@@ -12,9 +12,9 @@ public class HibernateUtil {
 		try {
 			sessionFactory = new Configuration().configure()
 					.buildSessionFactory();
-		} catch (Throwable ex) {
-			// Log exception!
-			throw new ExceptionInInitializerError(ex);
+		} catch (Throwable throwable) {
+			// Log throwable exception 
+			throw new ExceptionInInitializerError(throwable);
 		}
 	}
 

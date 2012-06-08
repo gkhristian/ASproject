@@ -3,6 +3,7 @@ package com.Shows;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.Shows.Domain.Model.Local;
@@ -18,21 +19,28 @@ public class Main {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 
-		Seient seient = new Seient();
-		seient.setFila(1);
-		seient.setColumna(1);
+		Query query = session.createQuery("Select fila from Seient");
 
-		Set<Seient> seients = new HashSet<Seient>();
-		seients.add(seient);
+		/***** init DB *****/
+		if (query.list().size() == 0) {
+			Seient seient = new Seient();
+			seient.setFila(1);
+			seient.setColumna(1);
 
-		Local local = new Local(seients);
-		local.setNom("Prueba");
-		local.setAdreca("C/Prueba");
+			Set<Seient> seients = new HashSet<Seient>();
+			seients.add(seient);
 
-		session.save(seient);
+			Local local = new Local(seients);
+			local.setNom("Prueba");
+			local.setAdreca("C/Prueba");
 
-		session.save(local);
+			session.save(seient);
 
-		session.getTransaction().commit();
+			session.save(local);
+
+			session.getTransaction().commit();
+		}
+
+		session.close();
 	}
 }
