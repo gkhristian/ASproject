@@ -6,18 +6,13 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Representacio {
 
 	@Id
-	@ManyToOne
-	private Sessio sessio;
-	@Id
-	@ManyToOne
-	private Local nom;
+	private AuxiliarRepresentacio aux;
 	private Float preu;
 	private Date data;
 	private Integer nombreSeientsLliures;
@@ -28,8 +23,7 @@ public class Representacio {
 
 	public Representacio(Sessio sessio, Local nom,
 			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
-		this.sessio = sessio;
-		this.nom = nom;
+		this.setAux(new AuxiliarRepresentacio(sessio, nom));
 		this.seientsEnRepresentacio = seientsEnRepresentacio;
 		this.entradas = new HashSet<Entrada>();
 		// TODO Controlar sets vacios
@@ -38,8 +32,7 @@ public class Representacio {
 	public Representacio(Sessio sessio, Local nom, Float preu, Date data,
 			Integer nombreSeientsLliures,
 			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
-		this.sessio = sessio;
-		this.nom = nom;
+		setAux(new AuxiliarRepresentacio(sessio, nom));
 		this.preu = preu;
 		this.data = data;
 		this.nombreSeientsLliures = nombreSeientsLliures;
@@ -72,22 +65,6 @@ public class Representacio {
 		this.nombreSeientsLliures = nombreSeientsLliures;
 	}
 
-	public Local getNom() {
-		return nom;
-	}
-
-	public void setNom(Local nom) {
-		this.nom = nom;
-	}
-
-	public Sessio getSessio() {
-		return sessio;
-	}
-
-	public void setSessio(Sessio sessio) {
-		this.sessio = sessio;
-	}
-
 	public Set<Entrada> getEntradas() {
 		return entradas;
 	}
@@ -103,5 +80,13 @@ public class Representacio {
 	public void setSeientsEnRepresentacio(
 			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
 		this.seientsEnRepresentacio = seientsEnRepresentacio;
+	}
+
+	public AuxiliarRepresentacio getAux() {
+		return aux;
+	}
+
+	public void setAux(AuxiliarRepresentacio aux) {
+		this.aux = aux;
 	}
 }

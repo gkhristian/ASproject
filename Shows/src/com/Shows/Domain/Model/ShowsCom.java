@@ -1,5 +1,6 @@
 package com.Shows.Domain.Model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ public class ShowsCom {
 	private String numeroCompte;
 	private Float comissio;
 	private Moneda divisa;
-	private Set<Moneda> canvis;
+	private HashSet<Moneda> canvis;
 
 	public int getId() {
 		return id;
@@ -60,7 +61,7 @@ public class ShowsCom {
 	}
 
 	public void setCanvis(Set<Moneda> canvis) {
-		this.canvis = canvis;
+		this.canvis = (HashSet<Moneda>) canvis;
 	}
 
 }

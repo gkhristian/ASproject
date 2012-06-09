@@ -1,16 +1,21 @@
 package com.Shows.Domain.Model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Estrena {
+public class Estrena implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int recarrec;
 	@Id
+	@OneToOne
 	private Representacio representacio;
 
 	public Estrena(Sessio sessio, Local nom,
