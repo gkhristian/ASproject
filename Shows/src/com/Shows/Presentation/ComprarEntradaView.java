@@ -4,15 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.CardLayout;
 import java.awt.EventQueue;
-import java.awt.Frame;
-import java.awt.Panel;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
 
 public class ComprarEntradaView extends JFrame {
 
@@ -21,9 +19,10 @@ public class ComprarEntradaView extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JPanel centerPanel = new JPanel();
 	private Prueba prueba = new Prueba();
 	private PagamentView pagament = new PagamentView();
-	private CardLayout card = new CardLayout(); 
+	private CardLayout card = new CardLayout();
 
 	/**
 	 * Launch the application.
@@ -49,45 +48,26 @@ public class ComprarEntradaView extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JButton btnCambio = new JButton("Cambio");
 		contentPane.add(btnCambio, BorderLayout.SOUTH);
-		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.CENTER);
-		btnCambio.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				JPanel panel = new JPanel();
-				panel.add(new Button("hola"));
-				setContentPane(panel);
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent arg0) {
 
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent arg0) {
+		contentPane.add(centerPanel, BorderLayout.CENTER);
 
-			}
-			
+		setContentPane(contentPane);
+
+		btnCambio.addActionListener(new ActionListener() {
+
 			@Override
-			public void mouseEntered(MouseEvent arg0) {
-	
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				prueba.setFocusable(true);
+			public void actionPerformed(ActionEvent actionEvent) {
+
+				centerPanel.setLayout(card);
+
+				centerPanel.add(prueba, "first");
+
+				card.show(centerPanel, "first");
 			}
 		});
-		
-		
 	}
-
 }
