@@ -1,8 +1,7 @@
 package com.Shows.Presentation.Controller;
 
+import java.sql.Date;
 import java.util.Set;
-
-import javax.xml.crypto.Data;
 
 import com.Shows.Domain.Controllers.ComprarEntradaUseCaseController;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -14,7 +13,7 @@ public class ComprarEntradaController {
 		comprarEntradaUseCaseController = new ComprarEntradaUseCaseController();
 	}
 	
-	public void PrOkObteRepresentacions(String titol, Data date) {
+	public void PrOkObteRepresentacions(String titol, Date data) {
 	}
 
 	public void PrOkObteOcupacio(String numLocal, String sessio, int nombEspectadors) {
