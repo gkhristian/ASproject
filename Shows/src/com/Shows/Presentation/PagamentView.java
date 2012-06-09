@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 
-public class PagamentView extends JFrame {
+public class PagamentView extends JPanel {
 
 	/**
 	 * 
@@ -23,12 +23,11 @@ public class PagamentView extends JFrame {
 	private JTextField NumeroDniTextField;
 	private JTextField BancTextField;
 	private JTextField CompteTextField;
-	private JTextField MessageAreaTextField;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -39,18 +38,16 @@ public class PagamentView extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
 	public PagamentView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
 		
 		Box horizontalBox = Box.createHorizontalBox();
 		contentPane.add(horizontalBox, BorderLayout.NORTH);
@@ -188,9 +185,11 @@ public class PagamentView extends JFrame {
 		Box horizontalBox_11 = Box.createHorizontalBox();
 		contentPane.add(horizontalBox_11, BorderLayout.SOUTH);
 		
-		MessageAreaTextField = new JTextField();
-		horizontalBox_11.add(MessageAreaTextField);
-		MessageAreaTextField.setColumns(10);
+		JLabel MessageAreaLbl = new JLabel("");
+		horizontalBox_11.add(MessageAreaLbl);
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		horizontalBox_11.add(horizontalGlue);
 		
 		JButton ContinuaBtn = new JButton("Continua");
 		ContinuaBtn.setEnabled(false);
