@@ -2,18 +2,20 @@ package com.Shows.Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
-public class PagamentView extends JFrame {
+import com.Shows.Presentation.Controller.ComprarEntradaController;
+
+public class PagamentView extends JPanel {
 
 	/**
 	 * 
@@ -23,34 +25,18 @@ public class PagamentView extends JFrame {
 	private JTextField NumeroDniTextField;
 	private JTextField BancTextField;
 	private JTextField CompteTextField;
-	private JTextField MessageAreaTextField;
+	private ComprarEntradaController comprarEntradaController;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PagamentView frame = new PagamentView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
 	 */
-	public PagamentView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public PagamentView(final ComprarEntradaController comprarEntradaController) {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
 		
 		Box horizontalBox = Box.createHorizontalBox();
 		contentPane.add(horizontalBox, BorderLayout.NORTH);
@@ -188,9 +174,11 @@ public class PagamentView extends JFrame {
 		Box horizontalBox_11 = Box.createHorizontalBox();
 		contentPane.add(horizontalBox_11, BorderLayout.SOUTH);
 		
-		MessageAreaTextField = new JTextField();
-		horizontalBox_11.add(MessageAreaTextField);
-		MessageAreaTextField.setColumns(10);
+		JLabel MessageAreaLbl = new JLabel("");
+		horizontalBox_11.add(MessageAreaLbl);
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		horizontalBox_11.add(horizontalGlue);
 		
 		JButton ContinuaBtn = new JButton("Continua");
 		ContinuaBtn.setEnabled(false);
@@ -198,6 +186,18 @@ public class PagamentView extends JFrame {
 		
 		JButton CancelaBtn = new JButton("Cancel\u00B7la");
 		horizontalBox_11.add(CancelaBtn);
+		
+		ContinuaBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				
+				//TODO mirar el flujo de datos y modificar datos
+				
+				comprarEntradaController.PrOkPagament("", 1, "");	
+				
+			}
+		});
 	}
 
 }
