@@ -2,11 +2,9 @@ package com.Shows.Domain.ServiceLocator;
 
 import java.util.Date;
 
-public class ServeiPagament {
+public class ServeiPagament extends Servei {
 
-    public boolean autoritza(String numTarj, Date dCad, float preuTotal) {
-        
+    public boolean autoritza(String dni, int codiB, String numCompte, float importe, int codiBancShows, String numcompteShows) {
         return true;
     }
-    
 }
