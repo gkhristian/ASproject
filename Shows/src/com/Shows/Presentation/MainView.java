@@ -8,6 +8,10 @@ public class MainView {
 
 	private JFrame frame;
 
+	public JFrame getFrame() {
+		return frame;
+	}
+
 	/**
 	 * Launch the application.
 	 */

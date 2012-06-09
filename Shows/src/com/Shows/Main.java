@@ -1,46 +1,41 @@
 package com.Shows;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.awt.EventQueue;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.Shows.Domain.Model.Local;
-import com.Shows.Domain.Model.Seient;
+import com.Shows.Presentation.MainView;
 
 public class Main {
 
 	/**
 	 * @param args
 	 */
-
 	public static void main(String[] args) {
+
+		/***** init DB *****/
+		if (need2InitDataBase())
+			DataLoader.initDatabase();
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainView mainView = new MainView();
+					mainView.getFrame().setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	private static boolean need2InitDataBase() {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 
 		Query query = session.createQuery("Select fila from Seient");
 
-		/***** init DB *****/
-		if (query.list().size() == 0) {
-			Seient seient = new Seient();
-			seient.setFila(1);
-			seient.setColumna(1);
-
-			Set<Seient> seients = new HashSet<Seient>();
-			seients.add(seient);
-
-			Local local = new Local(seients);
-			local.setNom("Prueba");
-			local.setAdreca("C/Prueba");
-
-			session.save(seient);
-
-			session.save(local);
-
-			session.getTransaction().commit();
-		}
-
-		session.close();
+		return (query.list().size() == 0);
 	}
 }
