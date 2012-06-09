@@ -11,6 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.Box;
+import javax.swing.JLabel;
+import java.awt.Component;
 
 public class ComprarEntradaView extends JFrame {
 
@@ -20,10 +23,13 @@ public class ComprarEntradaView extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel centerPanel = new JPanel();
-	private Prueba prueba = new Prueba();
-	private PagamentView pagament = new PagamentView();
+	private EspectacleView espectacle = new EspectacleView();
 	private CardLayout card = new CardLayout();
-
+	private final Box horizontalBox = Box.createHorizontalBox();
+	private final JButton ContinuaBtn = new JButton("Comprar Entrada");
+	
+	//TODO comprobar creadora, hay que pasarle el controlador??
+	
 	/**
 	 * Launch the application.
 	 */
@@ -50,24 +56,27 @@ public class ComprarEntradaView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		JButton btnCambio = new JButton("Cambio");
-		contentPane.add(btnCambio, BorderLayout.SOUTH);
-
-		contentPane.add(centerPanel, BorderLayout.CENTER);
+		contentPane.add(centerPanel);
 
 		setContentPane(contentPane);
-
-		btnCambio.addActionListener(new ActionListener() {
+		
+		contentPane.add(horizontalBox, BorderLayout.SOUTH);
+		
+		horizontalBox.add(ContinuaBtn);
+		
+		ContinuaBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 
 				centerPanel.setLayout(card);
 
-				centerPanel.add(prueba, "first");
+				centerPanel.add(espectacle, "first");
 
-				card.show(centerPanel, "first");
+				card.show(centerPanel, "first");				
+				
 			}
 		});
+		
 	}
 }

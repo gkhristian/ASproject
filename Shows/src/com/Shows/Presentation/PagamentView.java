@@ -2,16 +2,18 @@ package com.Shows.Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import com.Shows.Presentation.Controller.ComprarEntradaController;
 
 public class PagamentView extends JPanel {
 
@@ -23,27 +25,14 @@ public class PagamentView extends JPanel {
 	private JTextField NumeroDniTextField;
 	private JTextField BancTextField;
 	private JTextField CompteTextField;
+	private ComprarEntradaController comprarEntradaController;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PagamentView frame = new PagamentView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+
 
 	/**
 	 * Create the frame.
 	 */
-	public PagamentView() {
+	public PagamentView(final ComprarEntradaController comprarEntradaController) {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -197,6 +186,18 @@ public class PagamentView extends JPanel {
 		
 		JButton CancelaBtn = new JButton("Cancel\u00B7la");
 		horizontalBox_11.add(CancelaBtn);
+		
+		ContinuaBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				
+				//TODO mirar el flujo de datos y modificar datos
+				
+				comprarEntradaController.PrOkPagament("", 1, "");	
+				
+			}
+		});
 	}
 
 }
