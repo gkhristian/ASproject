@@ -13,6 +13,17 @@ public class Espectacle {
 	@OneToOne
 	private Representacio representacio;
 
+	public Espectacle(String titol, Representacio representacio) {
+		this.titol = titol;
+		this.representacio = representacio;
+	}
+	
+	public Espectacle(String titol, int participants, Representacio representacio) {
+		this.titol = titol;
+		this.participants = participants;
+		this.representacio = representacio;
+	}
+	
 	public String getTitol() {
 		return titol;
 	}

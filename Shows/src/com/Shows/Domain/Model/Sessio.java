@@ -9,6 +9,10 @@ public class Sessio {
 	@Id
 	private TipusSessio sessio;
 
+	public Sessio(TipusSessio sessio) {
+		this.sessio = sessio;
+	}
+	
 	public TipusSessio getSessio() {
 		return sessio;
 	}

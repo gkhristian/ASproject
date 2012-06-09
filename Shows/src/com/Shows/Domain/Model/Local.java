@@ -16,8 +16,17 @@ public class Local {
 	@OneToMany
 	private Set<Seient> seients;
 
-	public Local(Set<Seient> seients) {
+	public Local(String nom, Set<Seient> seients) {
+		this.nom = nom;
 		this.seients = seients;
+		// TODO Controlar set vacio
+	}
+
+	public Local(String nom, String adreca, Set<Seient> seients) {
+		this.nom = nom;
+		this.adreca = adreca;
+		this.seients = seients;
+		// TODO Controlar set vacio
 	}
 
 	public String getNom() {

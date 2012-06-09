@@ -25,6 +25,28 @@ public class Representacio {
 	@OneToMany
 	private Set<SeientEnRepresentacio> seientsEnRepresentacio;
 
+	public Representacio(Sessio sessio, Local nom, Set<Entrada> entradas,
+			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
+		this.sessio = sessio;
+		this.nom = nom;
+		this.entradas = entradas;
+		this.seientsEnRepresentacio = seientsEnRepresentacio;
+		// TODO Controlar sets vacios
+	}
+
+	public Representacio(Sessio sessio, Local nom, Float preu, Date data,
+			Integer nombreSeientsLliures, Set<Entrada> entradas,
+			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
+		this.sessio = sessio;
+		this.nom = nom;
+		this.preu = preu;
+		this.data = data;
+		this.nombreSeientsLliures = nombreSeientsLliures;
+		this.entradas = entradas;
+		this.seientsEnRepresentacio = seientsEnRepresentacio;
+		// TODO Controlar sets vacios
+	}
+
 	public Float getPreu() {
 		return preu;
 	}

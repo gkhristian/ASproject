@@ -11,11 +11,27 @@ public class Entrada {
 	@Id
 	private String identificador;
 	private String dniClient;
-	private Integer nombreEspectadors;
+	private int nombreEspectadors;
 	private Date data;
 	private Float preu;
 	@ManyToOne
 	private Representacio representacio;
+
+	public Entrada(String identificador, Representacio representacio) {
+		this.identificador = identificador;
+		this.representacio = representacio;
+	}
+
+	public Entrada(String identificador, String dniClient,
+			int nombreEspectadors, Date data, Float preu,
+			Representacio representacio) {
+		this.identificador = identificador;
+		this.dniClient = dniClient;
+		this.nombreEspectadors = nombreEspectadors;
+		this.data = data;
+		this.preu = preu;
+		this.representacio = representacio;
+	}
 
 	public String getIdentificador() {
 		return identificador;

@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Local;
 import com.Shows.Domain.Model.Seient;
 
@@ -15,22 +16,27 @@ public class DataLoader {
     	Session session = HibernateUtil.getSession();
         session.beginTransaction();
         
-		Seient seient = new Seient();
-		seient.setFila(1);
-		seient.setColumna(1);
+		Seient seient = new Seient(1,1);
+		/*seient.setFila(1);
+		seient.setColumna(1);*/
 
 		Set<Seient> seients = new HashSet<Seient>();
 		seients.add(seient);
 
-		Local local = new Local(seients);
+		Local local = new Local("1", seients);
 		local.setNom("Prueba");
 		local.setAdreca("C/Prueba");
+		
+		/*Espectacle espectacleA = new Espectacle();
+		Espectacle espectacleB = new Espectacle();*/		
+				
 
 		session.save(seient);
-
 		session.save(local);
 
 		session.getTransaction().commit();
+		
+		
 
         /*Client expected = new Client("46975089G", "Miguel", "San Román", "msanromanv@gmail.com");
         Client expected2 = new Client("39391628B", "Josep", "Lopez", "cyph3rfox@gmail.com");

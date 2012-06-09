@@ -14,6 +14,11 @@ public class Seient implements Serializable {
 	private int fila;
 	@Id
 	private int columna;
+	
+	public Seient(int fila, int columna) {
+		this.fila = fila;
+		this.columna = columna;
+	}
 
 	public int getFila() {
 		return fila;
