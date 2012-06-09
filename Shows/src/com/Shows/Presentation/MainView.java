@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import com.Shows.Domain.Controllers.ComprarEntradaUseCaseController;
+
 public class MainView {
 
 	private JFrame frame;

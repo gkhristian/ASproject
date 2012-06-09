@@ -16,7 +16,7 @@ public class ComprarEntradaUseCaseController {
 	private int preuTotal;
 
 	public Set<String> obteEspectacles() {
-		//TODO
+		//TODO obteEspectacles...
 		return new HashSet<String>();
 	}
 }
