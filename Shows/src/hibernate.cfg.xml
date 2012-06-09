@@ -11,7 +11,14 @@
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Shows</property>
   <property name="hibernate.hbm2ddl.auto">update</property>
+  <mapping class="com.Shows.Domain.Model.Entrada"/>
+  <mapping class="com.Shows.Domain.Model.Espectacle"/>
+  <mapping class="com.Shows.Domain.Model.Estrena"/>
   <mapping class="com.Shows.Domain.Model.Local"/>
+  <mapping class="com.Shows.Domain.Model.Representacio"/>
   <mapping class="com.Shows.Domain.Model.Seient"/>
+  <mapping class="com.Shows.Domain.Model.SeientEnRepresentacio"/>
+  <mapping class="com.Shows.Domain.Model.Sessio"/>
+  <mapping class="com.Shows.Domain.Model.ShowsCom"/>
  </session-factory>
 </hibernate-configuration>

@@ -1,6 +1,7 @@
 package com.Shows.Domain.Model;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -25,25 +26,25 @@ public class Representacio {
 	@OneToMany
 	private Set<SeientEnRepresentacio> seientsEnRepresentacio;
 
-	public Representacio(Sessio sessio, Local nom, Set<Entrada> entradas,
+	public Representacio(Sessio sessio, Local nom,
 			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
 		this.sessio = sessio;
 		this.nom = nom;
-		this.entradas = entradas;
 		this.seientsEnRepresentacio = seientsEnRepresentacio;
+		this.entradas = new HashSet<Entrada>();
 		// TODO Controlar sets vacios
 	}
 
 	public Representacio(Sessio sessio, Local nom, Float preu, Date data,
-			Integer nombreSeientsLliures, Set<Entrada> entradas,
+			Integer nombreSeientsLliures,
 			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
 		this.sessio = sessio;
 		this.nom = nom;
 		this.preu = preu;
 		this.data = data;
 		this.nombreSeientsLliures = nombreSeientsLliures;
-		this.entradas = entradas;
 		this.seientsEnRepresentacio = seientsEnRepresentacio;
+		this.entradas = new HashSet<Entrada>();
 		// TODO Controlar sets vacios
 	}
 
