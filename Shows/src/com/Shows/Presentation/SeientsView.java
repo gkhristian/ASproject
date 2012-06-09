@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 public class SeientsView extends JFrame {
 
@@ -147,6 +148,12 @@ public class SeientsView extends JFrame {
 		
 		Box horizontalBox_11 = Box.createHorizontalBox();
 		contentPane.add(horizontalBox_11, BorderLayout.SOUTH);
+		
+		JLabel MessageAreaLbl = new JLabel("");
+		horizontalBox_11.add(MessageAreaLbl);
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		horizontalBox_11.add(horizontalGlue);
 		
 		JButton ContinuaBtn = new JButton("Continua");
 		ContinuaBtn.setEnabled(false);

@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import java.awt.Component;
 import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
 public class RepresentacioView extends JFrame {
 
@@ -50,13 +51,23 @@ public class RepresentacioView extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		Box horizontalBox = Box.createHorizontalBox();
+		horizontalBox.setAlignmentX(RIGHT_ALIGNMENT);
 		contentPane.add(horizontalBox, BorderLayout.SOUTH);
 		
+		JLabel MessageAreaLbl = new JLabel("");
+		MessageAreaLbl.setAlignmentX(RIGHT_ALIGNMENT);
+		horizontalBox.add(MessageAreaLbl);
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		horizontalBox.add(horizontalGlue);
+		
 		JButton ContinuaBtn = new JButton("Continua");
+		ContinuaBtn.setAlignmentX(RIGHT_ALIGNMENT);
 		ContinuaBtn.setEnabled(false);
 		horizontalBox.add(ContinuaBtn);
 		
 		JButton CancelaBtn = new JButton("Cancel\u00B7la");
+		CancelaBtn.setAlignmentX(RIGHT_ALIGNMENT);
 		horizontalBox.add(CancelaBtn);
 		
 		Box horizontalBox_1 = Box.createHorizontalBox();
@@ -68,13 +79,13 @@ public class RepresentacioView extends JFrame {
 		JLabel EspectacleLbl = new JLabel("Espectacle:");
 		verticalBox.add(EspectacleLbl);
 		
-		JLabel NomEspectacleLbl = new JLabel("");
+		JLabel NomEspectacleLbl = new JLabel("New Label");
 		verticalBox.add(NomEspectacleLbl);
 		
 		JLabel DataLbl = new JLabel("Data:");
 		verticalBox.add(DataLbl);
 		
-		JLabel DataEspectacleLbl = new JLabel("");
+		JLabel DataEspectacleLbl = new JLabel("New Label");
 		verticalBox.add(DataEspectacleLbl);
 		
 		Component verticalStrut = Box.createVerticalStrut(80);

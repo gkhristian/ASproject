@@ -6,16 +6,24 @@ import java.awt.EventQueue;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
 public class PagamentView extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6594237397946129351L;
 	private JPanel contentPane;
+	private JTextField NumeroDniTextField;
+	private JTextField BancTextField;
+	private JTextField CompteTextField;
+	private JTextField MessageAreaTextField;
 
 	/**
 	 * Launch the application.
@@ -143,14 +151,46 @@ public class PagamentView extends JFrame {
 		Box verticalBox_1 = Box.createVerticalBox();
 		horizontalBox.add(verticalBox_1);
 		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		verticalBox_1.add(verticalStrut);
+		
 		Box horizontalBox_10 = Box.createHorizontalBox();
 		verticalBox_1.add(horizontalBox_10);
 		
-		JLabel DniLbl = new JLabel("New label");
+		JLabel DniLbl = new JLabel("DNI:");
 		horizontalBox_10.add(DniLbl);
+		
+		NumeroDniTextField = new JTextField();
+		horizontalBox_10.add(NumeroDniTextField);
+		NumeroDniTextField.setColumns(10);
+		
+		Component verticalStrut_1 = Box.createVerticalStrut(20);
+		verticalBox_1.add(verticalStrut_1);
+		
+		Box horizontalBox_12 = Box.createHorizontalBox();
+		verticalBox_1.add(horizontalBox_12);
+		
+		JLabel CompteLbl = new JLabel("Compte:");
+		horizontalBox_12.add(CompteLbl);
+		
+		BancTextField = new JTextField();
+		horizontalBox_12.add(BancTextField);
+		BancTextField.setColumns(10);
+		
+		CompteTextField = new JTextField();
+		CompteTextField.setText("");
+		horizontalBox_12.add(CompteTextField);
+		CompteTextField.setColumns(10);
+		
+		Component verticalStrut_2 = Box.createVerticalStrut(20);
+		verticalBox_1.add(verticalStrut_2);
 		
 		Box horizontalBox_11 = Box.createHorizontalBox();
 		contentPane.add(horizontalBox_11, BorderLayout.SOUTH);
+		
+		MessageAreaTextField = new JTextField();
+		horizontalBox_11.add(MessageAreaTextField);
+		MessageAreaTextField.setColumns(10);
 		
 		JButton ContinuaBtn = new JButton("Continua");
 		ContinuaBtn.setEnabled(false);

@@ -50,6 +50,12 @@ public class EspectacleView extends JFrame {
 		Box horizontalBox = Box.createHorizontalBox();
 		contentPane.add(horizontalBox, BorderLayout.SOUTH);
 		
+		JLabel MessageAreaLbl = new JLabel("");
+		horizontalBox.add(MessageAreaLbl);
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		horizontalBox.add(horizontalGlue);
+		
 		JButton ContinuaBtn = new JButton("Continua");
 		ContinuaBtn.setEnabled(false);
 		horizontalBox.add(ContinuaBtn);
