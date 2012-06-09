@@ -2,49 +2,37 @@ package com.Shows.Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class EspectacleView extends JFrame {
+import com.Shows.Presentation.Controller.ComprarEntradaController;
+
+public class EspectacleView extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EspectacleView frame = new EspectacleView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private ComprarEntradaController comprarEntradaController;
+	private Date data = new Date(1);
 
 	/**
 	 * Create the frame.
 	 */
-	public EspectacleView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public EspectacleView(final ComprarEntradaController comprarEntradaController) {
+		this.comprarEntradaController = comprarEntradaController;
 		setBounds(100, 100, 477, 241);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		Box horizontalBox = Box.createHorizontalBox();
@@ -80,5 +68,15 @@ public class EspectacleView extends JFrame {
 		
 		JButton btnDatapicker = new JButton("DATAPICKER");
 		horizontalBox_1.add(btnDatapicker);
+		
+		ContinuaBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				//TODO mirar el flujo de datos y modificar datos
+				comprarEntradaController.PrOkObteRepresentacions("", data);				
+				
+			}
+		});
 	}
 }

@@ -1,49 +1,40 @@
 package com.Shows.Presentation;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.Box;
-import javax.swing.JLabel;
 import java.awt.Component;
-import javax.swing.JTable;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Set;
+
+import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 
-public class SeientsView extends JFrame {
+import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.TupleTypes.PosicioSeient;
 
-	private JPanel contentPane;
-	private JTable table;
+public class SeientsView extends JPanel {
 
 	/**
-	 * Launch the application.
+	 * 
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SeientsView frame = new SeientsView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private static final long serialVersionUID = -8834919801528392136L;
+	private JPanel contentPane;
+	private JTable table;
+	private ComprarEntradaController comprarEntradaController;
+
 
 	/**
 	 * Create the frame.
 	 */
-	public SeientsView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public SeientsView(final ComprarEntradaController comprarEntradaController) {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
 		
 		Box horizontalBox = Box.createHorizontalBox();
 		contentPane.add(horizontalBox, BorderLayout.NORTH);
@@ -162,7 +153,19 @@ public class SeientsView extends JFrame {
 		JButton CancelaBtn = new JButton("Cancel\u00B7la");
 		horizontalBox_11.add(CancelaBtn);
 
-		
+		ContinuaBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				
+				//TODO mirar el flujo de datos y modificar datos
+				
+				Set<PosicioSeient> seients = null;
+				seients.add(new PosicioSeient(1, 1));
+				comprarEntradaController.PrOkSelecionarSeients(seients);	
+				
+			}
+		});
 		
 	}
 

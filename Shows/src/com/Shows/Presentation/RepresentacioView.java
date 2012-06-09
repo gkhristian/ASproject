@@ -1,20 +1,21 @@
 package com.Shows.Presentation;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
-import java.awt.Component;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
-public class RepresentacioView extends JFrame {
+import com.Shows.Presentation.Controller.ComprarEntradaController;
+
+public class RepresentacioView extends JPanel {
 
 	/**
 	 * 
@@ -22,32 +23,16 @@ public class RepresentacioView extends JFrame {
 	private static final long serialVersionUID = -3674558461643546039L;
 	private JPanel contentPane;
 	private JTable RepresentacionsTable;
+	private ComprarEntradaController comprarEntradaController;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RepresentacioView frame = new RepresentacioView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public RepresentacioView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public RepresentacioView(final ComprarEntradaController comprarEntradaController) {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		Box horizontalBox = Box.createHorizontalBox();
@@ -94,14 +79,24 @@ public class RepresentacioView extends JFrame {
 		JLabel NombreEspectadorsLbl = new JLabel("Nombre d'espectadors:");
 		verticalBox.add(NombreEspectadorsLbl);
 		
-		JComboBox comboBox = new JComboBox();
-		verticalBox.add(comboBox);
-		
 		Component verticalStrut_1 = Box.createVerticalStrut(90);
 		verticalBox.add(verticalStrut_1);
 		
+		JSpinner NumeroEspectadorsSpinner = new JSpinner();
+		verticalBox.add(NumeroEspectadorsSpinner);
+		
 		RepresentacionsTable = new JTable();
 		horizontalBox_1.add(RepresentacionsTable);
+		
+		ContinuaBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				//TODO mirar el flujo de datos y modificar datos
+				comprarEntradaController.PrOkObteOcupacio("", "", 2);	
+				
+			}
+		});
 	}
 
 }
