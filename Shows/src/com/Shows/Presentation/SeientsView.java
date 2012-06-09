@@ -1,0 +1,162 @@
+package com.Shows.Presentation;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.Box;
+import javax.swing.JLabel;
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.JButton;
+
+public class SeientsView extends JFrame {
+
+	private JPanel contentPane;
+	private JTable table;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					SeientsView frame = new SeientsView();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public SeientsView() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		Box horizontalBox = Box.createHorizontalBox();
+		contentPane.add(horizontalBox, BorderLayout.NORTH);
+		
+		Box verticalBox = Box.createVerticalBox();
+		horizontalBox.add(verticalBox);
+		
+		Box horizontalBox_1 = Box.createHorizontalBox();
+		horizontalBox_1.setAlignmentX(Component.LEFT_ALIGNMENT);
+		verticalBox.add(horizontalBox_1);
+		
+		JLabel EspectacleLbl = new JLabel("Espectacle:");
+		horizontalBox_1.add(EspectacleLbl);
+		
+		JLabel NomEspectacleLbl = new JLabel("New label");
+		horizontalBox_1.add(NomEspectacleLbl);
+		
+		Box horizontalBox_2 = Box.createHorizontalBox();
+		horizontalBox_2.setAlignmentX(Component.LEFT_ALIGNMENT);
+		verticalBox.add(horizontalBox_2);
+		
+		JLabel DataLbl = new JLabel("Data:");
+		horizontalBox_2.add(DataLbl);
+		
+		JLabel DataEspectacleLbl = new JLabel("New Label");
+		horizontalBox_2.add(DataEspectacleLbl);
+		
+		Box horizontalBox_4 = Box.createHorizontalBox();
+		horizontalBox_4.setAlignmentX(Component.LEFT_ALIGNMENT);
+		verticalBox.add(horizontalBox_4);
+		
+		JLabel LocalLbl = new JLabel("Local:");
+		horizontalBox_4.add(LocalLbl);
+		
+		JLabel NomLocalLbl = new JLabel("New label");
+		horizontalBox_4.add(NomLocalLbl);
+		
+		Box horizontalBox_3 = Box.createHorizontalBox();
+		horizontalBox_3.setAlignmentX(Component.LEFT_ALIGNMENT);
+		verticalBox.add(horizontalBox_3);
+		
+		JLabel SessioLbl = new JLabel("Sessio:");
+		horizontalBox_3.add(SessioLbl);
+		
+		JLabel TipusSessioLbl = new JLabel("New label");
+		horizontalBox_3.add(TipusSessioLbl);
+		
+		Box horizontalBox_5 = Box.createHorizontalBox();
+		horizontalBox_5.setAlignmentX(Component.LEFT_ALIGNMENT);
+		verticalBox.add(horizontalBox_5);
+		
+		JLabel NombreEspectadorsLbl = new JLabel("Nombre d'espectadors:");
+		horizontalBox_5.add(NombreEspectadorsLbl);
+		
+		JLabel NumeroEspectadorsLbl = new JLabel("New label");
+		horizontalBox_5.add(NumeroEspectadorsLbl);
+		
+		Box horizontalBox_6 = Box.createHorizontalBox();
+		horizontalBox_6.setAlignmentX(Component.LEFT_ALIGNMENT);
+		verticalBox.add(horizontalBox_6);
+		
+		JLabel EsEstrenaLbl = new JLabel("New label");
+		horizontalBox_6.add(EsEstrenaLbl);
+		
+		Box horizontalBox_8 = Box.createHorizontalBox();
+		horizontalBox_8.setAlignmentX(Component.LEFT_ALIGNMENT);
+		verticalBox.add(horizontalBox_8);
+		
+		JLabel PreuSeientsLbl = new JLabel("Preu per seient:");
+		horizontalBox_8.add(PreuSeientsLbl);
+		
+		JLabel PreuPerSeientEurosLbl = new JLabel("New label");
+		horizontalBox_8.add(PreuPerSeientEurosLbl);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		verticalBox.add(verticalStrut);
+		
+		Box horizontalBox_7 = Box.createHorizontalBox();
+		horizontalBox_7.setAlignmentX(Component.LEFT_ALIGNMENT);
+		verticalBox.add(horizontalBox_7);
+		
+		
+		
+		JLabel OcupatLbl = new JLabel("Ocupat");
+		horizontalBox_7.add(OcupatLbl);
+		
+		Box horizontalBox_9 = Box.createHorizontalBox();
+		horizontalBox_9.setAlignmentX(Component.LEFT_ALIGNMENT);
+		verticalBox.add(horizontalBox_9);
+		JLabel DisponibleLbl = new JLabel("Disponible");
+		horizontalBox_9.add(DisponibleLbl);
+		
+		Box horizontalBox_10 = Box.createHorizontalBox();
+		horizontalBox_10.setAlignmentX(Component.LEFT_ALIGNMENT);
+		verticalBox.add(horizontalBox_10);
+		JLabel SeleccionatLbl = new JLabel("Seleccionat");
+		horizontalBox_10.add(SeleccionatLbl);
+		
+		table = new JTable();
+		table.setToolTipText("");
+		horizontalBox.add(table);
+		
+		Box horizontalBox_11 = Box.createHorizontalBox();
+		contentPane.add(horizontalBox_11, BorderLayout.SOUTH);
+		
+		JButton ContinuaBtn = new JButton("Continua");
+		ContinuaBtn.setEnabled(false);
+		horizontalBox_11.add(ContinuaBtn);
+		
+		JButton CancelaBtn = new JButton("Cancel\u00B7la");
+		horizontalBox_11.add(CancelaBtn);
+
+		
+		
+	}
+
+}
