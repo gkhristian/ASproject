@@ -28,27 +28,33 @@ public class ComprarEntradaController {
 						.obteRepresentacions(titol, data));
 	}
 
-	public void PrOkObteOcupacio(String numLocal, String sessio,
+	public void PrOkObteOcupacio(String nomLocal, String sessio,
 			int nombEspectadors) {
+		comprarEntradaView.mostraOcupacio(comprarEntradaUseCaseController
+				.obteOcupacio(nomLocal, sessio, nombEspectadors));// , data));
 	}
 
 	public void PrOkSelecionarSeients(Set<PosicioSeient> seients) {
+		
 	}
 
 	public void PrOkPagament(String dni, int codiB, String numCompte) {
 	}
 
 	public void PrCancellar() {
+		comprarEntradaView.mostraAvis("");
 	}
 
 	public void PrCancellarAvis() {
+		
 	}
 
 	public void PrFi() {
-
+		comprarEntradaView.tancar();
 	}
 
 	public void canviPreuMoneda(Moneda moneda) {
 		// TODO esto esta bien???
+		//Falta llamada en ComprarEntradaView???
 	}
 }

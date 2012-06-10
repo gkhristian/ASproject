@@ -59,15 +59,15 @@ public class ComprarEntradaUseCaseController {
 	}
 
 	public Set<PosicioSeient> obteOcupacio(String nomLocal, String sessio,
-			int nombEspectadors, Date data) {
+			int nombEspectadors) {// , Date data) {
 		// Replicado...
 		this.nomLocal = nomLocal;
 		this.sessio = sessio;
 		this.nombEspectadors = nombEspectadors;
-		this.data = data; // TODO Es necesario???
+		// this.data = data; // TODO Es necesario???
 
 		return consultaOcupacioUseCaseController.obteOcupacio(nomLocal, sessio,
-				nombEspectadors, data);
+				nombEspectadors);// , data);
 	}
 
 	public Set<DadesEntrada> selecionarSeients(Set<PosicioSeient> seients) {
@@ -85,11 +85,12 @@ public class ComprarEntradaUseCaseController {
 		IPagamentAdapter pagamentAdapter = AdapterFactory.getInstance()
 				.getPagamentAdapter();
 		int codiBancShows = ShowsCom.getCodiBanc();
-		String numcompteShows  = ShowsCom.getNumeroCompte();
-		boolean autoritzat = pagamentAdapter.autoritza(dni, codiB, numCompte, preuTotal,
-				codiBancShows, numcompteShows);
+		String numcompteShows = ShowsCom.getNumeroCompte();
+		boolean autoritzat = pagamentAdapter.autoritza(dni, codiB, numCompte,
+				preuTotal, codiBancShows, numcompteShows);
 		if (!autoritzat) {
-			// TODO throw exception, aquí o en el servicio (Diría que en el servicio)
+			// TODO throw exception, aquí o en el servicio (Diría que en el
+			// servicio)
 			System.out.println("Pagament no autoritzat");
 		} else {
 			IControllerRepresentacio controllerRepresentacio = ControllerDataFactory

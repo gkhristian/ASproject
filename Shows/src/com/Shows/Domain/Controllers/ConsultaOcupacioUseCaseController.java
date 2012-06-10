@@ -21,7 +21,7 @@ public class ConsultaOcupacioUseCaseController {
 	// ===================//
 
 	public Set<PosicioSeient> obteOcupacio(String nomLocal, String sessio,
-			int nombEspectadors, Date data) {
+			int nombEspectadors) { // , Date data) {
 		this.nomLocal = nomLocal;
 		this.sessio = sessio;
 		this.nombEspectadors = nombEspectadors;
