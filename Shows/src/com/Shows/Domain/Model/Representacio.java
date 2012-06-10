@@ -67,7 +67,7 @@ public class Representacio {
 	
 	public void createEntrada(String titol, String dni, int nombEspectadors, Date data, float preuTotal) {
 		
-		//COM ES SAP L'IDENTIFICADOR?????????????????????
+		//TO CHECK: COM ES SAP L'IDENTIFICADOR?????????????????????
 		String identificador = ((Integer) getEntradas().size()).toString();
 		
 		Entrada e = new Entrada(identificador, dni, nombEspectadors, data, preuTotal, this);
