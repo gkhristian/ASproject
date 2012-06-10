@@ -8,9 +8,8 @@ import com.Shows.Domain.ServiceLocator.ServiceLocator;
 public class PagamentAdapter implements IPagamentAdapter {
 
     @Override
-    public boolean autoritza(String numTarj, Date dCad, float preuTotal) {
-        
-        ServeiPagament sp = ServiceLocator.getInstance().find("Servei Pagament");
-        return sp.autoritza(numTarj, dCad, preuTotal);
+    public boolean autoritza(String dni, int codiB, String numCompte, float importe, int codiBancShows, String numcompteShows) {
+        ServeiPagament sp = (ServeiPagament) ServiceLocator.getInstance().find("Servei Pagament");
+        return sp.autoritza( dni, codiB, numCompte, importe, codiBancShows, numcompteShows);
     }
 }

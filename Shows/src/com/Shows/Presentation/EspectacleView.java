@@ -78,5 +78,14 @@ public class EspectacleView extends JPanel {
 				
 			}
 		});
+		
+		CancelaBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				comprarEntradaController.PrCancellarAvis();
+			}
+		});
 	}
 }

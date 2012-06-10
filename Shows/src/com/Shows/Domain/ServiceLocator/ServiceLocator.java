@@ -3,7 +3,8 @@ package com.Shows.Domain.ServiceLocator;
 public class ServiceLocator {
     
     private static ServiceLocator instance;
-    private ServeiPagament servei;
+    private ServeiPagament serveiPagament;
+    private CurrencyConvertor serveiConvert;
     
     private ServiceLocator() {}
     
@@ -13,10 +14,14 @@ public class ServiceLocator {
         return instance;
     }
     
-    public ServeiPagament find(String name) {
-        
-        if (servei == null) servei = new ServeiPagament();
-        return servei;
+    public Servei find(String name) {
+        if(name.equals("Servei Pagament")){
+	        if (serveiPagament == null) serveiPagament = new ServeiPagament();
+	        return serveiPagament;
+        }
+        else {
+	        if (serveiConvert == null) serveiConvert = new CurrencyConvertor();
+	        return serveiConvert;
+        }
     }
-    
 }
