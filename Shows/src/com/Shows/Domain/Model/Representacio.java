@@ -1,22 +1,18 @@
 package com.Shows.Domain.Model;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Representacio {
 
 	@Id
-	@ManyToOne
-	private Sessio sessio;
-	@Id
-	@ManyToOne
-	private Local nom;
+	private AuxiliarRepresentacio aux;
 	private Float preu;
 	private Date data;
 	private Integer nombreSeientsLliures;
@@ -25,25 +21,23 @@ public class Representacio {
 	@OneToMany
 	private Set<SeientEnRepresentacio> seientsEnRepresentacio;
 
-	public Representacio(Sessio sessio, Local nom, Set<Entrada> entradas,
+	public Representacio(Sessio sessio, Local nom,
 			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
-		this.sessio = sessio;
-		this.nom = nom;
-		this.entradas = entradas;
+		this.setAux(new AuxiliarRepresentacio(sessio, nom));
 		this.seientsEnRepresentacio = seientsEnRepresentacio;
+		this.entradas = new HashSet<Entrada>();
 		// TODO Controlar sets vacios
 	}
 
 	public Representacio(Sessio sessio, Local nom, Float preu, Date data,
-			Integer nombreSeientsLliures, Set<Entrada> entradas,
+			Integer nombreSeientsLliures,
 			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
-		this.sessio = sessio;
-		this.nom = nom;
+		setAux(new AuxiliarRepresentacio(sessio, nom));
 		this.preu = preu;
 		this.data = data;
 		this.nombreSeientsLliures = nombreSeientsLliures;
-		this.entradas = entradas;
 		this.seientsEnRepresentacio = seientsEnRepresentacio;
+		this.entradas = new HashSet<Entrada>();
 		// TODO Controlar sets vacios
 	}
 
@@ -71,22 +65,6 @@ public class Representacio {
 		this.nombreSeientsLliures = nombreSeientsLliures;
 	}
 
-	public Local getNom() {
-		return nom;
-	}
-
-	public void setNom(Local nom) {
-		this.nom = nom;
-	}
-
-	public Sessio getSessio() {
-		return sessio;
-	}
-
-	public void setSessio(Sessio sessio) {
-		this.sessio = sessio;
-	}
-
 	public Set<Entrada> getEntradas() {
 		return entradas;
 	}
@@ -102,5 +80,13 @@ public class Representacio {
 	public void setSeientsEnRepresentacio(
 			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
 		this.seientsEnRepresentacio = seientsEnRepresentacio;
+	}
+
+	public AuxiliarRepresentacio getAux() {
+		return aux;
+	}
+
+	public void setAux(AuxiliarRepresentacio aux) {
+		this.aux = aux;
 	}
 }

@@ -15,6 +15,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		/***** init DB *****/
+		//DataLoader.clearDatabase();
 		if (need2InitDataBase())
 			DataLoader.initDatabase();
 
