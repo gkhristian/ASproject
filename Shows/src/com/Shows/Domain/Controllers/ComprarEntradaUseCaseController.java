@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Set;
 
 import com.Shows.Data.Controllers.ControllerDataFactory;
+import com.Shows.Data.Controllers.ControllerRepresentacio;
 import com.Shows.Data.Interfaces.IControllerEspectacle;
 import com.Shows.Data.Interfaces.IControllerRepresentacio;
+import com.Shows.Domain.Adapters.AdapterFactory;
+import com.Shows.Domain.Adapters.IPagamentAdapter;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.Representacio;
@@ -79,6 +82,17 @@ public class ComprarEntradaUseCaseController {
 	}
 
 	public void pagament(String dni, int codiB, String numCompte, Date data) {
-
+		IPagamentAdapter ipa = AdapterFactory.getInstance().getPagamentAdapter();
+		int codiBancShows = 0;// = Shows.com.getCodiBanc();
+		String numcompteShows = "099998";// = Shows.com.getNumeroCompte();
+		boolean b = ipa.autoritza(dni, codiB, numCompte, preuTotal, codiBancShows, numcompteShows);
+		if(! b){
+			System.out.println("Pagament no autoritzat");
+		}
+		else {
+			IControllerRepresentacio icr = ControllerDataFactory.getInstance().getControllerRepresentacio();
+			Representacio r = icr.getRepresentacio(nomLocal, sessio);
+			//r.createEntrada(titol, dni, nombEspectadors, data, preuTotal);
+		}
 	}
 }

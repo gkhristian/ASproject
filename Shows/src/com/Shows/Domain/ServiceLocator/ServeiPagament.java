@@ -1,6 +1,5 @@
 package com.Shows.Domain.ServiceLocator;
 
-import java.util.Date;
 
 public class ServeiPagament extends Servei {
 

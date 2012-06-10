@@ -64,6 +64,15 @@ public class Representacio {
 	public void setNombreSeientsLliures(Integer nombreSeientsLliures) {
 		this.nombreSeientsLliures = nombreSeientsLliures;
 	}
+	
+	public void createEntrada(String titol, String dni, int nombEspectadors, Date data, float preuTotal) {
+		
+		//COM ES SAP L'IDENTIFICADOR?????????????????????
+		String identificador = ((Integer) getEntradas().size()).toString();
+		
+		Entrada e = new Entrada(identificador, dni, nombEspectadors, data, preuTotal, this);
+		entradas.add(e);
+	}
 
 	public Set<Entrada> getEntradas() {
 		return entradas;
