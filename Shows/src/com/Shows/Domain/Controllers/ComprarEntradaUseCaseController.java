@@ -2,9 +2,15 @@ package com.Shows.Domain.Controllers;
 
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import com.Shows.Data.Controllers.ControllerDataFactory;
+import com.Shows.Data.Interfaces.IControllerEspectacle;
+import com.Shows.Data.Interfaces.IControllerRepresentacio;
+import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Moneda;
+import com.Shows.Domain.Model.Representacio;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -22,12 +28,22 @@ public class ComprarEntradaUseCaseController {
 	private Set<PosicioSeient> seients;
 	private float preuTotal;
 
+	private ControllerDataFactory controllerDataFactory = ControllerDataFactory
+			.getInstance();
+
 	private ConsultaRepresentacioUseCaseController consultaRepresentacioUseCaseController;
 	private ConsultaOcupacioUseCaseController consultaOcupacioUseCaseController;
 
 	public Set<String> obteEspectacles() {
-		// TODO obteEspectacles...
-		return new HashSet<String>();
+		IControllerEspectacle controllerEspectacle = controllerDataFactory
+				.getControllerEspectacle();
+		List<Espectacle> espectacles = controllerEspectacle.allEspectacles();
+		Set<String> titolEspectacles = new HashSet<String>(espectacles.size());
+
+		for (Espectacle espectacle : espectacles) {
+			titolEspectacles.add(espectacle.getTitol());
+		}
+		return titolEspectacles;
 	}
 
 	public Set<DadesRepresentacio> obteRepresentacions(String titol, Date data) {
@@ -46,6 +62,7 @@ public class ComprarEntradaUseCaseController {
 		this.sessio = sessio;
 		this.nombEspectadors = nombEspectadors;
 		this.data = data; // TODO Es necesario???
+
 		return consultaOcupacioUseCaseController.obteOcupacio(nomLocal, sessio,
 				nombEspectadors, data);
 	}
