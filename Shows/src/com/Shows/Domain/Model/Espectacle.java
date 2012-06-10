@@ -17,13 +17,14 @@ public class Espectacle {
 		this.titol = titol;
 		this.representacio = representacio;
 	}
-	
-	public Espectacle(String titol, int participants, Representacio representacio) {
+
+	public Espectacle(String titol, int participants,
+			Representacio representacio) {
 		this.titol = titol;
 		this.participants = participants;
 		this.representacio = representacio;
 	}
-	
+
 	public String getTitol() {
 		return titol;
 	}

@@ -18,21 +18,17 @@ public class Estrena implements Serializable {
 	@OneToOne
 	private Representacio representacio;
 
-	public Estrena(Sessio sessio, Local nom,
-			Set<SeientEnRepresentacio> seientsEnRepresentacio, int recarrec) {
-		this.representacio = new Representacio(sessio, nom,
-				seientsEnRepresentacio);
+	public Estrena(Sessio sessio, Local nom,  int recarrec) {
+		this.representacio = new Representacio(sessio, nom);
 		this.recarrec = recarrec;
-		// TODO Controlar sets vacios
 	}
 
 	public Estrena(Sessio sessio, Local nom, float preu, Date data,
 			int nombreSeientsLliures,
-			Set<SeientEnRepresentacio> seientsEnRepresentacio, int recarrec) {
+			int recarrec) {
 		this.representacio = new Representacio(sessio, nom, preu, data,
-				nombreSeientsLliures, seientsEnRepresentacio);
+				nombreSeientsLliures);
 		this.recarrec = recarrec;
-		// TODO Controlar sets vacios
 	}
 
 	public int getRecarrec() {

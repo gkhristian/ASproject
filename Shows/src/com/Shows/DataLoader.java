@@ -2,6 +2,8 @@ package com.Shows;
 
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
 import java.util.Set;
 
 import org.hibernate.HibernateException;
@@ -27,65 +29,184 @@ public class DataLoader {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 
-		Seient seient = new Seient(1, 1);
-		Seient seient2 = new Seient(1, 2);
-		/*
-		 * seient.setFila(1); seient.setColumna(1);
-		 */
+		/* Locals */
+		Local local1 = new Local("Palau Sant Jordi", "C/Falsa 123");
+		Local local2 = new Local("A Tomar Por Culo", "C/Parla");
+		session.save(local1);
+		session.save(local2);
+		
+		/* Seients */
+		int filas1 = 5;
+		int columnas1 = 5;
+		int filas2 = 3;
+		int columnas2 = 5;
 
-		Set<Seient> seients = new HashSet<Seient>();
-		seients.add(seient);
+		HashSet<Seient> seients1 = new HashSet<Seient>();
+		HashSet<Seient> seients2 = new HashSet<Seient>();
 
-		Local local = new Local("1", seients);
-		local.setNom("Prueba");
-		local.setAdreca("C/Prueba");
+		for (int i = 0; i < filas1; ++i) {
+			for (int j = 0; j < columnas1; j++) {
+				Seient aux = new Seient(local1, i + 1, j + 1);
+				session.save(aux);
+				seients1.add(aux);
+			}
+		}
 
-		Sessio sesMati = new Sessio(TipusSessio.mati);
+		for (int i = 0; i < filas2; ++i) {
+			for (int j = 0; j < columnas2; j++) {
+				Seient aux = new Seient(local2, i + 1, j + 1);
+				session.save(aux);
+				seients2.add(aux);
+			}
+		}
+		
+		local1.setSeients(seients1);
+		local2.setSeients(seients2);
 
+		
+
+		/* Sessions */
+		Sessio ses1 = new Sessio(TipusSessio.tarda);
+		Sessio ses2 = new Sessio(TipusSessio.nit);
+		session.save(ses1);
+		session.save(ses2);
+		
+
+		/* Data */
 		Date data1 = Date.valueOf("2012-6-30");
+		Date data2 = Date.valueOf("2012-7-31");
+		
+		/* Representacions i Estrenes */
+		Float preu1 = 10f;
+		Float preu2 = 20f;
 
-		Set<SeientEnRepresentacio> seientsEnRepresentacio = new HashSet<SeientEnRepresentacio>();
-		SeientEnRepresentacio ser1 = new SeientEnRepresentacio(seient,
-				Estat.ocupat);
-		SeientEnRepresentacio ser2 = new SeientEnRepresentacio(seient2,
-				Estat.ocupat);
-		seientsEnRepresentacio.add(ser1);
-		seientsEnRepresentacio.add(ser2);
+		int lliures1 = filas1 * columnas1;
+		int lliures2 = filas2 * columnas2;
+		
+		Representacio rep1 = new Representacio(ses1, local1, preu1, data1, lliures1);
+		Representacio est1 = new Representacio(ses2, local2, preu2, data2, lliures2);
+		session.save(rep1);
+		//session.save(est1.getRepresentacio());
+		session.save(est1);
 
-		Estrena estA = new Estrena(sesMati, local, 10000f, data1, 2,
-				seientsEnRepresentacio, 20);
+		/* Seients en representacio */
+		HashSet<SeientEnRepresentacio> ser1 = new HashSet<SeientEnRepresentacio>();
+		HashSet<SeientEnRepresentacio> ser2 = new HashSet<SeientEnRepresentacio>();
 
-		Representacio repA = estA.getRepresentacio();
+		Iterator<Seient> i1 = seients1.iterator();
+		Iterator<Seient> i2 = seients2.iterator();
+		
+		Random randomGenerator = new Random();
+		while (i1.hasNext()) {
+			int random = randomGenerator.nextInt(2);
+			if (random == 0) {
+				SeientEnRepresentacio aux = new SeientEnRepresentacio(
+						i1.next(), rep1, Estat.lliure);
+				session.save(aux);
+				ser1.add(aux);
+			} else {
+				SeientEnRepresentacio aux = new SeientEnRepresentacio(
+						i1.next(), rep1, Estat.ocupat);
+				session.save(aux);
+				ser1.add(aux);
+				--lliures1;
+			}
+		}
+		while (i2.hasNext()) {
+			int random = randomGenerator.nextInt(2);
+			if (random == 0) {
+				SeientEnRepresentacio aux = new SeientEnRepresentacio(
+						i2.next(), est1, Estat.lliure);
+				session.save(aux);
+				ser2.add(aux);
+			} else {
+				SeientEnRepresentacio aux = new SeientEnRepresentacio(
+						i2.next(), est1, Estat.ocupat);
+				session.save(aux);
+				ser2.add(aux);
+				--lliures1;
+			}
+		}
 
-		Set<Entrada> entradas1 = new HashSet<Entrada>();
-		Entrada entr1 = new Entrada("1", repA);
-		Entrada entr2 = new Entrada("2", repA);
-		entradas1.add(entr1);
-		entradas1.add(entr2);
 
-		repA.setEntradas(entradas1);
+		/* Espectacle */
+		Espectacle esp1 = new Espectacle("Espectacular", 3, rep1);
+		Espectacle esp2 = new Espectacle("EspectaCULO", 1,
+				est1);
+		session.save(esp1);
+		session.save(esp2);
 
-		Espectacle espectacleA = new Espectacle("Espectacular", 3, repA);
+		/* Entradas */
+		HashSet<Entrada> ent1 = new HashSet<Entrada>();
+		HashSet<Entrada> ent2 = new HashSet<Entrada>();
+		Entrada aux = new Entrada("1", "343434", 2, data1, preu1, rep1);
+		session.save(aux);
+		ent1.add(aux);
+		aux = new Entrada("2", "343435", 2, data1, preu1, rep1);
+		session.save(aux);
+		ent1.add(aux);
+		aux = new Entrada("3", "54545", 1, data2, preu2,
+				est1);
+		session.save(aux);
+		ent2.add(aux);
 
-		SetMoneda setM = new SetMoneda(Moneda.GBP, Moneda.USD);
-		ShowsCom scom = new ShowsCom(1, 1111, "7878787", 20f, Moneda.EUR, setM);
+		rep1.setEntradas(ent1);
+		est1.setEntradas(ent2);
 
-		session.save(seient);
-		session.save(seient2);
-		session.save(local);
-		session.save(ser1);
-		session.save(ser2);
-		session.save(sesMati);
-		session.save(repA);
-		session.save(entr1);
-		session.save(entr2);
-		session.save(espectacleA);
-		session.save(scom);
+		/* Shows.com */
+		SetMoneda sm = new SetMoneda(Moneda.GBP, Moneda.USD);
+		ShowsCom showscom = new ShowsCom(1, 12121, "34343434", 20f, Moneda.EUR,
+				sm);
+		session.save(showscom);
+
+		/*
+		 * 
+		 * Seient seient = new Seient(1, 1); Seient seient2 = new Seient(1, 2);
+		 * 
+		 * seient.setFila(1); seient.setColumna(1);
+		 * 
+		 * 
+		 * Set<Seient> seients = new HashSet<Seient>(); seients.add(seient);
+		 * 
+		 * Local local = new Local("1", seients); local.setNom("Prueba");
+		 * local.setAdreca("C/Prueba");
+		 * 
+		 * Sessio sesMati = new Sessio(TipusSessio.mati);
+		 * 
+		 * Date data1 = Date.valueOf("2012-6-30");
+		 * 
+		 * Set<SeientEnRepresentacio> seientsEnRepresentacio = new
+		 * HashSet<SeientEnRepresentacio>(); SeientEnRepresentacio ser1 = new
+		 * SeientEnRepresentacio(seient, Estat.ocupat); SeientEnRepresentacio
+		 * ser2 = new SeientEnRepresentacio(seient2, Estat.ocupat);
+		 * seientsEnRepresentacio.add(ser1); seientsEnRepresentacio.add(ser2);
+		 * 
+		 * Estrena estA = new Estrena(sesMati, local, 10000f, data1, 2,
+		 * seientsEnRepresentacio, 20);
+		 * 
+		 * Representacio repA = estA.getRepresentacio();
+		 * 
+		 * Set<Entrada> entradas1 = new HashSet<Entrada>(); Entrada entr1 = new
+		 * Entrada("1", repA); Entrada entr2 = new Entrada("2", repA);
+		 * entradas1.add(entr1); entradas1.add(entr2);
+		 * 
+		 * repA.setEntradas(entradas1);
+		 * 
+		 * Espectacle espectacleA = new Espectacle("Espectacular", 3, repA);
+		 * 
+		 * SetMoneda setM = new SetMoneda(Moneda.GBP, Moneda.USD); ShowsCom scom
+		 * = new ShowsCom(1, 1111, "7878787", 20f, Moneda.EUR, setM);
+		 * 
+		 * session.save(seient); session.save(seient2); session.save(local);
+		 * session.save(ser1); session.save(ser2); session.save(sesMati);
+		 * session.save(repA); session.save(entr1); session.save(entr2);
+		 * session.save(espectacleA); session.save(scom);
+		 */
 
 		session.getTransaction().commit();
 
 		/*
-		 * Client expected = new Client("46975089G", "Miguel", "San Rom√°n",
+		 * Client expected = new Client("46975089G", "Miguel", "San Rom·n",
 		 * "msanromanv@gmail.com"); Client expected2 = new Client("39391628B",
 		 * "Josep", "Lopez", "cyph3rfox@gmail.com");
 		 * 
@@ -96,7 +217,7 @@ public class DataLoader {
 		 * Date(50)), 0, "Es un pastel de hotel!"); Comentari comment3 = new
 		 * Comentari(new ComentariId("Hotel Pastel Manresa", "39391628B", new
 		 * Date(50)), 5,
-		 * "Es un pastel de hotel, pero s√≥c de Manresa i li dono un suficient!"
+		 * "Es un pastel de hotel, pero sÛc de Manresa i li dono un suficient!"
 		 * ); Comentari comment4 = new Comentari(new
 		 * ComentariId("Hotel Manresa", "39391628B", new Date(50)), 10,
 		 * "Bonissim");
@@ -108,11 +229,11 @@ public class DataLoader {
 		 * Hotel("Hotel Manresa",
 		 * "El millor hotel que podreu trobar a la capital del Bages", "5",
 		 * "Manresa"); Hotel h2 = new Hotel("Hotel Pastel Manresa",
-		 * "Un hotel per als amants de l'artesania i el menjar casol√†", "3",
+		 * "Un hotel per als amants de l'artesania i el menjar casol‡", "3",
 		 * "Manresa"); Hotel h3 = new Hotel("Hotel Princesa Sofia",
 		 * "Hotel ubicat a l'Avinguda Diagonal, d'impecable reputacio i alta qualitat."
 		 * , "Tres", "Barcelona"); Hotel h4 = new Hotel("Hotel Pastel Sofia",
-		 * "Hotel mes dolent, que intenta imitar l'est√®tica del Princesa Sofia"
+		 * "Hotel mes dolent, que intenta imitar l'estËtica del Princesa Sofia"
 		 * , "Zero", "Barcelona");
 		 * 
 		 * HabitacioId hId = new HabitacioId("Hotel Manresa", 1); HabitacioId

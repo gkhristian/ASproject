@@ -1,5 +1,6 @@
 package com.Shows.Domain.Model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -16,17 +17,15 @@ public class Local {
 	@OneToMany
 	private Set<Seient> seients;
 
-	public Local(String nom, Set<Seient> seients) {
+	public Local(String nom) {
 		this.nom = nom;
-		this.seients = seients;
-		// TODO Controlar set vacio
+		this.seients = new HashSet<Seient>();
 	}
 
-	public Local(String nom, String adreca, Set<Seient> seients) {
+	public Local(String nom, String adreca) {
 		this.nom = nom;
 		this.adreca = adreca;
-		this.seients = seients;
-		// TODO Controlar set vacio
+		this.seients = new HashSet<Seient>();
 	}
 
 	public String getNom() {

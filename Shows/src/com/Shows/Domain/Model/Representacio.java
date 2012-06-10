@@ -21,24 +21,20 @@ public class Representacio {
 	@OneToMany
 	private Set<SeientEnRepresentacio> seientsEnRepresentacio;
 
-	public Representacio(Sessio sessio, Local nom,
-			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
+	public Representacio(Sessio sessio, Local nom) {
 		this.setAux(new AuxiliarRepresentacio(sessio, nom));
-		this.seientsEnRepresentacio = seientsEnRepresentacio;
+		this.seientsEnRepresentacio = new HashSet<SeientEnRepresentacio>();
 		this.entradas = new HashSet<Entrada>();
-		// TODO Controlar sets vacios
 	}
 
 	public Representacio(Sessio sessio, Local nom, Float preu, Date data,
-			Integer nombreSeientsLliures,
-			Set<SeientEnRepresentacio> seientsEnRepresentacio) {
+			Integer nombreSeientsLliures) {
 		setAux(new AuxiliarRepresentacio(sessio, nom));
 		this.preu = preu;
 		this.data = data;
 		this.nombreSeientsLliures = nombreSeientsLliures;
-		this.seientsEnRepresentacio = seientsEnRepresentacio;
+		this.seientsEnRepresentacio = new HashSet<SeientEnRepresentacio>();
 		this.entradas = new HashSet<Entrada>();
-		// TODO Controlar sets vacios
 	}
 
 	public Float getPreu() {
