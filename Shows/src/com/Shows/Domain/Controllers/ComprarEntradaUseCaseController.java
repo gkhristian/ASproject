@@ -9,6 +9,7 @@ import com.Shows.Data.Controllers.ControllerDataFactory;
 import com.Shows.Data.Interfaces.IControllerEspectacle;
 import com.Shows.Data.Interfaces.IControllerRepresentacio;
 import com.Shows.Domain.Adapters.AdapterFactory;
+import com.Shows.Domain.Adapters.IConversorAdapter;
 import com.Shows.Domain.Adapters.IPagamentAdapter;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Moneda;
@@ -72,13 +73,29 @@ public class ComprarEntradaUseCaseController {
 
 	public Set<DadesEntrada> selecionarSeients(Set<PosicioSeient> seients) {
 		this.seients = seients;
-		return new HashSet<DadesEntrada>();
+
+		IControllerRepresentacio controllerRepresentacio = controllerDataFactory
+				.getControllerRepresentacio();
+		Representacio representacio = controllerRepresentacio.getRepresentacio(
+				nomLocal, sessio);
+
+		return new HashSet<DadesEntrada>(); // representacio.obtePreu(nombEspectadors);
 	}
 
 	public float obtePreuMoneda(Moneda moneda) {
 		// TODO esto es así???
-		this.preuTotal = 1f; // preu?
-		return 0f;
+
+		AdapterFactory adapterFactory = AdapterFactory.getInstance();
+		IConversorAdapter conversorAdapter = adapterFactory
+				.getConversorAdapter();
+
+		Moneda divisa = null; // ShowsCom.getDivisa();
+
+		double rate = conversorAdapter.convert(divisa, moneda);
+
+		// TODO no esta claro esto :S
+		preuTotal = (float) (preuTotal * rate); // preu?
+		return preuTotal;
 	}
 
 	public void pagament(String dni, int codiB, String numCompte, Date data) {
@@ -95,10 +112,12 @@ public class ComprarEntradaUseCaseController {
 		} else {
 			IControllerRepresentacio controllerRepresentacio = ControllerDataFactory
 					.getInstance().getControllerRepresentacio();
+
 			Representacio representacio = controllerRepresentacio
 					.getRepresentacio(nomLocal, sessio);
-			// representacio.createEntrada(titol, dni, nombEspectadors, data,
-			// preuTotal);
+
+			representacio.createEntrada(titol, dni, nombEspectadors, data,
+					preuTotal);
 		}
 	}
 }
