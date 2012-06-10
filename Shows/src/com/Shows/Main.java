@@ -5,9 +5,12 @@ import java.awt.EventQueue;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.Shows.Presentation.MainView;
+import com.Shows.Presentation.ComprarEntradaView;
+import com.Shows.Presentation.Controller.ComprarEntradaController;
 
 public class Main {
+
+	private static ComprarEntradaController comprarEntradaController;
 
 	/**
 	 * @param args
@@ -20,10 +23,15 @@ public class Main {
 			DataLoader.initDatabase();
 
 		EventQueue.invokeLater(new Runnable() {
+			
+
 			public void run() {
 				try {
-					MainView mainView = new MainView();
-					mainView.getFrame().setVisible(true);
+					//MainView mainView = new MainView();
+					//mainView.getFrame().setVisible(true);
+					comprarEntradaController = new ComprarEntradaController(); 
+					ComprarEntradaView comprarEntradaView = new ComprarEntradaView(comprarEntradaController);
+					comprarEntradaView.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

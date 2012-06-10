@@ -2,7 +2,6 @@ package com.Shows.Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
@@ -14,13 +13,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
 
 public class ComprarEntradaView extends JFrame {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Instancia de los Panels
@@ -30,36 +30,30 @@ public class ComprarEntradaView extends JFrame {
 	private SeientsPanel seientsPanel;
 	private PagamentPanel pagamentPanel;
 	private ComprarEntradaPanel comprarEntradaPanel;
-	
-	private static final long serialVersionUID = 1L;
+
 	private JPanel contentPane;
 	private JPanel centerPanel = new JPanel();
 	private CardLayout card = new CardLayout();
-	private static ComprarEntradaController comprarEntradaController;
+	private ComprarEntradaController comprarEntradaController;
 	private final Box horizontalBox = Box.createHorizontalBox();
 	private final JButton ContinuaBtn = new JButton("Comprar Entrada");
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					comprarEntradaController = new ComprarEntradaController(); 
-					//ComprarEntradaView frame = new ComprarEntradaView(comprarEntradaController);
-					//frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { comprarEntradaController = new
+	 * ComprarEntradaController(); //ComprarEntradaView frame = new
+	 * ComprarEntradaView(comprarEntradaController); //frame.setVisible(true); }
+	 * catch (Exception e) { e.printStackTrace(); } } }); }
+	 */
 
 	/**
 	 * Create the frame.
 	 */
-	public ComprarEntradaView(final ComprarEntradaController comprarEntradaController) {		
+	public ComprarEntradaView(
+			final ComprarEntradaController comprarEntradaController) {
 		espectaclePanel = new EspectaclePanel(comprarEntradaController);
 		representacioPanel = new RepresentacioPanel(comprarEntradaController);
 		seientsPanel = new SeientsPanel(comprarEntradaController);
@@ -78,8 +72,8 @@ public class ComprarEntradaView extends JFrame {
 
 		contentPane.add(horizontalBox, BorderLayout.SOUTH);
 
-		//horizontalBox.add(ContinuaBtn);
-		
+		// horizontalBox.add(ContinuaBtn);
+
 		centerPanel.setLayout(card);
 
 		/**
@@ -93,67 +87,68 @@ public class ComprarEntradaView extends JFrame {
 
 		JButton nuevo = comprarEntradaPanel.getComparEntradabtn();
 
-		/*ContinuaBtn.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		/*
+		 * ContinuaBtn.addMouseListener(new MouseAdapter() {
+		 * 
+		 * @Override public void mouseClicked(MouseEvent arg0) {
+		 * 
+		 * card.show(centerPanel, "espectacle"); }
+		 * 
+		 * });
+		 */
 
-				card.show(centerPanel, "espectacle");
-			}
-			
-		});*/
-		
 		nuevo.addMouseListener(new MouseAdapter() {
-			
+
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				comprarEntradaController.PrOkObteRepresentacions("", new Date(1));
+				comprarEntradaController.PrOkObteRepresentacions("",
+						new Date(1));
 			}
-			
+
 		});
 
 	}
-	
-	public void mostraEspectacles(Set<String> espectacles){
+
+	public void mostraEspectacles(Set<String> espectacles) {
 		espectaclePanel.setEspectacleComboBox(espectacles);
 		card.show(centerPanel, "espectacle");
 	}
-	
-	public void mostraRepresentacions(Set<DadesRepresentacio> representacions){
+
+	public void mostraRepresentacions(Set<DadesRepresentacio> representacions) {
 		representacioPanel.setInfo(representacions);
 		card.show(centerPanel, "representacio");
 	}
-	
-	public void mostraOcupacio(Set<PosicioSeient> seients){
-		
+
+	public void mostraOcupacio(Set<PosicioSeient> seients) {
+
 	}
-	
-	public void mostraPreu(DadesEntrada dadesEntrada){
-		
+
+	public void mostraPreu(DadesEntrada dadesEntrada) {
+
 	}
-	
-	public void mostraPreuMoneda (Float preu){
-		
+
+	public void mostraPreuMoneda(Float preu) {
+
 	}
-	
-	public void mostraMissatge(String missatge){
-		
+
+	public void mostraMissatge(String missatge) {
+
 	}
-	
-	public void mostraAvisFi(String missatge){
-		
+
+	public void mostraAvisFi(String missatge) {
+
 	}
-	
-	public void mostraAvis(String missatge){
-		
+
+	public void mostraAvis(String missatge) {
+
 	}
-	
-	public void tancarAvis(){
-		
+
+	public void tancarAvis() {
+
 	}
-	
-	public void tancar(){
-		
+
+	public void tancar() {
+
 	}
-	
+
 }
