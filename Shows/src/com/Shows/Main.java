@@ -22,8 +22,6 @@ public class Main {
 			DataLoader.initDatabase();
 
 		EventQueue.invokeLater(new Runnable() {
-			
-
 			public void run() {
 				try {
 					comprarEntradaController = new ComprarEntradaController(); 
