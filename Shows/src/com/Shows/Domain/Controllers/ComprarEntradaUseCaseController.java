@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.Shows.Data.Controllers.ControllerDataFactory;
-import com.Shows.Data.Controllers.ControllerRepresentacio;
 import com.Shows.Data.Interfaces.IControllerEspectacle;
 import com.Shows.Data.Interfaces.IControllerRepresentacio;
 import com.Shows.Domain.Adapters.AdapterFactory;
@@ -82,17 +81,22 @@ public class ComprarEntradaUseCaseController {
 	}
 
 	public void pagament(String dni, int codiB, String numCompte, Date data) {
-		IPagamentAdapter ipa = AdapterFactory.getInstance().getPagamentAdapter();
+		IPagamentAdapter pagamentAdapter = AdapterFactory.getInstance()
+				.getPagamentAdapter();
 		int codiBancShows = 0;// = Shows.com.getCodiBanc();
 		String numcompteShows = "099998";// = Shows.com.getNumeroCompte();
-		boolean b = ipa.autoritza(dni, codiB, numCompte, preuTotal, codiBancShows, numcompteShows);
-		if(! b){
+		boolean autoritzat = pagamentAdapter.autoritza(dni, codiB, numCompte, preuTotal,
+				codiBancShows, numcompteShows);
+		if (!autoritzat) {
+			// TODO throw exception, aquí o en el servicio (Diría que en el servicio)
 			System.out.println("Pagament no autoritzat");
-		}
-		else {
-			IControllerRepresentacio icr = ControllerDataFactory.getInstance().getControllerRepresentacio();
-			Representacio r = icr.getRepresentacio(nomLocal, sessio);
-			//r.createEntrada(titol, dni, nombEspectadors, data, preuTotal);
+		} else {
+			IControllerRepresentacio controllerRepresentacio = ControllerDataFactory
+					.getInstance().getControllerRepresentacio();
+			Representacio representacio = controllerRepresentacio
+					.getRepresentacio(nomLocal, sessio);
+			// representacio.createEntrada(titol, dni, nombEspectadors, data,
+			// preuTotal);
 		}
 	}
 }
