@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.Shows.Presentation.ComprarEntradaView;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 
 public class Main {
@@ -27,8 +26,6 @@ public class Main {
 
 			public void run() {
 				try {
-					//MainView mainView = new MainView();
-					//mainView.getFrame().setVisible(true);
 					comprarEntradaController = new ComprarEntradaController(); 
 				} catch (Exception e) {
 					e.printStackTrace();
