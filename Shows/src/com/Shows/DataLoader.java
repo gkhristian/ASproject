@@ -10,12 +10,16 @@ import org.hibernate.Session;
 
 import com.Shows.Domain.Model.Entrada;
 import com.Shows.Domain.Model.Espectacle;
+import com.Shows.Domain.Model.Estat;
 import com.Shows.Domain.Model.Estrena;
 import com.Shows.Domain.Model.Local;
+import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.Representacio;
 import com.Shows.Domain.Model.Seient;
 import com.Shows.Domain.Model.SeientEnRepresentacio;
 import com.Shows.Domain.Model.Sessio;
+import com.Shows.Domain.Model.SetMoneda;
+import com.Shows.Domain.Model.ShowsCom;
 import com.Shows.Domain.Model.TipusSessio;
 
 public class DataLoader {
@@ -41,12 +45,14 @@ public class DataLoader {
 		Date data1 = Date.valueOf("2012-6-30");
 
 		Set<SeientEnRepresentacio> seientsEnRepresentacio = new HashSet<SeientEnRepresentacio>();
-		SeientEnRepresentacio ser1 = new SeientEnRepresentacio(seient);
-		SeientEnRepresentacio ser2 = new SeientEnRepresentacio(seient2);
+		SeientEnRepresentacio ser1 = new SeientEnRepresentacio(seient,
+				Estat.ocupat);
+		SeientEnRepresentacio ser2 = new SeientEnRepresentacio(seient2,
+				Estat.ocupat);
 		seientsEnRepresentacio.add(ser1);
 		seientsEnRepresentacio.add(ser2);
 
-		Estrena estA = new Estrena(sesMati, local, (float) 10000, data1, 2,
+		Estrena estA = new Estrena(sesMati, local, 10000f, data1, 2,
 				seientsEnRepresentacio, 20);
 
 		Representacio repA = estA.getRepresentacio();
@@ -61,6 +67,9 @@ public class DataLoader {
 
 		Espectacle espectacleA = new Espectacle("Espectacular", 3, repA);
 
+		SetMoneda setM = new SetMoneda(Moneda.GBP, Moneda.USD);
+		ShowsCom scom = new ShowsCom(1, 1111, "7878787", 20f, Moneda.EUR, setM);
+
 		session.save(seient);
 		session.save(seient2);
 		session.save(local);
@@ -71,7 +80,7 @@ public class DataLoader {
 		session.save(entr1);
 		session.save(entr2);
 		session.save(espectacleA);
-		
+		session.save(scom);
 
 		session.getTransaction().commit();
 
@@ -207,6 +216,8 @@ public class DataLoader {
 
 		Query query;
 		query = session.createSQLQuery("DROP SCHEMA public CASCADE");
+		query.executeUpdate();
+		query = session.createSQLQuery("CREATE SCHEMA public");
 		query.executeUpdate();
 
 		session.getTransaction().commit();

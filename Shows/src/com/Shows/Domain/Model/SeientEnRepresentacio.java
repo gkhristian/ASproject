@@ -3,6 +3,8 @@ package com.Shows.Domain.Model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -14,11 +16,8 @@ public class SeientEnRepresentacio implements Serializable {
 	@Id
 	@ManyToOne
 	private Seient seient;
+	@Enumerated(EnumType.STRING)
 	private Estat estat;
-
-	public SeientEnRepresentacio(Seient seient) {
-		this.seient = seient;
-	}
 
 	public SeientEnRepresentacio(Seient seient, Estat estat) {
 		this.seient = seient;

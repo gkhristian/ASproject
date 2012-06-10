@@ -1,9 +1,8 @@
 package com.Shows.Domain.Model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 @Entity
@@ -13,8 +12,19 @@ public class ShowsCom {
 	private int codiBanc;
 	private String numeroCompte;
 	private Float comissio;
+	@Enumerated(EnumType.STRING)
 	private Moneda divisa;
-	private HashSet<Moneda> canvis;
+	private SetMoneda canvis;
+
+	public ShowsCom(int id, int codiBanc, String numeroCompte, Float comissio,
+			Moneda divisa, SetMoneda canvis) {
+		this.id = id;
+		this.codiBanc = codiBanc;
+		this.numeroCompte = numeroCompte;
+		this.comissio = comissio;
+		this.divisa = divisa;
+		this.setCanvis(canvis);
+	}
 
 	public int getId() {
 		return id;
@@ -56,12 +66,11 @@ public class ShowsCom {
 		this.divisa = divisa;
 	}
 
-	public Set<Moneda> getCanvis() {
+	public SetMoneda getCanvis() {
 		return canvis;
 	}
 
-	public void setCanvis(Set<Moneda> canvis) {
-		this.canvis = (HashSet<Moneda>) canvis;
+	public void setCanvis(SetMoneda canvis) {
+		this.canvis = canvis;
 	}
-
 }
