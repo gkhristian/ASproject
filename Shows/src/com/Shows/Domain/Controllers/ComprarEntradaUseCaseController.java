@@ -98,26 +98,18 @@ public class ComprarEntradaUseCaseController {
 		return preuTotal;
 	}
 
-	public void pagament(String dni, int codiB, String numCompte, Date data) {
+	public void pagament(String dni, int codiB, String numCompte, Date data) throws Exception {
 		IPagamentAdapter pagamentAdapter = AdapterFactory.getInstance()
 				.getPagamentAdapter();
 		int codiBancShows = ShowsCom.getCodiBanc();
 		String numcompteShows = ShowsCom.getNumeroCompte();
-		boolean autoritzat = pagamentAdapter.autoritza(dni, codiB, numCompte,
+		pagamentAdapter.autoritza(dni, codiB, numCompte,
 				preuTotal, codiBancShows, numcompteShows);
-		if (!autoritzat) {
-			// TODO throw exception, aquí o en el servicio (Diría que en el
-			// servicio)
-			System.out.println("Pagament no autoritzat");
-		} else {
-			IControllerRepresentacio controllerRepresentacio = ControllerDataFactory
-					.getInstance().getControllerRepresentacio();
-
-			Representacio representacio = controllerRepresentacio
-					.getRepresentacio(nomLocal, sessio);
-
-			representacio.createEntrada(titol, dni, nombEspectadors, data,
-					preuTotal);
-		}
+		IControllerRepresentacio controllerRepresentacio = ControllerDataFactory
+				.getInstance().getControllerRepresentacio();
+		Representacio representacio = controllerRepresentacio
+				.getRepresentacio(nomLocal, sessio);
+		representacio.createEntrada(titol, dni, nombEspectadors, data,
+				preuTotal);
 	}
 }
