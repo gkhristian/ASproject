@@ -1,5 +1,7 @@
 package com.Shows.Domain.Adapters;
 
+import java.rmi.RemoteException;
+
 import com.Shows.Domain.ServiceLocator.ServeiPagament;
 import com.Shows.Domain.ServiceLocator.ServiceLocator;
 
@@ -14,7 +16,7 @@ public class PagamentAdapter implements IPagamentAdapter {
 		boolean autoritza = sp.autoritza(dni, codiB, numCompte, importe,
 				codiBancShows, numcompteShows);
 		if (!autoritza) {
-			throw new Exception();
+			throw new RemoteException();
 		} else
 			return true;
 	}
