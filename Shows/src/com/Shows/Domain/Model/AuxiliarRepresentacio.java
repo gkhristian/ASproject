@@ -14,6 +14,9 @@ public class AuxiliarRepresentacio implements Serializable {
 	private Sessio sessio;
 	@ManyToOne
 	private Local local;
+	
+	public AuxiliarRepresentacio() {
+	}
 
 	public AuxiliarRepresentacio(Sessio sessio, Local nom) {
 		this.sessio = sessio;

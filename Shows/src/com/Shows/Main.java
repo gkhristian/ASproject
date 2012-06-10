@@ -30,8 +30,6 @@ public class Main {
 					//MainView mainView = new MainView();
 					//mainView.getFrame().setVisible(true);
 					comprarEntradaController = new ComprarEntradaController(); 
-					ComprarEntradaView comprarEntradaView = new ComprarEntradaView(comprarEntradaController);
-					comprarEntradaView.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

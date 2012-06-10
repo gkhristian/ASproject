@@ -18,6 +18,9 @@ public class Seient implements Serializable {
 	private int fila;
 	@Id
 	private int columna;
+	
+	public Seient() {
+	}
 
 	public Seient(Local local, int columna, int fila) {
 		this.fila = fila;

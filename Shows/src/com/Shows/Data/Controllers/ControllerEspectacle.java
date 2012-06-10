@@ -17,7 +17,7 @@ public class ControllerEspectacle implements IControllerEspectacle {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 
-		return session.createQuery("from Espectacle").list();
+		return (List<Espectacle>) session.createQuery("from Espectacle").list();
 	}
 
 	@Override

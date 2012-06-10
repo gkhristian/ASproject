@@ -16,6 +16,9 @@ public class Local {
 
 	@OneToMany
 	private Set<Seient> seients;
+	
+	public Local() {
+	}
 
 	public Local(String nom) {
 		this.nom = nom;

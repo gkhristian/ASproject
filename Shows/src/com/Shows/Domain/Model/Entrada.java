@@ -16,6 +16,9 @@ public class Entrada {
 	private Float preu;
 	@ManyToOne
 	private Representacio representacio;
+	
+	public Entrada() {
+	}
 
 	public Entrada(String identificador, Representacio representacio) {
 		this.identificador = identificador;

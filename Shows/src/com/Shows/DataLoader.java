@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -72,8 +73,8 @@ public class DataLoader {
 		
 
 		/* Data */
-		Date data1 = Date.valueOf("2012-06-30");
-		Date data2 = Date.valueOf("2012-07-31");
+		Date data1 = Date.valueOf("2012-6-30");
+		Date data2 = Date.valueOf("2012-7-31");
 		
 		/* Representacions i Estrenes */
 		Float preu1 = 10f;
@@ -83,9 +84,9 @@ public class DataLoader {
 		int lliures2 = filas2 * columnas2;
 		
 		Representacio rep1 = new Representacio(ses1, local1, preu1, data1, lliures1);
-		Estrena est1 = new Estrena(ses2, local2, preu2, data2, lliures2,1);
+		Representacio est1 = new Representacio(ses2, local2, preu2, data2, lliures2);
 		session.save(rep1);
-		session.save(est1.getRepresentacio());
+		//session.save(est1.getRepresentacio());
 		session.save(est1);
 
 		/* Seients en representacio */
@@ -115,12 +116,12 @@ public class DataLoader {
 			int random = randomGenerator.nextInt(2);
 			if (random == 0) {
 				SeientEnRepresentacio aux = new SeientEnRepresentacio(
-						i2.next(), est1.getRepresentacio(), Estat.lliure);
+						i2.next(), est1, Estat.lliure);
 				session.save(aux);
 				ser2.add(aux);
 			} else {
 				SeientEnRepresentacio aux = new SeientEnRepresentacio(
-						i2.next(), est1.getRepresentacio(), Estat.ocupat);
+						i2.next(), est1, Estat.ocupat);
 				session.save(aux);
 				ser2.add(aux);
 				--lliures1;
@@ -131,7 +132,7 @@ public class DataLoader {
 		/* Espectacle */
 		Espectacle esp1 = new Espectacle("Espectacular", 3, rep1);
 		Espectacle esp2 = new Espectacle("EspectaCULO", 1,
-				est1.getRepresentacio());
+				est1);
 		session.save(esp1);
 		session.save(esp2);
 
@@ -145,12 +146,12 @@ public class DataLoader {
 		session.save(aux);
 		ent1.add(aux);
 		aux = new Entrada("3", "54545", 1, data2, preu2,
-				est1.getRepresentacio());
+				est1);
 		session.save(aux);
 		ent2.add(aux);
 
 		rep1.setEntradas(ent1);
-		est1.getRepresentacio().setEntradas(ent2);
+		est1.setEntradas(ent2);
 
 		/* Shows.com */
 		SetMoneda sm = new SetMoneda(Moneda.GBP, Moneda.USD);

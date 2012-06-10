@@ -21,6 +21,9 @@ public class SeientEnRepresentacio implements Serializable {
 	private Representacio representacio;
 	@Enumerated(EnumType.STRING)
 	private Estat estat;
+	
+	public SeientEnRepresentacio() {
+	}
 
 	public SeientEnRepresentacio(Seient seient, Representacio representacio, Estat estat) {
 		this.seient = seient;

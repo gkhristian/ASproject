@@ -21,6 +21,9 @@ public class ShowsCom {
 	public static ShowsCom getInstance() {
 		return instance;
 	}
+	
+	public ShowsCom() {
+	}
 
 	public ShowsCom(int id, int codiBanc, String numeroCompte, Float comissio,
 			Moneda divisa, SetMoneda canvis) {

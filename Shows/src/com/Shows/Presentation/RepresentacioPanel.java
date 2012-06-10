@@ -1,13 +1,17 @@
 package com.Shows.Presentation;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Set;
 
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,26 +30,24 @@ public class RepresentacioPanel extends JPanel {
 	private JLabel NomEspectacleLbl;
 
 	private JLabel DataEspectacleLbl;
+
 	/**
 	 * Create the frame.
 	 */
 	public RepresentacioPanel(
 			final ComprarEntradaController comprarEntradaController) {
-		
+
 		this.comprarEntradaController = comprarEntradaController;
 		setLayout(new BorderLayout(0, 0));
 		Box horizontalBox_1 = Box.createHorizontalBox();
 		add(horizontalBox_1);
-		
-		Box verticalBox = Box.createVerticalBox();
-		horizontalBox_1.add(verticalBox);
-		
-		RepresentacionsTable = new JTable();
-		verticalBox.add(RepresentacionsTable);
-		/*Box horizontalBox_1 = Box.createHorizontalBox();
-		add(horizontalBox_1);
 
 		Box verticalBox = Box.createVerticalBox();
+		horizontalBox_1.add(verticalBox);
+
+		RepresentacionsTable = new JTable();
+		verticalBox.add(RepresentacionsTable);
+
 		horizontalBox_1.add(verticalBox);
 
 		JLabel EspectacleLbl = new JLabel("Espectacle:");
@@ -109,37 +111,35 @@ public class RepresentacioPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				comprarEntradaController.PrCancellarAvis();
+				comprarEntradaController.PrCancellar();
 			}
-		});*/
+		});
 	}
 
 	public void setInfo(Set<DadesRepresentacio> representacions) {
-		String[] columnNames = {"Local", "Sessió", "Seients Disponibles", "És estrena?", "Preu"};
+		String[] columnNames = { "Local", "Sessió", "Seients Disponibles",
+				"És estrena?", "Preu" };
 		JScrollPane scpEjemplo = new JScrollPane();
-		DefaultTableModel dtmEjemplo = new DefaultTableModel(null,columnNames);
-		
-		/*int i = 0;
-		for (DadesRepresentacio dades : representacions) {
-			Object datos[] = new Object[3];
-			
-			datos[i] = dades.getNombreSeientsLliures();
-			datos[i] = dades.getNomLocal();
-			datos[i] = dades.getPreu();
-			datos[i] = dades.getSessio();
-			++i;
-			dtmEjemplo.addRow(datos);
-		}*/
+		DefaultTableModel dtmEjemplo = new DefaultTableModel(null, columnNames);
+
+		/*
+		 * int i = 0; for (DadesRepresentacio dades : representacions) { Object
+		 * datos[] = new Object[3];
+		 * 
+		 * datos[i] = dades.getNombreSeientsLliures(); datos[i] =
+		 * dades.getNomLocal(); datos[i] = dades.getPreu(); datos[i] =
+		 * dades.getSessio(); ++i; dtmEjemplo.addRow(datos); }
+		 */
 		Object datos[] = new Object[3];
 		datos[0] = "hola";
 		datos[1] = "hola";
 		datos[2] = "hola";
-		
+
 		RepresentacionsTable.setModel(dtmEjemplo);
 		scpEjemplo.add(RepresentacionsTable);
 		RepresentacionsTable.setVisible(true);
 	}
-	
+
 	public void setNomEspectacleLbl(JLabel nomEspectacleLbl) {
 		NomEspectacleLbl = nomEspectacleLbl;
 	}
@@ -147,5 +147,4 @@ public class RepresentacioPanel extends JPanel {
 	public void setDataEspectacleLbl(JLabel dataEspectacleLbl) {
 		DataEspectacleLbl = dataEspectacleLbl;
 	}
-
 }

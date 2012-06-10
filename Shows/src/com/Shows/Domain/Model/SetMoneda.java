@@ -13,7 +13,6 @@ public class SetMoneda {
 	private Moneda canvi2;
 
 	public SetMoneda() {
-		
 	}
 	
 	public SetMoneda(Moneda m1, Moneda m2) {

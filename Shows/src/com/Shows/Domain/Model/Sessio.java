@@ -12,6 +12,9 @@ public class Sessio {
 	@Enumerated(EnumType.STRING)
 	private TipusSessio sessio;
 
+	public Sessio() {
+	}
+	
 	public Sessio(TipusSessio sessio) {
 		this.sessio = sessio;
 	}

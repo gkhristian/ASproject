@@ -2,6 +2,7 @@ package com.Shows.Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
@@ -37,17 +38,6 @@ public class ComprarEntradaView extends JFrame {
 	private ComprarEntradaController comprarEntradaController;
 	private final Box horizontalBox = Box.createHorizontalBox();
 	private final JButton ContinuaBtn = new JButton("Comprar Entrada");
-
-	/**
-	 * Launch the application.
-	 */
-	/*
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { comprarEntradaController = new
-	 * ComprarEntradaController(); //ComprarEntradaView frame = new
-	 * ComprarEntradaView(comprarEntradaController); //frame.setVisible(true); }
-	 * catch (Exception e) { e.printStackTrace(); } } }); }
-	 */
 
 	/**
 	 * Create the frame.
@@ -100,9 +90,8 @@ public class ComprarEntradaView extends JFrame {
 		nuevo.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				comprarEntradaController.PrOkObteRepresentacions("",
-						new Date(1));
+			public void mouseClicked(MouseEvent mouseEvent) {
+				comprarEntradaController.PrComprarEntrada();
 			}
 
 		});
@@ -132,23 +121,28 @@ public class ComprarEntradaView extends JFrame {
 	}
 
 	public void mostraMissatge(String missatge) {
-
+		// TODO label en el down --> missatgeLabel.setText(missatge);
 	}
 
 	public void mostraAvisFi(String missatge) {
-
+		// TODO delete missatge???
 	}
 
 	public void mostraAvis(String missatge) {
-
+		// TODO delete missatge???
+		AvisSortirDialog avisSortirDialog = new AvisSortirDialog();
+		avisSortirDialog.setVisible(true);
 	}
 
 	public void tancarAvis() {
-
+		// TODO necesario??? que es???
 	}
 
 	public void tancar() {
-
+		try {
+			finalize();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 	}
-
 }

@@ -1,8 +1,14 @@
 package com.Shows.Domain.Model;
 
+import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
+import com.Shows.TupleTypes.DadesRepresentacio;
 
 @Entity
 public class Espectacle {
@@ -10,19 +16,32 @@ public class Espectacle {
 	@Id
 	private String titol;
 	private int participants;
-	@OneToOne
-	private Representacio representacio;
+	@OneToMany
+	private Set<Representacio> representacions;
 
-	public Espectacle(String titol, Representacio representacio) {
+	public Espectacle() {
+	}
+
+	public Espectacle(String titol, Set<Representacio> representacions) {
 		this.titol = titol;
-		this.representacio = representacio;
+		this.representacions = representacions;
 	}
 
 	public Espectacle(String titol, int participants,
-			Representacio representacio) {
+			Set<Representacio> representacions) {
 		this.titol = titol;
 		this.participants = participants;
-		this.representacio = representacio;
+		this.representacions = representacions;
+	}
+
+	public Set<DadesRepresentacio> obteRep(Date data) {
+		HashSet<DadesRepresentacio> dadesRepresentacios = new HashSet<DadesRepresentacio>();
+		for (Representacio representacio : representacions) {
+			if(representacio.dataOk(data))
+				dadesRepresentacios.add(representacio.obteInformacio());
+		}
+		
+		return dadesRepresentacios;
 	}
 
 	public String getTitol() {
@@ -41,12 +60,12 @@ public class Espectacle {
 		this.participants = participants;
 	}
 
-	public Representacio getRepresentacio() {
-		return representacio;
+	public Set<Representacio> getRepresentacio() {
+		return representacions;
 	}
 
-	public void setRepresentacio(Representacio representacio) {
-		this.representacio = representacio;
+	public void setRepresentacio(Set<Representacio> representacions) {
+		this.representacions = representacions;
 	}
 
 }

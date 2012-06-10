@@ -1,13 +1,15 @@
 package com.Shows.TupleTypes;
 
+import com.Shows.Domain.Model.TipusSessio;
+
 public class DadesRepresentacio {
 	private String nomLocal;
-	private String sessio;
+	private TipusSessio sessio;
 	private int nombreSeientsLliures;
 	private boolean estrena;
 	private float preu;
 
-	public DadesRepresentacio(final String nomLocal, final String sessio,
+	public DadesRepresentacio(final String nomLocal, final TipusSessio sessio,
 			final int nombreSeientsLliures, final boolean estrena,
 			final float preu) {
 		this.setNomLocal(nomLocal);
@@ -25,11 +27,11 @@ public class DadesRepresentacio {
 		this.nomLocal = nomLocal;
 	}
 
-	public String getSessio() {
+	public TipusSessio getSessio() {
 		return sessio;
 	}
 
-	public void setSessio(String sessio) {
+	public void setSessio(TipusSessio sessio) {
 		this.sessio = sessio;
 	}
 
