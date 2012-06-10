@@ -12,5 +12,4 @@ public class ConversorAdapter implements IConversorAdapter {
         CurrencyConvertor cc = new CurrencyConvertor();
         return cc.convert(divisa, moneda);
     }
-
 }

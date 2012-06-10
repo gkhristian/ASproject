@@ -35,29 +35,47 @@ public final class CurrencyConvertorSoap_CurrencyConvertorSoap_Client {
 
     public static double convert(Moneda divisa, Moneda moneda)  {
         URL wsdlURL = CurrencyConvertor.WSDL_LOCATION;
-        /*if (args.length > 0 && args[0] != null && !"".equals(args[0])) { 
-            File wsdlFile = new File(args[0]);
-            try {
-                if (wsdlFile.exists()) {
-                    wsdlURL = wsdlFile.toURI().toURL();
-                } else {
-                    wsdlURL = new URL(args[0]);
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        }*/
-      
-        CurrencyConvertor ss = new CurrencyConvertor(wsdlURL, SERVICE_NAME);
-        CurrencyConvertorSoap port = ss.getCurrencyConvertorSoap();  
         
-        {
-        System.out.println("Invoking conversionRate...");
-        net.webservicex.Currency _conversionRate_fromCurrency = net.webservicex.Currency.EUR;
-        net.webservicex.Currency _conversionRate_toCurrency = net.webservicex.Currency.USD;
-        return port.conversionRate(_conversionRate_fromCurrency, _conversionRate_toCurrency);
-        //System.out.println("conversionRate.result=" + _conversionRate__return);
+        CurrencyConvertor ss = new CurrencyConvertor(wsdlURL, SERVICE_NAME);
+        CurrencyConvertorSoap port = ss.getCurrencyConvertorSoap();
+        
+        if (divisa.toString().equals("EUR")) {
+	        if (moneda.toString().equals("USD")) {
+		        net.webservicex.Currency _conversionRate_fromCurrency = net.webservicex.Currency.EUR;
+		        net.webservicex.Currency _conversionRate_toCurrency = net.webservicex.Currency.USD;
+		        return port.conversionRate(_conversionRate_fromCurrency, _conversionRate_toCurrency);
+	        }
+	        else if (moneda.toString().equals("GBP")) {
+		        net.webservicex.Currency _conversionRate_fromCurrency = net.webservicex.Currency.EUR;
+		        net.webservicex.Currency _conversionRate_toCurrency = net.webservicex.Currency.GBP;
+		        return port.conversionRate(_conversionRate_fromCurrency, _conversionRate_toCurrency);
+	        }
         }
+        else if (divisa.toString().equals("USD")) {
+	        if (moneda.toString().equals("EUR")) {
+		        net.webservicex.Currency _conversionRate_fromCurrency = net.webservicex.Currency.USD;
+		        net.webservicex.Currency _conversionRate_toCurrency = net.webservicex.Currency.EUR;
+		        return port.conversionRate(_conversionRate_fromCurrency, _conversionRate_toCurrency);
+	        }
+	        else if (moneda.toString().equals("GBP")) {
+		        net.webservicex.Currency _conversionRate_fromCurrency = net.webservicex.Currency.USD;
+		        net.webservicex.Currency _conversionRate_toCurrency = net.webservicex.Currency.GBP;
+		        return port.conversionRate(_conversionRate_fromCurrency, _conversionRate_toCurrency);
+	        }
+        }
+        else if (divisa.toString().equals("GBP")){
+	        if (moneda.toString().equals("EUR")) {
+		        net.webservicex.Currency _conversionRate_fromCurrency = net.webservicex.Currency.GBP;
+		        net.webservicex.Currency _conversionRate_toCurrency = net.webservicex.Currency.EUR;
+		        return port.conversionRate(_conversionRate_fromCurrency, _conversionRate_toCurrency);
+	        }
+	        else if (moneda.toString().equals("USD")) {
+		        net.webservicex.Currency _conversionRate_fromCurrency = net.webservicex.Currency.GBP;
+		        net.webservicex.Currency _conversionRate_toCurrency = net.webservicex.Currency.USD;
+		        return port.conversionRate(_conversionRate_fromCurrency, _conversionRate_toCurrency);
+	        }
+        }
+        return 1;
     }
 
 }
