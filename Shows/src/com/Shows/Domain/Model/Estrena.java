@@ -2,7 +2,6 @@ package com.Shows.Domain.Model;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

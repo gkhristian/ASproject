@@ -9,12 +9,18 @@ import javax.persistence.Id;
 public class ShowsCom {
 	@Id
 	private int id;
-	private static int codiBanc;
-	private static String numeroCompte;
+	private int codiBanc;
+	private String numeroCompte;
 	private Float comissio;
 	@Enumerated(EnumType.STRING)
 	private Moneda divisa;
 	private SetMoneda canvis;
+
+	private static ShowsCom instance;
+
+	public static ShowsCom getInstance() {
+		return instance;
+	}
 
 	public ShowsCom(int id, int codiBanc, String numeroCompte, Float comissio,
 			Moneda divisa, SetMoneda canvis) {
@@ -24,6 +30,7 @@ public class ShowsCom {
 		this.comissio = comissio;
 		this.divisa = divisa;
 		this.setCanvis(canvis);
+		instance = this;
 	}
 
 	public int getId() {
@@ -34,7 +41,7 @@ public class ShowsCom {
 		this.id = id;
 	}
 
-	public static int getCodiBanc() {
+	public int getCodiBanc() {
 		return codiBanc;
 	}
 
@@ -42,7 +49,7 @@ public class ShowsCom {
 		this.codiBanc = codiBanc;
 	}
 
-	public static String getNumeroCompte() {
+	public String getNumeroCompte() {
 		return numeroCompte;
 	}
 

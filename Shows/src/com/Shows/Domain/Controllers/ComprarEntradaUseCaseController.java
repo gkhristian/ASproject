@@ -89,7 +89,7 @@ public class ComprarEntradaUseCaseController {
 		IConversorAdapter conversorAdapter = adapterFactory
 				.getConversorAdapter();
 
-		Moneda divisa = null; // ShowsCom.getDivisa();
+		Moneda divisa = ShowsCom.getInstance().getDivisa();
 
 		double rate = conversorAdapter.convert(divisa, moneda);
 
@@ -98,17 +98,18 @@ public class ComprarEntradaUseCaseController {
 		return preuTotal;
 	}
 
-	public void pagament(String dni, int codiB, String numCompte, Date data) throws Exception {
+	public void pagament(String dni, int codiB, String numCompte, Date data)
+			throws Exception {
 		IPagamentAdapter pagamentAdapter = AdapterFactory.getInstance()
 				.getPagamentAdapter();
-		int codiBancShows = ShowsCom.getCodiBanc();
-		String numcompteShows = ShowsCom.getNumeroCompte();
-		pagamentAdapter.autoritza(dni, codiB, numCompte,
-				preuTotal, codiBancShows, numcompteShows);
+		int codiBancShows = ShowsCom.getInstance().getCodiBanc();
+		String numcompteShows = ShowsCom.getInstance().getNumeroCompte();
+		pagamentAdapter.autoritza(dni, codiB, numCompte, preuTotal,
+				codiBancShows, numcompteShows);
 		IControllerRepresentacio controllerRepresentacio = ControllerDataFactory
 				.getInstance().getControllerRepresentacio();
-		Representacio representacio = controllerRepresentacio
-				.getRepresentacio(nomLocal, sessio);
+		Representacio representacio = controllerRepresentacio.getRepresentacio(
+				nomLocal, sessio);
 		representacio.createEntrada(titol, dni, nombEspectadors, data,
 				preuTotal);
 	}

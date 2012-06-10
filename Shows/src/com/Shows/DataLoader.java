@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
-import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -13,7 +12,6 @@ import org.hibernate.Session;
 import com.Shows.Domain.Model.Entrada;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Estat;
-import com.Shows.Domain.Model.Estrena;
 import com.Shows.Domain.Model.Local;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.Representacio;
@@ -73,8 +71,8 @@ public class DataLoader {
 		
 
 		/* Data */
-		Date data1 = Date.valueOf("2012-6-30");
-		Date data2 = Date.valueOf("2012-7-31");
+		Date data1 = Date.valueOf("2012-06-30");
+		Date data2 = Date.valueOf("2012-07-31");
 		
 		/* Representacions i Estrenes */
 		Float preu1 = 10f;
