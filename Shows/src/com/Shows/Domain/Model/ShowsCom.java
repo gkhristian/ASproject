@@ -9,8 +9,8 @@ import javax.persistence.Id;
 public class ShowsCom {
 	@Id
 	private int id;
-	private int codiBanc;
-	private String numeroCompte;
+	private static int codiBanc;
+	private static String numeroCompte;
 	private Float comissio;
 	@Enumerated(EnumType.STRING)
 	private Moneda divisa;
@@ -34,7 +34,7 @@ public class ShowsCom {
 		this.id = id;
 	}
 
-	public int getCodiBanc() {
+	public static int getCodiBanc() {
 		return codiBanc;
 	}
 
@@ -42,7 +42,7 @@ public class ShowsCom {
 		this.codiBanc = codiBanc;
 	}
 
-	public String getNumeroCompte() {
+	public static String getNumeroCompte() {
 		return numeroCompte;
 	}
 

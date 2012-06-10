@@ -13,6 +13,7 @@ import com.Shows.Domain.Adapters.IPagamentAdapter;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.Representacio;
+import com.Shows.Domain.Model.ShowsCom;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -83,8 +84,8 @@ public class ComprarEntradaUseCaseController {
 	public void pagament(String dni, int codiB, String numCompte, Date data) {
 		IPagamentAdapter pagamentAdapter = AdapterFactory.getInstance()
 				.getPagamentAdapter();
-		int codiBancShows = 0;// = Shows.com.getCodiBanc();
-		String numcompteShows = "099998";// = Shows.com.getNumeroCompte();
+		int codiBancShows = ShowsCom.getCodiBanc();
+		String numcompteShows  = ShowsCom.getNumeroCompte();
 		boolean autoritzat = pagamentAdapter.autoritza(dni, codiB, numCompte, preuTotal,
 				codiBancShows, numcompteShows);
 		if (!autoritzat) {
