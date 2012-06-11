@@ -22,7 +22,7 @@ public class EspectaclePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private ComprarEntradaController comprarEntradaController;
-	private Date data = Date.valueOf("2012-06-30");
+	private Date data = Date.valueOf("2012-07-31");
 	private JComboBox espectacleComboBox;
 
 	private JButton continuaButton;

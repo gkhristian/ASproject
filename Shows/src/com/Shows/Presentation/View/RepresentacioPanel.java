@@ -46,41 +46,46 @@ public class RepresentacioPanel extends JPanel {
 		Box verticalBox = Box.createVerticalBox();
 		horizontalBox_1.add(verticalBox);
 
-		JScrollPane scrollPaneRepresentacioTable = new JScrollPane();
-
-		representacionsTable = new JTable();
-		scrollPaneRepresentacioTable.add(representacionsTable);
-
-		verticalBox.add(scrollPaneRepresentacioTable);
-
 		horizontalBox_1.add(verticalBox);
+		
+		Box horizontalBox_2 = Box.createHorizontalBox();
+		verticalBox.add(horizontalBox_2);
+		
+		Box verticalBox_1 = Box.createVerticalBox();
+		horizontalBox_2.add(verticalBox_1);
 
 		JLabel EspectacleLbl = new JLabel("Espectacle:");
-		verticalBox.add(EspectacleLbl);
+		verticalBox_1.add(EspectacleLbl);
 
 		nomEspectacleLabel = new JLabel("New Label");
-		verticalBox.add(nomEspectacleLabel);
+		verticalBox_1.add(nomEspectacleLabel);
 
 		JLabel DataLbl = new JLabel("Data:");
-		verticalBox.add(DataLbl);
+		verticalBox_1.add(DataLbl);
 
 		dataEspectacleLabel = new JLabel("New Label");
-		verticalBox.add(dataEspectacleLabel);
+		verticalBox_1.add(dataEspectacleLabel);
 
 		Component verticalStrut = Box.createVerticalStrut(80);
-		verticalBox.add(verticalStrut);
+		verticalBox_1.add(verticalStrut);
 
 		JLabel NombreEspectadorsLbl = new JLabel("Nombre d'espectadors:");
-		verticalBox.add(NombreEspectadorsLbl);
+		verticalBox_1.add(NombreEspectadorsLbl);
 
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		verticalBox.add(verticalStrut_1);
+		verticalBox_1.add(verticalStrut_1);
 
 		JSpinner NumeroEspectadorsSpinner = new JSpinner();
-		verticalBox.add(NumeroEspectadorsSpinner);
+		verticalBox_1.add(NumeroEspectadorsSpinner);
 
+		/**** JTable *****/
 		representacionsTable = new JTable();
-		verticalBox.add(representacionsTable);
+		representacionsTable.setVisible(true);
+		// representacionsTable.setEnabled(false);
+
+		JScrollPane scrollPaneRepresentacioTable = new JScrollPane(
+				representacionsTable);
+		horizontalBox_2.add(scrollPaneRepresentacioTable);
 
 		Box horizontalBox = Box.createHorizontalBox();
 		horizontalBox.setAlignmentX(RIGHT_ALIGNMENT);
