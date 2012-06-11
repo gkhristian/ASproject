@@ -34,10 +34,11 @@ public class Estrena extends Representacio implements Serializable {
 		this.recarrec = recarrec;
 	}
 
+	@Override
 	public int getRecarrec() {
-		return recarrec;
+		return this.recarrec;
 	}
-
+	
 	public void setRecarrec(int recarrec) {
 		this.recarrec = recarrec;
 	}
@@ -46,5 +47,6 @@ public class Estrena extends Representacio implements Serializable {
 	public boolean esEstrena() {
 		return true;
 	}
+	
 
 }

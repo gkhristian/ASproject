@@ -12,6 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 import com.Shows.Domain.Exception.seientsNoDisp;
+import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
 
@@ -139,4 +140,22 @@ public class Representacio {
 		return result;
 	}
 
+	public int getRecarrec() {
+		return 0;
+	}
+
+	public DadesEntrada obtePreu(int nombEspectadors) {
+		Float comisio = ShowsCom.getInstance().getComissio();
+		SetMoneda canvis = ShowsCom.getInstance().getCanvis();
+		int recarrec = getRecarrec();
+
+		// Pasar de Set Moneda a set de strings
+		HashSet<String> canvi = new HashSet<String>();
+		canvi.add(canvis.getDivisa1().toString());
+		canvi.add(canvis.getDivisa2().toString());
+
+		DadesEntrada resultado = new DadesEntrada(
+				(this.preu + comisio + recarrec) * nombEspectadors, canvi);
+		return resultado;
+	}
 }

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.Shows.TupleTypes.PosicioSeient;
+
 @Entity
 public class Seient implements Serializable {
 
@@ -50,5 +52,10 @@ public class Seient implements Serializable {
 
 	public void setLocal(Local local) {
 		this.local = local;
+	}
+
+	public PosicioSeient seient() {
+		PosicioSeient aux = new PosicioSeient(fila, columna);
+		return aux;
 	}
 }

@@ -59,7 +59,7 @@ public class SeientEnRepresentacio implements Serializable {
 
 	public PosicioSeient esLliure() {
 		if (this.estat == Estat.lliure) {
-			PosicioSeient lliure = new PosicioSeient(this.seient.getFila(), this.seient.getColumna());
+			PosicioSeient lliure = this.seient.seient();
 			return lliure;
 		}
 		return null;
