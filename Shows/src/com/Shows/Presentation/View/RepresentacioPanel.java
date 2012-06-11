@@ -1,4 +1,4 @@
-package com.Shows.Presentation;
+package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.Presentation.View.CellRenderer.CheckBoxRenderer;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
 public class RepresentacioPanel extends JPanel {
@@ -45,8 +46,12 @@ public class RepresentacioPanel extends JPanel {
 		Box verticalBox = Box.createVerticalBox();
 		horizontalBox_1.add(verticalBox);
 
+		JScrollPane scrollPaneRepresentacioTable = new JScrollPane();
+
 		representacionsTable = new JTable();
-		verticalBox.add(representacionsTable);
+		scrollPaneRepresentacioTable.add(representacionsTable);
+
+		verticalBox.add(scrollPaneRepresentacioTable);
 
 		horizontalBox_1.add(verticalBox);
 
@@ -117,47 +122,36 @@ public class RepresentacioPanel extends JPanel {
 	}
 
 	public void setInfo(Set<DadesRepresentacio> representacions) {
-		/*String[] columnNames = { "Local", "Sessió", "Seients Disponibles",
-				"És estrena?", "Preu" };*/
-		
-		String[] columnNames = {"First Name",
-                "Last Name",
-                "Sport",
-                "# of Years",
-                "Vegetarian"};
 
-		//JScrollPane scpEjemplo = new JScrollPane();
-		DefaultTableModel dtmEjemplo = new DefaultTableModel(null, columnNames);
+		String[] columnNames = { "Local", "Sessió", "Seients Disponibles",
+				"És estrena?", "Preu" };
 
-		/*
-		 * int i = 0; for (DadesRepresentacio dades : representacions) { Object
-		 * datos[] = new Object[3];
-		 * 
-		 * datos[i] = dades.getNombreSeientsLliures(); datos[i] =
-		 * dades.getNomLocal(); datos[i] = dades.getPreu(); datos[i] =
-		 * dades.getSessio(); ++i; dtmEjemplo.addRow(datos); }
-		 */
-		Object datos[] = new Object[3];
-		datos[0] = "hola";
-		datos[1] = "hola";
-		datos[2] = "hola";
-		
-		Object[][] rowData = {
-			    {"Kathy", "Smith",
-			     "Snowboarding", new Integer(5), new Boolean(false)},
-			    {"John", "Doe",
-			     "Rowing", new Integer(3), new Boolean(true)},
-			    {"Sue", "Black",
-			     "Knitting", new Integer(2), new Boolean(false)},
-			    {"Jane", "White",
-			     "Speed reading", new Integer(20), new Boolean(true)},
-			    {"Joe", "Brown",
-			     "Pool", new Integer(10), new Boolean(false)}
-			};
+		DadesRepresentacio[] dades = representacions
+				.toArray(new DadesRepresentacio[0]);
 
-		representacionsTable = new JTable(rowData, columnNames);
-		//scpEjemplo.add(representacionsTable);
-		representacionsTable.setVisible(true);
+		DefaultTableModel dataModel = new DefaultTableModel();
+
+		for (int i = 0; i < columnNames.length; i++) {
+			dataModel.addColumn(columnNames[i]);
+		}
+
+		for (int j = 0; j < representacions.size(); j++) {
+			Object datos[] = new Object[5];
+
+			datos[0] = dades[j].getNomLocal();
+			datos[1] = dades[j].getSessio();
+			datos[2] = dades[j].getNombreSeientsLliures();
+			datos[3] = dades[j].isEstrena();
+			datos[4] = dades[j].getPreu();
+
+			dataModel.addRow(datos);
+		}
+
+		representacionsTable.setModel(dataModel);
+
+		representacionsTable.getColumnModel().getColumn(3)
+				.setCellRenderer(new CheckBoxRenderer());
+
 	}
 
 	public void setnomEspectacleLabel(JLabel nomEspectacleLabel) {

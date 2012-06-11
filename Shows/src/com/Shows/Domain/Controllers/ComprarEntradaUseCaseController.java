@@ -11,6 +11,7 @@ import com.Shows.Data.Interfaces.IControllerRepresentacio;
 import com.Shows.Domain.Adapters.AdapterFactory;
 import com.Shows.Domain.Adapters.IConversorAdapter;
 import com.Shows.Domain.Adapters.IPagamentAdapter;
+import com.Shows.Domain.Exception.noHiHaRepresentacions;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.Representacio;
@@ -50,7 +51,8 @@ public class ComprarEntradaUseCaseController {
 		return titolEspectacles;
 	}
 
-	public Set<DadesRepresentacio> obteRepresentacions(String titol, Date data) {
+	public Set<DadesRepresentacio> obteRepresentacions(String titol, Date data)
+			throws noHiHaRepresentacions {
 		// Replicado...
 		this.titol = titol;
 		this.data = data;

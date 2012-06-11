@@ -1,4 +1,4 @@
-package com.Shows.Presentation;
+package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class AvisAcabaDialog extends JDialog {
+public class AvisSortirDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,23 +18,21 @@ public class AvisAcabaDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AvisAcabaDialog() {
+	public AvisSortirDialog() {
+		// TODO message???
 		setAlwaysOnTop(true);
 		setModal(true);
 		setResizable(false);
 
-		setBounds(100, 100, 279, 122);
+		setBounds(100, 100, 308, 106);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JLabel lblElPagamentSha = new JLabel(
-					"El pagament s'ha produ\u00EFt correctament.");
-			JLabel lblElPagamentSha2 = new JLabel(
-					"Ja ho pot recogir a la seva entitat banc\u00E0ria.");
-			contentPanel.add(lblElPagamentSha);
-			contentPanel.add(lblElPagamentSha2);
+			JLabel lblSiCancelaLoperaci = new JLabel(
+					"Si cancel\u00B7a l'operaci\u00F3 es perdr\u00E0 tot el proc\u00E8s");
+			contentPanel.add(lblSiCancelaLoperaci);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -45,6 +43,11 @@ public class AvisAcabaDialog extends JDialog {
 				okButton.setActionCommand("Accepta");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
+			}
+			{
+				JButton cancelButton = new JButton("Cancel·la");
+				cancelButton.setActionCommand("Cancel·la");
+				buttonPane.add(cancelButton);
 			}
 		}
 	}

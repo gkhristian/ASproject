@@ -1,4 +1,4 @@
-package com.Shows.Presentation;
+package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.Shows.Domain.Exception.noHiHaRepresentacions;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 
 public class EspectaclePanel extends JPanel {
@@ -79,8 +80,13 @@ public class EspectaclePanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				// TODO Data HardCoded!!!
-				comprarEntradaController.PrOkObteRepresentacions(
-						espectacleComboBox.getSelectedItem().toString(), data);
+				try {
+					comprarEntradaController.PrOkObteRepresentacions(
+							espectacleComboBox.getSelectedItem().toString(), data);
+				} catch (noHiHaRepresentacions e) {
+					// TODO Excepción por mostrar!!!
+					e.printStackTrace();
+				}
 
 			}
 		});

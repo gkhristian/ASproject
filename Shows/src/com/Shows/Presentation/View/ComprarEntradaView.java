@@ -1,4 +1,4 @@
-package com.Shows.Presentation;
+package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;

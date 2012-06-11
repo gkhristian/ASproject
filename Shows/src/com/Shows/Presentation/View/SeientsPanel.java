@@ -1,40 +1,40 @@
-package com.Shows.Presentation;
+package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JTable;
 
 import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.TupleTypes.PosicioSeient;
 
-public class PagamentPanel extends JPanel {
+public class SeientsPanel extends JPanel {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6594237397946129351L;
+	private static final long serialVersionUID = -8834919801528392136L;
 	private JPanel contentPane;
-	private JTextField NumeroDniTextField;
-	private JTextField BancTextField;
-	private JTextField CompteTextField;
+	private JTable table;
 	private ComprarEntradaController comprarEntradaController;
 
 	/**
 	 * Create the frame.
 	 */
-	public PagamentPanel(final ComprarEntradaController comprarEntradaController) {
-		
-		setLayout(new BorderLayout(0, 0));
+	public SeientsPanel(final ComprarEntradaController comprarEntradaController) {
+
 		this.comprarEntradaController = comprarEntradaController;
+		setLayout(new BorderLayout(0, 0));
+		
 		Box horizontalBox = Box.createHorizontalBox();
-		add(horizontalBox, BorderLayout.NORTH);
+		add(horizontalBox);
 
 		Box verticalBox = Box.createVerticalBox();
 		horizontalBox.add(verticalBox);
@@ -106,69 +106,34 @@ public class PagamentPanel extends JPanel {
 		JLabel PreuPerSeientEurosLbl = new JLabel("New label");
 		horizontalBox_8.add(PreuPerSeientEurosLbl);
 
+		Component verticalStrut = Box.createVerticalStrut(20);
+		verticalBox.add(verticalStrut);
+
 		Box horizontalBox_7 = Box.createHorizontalBox();
 		horizontalBox_7.setAlignmentX(Component.LEFT_ALIGNMENT);
 		verticalBox.add(horizontalBox_7);
 
-		JLabel SeientsLbl = new JLabel("Seients");
-		horizontalBox_7.add(SeientsLbl);
-
-		JLabel TotsSeientsLbl = new JLabel("New label");
-		horizontalBox_7.add(TotsSeientsLbl);
+		JLabel OcupatLbl = new JLabel("Ocupat");
+		horizontalBox_7.add(OcupatLbl);
 
 		Box horizontalBox_9 = Box.createHorizontalBox();
 		horizontalBox_9.setAlignmentX(Component.LEFT_ALIGNMENT);
 		verticalBox.add(horizontalBox_9);
-
-		JLabel PreuTotalLbl = new JLabel("Preu Total:");
-		horizontalBox_9.add(PreuTotalLbl);
-
-		JLabel PreuTotalEurosLbl = new JLabel("New label");
-		horizontalBox_9.add(PreuTotalEurosLbl);
-
-		JComboBox MonedaComboBox = new JComboBox();
-		horizontalBox_9.add(MonedaComboBox);
-
-		Box verticalBox_1 = Box.createVerticalBox();
-		horizontalBox.add(verticalBox_1);
-
-		Component verticalStrut = Box.createVerticalStrut(30);
-		verticalBox_1.add(verticalStrut);
+		JLabel DisponibleLbl = new JLabel("Disponible");
+		horizontalBox_9.add(DisponibleLbl);
 
 		Box horizontalBox_10 = Box.createHorizontalBox();
-		verticalBox_1.add(horizontalBox_10);
+		horizontalBox_10.setAlignmentX(Component.LEFT_ALIGNMENT);
+		verticalBox.add(horizontalBox_10);
+		JLabel SeleccionatLbl = new JLabel("Seleccionat");
+		horizontalBox_10.add(SeleccionatLbl);
 
-		JLabel DniLbl = new JLabel("DNI:");
-		horizontalBox_10.add(DniLbl);
-
-		NumeroDniTextField = new JTextField();
-		horizontalBox_10.add(NumeroDniTextField);
-		NumeroDniTextField.setColumns(10);
-
-		Component verticalStrut_1 = Box.createVerticalStrut(30);
-		verticalBox_1.add(verticalStrut_1);
-
-		Box horizontalBox_12 = Box.createHorizontalBox();
-		verticalBox_1.add(horizontalBox_12);
-
-		JLabel CompteLbl = new JLabel("Compte:");
-		horizontalBox_12.add(CompteLbl);
-
-		BancTextField = new JTextField();
-		horizontalBox_12.add(BancTextField);
-		BancTextField.setColumns(10);
-
-		CompteTextField = new JTextField();
-		CompteTextField.setText("");
-		horizontalBox_12.add(CompteTextField);
-		CompteTextField.setColumns(10);
-
-		Component verticalStrut_2 = Box.createVerticalStrut(30);
-		verticalBox_1.add(verticalStrut_2);
+		table = new JTable();
+		table.setToolTipText("");
+		horizontalBox.add(table);
 
 		Box horizontalBox_11 = Box.createHorizontalBox();
 		add(horizontalBox_11, BorderLayout.SOUTH);
-
 		JLabel MessageAreaLbl = new JLabel("");
 		horizontalBox_11.add(MessageAreaLbl);
 
@@ -189,7 +154,9 @@ public class PagamentPanel extends JPanel {
 
 				// TODO mirar el flujo de datos y modificar datos
 
-				comprarEntradaController.PrOkPagament("", 1, "");
+				Set<PosicioSeient> seients = null;
+				seients.add(new PosicioSeient(1, 1));
+				comprarEntradaController.PrOkSelecionarSeients(seients);
 
 			}
 		});
@@ -202,6 +169,7 @@ public class PagamentPanel extends JPanel {
 				comprarEntradaController.PrCancellarAvis();
 			}
 		});
+
 	}
 
 }
