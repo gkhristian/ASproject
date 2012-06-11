@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.Shows.TupleTypes.PosicioSeient;
+
 @Entity
 public class SeientEnRepresentacio implements Serializable {
 
@@ -53,5 +55,13 @@ public class SeientEnRepresentacio implements Serializable {
 
 	public void setRepresentacio(Representacio representacio) {
 		this.representacio = representacio;
+	}
+
+	public PosicioSeient esLliure() {
+		if (this.estat == Estat.lliure) {
+			PosicioSeient lliure = new PosicioSeient(this.seient.getFila(), this.seient.getColumna());
+			return lliure;
+		}
+		return null;
 	}
 }
