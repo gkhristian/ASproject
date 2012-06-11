@@ -14,6 +14,9 @@ public class Estrena extends Representacio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int recarrec;
+	
+	public Estrena() {
+	}
 
 	public Estrena(Sessio sessio, Local nom, int recarrec) {
 		AuxiliarRepresentacio aux = new AuxiliarRepresentacio(sessio, nom);
