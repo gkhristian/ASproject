@@ -35,14 +35,16 @@ public class Espectacle {
 		this.representacions = representacions;
 	}
 
-	public Set<DadesRepresentacio> obteRep(Date data) throws noHiHaRepresentacions {
-		if (this.representacions.size() == 0) throw new noHiHaRepresentacions("No hi ha representacions"); 
+	public Set<DadesRepresentacio> obteRep(Date data)
+			throws noHiHaRepresentacions {
+		if (this.representacions.size() == 0)
+			throw new noHiHaRepresentacions("No hi ha representacions");
 		HashSet<DadesRepresentacio> dadesRepresentacios = new HashSet<DadesRepresentacio>();
 		for (Representacio representacio : representacions) {
-			if(representacio.dataOk(data))
+			if (representacio.dataOk(data))
 				dadesRepresentacios.add(representacio.obteInformacio());
 		}
-		
+
 		return dadesRepresentacios;
 	}
 
