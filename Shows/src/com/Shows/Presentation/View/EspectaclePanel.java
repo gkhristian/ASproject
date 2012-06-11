@@ -4,7 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Set;
 import java.util.Vector;
 
@@ -17,13 +18,15 @@ import javax.swing.JPanel;
 
 import com.Shows.Domain.Exception.noHiHaRepresentacions;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.toedter.calendar.JDateChooser;
 
 public class EspectaclePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private ComprarEntradaController comprarEntradaController;
-	private Date data = Date.valueOf("2012-07-31");
+	// private Date data = Date.valueOf("2012-07-31");
 	private JComboBox espectacleComboBox;
+	private JDateChooser dateChooser;
 
 	private JButton continuaButton;
 	private JButton cancelaButton;
@@ -53,8 +56,10 @@ public class EspectaclePanel extends JPanel {
 		espectacleComboBox = new JComboBox();
 		horizontalBox_1.add(espectacleComboBox);
 
-		JButton btnDatapicker = new JButton("DATAPICKER");
-		horizontalBox_1.add(btnDatapicker);
+		/***** DataChooser *****/
+		dateChooser = new JDateChooser();
+
+		horizontalBox_1.add(dateChooser);
 
 		Component verticalStrut_1 = Box.createVerticalStrut(120);
 		verticalBox.add(verticalStrut_1);
@@ -79,10 +84,13 @@ public class EspectaclePanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				// TODO Data HardCoded!!!
 				try {
+					java.sql.Date date = new java.sql.Date(dateChooser
+							.getDate().getTime());
+
 					comprarEntradaController.PrOkObteRepresentacions(
-							espectacleComboBox.getSelectedItem().toString(), data);
+							espectacleComboBox.getSelectedItem().toString(),
+							date);
 				} catch (noHiHaRepresentacions e) {
 					// TODO Excepción por mostrar!!!
 					e.printStackTrace();
@@ -99,6 +107,23 @@ public class EspectaclePanel extends JPanel {
 				comprarEntradaController.PrCancellar();
 			}
 		});
+
+		dateChooser.getDateEditor().addPropertyChangeListener(
+				new PropertyChangeListener() {
+
+					@Override
+					public void propertyChange(
+							PropertyChangeEvent propertyChangeEvent) {
+						if ("date".equals(propertyChangeEvent.getPropertyName())) {
+							System.out.println(propertyChangeEvent
+									.getPropertyName()
+									+ ": "
+									+ (java.util.Date) propertyChangeEvent
+											.getNewValue());
+							setEnableContinua();
+						}
+					}
+				});
 	}
 
 	public void setEspectacleComboBox(Set<String> espectacles) {
@@ -118,8 +143,14 @@ public class EspectaclePanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				continuaButton.setEnabled(true);
+				setEnableContinua();
 			}
 		});
+	}
+
+	private void setEnableContinua() {
+		continuaButton
+				.setEnabled((dateChooser.getDate() != null && espectacleComboBox
+						.getSelectedIndex() > -1));
 	}
 }
