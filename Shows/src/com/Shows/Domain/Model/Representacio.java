@@ -7,12 +7,16 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
+import com.Shows.Domain.Exception.seientsNoDisp;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Representacio {
 
 	@Id
@@ -60,10 +64,15 @@ public class Representacio {
 	}
 
 	public DadesRepresentacio obteInformacio() {
-		return new DadesRepresentacio(
-				auxiliarRepresentacio.getLocal().getNom(),
-				auxiliarRepresentacio.getSessio().getSessio(),
-				nombreSeientsLliures, false, preu);
+		boolean est = this.esEstrena();
+		DadesRepresentacio aux = new DadesRepresentacio(auxiliarRepresentacio
+				.getLocal().getNom(), auxiliarRepresentacio.getSessio()
+				.getSessio(), nombreSeientsLliures, est, preu);
+		return aux;
+	}
+
+	public boolean esEstrena() {
+		return false;
 	}
 
 	public Float getPreu() {
@@ -115,16 +124,18 @@ public class Representacio {
 			AuxiliarRepresentacio auxiliarRepresentacio) {
 		this.auxiliarRepresentacio = auxiliarRepresentacio;
 	}
-	
-	public Set<PosicioSeient> obteLliures(int numEspectadors) {
+
+	public Set<PosicioSeient> obteLliures(int numEspectadors)
+			throws seientsNoDisp {
 		HashSet<PosicioSeient> result = new HashSet<PosicioSeient>();
 		Iterator<SeientEnRepresentacio> it = seientsEnRepresentacio.iterator();
 		while (it.hasNext()) {
 			PosicioSeient aux = it.next().esLliure();
-			if (aux != null) result.add(aux);
+			if (aux != null)
+				result.add(aux);
 		}
-		//TODO No se como organizar las excepciones, que creo un nuevo package llamado com.Shows.Domain.Exceptions??
-		//if (result.size() < numEspectadors) throw new seientsNoDisp();
+		if (result.size() < numEspectadors)
+			throw new seientsNoDisp("No hi ha suficients seients lliures");
 		return result;
 	}
 

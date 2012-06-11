@@ -4,29 +4,30 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
-public class Estrena implements Serializable {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Estrena extends Representacio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private int recarrec;
-	@Id
-	@OneToOne
-	private Representacio representacio;
 
-	public Estrena(Sessio sessio, Local nom,  int recarrec) {
-		this.representacio = new Representacio(sessio, nom);
+	public Estrena(Sessio sessio, Local nom, int recarrec) {
+		AuxiliarRepresentacio aux = new AuxiliarRepresentacio(sessio, nom);
+		this.setAuxiliarRepresentacio(aux);
 		this.recarrec = recarrec;
 	}
 
 	public Estrena(Sessio sessio, Local nom, float preu, Date data,
-			int nombreSeientsLliures,
-			int recarrec) {
-		this.representacio = new Representacio(sessio, nom, preu, data,
-				nombreSeientsLliures);
+			int nombreSeientsLliures, int recarrec) {
+		AuxiliarRepresentacio aux = new AuxiliarRepresentacio(sessio, nom);
+		this.setAuxiliarRepresentacio(aux);
+		this.setPreu(preu);
+		this.setData(data);
+		this.setNombreSeientsLliures(nombreSeientsLliures);
 		this.recarrec = recarrec;
 	}
 
@@ -37,13 +38,10 @@ public class Estrena implements Serializable {
 	public void setRecarrec(int recarrec) {
 		this.recarrec = recarrec;
 	}
-
-	public Representacio getRepresentacio() {
-		return representacio;
-	}
-
-	public void setRepresentacio(Representacio representacio) {
-		this.representacio = representacio;
+	
+	@Override
+	public boolean esEstrena() {
+		return true;
 	}
 
 }

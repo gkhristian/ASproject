@@ -85,13 +85,13 @@ public class DataLoader {
 		Representacio rep1 = new Representacio(ses1, local1, preu1, data1, lliures1);
 		Estrena est1 = new Estrena(ses2, local2, preu2, data2, lliures2,1);
 		session.save(rep1);
-		session.save(est1.getRepresentacio());
+		session.save(est1);
 		session.save(est1);
 		
 		HashSet<Representacio> representacions1 = new HashSet<Representacio>();
 		representacions1.add(rep1);
 		HashSet<Representacio> representacions2 = new HashSet<Representacio>();
-		representacions2.add(est1.getRepresentacio());
+		representacions2.add(est1);
 
 		/* Seients en representacio */
 		HashSet<SeientEnRepresentacio> ser1 = new HashSet<SeientEnRepresentacio>();
@@ -120,12 +120,12 @@ public class DataLoader {
 			int random = randomGenerator.nextInt(2);
 			if (random == 0) {
 				SeientEnRepresentacio aux = new SeientEnRepresentacio(
-						i2.next(), est1.getRepresentacio(), Estat.lliure);
+						i2.next(), est1, Estat.lliure);
 				session.save(aux);
 				ser2.add(aux);
 			} else {
 				SeientEnRepresentacio aux = new SeientEnRepresentacio(
-						i2.next(), est1.getRepresentacio(), Estat.ocupat);
+						i2.next(), est1, Estat.ocupat);
 				session.save(aux);
 				ser2.add(aux);
 				--lliures1;
@@ -149,12 +149,12 @@ public class DataLoader {
 		session.save(aux);
 		ent1.add(aux);
 		aux = new Entrada("3", "54545", 1, data2, preu2,
-				est1.getRepresentacio());
+				est1);
 		session.save(aux);
 		ent2.add(aux);
 
 		rep1.setEntradas(ent1);
-		est1.getRepresentacio().setEntradas(ent2);
+		est1.setEntradas(ent2);
 
 		/* Shows.com */
 		SetMoneda sm = new SetMoneda(Moneda.GBP, Moneda.USD);
