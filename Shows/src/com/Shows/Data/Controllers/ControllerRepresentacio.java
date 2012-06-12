@@ -8,11 +8,12 @@ import com.Shows.Domain.Model.AuxiliarRepresentacio;
 import com.Shows.Domain.Model.Local;
 import com.Shows.Domain.Model.Representacio;
 import com.Shows.Domain.Model.Sessio;
+import com.Shows.Domain.Model.TipusSessio;
 
 public class ControllerRepresentacio implements IControllerRepresentacio {
 
 	@Override
-	public Representacio getRepresentacio(String nomLocal, String sessio) {
+	public Representacio getRepresentacio(String nomLocal, TipusSessio sessio) {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 

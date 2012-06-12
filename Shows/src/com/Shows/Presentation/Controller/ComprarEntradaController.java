@@ -5,7 +5,9 @@ import java.util.Set;
 
 import com.Shows.Domain.Controllers.ComprarEntradaUseCaseController;
 import com.Shows.Domain.Exception.noHiHaRepresentacions;
+import com.Shows.Domain.Exception.seientsNoDisp;
 import com.Shows.Domain.Model.Moneda;
+import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.Presentation.View.ComprarEntradaView;
 import com.Shows.TupleTypes.PosicioSeient;
 
@@ -30,8 +32,8 @@ public class ComprarEntradaController {
 						.obteRepresentacions(titol, data));
 	}
 
-	public void PrOkObteOcupacio(String nomLocal, String sessio,
-			int nombEspectadors) {
+	public void PrOkObteOcupacio(String nomLocal, TipusSessio sessio,
+			int nombEspectadors) throws seientsNoDisp {
 		comprarEntradaView.mostraOcupacio(comprarEntradaUseCaseController
 				.obteOcupacio(nomLocal, sessio, nombEspectadors));// , data));
 	}

@@ -12,10 +12,12 @@ import com.Shows.Domain.Adapters.AdapterFactory;
 import com.Shows.Domain.Adapters.IConversorAdapter;
 import com.Shows.Domain.Adapters.IPagamentAdapter;
 import com.Shows.Domain.Exception.noHiHaRepresentacions;
+import com.Shows.Domain.Exception.seientsNoDisp;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.Representacio;
 import com.Shows.Domain.Model.ShowsCom;
+import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -27,7 +29,7 @@ public class ComprarEntradaUseCaseController {
 	// ===================//
 	// TODO Replicado ====//
 	private String nomLocal;
-	private String sessio;
+	private TipusSessio sessio;
 	private int nombEspectadors;
 	// ===================//
 	private Set<PosicioSeient> seients;
@@ -61,13 +63,15 @@ public class ComprarEntradaUseCaseController {
 				titol, data);
 	}
 
-	public Set<PosicioSeient> obteOcupacio(String nomLocal, String sessio,
-			int nombEspectadors) {// , Date data) {
+	public Set<PosicioSeient> obteOcupacio(String nomLocal, TipusSessio sessio,
+			int nombEspectadors) throws seientsNoDisp {// , Date data) {
 		// Replicado...
 		this.nomLocal = nomLocal;
 		this.sessio = sessio;
 		this.nombEspectadors = nombEspectadors;
 		// this.data = data; // TODO Es necesario???
+
+		consultaOcupacioUseCaseController = new ConsultaOcupacioUseCaseController();
 
 		return consultaOcupacioUseCaseController.obteOcupacio(nomLocal, sessio,
 				nombEspectadors);// , data);
