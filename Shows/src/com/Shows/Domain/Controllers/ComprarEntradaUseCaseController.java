@@ -11,8 +11,9 @@ import com.Shows.Data.Interfaces.IControllerRepresentacio;
 import com.Shows.Domain.Adapters.AdapterFactory;
 import com.Shows.Domain.Adapters.IConversorAdapter;
 import com.Shows.Domain.Adapters.IPagamentAdapter;
-import com.Shows.Domain.Exception.noHiHaRepresentacions;
-import com.Shows.Domain.Exception.seientsNoDisp;
+import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
+import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
+import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.Representacio;
@@ -54,7 +55,7 @@ public class ComprarEntradaUseCaseController {
 	}
 
 	public Set<DadesRepresentacio> obteRepresentacions(String titol, Date data)
-			throws noHiHaRepresentacions {
+			throws NoHiHaRepresentacions {
 		// Replicado...
 		this.titol = titol;
 		this.data = data;
@@ -64,7 +65,7 @@ public class ComprarEntradaUseCaseController {
 	}
 
 	public Set<PosicioSeient> obteOcupacio(String nomLocal, TipusSessio sessio,
-			int nombEspectadors) throws seientsNoDisp {// , Date data) {
+			int nombEspectadors) throws SeientsNoDisp {// , Date data) {
 		// Replicado...
 		this.nomLocal = nomLocal;
 		this.sessio = sessio;
@@ -105,15 +106,18 @@ public class ComprarEntradaUseCaseController {
 	}
 
 	public void pagament(String dni, int codiB, String numCompte, Date data)
-			throws Exception {
+			throws PagamentNoAutoritzat {
 		IPagamentAdapter pagamentAdapter = AdapterFactory.getInstance()
 				.getPagamentAdapter();
+		
 		int codiBancShows = ShowsCom.getInstance().getCodiBanc();
 		String numcompteShows = ShowsCom.getInstance().getNumeroCompte();
+		
 		pagamentAdapter.autoritza(dni, codiB, numCompte, preuTotal,
 				codiBancShows, numcompteShows);
 		IControllerRepresentacio controllerRepresentacio = ControllerDataFactory
 				.getInstance().getControllerRepresentacio();
+		
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
 				nomLocal, sessio);
 		representacio.createEntrada(titol, dni, nombEspectadors, data,

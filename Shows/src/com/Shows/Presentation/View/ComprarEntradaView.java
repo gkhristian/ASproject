@@ -21,6 +21,7 @@ public class ComprarEntradaView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	private ComprarEntradaController comprarEntradaController;
 	/**
 	 * Instancia de los Panels
 	 */
@@ -33,15 +34,15 @@ public class ComprarEntradaView extends JFrame {
 	private JPanel contentPane;
 	private JPanel centerPanel = new JPanel();
 	private CardLayout card = new CardLayout();
-	private ComprarEntradaController comprarEntradaController;
 	private final Box horizontalBox = Box.createHorizontalBox();
-	private final JButton ContinuaBtn = new JButton("Comprar Entrada");
+	private final JButton comprarEntradaButton = new JButton("Comprar Entrada");
 
 	/**
 	 * Create the frame.
 	 */
 	public ComprarEntradaView(
 			final ComprarEntradaController comprarEntradaController) {
+		this.comprarEntradaController = comprarEntradaController;
 		espectaclePanel = new EspectaclePanel(comprarEntradaController);
 		representacioPanel = new RepresentacioPanel(comprarEntradaController);
 		seientsPanel = new SeientsPanel(comprarEntradaController);
@@ -60,7 +61,7 @@ public class ComprarEntradaView extends JFrame {
 
 		contentPane.add(horizontalBox, BorderLayout.SOUTH);
 
-		// horizontalBox.add(ContinuaBtn);
+		// horizontalBox.add(comprarEntradaButton);
 
 		centerPanel.setLayout(card);
 
@@ -76,7 +77,7 @@ public class ComprarEntradaView extends JFrame {
 		JButton nuevo = comprarEntradaPanel.getComparEntradabtn();
 
 		/*
-		 * ContinuaBtn.addMouseListener(new MouseAdapter() {
+		 * comprarEntradaButton.addMouseListener(new MouseAdapter() {
 		 * 
 		 * @Override public void mouseClicked(MouseEvent arg0) {
 		 * 
@@ -107,7 +108,7 @@ public class ComprarEntradaView extends JFrame {
 	}
 
 	public void mostraOcupacio(Set<PosicioSeient> seients) {
-		// TODO seientsPanel
+		seientsPanel.setSeients(seients);
 		card.show(centerPanel, "seients");
 	}
 
@@ -129,7 +130,8 @@ public class ComprarEntradaView extends JFrame {
 
 	public void mostraAvis(String missatge) {
 		// TODO delete missatge???
-		AvisSortirDialog avisSortirDialog = new AvisSortirDialog();
+		AvisSortirDialog avisSortirDialog = new AvisSortirDialog(
+				comprarEntradaController);
 		avisSortirDialog.setVisible(true);
 	}
 
@@ -139,7 +141,7 @@ public class ComprarEntradaView extends JFrame {
 
 	public void tancar() {
 		try {
-			finalize();
+			this.finalize();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}

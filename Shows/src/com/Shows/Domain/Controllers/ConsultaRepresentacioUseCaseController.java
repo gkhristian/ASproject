@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.Shows.Data.Controllers.ControllerDataFactory;
 import com.Shows.Data.Interfaces.IControllerEspectacle;
-import com.Shows.Domain.Exception.noHiHaRepresentacions;
+import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
 public class ConsultaRepresentacioUseCaseController {
@@ -18,7 +18,7 @@ public class ConsultaRepresentacioUseCaseController {
 			.getInstance();
 
 	public Set<DadesRepresentacio> obteRepresentacions(String titol, Date data)
-			throws noHiHaRepresentacions {
+			throws NoHiHaRepresentacions {
 		this.titol = titol;
 		this.data = data;
 

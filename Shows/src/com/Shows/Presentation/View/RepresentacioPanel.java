@@ -20,7 +20,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
-import com.Shows.Domain.Exception.seientsNoDisp;
+import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.CellRenderer.CheckBoxRenderer;
@@ -131,9 +131,9 @@ public class RepresentacioPanel extends JPanel {
 											representacionsTable
 													.getSelectedRow(), 1),
 							(Integer) nombreEspectadorsSpinner.getValue());
-				} catch (seientsNoDisp e) {
+				} catch (SeientsNoDisp seientsNoDisp) {
 					// TODO mostrar excepción!
-					e.printStackTrace();
+					seientsNoDisp.printStackTrace();
 				}
 
 			}

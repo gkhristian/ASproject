@@ -2,15 +2,16 @@ package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -21,9 +22,10 @@ public class SeientsPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -8834919801528392136L;
-	private JPanel contentPane;
-	private JTable table;
 	private ComprarEntradaController comprarEntradaController;
+
+	private JPanel contentPane;
+	private JPanel seientsPanel;
 
 	/**
 	 * Create the frame.
@@ -32,12 +34,15 @@ public class SeientsPanel extends JPanel {
 
 		this.comprarEntradaController = comprarEntradaController;
 		setLayout(new BorderLayout(0, 0));
-		
+
 		Box horizontalBox = Box.createHorizontalBox();
 		add(horizontalBox);
 
+		Box horizontalBox_12 = Box.createHorizontalBox();
+		horizontalBox.add(horizontalBox_12);
+
 		Box verticalBox = Box.createVerticalBox();
-		horizontalBox.add(verticalBox);
+		horizontalBox_12.add(verticalBox);
 
 		Box horizontalBox_1 = Box.createHorizontalBox();
 		horizontalBox_1.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -127,10 +132,18 @@ public class SeientsPanel extends JPanel {
 		verticalBox.add(horizontalBox_10);
 		JLabel SeleccionatLbl = new JLabel("Seleccionat");
 		horizontalBox_10.add(SeleccionatLbl);
+		
+		Box verticalBox_1 = Box.createVerticalBox();
+		horizontalBox_12.add(verticalBox_1);
+		
+		Component verticalGlue = Box.createVerticalGlue();
+		verticalBox_1.add(verticalGlue);
 
-		table = new JTable();
-		table.setToolTipText("");
-		horizontalBox.add(table);
+		seientsPanel = new JPanel();
+		verticalBox_1.add(seientsPanel);
+		
+		Component verticalGlue_1 = Box.createVerticalGlue();
+		verticalBox_1.add(verticalGlue_1);
 
 		Box horizontalBox_11 = Box.createHorizontalBox();
 		add(horizontalBox_11, BorderLayout.SOUTH);
@@ -140,36 +153,66 @@ public class SeientsPanel extends JPanel {
 		Component horizontalGlue = Box.createHorizontalGlue();
 		horizontalBox_11.add(horizontalGlue);
 
-		JButton ContinuaBtn = new JButton("Continua");
-		ContinuaBtn.setEnabled(false);
-		horizontalBox_11.add(ContinuaBtn);
+		JButton continuaButton = new JButton("Continua");
+		continuaButton.setEnabled(false);
+		horizontalBox_11.add(continuaButton);
 
-		JButton CancelaBtn = new JButton("Cancel\u00B7la");
-		horizontalBox_11.add(CancelaBtn);
+		JButton cancelaButton = new JButton("Cancel\u00B7la");
+		horizontalBox_11.add(cancelaButton);
 
-		ContinuaBtn.addActionListener(new ActionListener() {
+		continuaButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 
 				// TODO mirar el flujo de datos y modificar datos
 
-				Set<PosicioSeient> seients = null;
-				seients.add(new PosicioSeient(1, 1));
-				comprarEntradaController.PrOkSelecionarSeients(seients);
+				comprarEntradaController
+						.PrOkSelecionarSeients(new HashSet<PosicioSeient>());
 
 			}
 		});
 
-		CancelaBtn.addActionListener(new ActionListener() {
+		cancelaButton.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent actionEvent) {
 
-				comprarEntradaController.PrCancellarAvis();
+				comprarEntradaController.PrCancellar();
 			}
 		});
-
 	}
 
+	public void setSeients(Set<PosicioSeient> seients) {
+
+		PosicioSeient[] dades = seients.toArray(new PosicioSeient[0]);
+
+		int maxFila = 0;
+		int maxColumna = 0;
+		for (int i = 0; i < dades.length; i++) {
+			if (maxFila < dades[i].getFila())
+				maxFila = dades[i].getFila();
+			if (maxColumna < dades[i].getColumna())
+				maxColumna = dades[i].getColumna();
+		}
+
+		JPanel[][] panelHolder = new JPanel[maxFila][maxColumna];
+		JButton[][] buttonHolder = new JButton[maxFila][maxColumna];
+
+		seientsPanel.setLayout(new GridLayout(maxFila, maxColumna));
+
+		for (int m = 0; m < maxFila; m++) {
+			for (int n = 0; n < maxColumna; n++) {
+				panelHolder[m][n] = new JPanel();
+				buttonHolder[m][n] = new JButton("Ocupat");
+				panelHolder[m][n].add(buttonHolder[m][n]);
+				seientsPanel.add(panelHolder[m][n]);
+			}
+		}
+
+		for (int i = 0; i < dades.length; i++) {
+			buttonHolder[dades[i].getFila() - 1][dades[i].getColumna() - 1]
+					.setText("Lliure");
+		}
+	}
 }

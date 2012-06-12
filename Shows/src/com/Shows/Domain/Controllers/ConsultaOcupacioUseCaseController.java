@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.Shows.Data.Controllers.ControllerDataFactory;
 import com.Shows.Data.Interfaces.IControllerRepresentacio;
-import com.Shows.Domain.Exception.seientsNoDisp;
+import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.Representacio;
 import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -21,7 +21,7 @@ public class ConsultaOcupacioUseCaseController {
 	// ===================//
 
 	public Set<PosicioSeient> obteOcupacio(String nomLocal, TipusSessio sessio,
-			int nombEspectadors) throws seientsNoDisp { // , Date data) {
+			int nombEspectadors) throws SeientsNoDisp { // , Date data) {
 		this.nomLocal = nomLocal;
 		this.sessio = sessio;
 		this.nombEspectadors = nombEspectadors;

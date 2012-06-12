@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.Shows.Domain.Exception.noHiHaRepresentacions;
+import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
 @Entity
@@ -36,9 +36,9 @@ public class Espectacle {
 	}
 
 	public Set<DadesRepresentacio> obteRep(Date data)
-			throws noHiHaRepresentacions {
+			throws NoHiHaRepresentacions {
 		if (this.representacions.size() == 0)
-			throw new noHiHaRepresentacions("No hi ha representacions");
+			throw new NoHiHaRepresentacions("No hi ha representacions");
 		HashSet<DadesRepresentacio> dadesRepresentacios = new HashSet<DadesRepresentacio>();
 		for (Representacio representacio : representacions) {
 			if (representacio.dataOk(data))

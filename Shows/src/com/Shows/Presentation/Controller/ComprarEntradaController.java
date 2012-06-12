@@ -4,8 +4,8 @@ import java.sql.Date;
 import java.util.Set;
 
 import com.Shows.Domain.Controllers.ComprarEntradaUseCaseController;
-import com.Shows.Domain.Exception.noHiHaRepresentacions;
-import com.Shows.Domain.Exception.seientsNoDisp;
+import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
+import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.Presentation.View.ComprarEntradaView;
@@ -26,14 +26,14 @@ public class ComprarEntradaController {
 	}
 
 	public void PrOkObteRepresentacions(String titol, Date data)
-			throws noHiHaRepresentacions {
+			throws NoHiHaRepresentacions {
 		comprarEntradaView
 				.mostraRepresentacions(comprarEntradaUseCaseController
 						.obteRepresentacions(titol, data));
 	}
 
 	public void PrOkObteOcupacio(String nomLocal, TipusSessio sessio,
-			int nombEspectadors) throws seientsNoDisp {
+			int nombEspectadors) throws SeientsNoDisp {
 		comprarEntradaView.mostraOcupacio(comprarEntradaUseCaseController
 				.obteOcupacio(nomLocal, sessio, nombEspectadors));// , data));
 	}
@@ -46,6 +46,7 @@ public class ComprarEntradaController {
 	}
 
 	public void PrCancellar() {
+		// TODO aviso aquí?
 		comprarEntradaView.mostraAvis("");
 	}
 

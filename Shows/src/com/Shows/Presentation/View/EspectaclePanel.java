@@ -17,7 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.Shows.Domain.Exception.noHiHaRepresentacions;
+import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.toedter.calendar.JDateChooser;
 
@@ -88,13 +88,13 @@ public class EspectaclePanel extends JPanel {
 				try {
 					java.sql.Date date = new java.sql.Date(dateChooser
 							.getDate().getTime());
-					
+
 					comprarEntradaController.PrOkObteRepresentacions(
 							espectacleComboBox.getSelectedItem().toString(),
 							date);
-				} catch (noHiHaRepresentacions e) {
+				} catch (NoHiHaRepresentacions noHiHaRepresentacions) {
 					// TODO Excepción por mostrar!!!
-					e.printStackTrace();
+					noHiHaRepresentacions.printStackTrace();
 				}
 
 			}

@@ -11,7 +11,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
-import com.Shows.Domain.Exception.seientsNoDisp;
+import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -134,7 +134,7 @@ public class Representacio {
 	}
 
 	public Set<PosicioSeient> obteLliures(int numEspectadors)
-			throws seientsNoDisp {
+			throws SeientsNoDisp {
 		HashSet<PosicioSeient> result = new HashSet<PosicioSeient>();
 		Iterator<SeientEnRepresentacio> it = seientsEnRepresentacio.iterator();
 		while (it.hasNext()) {
@@ -143,7 +143,7 @@ public class Representacio {
 				result.add(aux);
 		}
 		if (result.size() < numEspectadors)
-			throw new seientsNoDisp("No hi ha suficients seients lliures");
+			throw new SeientsNoDisp("No hi ha suficients seients lliures");
 		return result;
 	}
 
