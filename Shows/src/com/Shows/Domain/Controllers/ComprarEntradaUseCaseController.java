@@ -14,6 +14,7 @@ import com.Shows.Domain.Adapters.IPagamentAdapter;
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
+import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.Representacio;
@@ -89,7 +90,7 @@ public class ComprarEntradaUseCaseController {
 		return new HashSet<DadesEntrada>(); // representacio.obtePreu(nombEspectadors);
 	}
 
-	public float obtePreuMoneda(Moneda moneda) {
+	public float obtePreuMoneda(Moneda moneda) throws ServeiNoDisponible {
 		// TODO esto es así???
 
 		AdapterFactory adapterFactory = AdapterFactory.getInstance();

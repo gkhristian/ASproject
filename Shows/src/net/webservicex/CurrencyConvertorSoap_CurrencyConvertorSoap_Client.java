@@ -9,6 +9,7 @@ import java.net.URL;
 
 import javax.xml.namespace.QName;
 
+import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.Moneda;
 
 /**
@@ -24,7 +25,7 @@ public final class CurrencyConvertorSoap_CurrencyConvertorSoap_Client {
 	public CurrencyConvertorSoap_CurrencyConvertorSoap_Client() {
 	}
 
-	public static double convert(Moneda divisa, Moneda moneda) {
+	public static double convert(Moneda divisa, Moneda moneda) throws ServeiNoDisponible {
 		URL wsdlURL = CurrencyConvertor.WSDL_LOCATION;
 
 		CurrencyConvertor currencyConvertor = new CurrencyConvertor(wsdlURL,
