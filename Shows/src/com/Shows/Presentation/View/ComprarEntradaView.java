@@ -2,10 +2,8 @@ package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
 import java.util.Set;
 
 import javax.swing.Box;
@@ -109,7 +107,8 @@ public class ComprarEntradaView extends JFrame {
 	}
 
 	public void mostraOcupacio(Set<PosicioSeient> seients) {
-
+		// TODO seientsPanel
+		card.show(centerPanel, "seients");
 	}
 
 	public void mostraPreu(DadesEntrada dadesEntrada) {
