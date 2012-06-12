@@ -60,8 +60,15 @@ public class Representacio {
 		entradas.add(e);
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean dataOk(Date data) {
-		return (data.equals(this.data));
+		if (this.data.getYear() != data.getYear())
+			return false;
+		if (this.data.getMonth() != data.getMonth())
+			return false;
+		if (this.data.getDay() != data.getDay())
+			return false;
+		return true;
 	}
 
 	public DadesRepresentacio obteInformacio() {

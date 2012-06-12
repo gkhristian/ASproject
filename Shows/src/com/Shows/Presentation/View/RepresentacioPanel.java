@@ -47,10 +47,10 @@ public class RepresentacioPanel extends JPanel {
 		horizontalBox_1.add(verticalBox);
 
 		horizontalBox_1.add(verticalBox);
-		
+
 		Box horizontalBox_2 = Box.createHorizontalBox();
 		verticalBox.add(horizontalBox_2);
-		
+
 		Box verticalBox_1 = Box.createVerticalBox();
 		horizontalBox_2.add(verticalBox_1);
 
@@ -80,7 +80,7 @@ public class RepresentacioPanel extends JPanel {
 
 		/**** JTable *****/
 		representacionsTable = new JTable();
-		representacionsTable.setVisible(true);
+		// representacionsTable.setVisible(true);
 		// representacionsTable.setEnabled(false);
 
 		JScrollPane scrollPaneRepresentacioTable = new JScrollPane(
@@ -134,7 +134,14 @@ public class RepresentacioPanel extends JPanel {
 		DadesRepresentacio[] dades = representacions
 				.toArray(new DadesRepresentacio[0]);
 
-		DefaultTableModel dataModel = new DefaultTableModel();
+		DefaultTableModel dataModel = new DefaultTableModel() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 
 		for (int i = 0; i < columnNames.length; i++) {
 			dataModel.addColumn(columnNames[i]);

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.sql.Date;
 import java.util.Set;
 import java.util.Vector;
 
@@ -24,7 +25,7 @@ public class EspectaclePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private ComprarEntradaController comprarEntradaController;
-	// private Date data = Date.valueOf("2012-07-31");
+	private Date data1 = Date.valueOf("2012-07-31");
 	private JComboBox espectacleComboBox;
 	private JDateChooser dateChooser;
 
@@ -87,7 +88,7 @@ public class EspectaclePanel extends JPanel {
 				try {
 					java.sql.Date date = new java.sql.Date(dateChooser
 							.getDate().getTime());
-
+					
 					comprarEntradaController.PrOkObteRepresentacions(
 							espectacleComboBox.getSelectedItem().toString(),
 							date);
