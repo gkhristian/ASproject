@@ -16,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.Shows.Domain.Exception.seientsNoDisp;
@@ -107,9 +109,9 @@ public class RepresentacioPanel extends JPanel {
 		continuaButton.setEnabled(false);
 		horizontalBox.add(continuaButton);
 
-		JButton CancelaBtn = new JButton("Cancel\u00B7la");
-		CancelaBtn.setAlignmentX(RIGHT_ALIGNMENT);
-		horizontalBox.add(CancelaBtn);
+		JButton cancelaButton = new JButton("Cancel\u00B7la");
+		cancelaButton.setAlignmentX(RIGHT_ALIGNMENT);
+		horizontalBox.add(cancelaButton);
 
 		continuaButton.addActionListener(new ActionListener() {
 
@@ -137,12 +139,20 @@ public class RepresentacioPanel extends JPanel {
 			}
 		});
 
-		CancelaBtn.addActionListener(new ActionListener() {
+		cancelaButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				comprarEntradaController.PrCancellar();
+			}
+		});
+
+		nombreEspectadorsSpinner.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent changeEvent) {
+				setEnableContinua();
 			}
 		});
 	}
@@ -202,6 +212,7 @@ public class RepresentacioPanel extends JPanel {
 	}
 
 	private void setEnableContinua() {
-		continuaButton.setEnabled((representacionsTable.getSelectedRow() > -1));
+		continuaButton.setEnabled((representacionsTable.getSelectedRow() > -1)
+				&& ((Integer) nombreEspectadorsSpinner.getValue() > 0));
 	}
 }
