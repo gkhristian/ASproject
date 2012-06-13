@@ -2,6 +2,8 @@ package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Set;
@@ -37,20 +39,33 @@ public class ComprarEntradaView extends JFrame {
 	private final Box horizontalBox = Box.createHorizontalBox();
 	private final JButton comprarEntradaButton = new JButton("Comprar Entrada");
 
+	private int width = 600;
+	private int heigth = 400;
+
 	/**
 	 * Create the frame.
 	 */
 	public ComprarEntradaView(
 			final ComprarEntradaController comprarEntradaController) {
 		this.comprarEntradaController = comprarEntradaController;
+
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+
+		setBounds(dimension.width / 2 - width / 2, dimension.height / 2
+				- heigth / 2, width, heigth);
+
+		// TODO
+		setResizable(false);
+
 		espectaclePanel = new EspectaclePanel(comprarEntradaController);
 		representacioPanel = new RepresentacioPanel(comprarEntradaController);
 		seientsPanel = new SeientsPanel(comprarEntradaController);
 		pagamentPanel = new PagamentPanel(comprarEntradaController);
 		comprarEntradaPanel = new ComprarEntradaPanel();
+
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 530, 331);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -141,7 +156,8 @@ public class ComprarEntradaView extends JFrame {
 
 	public void tancar() {
 		try {
-			this.finalize();
+			finalize();
+			System.exit(0);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
