@@ -2,6 +2,7 @@ package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
 
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.toedter.calendar.JDateChooser;
 
 public class EspectaclePanel extends JPanel {
@@ -44,26 +46,52 @@ public class EspectaclePanel extends JPanel {
 		Box verticalBox = Box.createVerticalBox();
 		add(verticalBox);
 
-		Component verticalStrut = Box.createVerticalStrut(120);
-		verticalBox.add(verticalStrut);
+		Component verticalStrut_1 = Box.createVerticalStrut(150);
+		verticalBox.add(verticalStrut_1);
 
 		Box horizontalBox_1 = Box.createHorizontalBox();
+		horizontalBox_1.setAlignmentY(Component.CENTER_ALIGNMENT);
 		verticalBox.add(horizontalBox_1);
 
-		JLabel lblSeleccioniEspectacleI = new JLabel(
-				"Seleccioni espectacle i data ");
-		horizontalBox_1.add(lblSeleccioniEspectacleI);
+		JLabel seleccioniEspectacleLabel = new JLabel(
+				"Seleccioni espectacle i data: ");
+		horizontalBox_1.add(seleccioniEspectacleLabel);
 
 		espectacleComboBox = new JComboBox();
+		espectacleComboBox.setToolTipText("Espectacles");
+		espectacleComboBox.setMaximumRowCount(30);
+		
+		espectacleComboBox.setRenderer(new PromptComboBoxRenderer(
+				"Espectacle..."));
+
 		horizontalBox_1.add(espectacleComboBox);
-
-		/***** DataChooser *****/
 		dateChooser = new JDateChooser();
-
+		
+		dateChooser.setMinimumSize(new Dimension(100, 20));
+		
 		horizontalBox_1.add(dateChooser);
 
-		Component verticalStrut_1 = Box.createVerticalStrut(120);
-		verticalBox.add(verticalStrut_1);
+		dateChooser.getDateEditor().addPropertyChangeListener(
+				new PropertyChangeListener() {
+
+					@Override
+					public void propertyChange(
+							PropertyChangeEvent propertyChangeEvent) {
+						if ("date".equals(propertyChangeEvent.getPropertyName())) {
+							System.out.println(propertyChangeEvent
+									.getPropertyName()
+									+ ": "
+									+ (java.util.Date) propertyChangeEvent
+											.getNewValue());
+							setEnableContinua();
+						}
+					}
+				});
+
+		Component verticalStrut = Box.createVerticalStrut(150);
+		verticalBox.add(verticalStrut);
+
+		/***** DataChooser *****/
 
 		Box horizontalBox = Box.createHorizontalBox();
 		add(horizontalBox, BorderLayout.SOUTH);
@@ -108,23 +136,6 @@ public class EspectaclePanel extends JPanel {
 				comprarEntradaController.PrCancellar();
 			}
 		});
-
-		dateChooser.getDateEditor().addPropertyChangeListener(
-				new PropertyChangeListener() {
-
-					@Override
-					public void propertyChange(
-							PropertyChangeEvent propertyChangeEvent) {
-						if ("date".equals(propertyChangeEvent.getPropertyName())) {
-							System.out.println(propertyChangeEvent
-									.getPropertyName()
-									+ ": "
-									+ (java.util.Date) propertyChangeEvent
-											.getNewValue());
-							setEnableContinua();
-						}
-					}
-				});
 	}
 
 	public void setEspectacleComboBox(Set<String> espectacles) {
@@ -139,6 +150,10 @@ public class EspectaclePanel extends JPanel {
 				espectaclesVector);
 
 		espectacleComboBox.setModel(defaultComboBoxModel);
+
+		espectacleComboBox.setSelectedIndex(-1);
+		
+		espectacleComboBox.setMinimumSize(new Dimension(200, 20));
 
 		espectacleComboBox.addActionListener(new ActionListener() {
 

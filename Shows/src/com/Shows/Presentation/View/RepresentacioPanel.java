@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
-import com.Shows.Presentation.View.CellRenderer.CheckBoxRenderer;
+import com.Shows.Presentation.View.Renderer.CheckBoxRenderer;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
 public class RepresentacioPanel extends JPanel {

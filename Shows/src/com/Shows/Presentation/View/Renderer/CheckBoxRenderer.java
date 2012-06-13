@@ -1,4 +1,4 @@
-package com.Shows.Presentation.View.CellRenderer;
+package com.Shows.Presentation.View.Renderer;
 
 import java.awt.Component;
 
