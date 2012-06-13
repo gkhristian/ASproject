@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.Presentation.View.Component.JSeient;
 import com.Shows.TupleTypes.PosicioSeient;
 
 public class SeientsPanel extends JPanel {
@@ -26,6 +29,10 @@ public class SeientsPanel extends JPanel {
 
 	private JPanel contentPane;
 	private JPanel seientsPanel;
+
+	private JButton continuaButton;
+
+	private HashSet<PosicioSeient> selectedSeients = new HashSet<PosicioSeient>();
 
 	/**
 	 * Create the frame.
@@ -132,16 +139,16 @@ public class SeientsPanel extends JPanel {
 		verticalBox.add(horizontalBox_10);
 		JLabel SeleccionatLbl = new JLabel("Seleccionat");
 		horizontalBox_10.add(SeleccionatLbl);
-		
+
 		Box verticalBox_1 = Box.createVerticalBox();
 		horizontalBox_12.add(verticalBox_1);
-		
+
 		Component verticalGlue = Box.createVerticalGlue();
 		verticalBox_1.add(verticalGlue);
 
 		seientsPanel = new JPanel();
 		verticalBox_1.add(seientsPanel);
-		
+
 		Component verticalGlue_1 = Box.createVerticalGlue();
 		verticalBox_1.add(verticalGlue_1);
 
@@ -153,7 +160,7 @@ public class SeientsPanel extends JPanel {
 		Component horizontalGlue = Box.createHorizontalGlue();
 		horizontalBox_11.add(horizontalGlue);
 
-		JButton continuaButton = new JButton("Continua");
+		continuaButton = new JButton("Continua");
 		continuaButton.setEnabled(false);
 		horizontalBox_11.add(continuaButton);
 
@@ -165,10 +172,7 @@ public class SeientsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 
-				// TODO mirar el flujo de datos y modificar datos
-
-				comprarEntradaController
-						.PrOkSelecionarSeients(new HashSet<PosicioSeient>());
+				comprarEntradaController.PrOkSelecionarSeients(selectedSeients);
 
 			}
 		});
@@ -197,22 +201,42 @@ public class SeientsPanel extends JPanel {
 		}
 
 		JPanel[][] panelHolder = new JPanel[maxFila][maxColumna];
-		JButton[][] buttonHolder = new JButton[maxFila][maxColumna];
+		JSeient[][] holder = new JSeient[maxFila][maxColumna];
 
 		seientsPanel.setLayout(new GridLayout(maxFila, maxColumna));
 
 		for (int m = 0; m < maxFila; m++) {
 			for (int n = 0; n < maxColumna; n++) {
 				panelHolder[m][n] = new JPanel();
-				buttonHolder[m][n] = new JButton("Ocupat");
-				panelHolder[m][n].add(buttonHolder[m][n]);
+				holder[m][n] = new JSeient(new PosicioSeient(m + 1, n + 1));
+				holder[m][n].setEnabled(false);
+				panelHolder[m][n].add(holder[m][n]);
 				seientsPanel.add(panelHolder[m][n]);
 			}
 		}
 
+		int m, n;
 		for (int i = 0; i < dades.length; i++) {
-			buttonHolder[dades[i].getFila() - 1][dades[i].getColumna() - 1]
-					.setText("Lliure");
+			m = dades[i].getFila() - 1;
+			n = dades[i].getColumna() - 1;
+			// holder[m][n].setText("L");
+			holder[m][n].setEnabled(true);
+			holder[m][n].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseReleased(MouseEvent mouseEvent) {
+					JSeient jSeient = (JSeient) mouseEvent.getSource();
+					if (jSeient.isSelected())
+						selectedSeients.add(jSeient.getPosicioSeient());
+					else
+						selectedSeients.remove(jSeient.getPosicioSeient());
+					setEnableContinua();
+				}
+			});
 		}
+	}
+
+	private void setEnableContinua() {
+		// TODO nombEspectadors? :S
+		continuaButton.setEnabled((selectedSeients.size() == 2));
 	}
 }

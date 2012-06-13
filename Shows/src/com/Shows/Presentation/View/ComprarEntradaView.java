@@ -128,7 +128,8 @@ public class ComprarEntradaView extends JFrame {
 	}
 
 	public void mostraPreu(DadesEntrada dadesEntrada) {
-
+		pagamentPanel.setDadesEntrada(dadesEntrada);
+		card.show(centerPanel, "pagament");
 	}
 
 	public void mostraPreuMoneda(Float preu) {

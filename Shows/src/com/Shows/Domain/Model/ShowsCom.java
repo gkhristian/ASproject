@@ -5,6 +5,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
+import org.hibernate.Session;
+
+import com.Shows.HibernateUtil;
+
 @Entity
 public class ShowsCom {
 	@Id
@@ -19,9 +23,15 @@ public class ShowsCom {
 	private static ShowsCom instance;
 
 	public static ShowsCom getInstance() {
+		if (instance == null) {
+			Session session = HibernateUtil.getSession();
+			session.beginTransaction();
+
+			instance = (ShowsCom) session.get(ShowsCom.class, 1);
+		}
 		return instance;
 	}
-	
+
 	public ShowsCom() {
 	}
 

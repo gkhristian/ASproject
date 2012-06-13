@@ -13,13 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.TupleTypes.DadesEntrada;
 
 public class PagamentPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6594237397946129351L;
+
 	private JPanel contentPane;
 	private JTextField NumeroDniTextField;
 	private JTextField BancTextField;
@@ -30,9 +29,10 @@ public class PagamentPanel extends JPanel {
 	 * Create the frame.
 	 */
 	public PagamentPanel(final ComprarEntradaController comprarEntradaController) {
-		
-		setLayout(new BorderLayout(0, 0));
+
 		this.comprarEntradaController = comprarEntradaController;
+
+		setLayout(new BorderLayout(0, 0));
 		Box horizontalBox = Box.createHorizontalBox();
 		add(horizontalBox, BorderLayout.NORTH);
 
@@ -204,4 +204,7 @@ public class PagamentPanel extends JPanel {
 		});
 	}
 
+	public void setDadesEntrada(DadesEntrada dadesEntrada) {
+		// TODO
+	}
 }

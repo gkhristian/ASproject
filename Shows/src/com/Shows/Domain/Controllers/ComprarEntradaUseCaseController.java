@@ -79,7 +79,7 @@ public class ComprarEntradaUseCaseController {
 				nombEspectadors);// , data);
 	}
 
-	public Set<DadesEntrada> selecionarSeients(Set<PosicioSeient> seients) {
+	public DadesEntrada selecionarSeients(Set<PosicioSeient> seients) {
 		this.seients = seients;
 
 		IControllerRepresentacio controllerRepresentacio = controllerDataFactory
@@ -87,7 +87,7 @@ public class ComprarEntradaUseCaseController {
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
 				nomLocal, sessio);
 
-		return new HashSet<DadesEntrada>(); // representacio.obtePreu(nombEspectadors);
+		return representacio.obtePreu(nombEspectadors);
 	}
 
 	public float obtePreuMoneda(Moneda moneda) throws ServeiNoDisponible {
@@ -110,15 +110,15 @@ public class ComprarEntradaUseCaseController {
 			throws PagamentNoAutoritzat {
 		IPagamentAdapter pagamentAdapter = AdapterFactory.getInstance()
 				.getPagamentAdapter();
-		
+
 		int codiBancShows = ShowsCom.getInstance().getCodiBanc();
 		String numcompteShows = ShowsCom.getInstance().getNumeroCompte();
-		
+
 		pagamentAdapter.autoritza(dni, codiB, numCompte, preuTotal,
 				codiBancShows, numcompteShows);
 		IControllerRepresentacio controllerRepresentacio = ControllerDataFactory
 				.getInstance().getControllerRepresentacio();
-		
+
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
 				nomLocal, sessio);
 		representacio.createEntrada(titol, dni, nombEspectadors, data,

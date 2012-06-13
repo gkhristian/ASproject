@@ -39,7 +39,8 @@ public class ComprarEntradaController {
 	}
 
 	public void PrOkSelecionarSeients(Set<PosicioSeient> seients) {
-
+		comprarEntradaView.mostraPreu(comprarEntradaUseCaseController
+				.selecionarSeients(seients));
 	}
 
 	public void PrOkPagament(String dni, int codiB, String numCompte) {
