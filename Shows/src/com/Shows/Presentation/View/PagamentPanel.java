@@ -2,16 +2,21 @@ package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.Box;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.Shows.Domain.Model.Moneda;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.TupleTypes.DadesEntrada;
 
@@ -24,6 +29,7 @@ public class PagamentPanel extends JPanel {
 	private JTextField BancTextField;
 	private JTextField CompteTextField;
 	private ComprarEntradaController comprarEntradaController;
+	private JComboBox MonedaComboBox;
 
 	/**
 	 * Create the frame.
@@ -126,7 +132,7 @@ public class PagamentPanel extends JPanel {
 		JLabel PreuTotalEurosLbl = new JLabel("New label");
 		horizontalBox_9.add(PreuTotalEurosLbl);
 
-		JComboBox MonedaComboBox = new JComboBox();
+		MonedaComboBox = new JComboBox();
 		horizontalBox_9.add(MonedaComboBox);
 
 		Box verticalBox_1 = Box.createVerticalBox();
@@ -206,5 +212,29 @@ public class PagamentPanel extends JPanel {
 
 	public void setDadesEntrada(DadesEntrada dadesEntrada) {
 		// TODO
+		Vector<String> monedas = new Vector<String>();
+		monedas.add("€");
+		monedas.add("pts");
+		monedas.add("libras");
+		
+		DefaultComboBoxModel model = new DefaultComboBoxModel(monedas);
+		MonedaComboBox.setModel(model);
+		MonedaComboBox.setSelectedIndex(-1);
+		setMinimumSize(new Dimension(50,20));
+		MonedaComboBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				comprarEntradaController.canviPreuMoneda((Moneda) MonedaComboBox.getSelectedItem());
+			}
+		});
+
+
 	}
+
+//	private void setEnableContinua() {
+//		continuaButton
+//				.setEnabled((dateChooser.getDate() != null && espectacleComboBox
+//						.getSelectedIndex() > -1));
+//	}
 }

@@ -44,6 +44,7 @@ public class ComprarEntradaController {
 	}
 
 	public void PrOkPagament(String dni, int codiB, String numCompte) {
+		comprarEntradaView.mostraAvisFi("Tot ha finalitzat correctament");
 	}
 
 	public void PrCancellar() {
