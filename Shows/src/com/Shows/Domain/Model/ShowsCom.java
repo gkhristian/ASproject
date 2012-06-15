@@ -1,5 +1,7 @@
 package com.Shows.Domain.Model;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -91,7 +93,14 @@ public class ShowsCom {
 		this.divisa = divisa;
 	}
 
-	public Set<Moneda> getCanvis() {
-		return canvis.getCanvis();
+	public Set<String> getCanvis() {
+		HashSet<String> canvis = new HashSet<String>();
+
+		Iterator<Moneda> iterator = this.canvis.iterator();
+		while (iterator.hasNext()) {
+			canvis.add(iterator.next().toString());
+		}
+
+		return canvis;
 	}
 }

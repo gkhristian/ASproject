@@ -61,7 +61,7 @@ public class ComprarEntradaUseCaseController {
 
 	public Set<PosicioSeient> obteOcupacio(final String nomLocal,
 			final TipusSessio sessio, final int nombEspectadors)
-			throws SeientsNoDisp {// , Date data) {
+			throws SeientsNoDisp {
 
 		consultaOcupacioUseCaseController = new ConsultaOcupacioUseCaseController();
 
@@ -95,21 +95,30 @@ public class ComprarEntradaUseCaseController {
 		 * canvi.add(canvis.getDivisa2().toString());
 		 */
 
-		DadesEntrada dadesEntrada = new DadesEntrada(
-				(this.preuTotal + ShowsCom.getInstance().getComissio() + representacio
-						.getRecarrec())
-						* consultaOcupacioUseCaseController
-								.getNombEspectadors(),
-				ShowsCom.getInstance().getCanvis());
+		ShowsCom showsCom = ShowsCom.getInstance();
+
+		float comisio = showsCom.getComissio();
+		int recarec = representacio.getRecarrec();
+		Set<String> canvis = showsCom.getCanvis();
+
+		canvis.add(showsCom.getDivisa().toString());
+
+		float preu = this.preuTotal + comisio + recarec;
+
+		DadesEntrada dadesEntrada = new DadesEntrada(preu
+				* consultaOcupacioUseCaseController.getNombEspectadors(),
+				canvis);
 
 		// TODO duda preuTotal
-		this.preuTotal = dadesEntrada.getPreu();
+		this.preuTotal = preu;
 
 		return dadesEntrada;
 	}
 
 	public float obtePreuMoneda(final String moneda) throws ServeiNoDisponible {
+
 		AdapterFactory adapterFactory = AdapterFactory.getInstance();
+
 		IConversorAdapter conversorAdapter = adapterFactory
 				.getConversorAdapter();
 
@@ -146,6 +155,8 @@ public class ComprarEntradaUseCaseController {
 				consultaOcupacioUseCaseController.getNombEspectadors(),
 				consultaRepresentacioUseCaseController.getData(),
 				this.preuTotal);
+
+		// TODO ocupar seients
 
 		Session session = HibernateUtil.getSession();
 

@@ -20,7 +20,6 @@ import javax.swing.text.MaskFormatter;
 
 import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.Exceptions.ServeiNoDisponible;
-import com.Shows.Domain.Model.Moneda;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.Shows.TupleTypes.DadesEntrada;
@@ -270,10 +269,10 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-
-				Moneda moneda = (Moneda) monedaComboBox.getSelectedItem();
 				try {
-					comprarEntradaController.canviPreuMoneda(moneda.toString());
+					comprarEntradaController
+							.canviPreuMoneda((String) monedaComboBox
+									.getSelectedItem());
 				} catch (ServeiNoDisponible serveiNoDisponible) {
 					comprarEntradaView.mostraMissatge(serveiNoDisponible
 							.getMessage());

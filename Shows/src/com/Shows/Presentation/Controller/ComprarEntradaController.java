@@ -42,7 +42,7 @@ public class ComprarEntradaController {
 			throws SeientsNoDisp {
 
 		comprarEntradaView.mostraOcupacio(comprarEntradaUseCaseController
-				.obteOcupacio(nomLocal, sessio, nombEspectadors));// , data));
+				.obteOcupacio(nomLocal, sessio, nombEspectadors));
 	}
 
 	public void PrOkSelecionarSeients(final Set<PosicioSeient> seients) {

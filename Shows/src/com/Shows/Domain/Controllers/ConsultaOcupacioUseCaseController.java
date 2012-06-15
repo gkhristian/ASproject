@@ -28,6 +28,7 @@ public class ConsultaOcupacioUseCaseController {
 
 		IControllerRepresentacio controllerRepresentacio = controllerDataFactory
 				.getControllerRepresentacio();
+		
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
 				nomLocal, sessio, data);
 

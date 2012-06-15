@@ -124,22 +124,26 @@ public class Representacio {
 
 	public Set<PosicioSeient> obteLliures(int numEspectadors)
 			throws SeientsNoDisp {
-		HashSet<PosicioSeient> result = new HashSet<PosicioSeient>();
+
+		HashSet<PosicioSeient> posicioSeients = new HashSet<PosicioSeient>();
 		Iterator<SeientEnRepresentacio> it = seientsEnRepresentacio.iterator();
+
 		while (it.hasNext()) {
 			PosicioSeient aux = it.next().esLliure();
 			if (aux != null)
-				result.add(aux);
+				posicioSeients.add(aux);
 		}
-		if (result.size() < numEspectadors)
+
+		if (nombreSeientsLliures < numEspectadors)
 			throw new SeientsNoDisp("No hi ha suficients seients lliures");
-		return result;
+
+		return posicioSeients;
 	}
 
 	public int getRecarrec() {
 		return 0;
 	}
-	
+
 	// TODO toDelete()
 	/*
 	 * public DadesEntrada obtePreu(int nombEspectadors) { float comisio =
