@@ -90,8 +90,12 @@ public class ComprarEntradaUseCaseController {
 				.getControllerRepresentacio();
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
 				nomLocal, sessio);
+		DadesEntrada dadesEntrada = representacio.obtePreu(nombEspectadors);
 
-		return representacio.obtePreu(nombEspectadors);
+		// TODO duda preuTotal
+		this.preuTotal = dadesEntrada.getPreu();
+		
+		return dadesEntrada;
 	}
 
 	public float obtePreuMoneda(String moneda) throws ServeiNoDisponible {
@@ -104,9 +108,9 @@ public class ComprarEntradaUseCaseController {
 		
 		double rate = conversorAdapter.convert(divisa, Moneda.valueOf(moneda));
 
-		// TODO esto es así??? precio, guardar en controlador? :S
-		preuTotal = (float) (preuTotal * rate);
-		return preuTotal;
+		// TODO duda preuTotal, guardar en controlador? :S
+		this.preuTotal = (float) (preuTotal * rate);
+		return this.preuTotal;
 	}
 
 	public void pagament(String dni, int codiB, String numCompte, Date data)
