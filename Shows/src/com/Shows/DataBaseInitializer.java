@@ -23,7 +23,7 @@ import com.Shows.Domain.Model.SetMoneda;
 import com.Shows.Domain.Model.ShowsCom;
 import com.Shows.Domain.Model.TipusSessio;
 
-public class DataLoader {
+public class DataBaseInitializer {
 	public static void initDatabase() {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
@@ -112,32 +112,34 @@ public class DataLoader {
 
 		Representacio rep1 = new Representacio(ses1, local1, preu1, data1,
 				lliures1);
-		Estrena est1 = new Estrena(ses2, local2, preu2, data2, lliures2, 1);
+		
+		Estrena est1 = new Estrena(ses2, local2, preu2, data2, lliures2, 10);
 		Estrena est2 = new Estrena(ses1, local2_2, preu2, data2, lliures2_2_1,
-				1);
-		Estrena est3 = new Estrena(ses2, local2_3, preu2, data2, lliures2_3, 1);
-		Estrena est4 = new Estrena(ses3, local2_2, preu2, data2, lliures2_2_2,
-				1);
+				10);
+		Representacio rep2 = new Representacio(ses2, local2_3, preu2, data2,
+				lliures2_3);
+		Representacio rep3 = new Representacio(ses3, local2_2, preu2, data2,
+				lliures2_2_2);
 		session.saveOrUpdate(rep1);
 		session.saveOrUpdate(est1);
 		session.saveOrUpdate(est2);
-		session.saveOrUpdate(est3);
-		session.saveOrUpdate(est4);
+		session.saveOrUpdate(rep2);
+		session.saveOrUpdate(rep3);
 
 		HashSet<Representacio> representacions1 = new HashSet<Representacio>();
 		representacions1.add(rep1);
 		HashSet<Representacio> representacions2 = new HashSet<Representacio>();
 		representacions2.add(est1);
 		representacions2.add(est2);
-		representacions2.add(est3);
-		representacions2.add(est4);
+		representacions2.add(rep2);
+		representacions2.add(rep3);
 
 		/* Seients en representacio */
 		seientsEnRepresentacio(rep1, seients1, lliures1, session);
 		seientsEnRepresentacio(est1, seients2, lliures2, session);
 		seientsEnRepresentacio(est2, seients2_2, lliures2_2_1, session);
-		seientsEnRepresentacio(est3, seients2_3, lliures2_3, session);
-		seientsEnRepresentacio(est4, seients2_2, lliures2_2_2, session);
+		seientsEnRepresentacio(rep2, seients2_3, lliures2_3, session);
+		seientsEnRepresentacio(rep3, seients2_2, lliures2_2_2, session);
 
 		/* Espectacle */
 		Espectacle esp1 = new Espectacle("Espectacular", 3, representacions1);
@@ -168,7 +170,6 @@ public class DataLoader {
 		session.saveOrUpdate(showscom);
 
 		session.getTransaction().commit();
-
 	}
 
 	private static void seientsEnRepresentacio(Representacio rep,

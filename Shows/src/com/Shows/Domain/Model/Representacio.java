@@ -53,11 +53,12 @@ public class Representacio {
 			Date data, float preuTotal) {
 
 		// FIXME CHECK: COM ES SAP L'IDENTIFICADOR?????????????????????
-		String identificador = titol + ((Integer) getEntradas().size()).toString();
+		String identificador = titol
+				+ ((Integer) getEntradas().size()).toString();
 
 		Entrada entrada = new Entrada(identificador, dni, nombEspectadors,
 				data, preuTotal, this);
-		
+
 		entradas.add(entrada);
 		return entrada;
 	}
@@ -74,15 +75,18 @@ public class Representacio {
 	}
 
 	public DadesRepresentacio obteInformacio() {
-		boolean est = this.esEstrena();
-		DadesRepresentacio aux = new DadesRepresentacio(auxiliarRepresentacio
-				.getLocal().getNom(), auxiliarRepresentacio.getSessio()
-				.getSessio(), nombreSeientsLliures, est, preu);
-		return aux;
+		return new DadesRepresentacio(
+				auxiliarRepresentacio.getLocal().getNom(),
+				auxiliarRepresentacio.getSessio().getSessio(),
+				nombreSeientsLliures, esEstrena(), obtePreu());
 	}
 
 	public boolean esEstrena() {
 		return false;
+	}
+
+	public float obtePreu() {
+		return preu;
 	}
 
 	public Float getPreu() {

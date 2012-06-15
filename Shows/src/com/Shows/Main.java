@@ -9,6 +9,7 @@ import com.Shows.Presentation.Controller.ComprarEntradaController;
 
 public class Main {
 
+	@SuppressWarnings("unused")
 	private static ComprarEntradaController comprarEntradaController;
 
 	/**
@@ -17,14 +18,14 @@ public class Main {
 	public static void main(String[] args) {
 
 		/***** init DB *****/
-		//DataLoader.clearDatabase();
+		// DataBaseInitializer.clearDatabase();
 		if (need2InitDataBase())
-			DataLoader.initDatabase();
+			DataBaseInitializer.initDatabase();
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					comprarEntradaController = new ComprarEntradaController(); 
+					comprarEntradaController = new ComprarEntradaController();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

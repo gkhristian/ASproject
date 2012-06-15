@@ -9,22 +9,36 @@ import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
 public class ConsultaRepresentacioUseCaseController {
-	// TODO Replicado ====//
 	private String titol;
 	private Date data;
-	// ===================//
 
 	private ControllerDataFactory controllerDataFactory = ControllerDataFactory
 			.getInstance();
 
 	public Set<DadesRepresentacio> obteRepresentacions(String titol, Date data)
 			throws NoHiHaRepresentacions {
-		this.titol = titol;
-		this.data = data;
+		this.setTitol(titol);
+		this.setData(data);
 
 		IControllerEspectacle controllerEspectacle = controllerDataFactory
 				.getControllerEspectacle();
 
 		return controllerEspectacle.getEspectacle(titol).obteRep(data);
+	}
+
+	public String getTitol() {
+		return titol;
+	}
+
+	public void setTitol(String titol) {
+		this.titol = titol;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 }

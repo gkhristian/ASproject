@@ -14,7 +14,7 @@ public class Estrena extends Representacio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int recarrec;
-	
+
 	public Estrena() {
 	}
 
@@ -38,15 +38,18 @@ public class Estrena extends Representacio implements Serializable {
 	public int getRecarrec() {
 		return this.recarrec;
 	}
-	
+
 	public void setRecarrec(int recarrec) {
 		this.recarrec = recarrec;
 	}
-	
+
 	@Override
 	public boolean esEstrena() {
 		return true;
 	}
-	
 
+	@Override
+	public float obtePreu() {
+		return getPreu() + this.recarrec;
+	}
 }
