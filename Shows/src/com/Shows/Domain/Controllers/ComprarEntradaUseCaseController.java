@@ -81,20 +81,6 @@ public class ComprarEntradaUseCaseController {
 				consultaOcupacioUseCaseController.getSessio(),
 				consultaRepresentacioUseCaseController.getData());
 
-		/*
-		 * DadesEntrada dadesEntrada = representacio
-		 * .obtePreu(consultaOcupacioUseCaseController.getNombEspectadors());
-		 */
-
-		// SetMoneda canvis = ShowsCom.getInstance().getCanvis();
-
-		// Pasar de Set Moneda a Set de Strings
-		/*
-		 * HashSet<String> canvi = new HashSet<String>();
-		 * canvi.add(canvis.getDivisa1().toString());
-		 * canvi.add(canvis.getDivisa2().toString());
-		 */
-
 		ShowsCom showsCom = ShowsCom.getInstance();
 
 		float comisio = showsCom.getComissio();
@@ -103,14 +89,13 @@ public class ComprarEntradaUseCaseController {
 
 		canvis.add(showsCom.getDivisa().toString());
 
-		float preu = this.preuTotal + comisio + recarec;
+		float preuTotal = this.preuTotal + comisio + recarec;
 
-		DadesEntrada dadesEntrada = new DadesEntrada(preu
+		DadesEntrada dadesEntrada = new DadesEntrada(preuTotal
 				* consultaOcupacioUseCaseController.getNombEspectadors(),
 				canvis);
 
-		// TODO duda preuTotal
-		this.preuTotal = preu;
+		this.preuTotal = preuTotal;
 
 		return dadesEntrada;
 	}
@@ -126,9 +111,7 @@ public class ComprarEntradaUseCaseController {
 
 		double rate = conversorAdapter.convert(divisa, Moneda.valueOf(moneda));
 
-		// TODO duda preuTotal, guardar en controlador? :S
-		this.preuTotal = (float) (this.preuTotal * rate);
-		return this.preuTotal;
+		return (float) (this.preuTotal * rate);
 	}
 
 	public void pagament(final String dni, final int codiB,
@@ -157,7 +140,10 @@ public class ComprarEntradaUseCaseController {
 				this.preuTotal);
 
 		// TODO ocupar seients
+		// Usar this.seients
 
+		// TODO calcular nombreSeientsLliures
+		
 		Session session = HibernateUtil.getSession();
 
 		session.beginTransaction();

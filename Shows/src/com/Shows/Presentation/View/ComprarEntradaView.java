@@ -135,6 +135,7 @@ public class ComprarEntradaView extends JFrame {
 	}
 
 	public void mostraMissatge(String missatge) {
+		// TODO migrar a un JOption (parecido a JDialog) para que se ve mejor...
 		missatgeLabel.setText(missatge);
 	}
 

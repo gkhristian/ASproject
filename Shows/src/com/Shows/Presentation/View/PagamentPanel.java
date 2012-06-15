@@ -20,6 +20,7 @@ import javax.swing.text.MaskFormatter;
 
 import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.Exceptions.ServeiNoDisponible;
+import com.Shows.Domain.Model.ShowsCom;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.Shows.TupleTypes.DadesEntrada;
@@ -40,6 +41,8 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 	private JComboBox monedaComboBox;
 
 	private JButton continuaButton;
+
+	private Object monedaComboBoxSelectetItem;
 
 	/**
 	 * Create the frame.
@@ -148,7 +151,6 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		horizontalBox_9.add(preuTotalEurosLabel);
 
 		monedaComboBox = new JComboBox();
-		// TODO prompt necesario, o euros de serie?
 		monedaComboBox.setRenderer(new PromptComboBoxRenderer("Divisa..."));
 		horizontalBox_9.add(monedaComboBox);
 
@@ -261,7 +263,10 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		monedaComboBox.setModel(new DefaultComboBoxModel(dadesEntrada
 				.getCanvis().toArray()));
 
-		monedaComboBox.setSelectedIndex(-1);
+		monedaComboBoxSelectetItem = ShowsCom.getInstance().getDivisa()
+				.toString();
+
+		monedaComboBox.setSelectedItem(monedaComboBoxSelectetItem);
 
 		setMinimumSize(new Dimension(50, 20));
 
@@ -269,14 +274,21 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				try {
-					comprarEntradaController
-							.canviPreuMoneda((String) monedaComboBox
-									.getSelectedItem());
-				} catch (ServeiNoDisponible serveiNoDisponible) {
-					comprarEntradaView.mostraMissatge(serveiNoDisponible
-							.getMessage());
-					// serveiNoDisponible.printStackTrace();
+				if (monedaComboBoxSelectetItem != monedaComboBox
+						.getSelectedItem()) {
+					try {
+						comprarEntradaController
+								.canviPreuMoneda((String) monedaComboBox
+										.getSelectedItem());
+						
+						monedaComboBoxSelectetItem = monedaComboBox
+								.getSelectedItem();
+						
+					} catch (ServeiNoDisponible serveiNoDisponible) {
+						comprarEntradaView.mostraMissatge(serveiNoDisponible
+								.getMessage());
+						// serveiNoDisponible.printStackTrace();
+					}
 				}
 				setEnableContinua();
 			}
