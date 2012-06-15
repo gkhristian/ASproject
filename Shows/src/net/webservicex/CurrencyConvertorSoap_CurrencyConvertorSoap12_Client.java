@@ -51,8 +51,8 @@ public final class CurrencyConvertorSoap_CurrencyConvertorSoap12_Client {
         
         {
         System.out.println("Invoking conversionRate...");
-        net.webservicex.Currency _conversionRate_fromCurrency = net.webservicex.Currency.MNT;
-        net.webservicex.Currency _conversionRate_toCurrency = net.webservicex.Currency.BHD;
+        net.webservicex.Currency _conversionRate_fromCurrency = net.webservicex.Currency.EUR;
+        net.webservicex.Currency _conversionRate_toCurrency = net.webservicex.Currency.USD;
         double _conversionRate__return = port.conversionRate(_conversionRate_fromCurrency, _conversionRate_toCurrency);
         System.out.println("conversionRate.result=" + _conversionRate__return);
 

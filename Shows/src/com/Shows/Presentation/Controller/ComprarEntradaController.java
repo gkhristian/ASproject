@@ -7,7 +7,7 @@ import com.Shows.Domain.Controllers.ComprarEntradaUseCaseController;
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
-import com.Shows.Domain.Model.Moneda;
+import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.Presentation.View.ComprarEntradaView;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -44,9 +44,11 @@ public class ComprarEntradaController {
 				.selecionarSeients(seients));
 	}
 
-	public void PrOkPagament(String dni, int codiB, String numCompte) throws PagamentNoAutoritzat {
+	public void PrOkPagament(String dni, int codiB, String numCompte)
+			throws PagamentNoAutoritzat {
 		// TODO Data del controlador?
-		comprarEntradaUseCaseController.pagament(dni, codiB, numCompte, comprarEntradaUseCaseController.getData());
+		comprarEntradaUseCaseController.pagament(dni, codiB, numCompte,
+				comprarEntradaUseCaseController.getData());
 		comprarEntradaView.mostraAvisFi("Tot ha finalitzat correctament");
 	}
 
@@ -63,8 +65,7 @@ public class ComprarEntradaController {
 		comprarEntradaView.tancar();
 	}
 
-	public void canviPreuMoneda(Moneda moneda) {
-		// TODO esto esta bien???
-		// Falta llamada en ComprarEntradaView???
+	public void canviPreuMoneda(String moneda) throws ServeiNoDisponible {
+		comprarEntradaView.mostraPreuMoneda(comprarEntradaUseCaseController.obtePreuMoneda(moneda));
 	}
 }

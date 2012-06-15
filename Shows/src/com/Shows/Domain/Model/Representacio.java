@@ -49,15 +49,17 @@ public class Representacio {
 		this.entradas = new HashSet<Entrada>();
 	}
 
-	public void createEntrada(String titol, String dni, int nombEspectadors,
+	public Entrada createEntrada(String titol, String dni, int nombEspectadors,
 			Date data, float preuTotal) {
 
-		// TODO CHECK: COM ES SAP L'IDENTIFICADOR?????????????????????
-		String identificador = ((Integer) getEntradas().size()).toString();
+		// FIXME CHECK: COM ES SAP L'IDENTIFICADOR?????????????????????
+		String identificador = titol + ((Integer) getEntradas().size()).toString();
 
-		Entrada e = new Entrada(identificador, dni, nombEspectadors, data,
-				preuTotal, this);
-		entradas.add(e);
+		Entrada entrada = new Entrada(identificador, dni, nombEspectadors,
+				data, preuTotal, this);
+		
+		entradas.add(entrada);
+		return entrada;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -156,7 +158,7 @@ public class Representacio {
 		SetMoneda canvis = ShowsCom.getInstance().getCanvis();
 		int recarrec = getRecarrec();
 
-		// Pasar de Set Moneda a set de strings
+		// Pasar de Set Moneda a Set de Strings
 		HashSet<String> canvi = new HashSet<String>();
 		canvi.add(canvis.getDivisa1().toString());
 		canvi.add(canvis.getDivisa2().toString());

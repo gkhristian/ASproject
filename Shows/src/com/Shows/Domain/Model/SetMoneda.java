@@ -4,6 +4,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+// FIXME Mejorable...
 @Embeddable
 public class SetMoneda {
 

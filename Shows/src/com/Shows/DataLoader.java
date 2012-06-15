@@ -33,10 +33,10 @@ public class DataLoader {
 		Local local2 = new Local("A Tomar Por Culo", "C/Parla");
 		Local local2_2 = new Local("PepeStage", "C/Tio Pepe");
 		Local local2_3 = new Local("Akihabara Playbox", "C/Japon 2222bis");
-		session.save(local1);
-		session.save(local2);
-		session.save(local2_2);
-		session.save(local2_3);
+		session.saveOrUpdate(local1);
+		session.saveOrUpdate(local2);
+		session.saveOrUpdate(local2_2);
+		session.saveOrUpdate(local2_3);
 
 		/* Seients */
 		int filas1 = 5;
@@ -56,7 +56,7 @@ public class DataLoader {
 		for (int i = 0; i < filas1; ++i) {
 			for (int j = 0; j < columnas1; j++) {
 				Seient aux = new Seient(local1, j + 1, i + 1);
-				session.save(aux);
+				session.saveOrUpdate(aux);
 				seients1.add(aux);
 			}
 		}
@@ -64,21 +64,21 @@ public class DataLoader {
 		for (int i = 0; i < filas2; ++i) {
 			for (int j = 0; j < columnas2; j++) {
 				Seient aux = new Seient(local2, j + 1, i + 1);
-				session.save(aux);
+				session.saveOrUpdate(aux);
 				seients2.add(aux);
 			}
 		}
 		for (int i = 0; i < filas2_2; ++i) {
 			for (int j = 0; j < columnas2_2; j++) {
 				Seient aux = new Seient(local2_2, j + 1, i + 1);
-				session.save(aux);
+				session.saveOrUpdate(aux);
 				seients2_2.add(aux);
 			}
 		}
 		for (int i = 0; i < filas2_3; ++i) {
 			for (int j = 0; j < columnas2_3; j++) {
 				Seient aux = new Seient(local2_3, j + 1, i + 1);
-				session.save(aux);
+				session.saveOrUpdate(aux);
 				seients2_3.add(aux);
 			}
 		}
@@ -92,9 +92,9 @@ public class DataLoader {
 		Sessio ses1 = new Sessio(TipusSessio.tarda);
 		Sessio ses2 = new Sessio(TipusSessio.nit);
 		Sessio ses3 = new Sessio(TipusSessio.mati);
-		session.save(ses1);
-		session.save(ses2);
-		session.save(ses3);
+		session.saveOrUpdate(ses1);
+		session.saveOrUpdate(ses2);
+		session.saveOrUpdate(ses3);
 
 		/* Data */
 		Date data1 = Date.valueOf("2012-06-30");
@@ -118,11 +118,11 @@ public class DataLoader {
 		Estrena est3 = new Estrena(ses2, local2_3, preu2, data2, lliures2_3, 1);
 		Estrena est4 = new Estrena(ses3, local2_2, preu2, data2, lliures2_2_2,
 				1);
-		session.save(rep1);
-		session.save(est1);
-		session.save(est2);
-		session.save(est3);
-		session.save(est4);
+		session.saveOrUpdate(rep1);
+		session.saveOrUpdate(est1);
+		session.saveOrUpdate(est2);
+		session.saveOrUpdate(est3);
+		session.saveOrUpdate(est4);
 
 		HashSet<Representacio> representacions1 = new HashSet<Representacio>();
 		representacions1.add(rep1);
@@ -142,20 +142,20 @@ public class DataLoader {
 		/* Espectacle */
 		Espectacle esp1 = new Espectacle("Espectacular", 3, representacions1);
 		Espectacle esp2 = new Espectacle("EspectaCULO", 1, representacions2);
-		session.save(esp1);
-		session.save(esp2);
+		session.saveOrUpdate(esp1);
+		session.saveOrUpdate(esp2);
 
 		/* Entradas */
 		HashSet<Entrada> ent1 = new HashSet<Entrada>();
 		HashSet<Entrada> ent2 = new HashSet<Entrada>();
 		Entrada aux = new Entrada("1", "343434", 2, data1, preu1, rep1);
-		session.save(aux);
+		session.saveOrUpdate(aux);
 		ent1.add(aux);
 		aux = new Entrada("2", "343435", 2, data1, preu1, rep1);
-		session.save(aux);
+		session.saveOrUpdate(aux);
 		ent1.add(aux);
 		aux = new Entrada("3", "54545", 1, data2, preu2, est1);
-		session.save(aux);
+		session.saveOrUpdate(aux);
 		ent2.add(aux);
 
 		rep1.setEntradas(ent1);
@@ -165,7 +165,7 @@ public class DataLoader {
 		SetMoneda sm = new SetMoneda(Moneda.GBP, Moneda.USD);
 		ShowsCom showscom = new ShowsCom(1, 12121, "34343434", 20f, Moneda.EUR,
 				sm);
-		session.save(showscom);
+		session.saveOrUpdate(showscom);
 
 		session.getTransaction().commit();
 
@@ -182,12 +182,12 @@ public class DataLoader {
 			if (random == 0) {
 				SeientEnRepresentacio aux = new SeientEnRepresentacio(
 						it.next(), rep, Estat.lliure);
-				session.save(aux);
+				session.saveOrUpdate(aux);
 				ser.add(aux);
 			} else {
 				SeientEnRepresentacio aux = new SeientEnRepresentacio(
 						it.next(), rep, Estat.ocupat);
-				session.save(aux);
+				session.saveOrUpdate(aux);
 				ser.add(aux);
 				--ll;
 			}

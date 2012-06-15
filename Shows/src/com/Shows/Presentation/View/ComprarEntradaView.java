@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -18,6 +19,9 @@ import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class ComprarEntradaView extends JFrame {
 
@@ -37,10 +41,10 @@ public class ComprarEntradaView extends JFrame {
 	private JPanel centerPanel = new JPanel();
 	private CardLayout card = new CardLayout();
 	private final Box horizontalBox = Box.createHorizontalBox();
-	private final JButton comprarEntradaButton = new JButton("Comprar Entrada");
 
 	private int width = 600;
 	private int heigth = 400;
+	private JLabel missatgeLabel;
 
 	/**
 	 * Create the frame.
@@ -54,13 +58,14 @@ public class ComprarEntradaView extends JFrame {
 		setBounds(dimension.width / 2 - width / 2, dimension.height / 2
 				- heigth / 2, width, heigth);
 
-		// TODO
+		// TODO Resizable?
 		setResizable(false);
 
-		espectaclePanel = new EspectaclePanel(comprarEntradaController);
-		representacioPanel = new RepresentacioPanel(comprarEntradaController);
-		seientsPanel = new SeientsPanel(comprarEntradaController);
-		pagamentPanel = new PagamentPanel(comprarEntradaController);
+		espectaclePanel = new EspectaclePanel(comprarEntradaController, this);
+		representacioPanel = new RepresentacioPanel(comprarEntradaController,
+				this);
+		seientsPanel = new SeientsPanel(comprarEntradaController, this);
+		pagamentPanel = new PagamentPanel(comprarEntradaController, this);
 		comprarEntradaPanel = new ComprarEntradaPanel();
 
 		setVisible(true);
@@ -73,10 +78,13 @@ public class ComprarEntradaView extends JFrame {
 		contentPane.add(centerPanel);
 
 		setContentPane(contentPane);
+		horizontalBox.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		contentPane.add(horizontalBox, BorderLayout.SOUTH);
 
-		// horizontalBox.add(comprarEntradaButton);
+		missatgeLabel = new JLabel(" ");
+		missatgeLabel.setForeground(SystemColor.textHighlight);
+		horizontalBox.add(missatgeLabel);
 
 		centerPanel.setLayout(card);
 
@@ -90,16 +98,6 @@ public class ComprarEntradaView extends JFrame {
 		centerPanel.add(pagamentPanel, "pagament");
 
 		JButton nuevo = comprarEntradaPanel.getComparEntradabtn();
-
-		/*
-		 * comprarEntradaButton.addMouseListener(new MouseAdapter() {
-		 * 
-		 * @Override public void mouseClicked(MouseEvent arg0) {
-		 * 
-		 * card.show(centerPanel, "espectacle"); }
-		 * 
-		 * });
-		 */
 
 		nuevo.addMouseListener(new MouseAdapter() {
 
@@ -133,11 +131,11 @@ public class ComprarEntradaView extends JFrame {
 	}
 
 	public void mostraPreuMoneda(Float preu) {
-
+		pagamentPanel.setPreu(preu);
 	}
 
 	public void mostraMissatge(String missatge) {
-		// TODO label en el down --> missatgeLabel.setText(missatge);
+		missatgeLabel.setText(missatge);
 	}
 
 	public void mostraAvisFi(String missatge) {
@@ -155,7 +153,7 @@ public class ComprarEntradaView extends JFrame {
 	}
 
 	public void tancarAvis() {
-		// TODO necesario??? que es???
+		// TODO necesario tancarAvis??? que es???
 	}
 
 	public void tancar() {

@@ -7,8 +7,9 @@ import com.Shows.Domain.ServiceLocator.CurrencyConvertor;
 public class ConversorAdapter implements IConversorAdapter {
 
 	@Override
-	public double convert(Moneda divisa, Moneda moneda) throws ServeiNoDisponible {
-		CurrencyConvertor currencyConvertor = new CurrencyConvertor();
-		return currencyConvertor.convert(divisa, moneda);
+	public double convert(Moneda divisa, Moneda moneda)
+			throws ServeiNoDisponible {
+
+		return new CurrencyConvertor().convert(divisa, moneda);
 	}
 }

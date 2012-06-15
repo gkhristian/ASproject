@@ -37,13 +37,15 @@ public class Espectacle {
 
 	public Set<DadesRepresentacio> obteRep(Date data)
 			throws NoHiHaRepresentacions {
-		if (this.representacions.size() == 0)
-			throw new NoHiHaRepresentacions("No hi ha representacions");
+	
 		HashSet<DadesRepresentacio> dadesRepresentacios = new HashSet<DadesRepresentacio>();
 		for (Representacio representacio : representacions) {
 			if (representacio.dataOk(data))
 				dadesRepresentacios.add(representacio.obteInformacio());
 		}
+		
+		if (dadesRepresentacios.size() == 0)
+			throw new NoHiHaRepresentacions("No hi ha representacions");
 
 		return dadesRepresentacios;
 	}

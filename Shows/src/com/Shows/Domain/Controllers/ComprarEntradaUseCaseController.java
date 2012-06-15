@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Session;
+
+import com.Shows.HibernateUtil;
 import com.Shows.Data.Controllers.ControllerDataFactory;
 import com.Shows.Data.Interfaces.IControllerEspectacle;
 import com.Shows.Data.Interfaces.IControllerRepresentacio;
@@ -15,6 +18,7 @@ import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Exceptions.ServeiNoDisponible;
+import com.Shows.Domain.Model.Entrada;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.Representacio;
@@ -90,19 +94,18 @@ public class ComprarEntradaUseCaseController {
 		return representacio.obtePreu(nombEspectadors);
 	}
 
-	public float obtePreuMoneda(Moneda moneda) throws ServeiNoDisponible {
-		// TODO esto es así???
-
+	public float obtePreuMoneda(String moneda) throws ServeiNoDisponible {
 		AdapterFactory adapterFactory = AdapterFactory.getInstance();
 		IConversorAdapter conversorAdapter = adapterFactory
 				.getConversorAdapter();
 
 		Moneda divisa = ShowsCom.getInstance().getDivisa();
+		
+		
+		double rate = conversorAdapter.convert(divisa, Moneda.valueOf(moneda));
 
-		double rate = conversorAdapter.convert(divisa, moneda);
-
-		// TODO no esta claro esto :S
-		preuTotal = (float) (preuTotal * rate); // preu?
+		// TODO esto es así??? precio, guardar en controlador? :S
+		preuTotal = (float) (preuTotal * rate);
 		return preuTotal;
 	}
 
@@ -121,8 +124,14 @@ public class ComprarEntradaUseCaseController {
 
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
 				nomLocal, sessio);
-		representacio.createEntrada(titol, dni, nombEspectadors, data,
-				preuTotal);
+		Entrada entrada = representacio.createEntrada(titol, dni,
+				nombEspectadors, data, preuTotal);
+
+		Session session = HibernateUtil.getSession();
+
+		session.beginTransaction();
+		session.saveOrUpdate(entrada);
+		session.getTransaction().commit();
 	}
 
 	public Date getData() {

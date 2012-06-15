@@ -4,5 +4,5 @@ import javax.persistence.Entity;
 
 @Entity
 public enum Moneda {
-	EUR, USD, GBP
+	EUR, USD, GBP;
 }

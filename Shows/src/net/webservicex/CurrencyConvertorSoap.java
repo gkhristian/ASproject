@@ -1,6 +1,5 @@
 package net.webservicex;
 
-import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -31,5 +30,5 @@ public interface CurrencyConvertorSoap {
         net.webservicex.Currency fromCurrency,
         @WebParam(name = "ToCurrency", targetNamespace = "http://www.webserviceX.NET/")
         net.webservicex.Currency toCurrency
-    ) throws ServeiNoDisponible;
+    ); //throws ServeiNoDisponible;
 }

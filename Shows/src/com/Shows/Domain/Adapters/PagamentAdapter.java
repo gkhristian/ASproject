@@ -18,7 +18,7 @@ public class PagamentAdapter implements IPagamentAdapter {
 				importe, codiBancShows, numcompteShows);
 		
 		if (!autoritza) {
-			throw new PagamentNoAutoritzat();
+			throw new PagamentNoAutoritzat("Pagament no autoritzat");
 		} else
 			return true;
 	}

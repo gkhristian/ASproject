@@ -30,8 +30,6 @@ public class RepresentacioPanel extends JPanel {
 
 	private static final long serialVersionUID = -3674558461643546039L;
 
-	private ComprarEntradaController comprarEntradaController;
-	private JPanel contentPane;
 	private JTable representacionsTable;
 	private JLabel nomEspectacleLabel;
 	private JLabel dataEspectacleLabel;
@@ -40,11 +38,13 @@ public class RepresentacioPanel extends JPanel {
 
 	/**
 	 * Create the frame.
+	 * 
+	 * @param comprarEntradaView
 	 */
 	public RepresentacioPanel(
-			final ComprarEntradaController comprarEntradaController) {
+			final ComprarEntradaController comprarEntradaController,
+			ComprarEntradaView comprarEntradaView) {
 
-		this.comprarEntradaController = comprarEntradaController;
 		setLayout(new BorderLayout(0, 0));
 		Box horizontalBox_1 = Box.createHorizontalBox();
 		add(horizontalBox_1);
@@ -117,7 +117,6 @@ public class RepresentacioPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				// TODO mirar el flujo de datos y modificar datos
 				try {
 					comprarEntradaController.PrOkObteOcupacio(
 							representacionsTable
@@ -132,7 +131,6 @@ public class RepresentacioPanel extends JPanel {
 													.getSelectedRow(), 1),
 							(Integer) nombreEspectadorsSpinner.getValue());
 				} catch (SeientsNoDisp seientsNoDisp) {
-					// TODO mostrar excepción!
 					seientsNoDisp.printStackTrace();
 				}
 

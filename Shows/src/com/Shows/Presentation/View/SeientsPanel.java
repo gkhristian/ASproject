@@ -21,13 +21,8 @@ import com.Shows.TupleTypes.PosicioSeient;
 
 public class SeientsPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8834919801528392136L;
-	private ComprarEntradaController comprarEntradaController;
 
-	private JPanel contentPane;
 	private JPanel seientsPanel;
 
 	private JButton continuaButton;
@@ -36,10 +31,13 @@ public class SeientsPanel extends JPanel {
 
 	/**
 	 * Create the frame.
+	 * 
+	 * @param comprarEntradaView
 	 */
-	public SeientsPanel(final ComprarEntradaController comprarEntradaController) {
+	public SeientsPanel(
+			final ComprarEntradaController comprarEntradaController,
+			ComprarEntradaView comprarEntradaView) {
 
-		this.comprarEntradaController = comprarEntradaController;
 		setLayout(new BorderLayout(0, 0));
 
 		Box horizontalBox = Box.createHorizontalBox();

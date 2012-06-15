@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.sql.Date;
 import java.util.Set;
 import java.util.Vector;
 
@@ -26,8 +25,6 @@ import com.toedter.calendar.JDateChooser;
 public class EspectaclePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private ComprarEntradaController comprarEntradaController;
-	private Date data1 = Date.valueOf("2012-07-31");
 	private JComboBox espectacleComboBox;
 	private JDateChooser dateChooser;
 
@@ -36,10 +33,12 @@ public class EspectaclePanel extends JPanel {
 
 	/**
 	 * Create the frame.
+	 * 
+	 * @param comprarEntradaView
 	 */
 	public EspectaclePanel(
-			final ComprarEntradaController comprarEntradaController) {
-		this.comprarEntradaController = comprarEntradaController;
+			final ComprarEntradaController comprarEntradaController,
+			final ComprarEntradaView comprarEntradaView) {
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -60,15 +59,15 @@ public class EspectaclePanel extends JPanel {
 		espectacleComboBox = new JComboBox();
 		espectacleComboBox.setToolTipText("Espectacles");
 		espectacleComboBox.setMaximumRowCount(30);
-		
+
 		espectacleComboBox.setRenderer(new PromptComboBoxRenderer(
 				"Espectacle..."));
 
 		horizontalBox_1.add(espectacleComboBox);
 		dateChooser = new JDateChooser();
-		
+
 		dateChooser.setMinimumSize(new Dimension(100, 20));
-		
+
 		horizontalBox_1.add(dateChooser);
 
 		dateChooser.getDateEditor().addPropertyChangeListener(
@@ -121,10 +120,10 @@ public class EspectaclePanel extends JPanel {
 							espectacleComboBox.getSelectedItem().toString(),
 							date);
 				} catch (NoHiHaRepresentacions noHiHaRepresentacions) {
-					// TODO Excepción por mostrar!!!
-					noHiHaRepresentacions.printStackTrace();
+					comprarEntradaView.mostraMissatge(noHiHaRepresentacions
+							.getMessage());
+					// noHiHaRepresentacions.printStackTrace();
 				}
-
 			}
 		});
 
@@ -152,7 +151,7 @@ public class EspectaclePanel extends JPanel {
 		espectacleComboBox.setModel(defaultComboBoxModel);
 
 		espectacleComboBox.setSelectedIndex(-1);
-		
+
 		espectacleComboBox.setMinimumSize(new Dimension(200, 20));
 
 		espectacleComboBox.addActionListener(new ActionListener() {

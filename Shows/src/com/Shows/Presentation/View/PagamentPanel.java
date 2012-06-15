@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
 
 import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
-import com.Shows.Domain.Model.Moneda;
+import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.Shows.TupleTypes.DadesEntrada;
@@ -28,20 +28,30 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 
 	private static final long serialVersionUID = 1L;
 
+	private ComprarEntradaController comprarEntradaController;
+	private ComprarEntradaView comprarEntradaView;
+
 	private JFormattedTextField numeroDniFormattedTextField;
 	private JFormattedTextField bancFormattedTextField;
 	private JFormattedTextField compteFormattedTextField;
-	private ComprarEntradaController comprarEntradaController;
+
+	private JLabel preuTotalEurosLabel;
+
 	private JComboBox monedaComboBox;
 
 	private JButton continuaButton;
 
 	/**
 	 * Create the frame.
+	 * 
+	 * @param comprarEntradaView
 	 */
-	public PagamentPanel(final ComprarEntradaController comprarEntradaController) {
+	public PagamentPanel(
+			final ComprarEntradaController comprarEntradaController,
+			final ComprarEntradaView comprarEntradaView) {
 
 		this.comprarEntradaController = comprarEntradaController;
+		this.comprarEntradaView = comprarEntradaView;
 
 		setLayout(new BorderLayout(0, 0));
 		Box horizontalBox = Box.createHorizontalBox();
@@ -134,11 +144,11 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		JLabel PreuTotalLbl = new JLabel("Preu Total:");
 		horizontalBox_9.add(PreuTotalLbl);
 
-		JLabel PreuTotalEurosLbl = new JLabel("New label");
-		horizontalBox_9.add(PreuTotalEurosLbl);
+		preuTotalEurosLabel = new JLabel("");
+		horizontalBox_9.add(preuTotalEurosLabel);
 
 		monedaComboBox = new JComboBox();
-		// TODO necesario, o euros de serie?
+		// TODO prompt necesario, o euros de serie?
 		monedaComboBox.setRenderer(new PromptComboBoxRenderer("Divisa..."));
 		horizontalBox_9.add(monedaComboBox);
 
@@ -219,18 +229,16 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-
-				// TODO mirar el flujo de datos y modificar datos
-
 				try {
 					comprarEntradaController.PrOkPagament(
 							numeroDniFormattedTextField.getValue().toString(),
 							Integer.parseInt(bancFormattedTextField.getValue()
 									.toString()), compteFormattedTextField
 									.getValue().toString());
-				} catch (PagamentNoAutoritzat e) {
-					// TODO mensaje!
-					e.printStackTrace();
+				} catch (PagamentNoAutoritzat pagamentNoAutoritzat) {
+					comprarEntradaView.mostraMissatge(pagamentNoAutoritzat
+							.getMessage());
+					pagamentNoAutoritzat.printStackTrace();
 				}
 
 			}
@@ -247,26 +255,35 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 	}
 
 	public void setDadesEntrada(DadesEntrada dadesEntrada) {
-		// TODO es así o deberían depender de ShowsCom?
 
-		MonedaData[] monedaDatas = { new MonedaData(Moneda.EUR, "euro"),
-				new MonedaData(Moneda.GBP, "GBP"),
-				new MonedaData(Moneda.USD, "USD") };
+		setPreu(dadesEntrada.getPreu());
 
-		monedaComboBox.setModel(new DefaultComboBoxModel(monedaDatas));
+		monedaComboBox.setModel(new DefaultComboBoxModel(dadesEntrada
+				.getCanvis().toArray()));
+
 		monedaComboBox.setSelectedIndex(-1);
+
 		setMinimumSize(new Dimension(50, 20));
+
 		monedaComboBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				MonedaData monedaData = (MonedaData) monedaComboBox
-						.getSelectedItem();
-				comprarEntradaController.canviPreuMoneda(monedaData.getMoneda());
+				try {
+					comprarEntradaController
+							.canviPreuMoneda((String) monedaComboBox
+									.getSelectedItem());
+				} catch (ServeiNoDisponible serveiNoDisponible) {
+					comprarEntradaView.mostraMissatge(serveiNoDisponible.getMessage());
+					//serveiNoDisponible.printStackTrace();
+				}
 				setEnableContinua();
 			}
 		});
+	}
 
+	public void setPreu(float preu) {
+		preuTotalEurosLabel.setText(Float.toString(preu));
 	}
 
 	private void setEnableContinua() {
@@ -290,28 +307,5 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
 		setEnableContinua();
-	}
-
-	class MonedaData {
-		private Moneda moneda;
-		private String nom;
-
-		public MonedaData(Moneda moneda, String nom) {
-			this.moneda = moneda;
-			this.nom = nom;
-		}
-
-		public Moneda getMoneda() {
-			return moneda;
-		}
-
-		public String getNom() {
-			return nom;
-		}
-
-		@Override
-		public String toString() {
-			return nom;
-		}
 	}
 }
