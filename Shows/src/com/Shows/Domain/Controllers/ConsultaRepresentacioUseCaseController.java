@@ -9,16 +9,17 @@ import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
 public class ConsultaRepresentacioUseCaseController {
+	
 	private String titol;
 	private Date data;
 
 	private ControllerDataFactory controllerDataFactory = ControllerDataFactory
 			.getInstance();
 
-	public Set<DadesRepresentacio> obteRepresentacions(String titol, Date data)
-			throws NoHiHaRepresentacions {
-		this.setTitol(titol);
-		this.setData(data);
+	public Set<DadesRepresentacio> obteRepresentacions(final String titol,
+			final Date data) throws NoHiHaRepresentacions {
+		this.titol = titol;
+		this.data = data;
 
 		IControllerEspectacle controllerEspectacle = controllerDataFactory
 				.getControllerEspectacle();
@@ -30,15 +31,7 @@ public class ConsultaRepresentacioUseCaseController {
 		return titol;
 	}
 
-	public void setTitol(String titol) {
-		this.titol = titol;
-	}
-
 	public Date getData() {
 		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
 	}
 }

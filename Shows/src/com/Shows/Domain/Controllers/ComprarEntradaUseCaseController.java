@@ -29,15 +29,7 @@ import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
 
 public class ComprarEntradaUseCaseController {
-	// TODO Replicado ====//
-	private String titol;
-	private Date data;
-	// ===================//
-	// TODO Replicado ====//
-	private String nomLocal;
-	private TipusSessio sessio;
-	private int nombEspectadors;
-	// ===================//
+
 	private Set<PosicioSeient> seients;
 	private float preuTotal;
 
@@ -59,86 +51,106 @@ public class ComprarEntradaUseCaseController {
 		return titolEspectacles;
 	}
 
-	public Set<DadesRepresentacio> obteRepresentacions(String titol, Date data)
-			throws NoHiHaRepresentacions {
-		// Replicado...
-		this.titol = titol;
-		this.data = data;
+	public Set<DadesRepresentacio> obteRepresentacions(final String titol,
+			final Date data) throws NoHiHaRepresentacions {
+
 		consultaRepresentacioUseCaseController = new ConsultaRepresentacioUseCaseController();
 		return consultaRepresentacioUseCaseController.obteRepresentacions(
 				titol, data);
 	}
 
-	public Set<PosicioSeient> obteOcupacio(String nomLocal, TipusSessio sessio,
-			int nombEspectadors) throws SeientsNoDisp {// , Date data) {
-		// Replicado...
-		this.nomLocal = nomLocal;
-		this.sessio = sessio;
-		this.nombEspectadors = nombEspectadors;
-		// this.data = data; // TODO Es necesario???
+	public Set<PosicioSeient> obteOcupacio(final String nomLocal,
+			final TipusSessio sessio, final int nombEspectadors)
+			throws SeientsNoDisp {// , Date data) {
 
 		consultaOcupacioUseCaseController = new ConsultaOcupacioUseCaseController();
 
 		return consultaOcupacioUseCaseController.obteOcupacio(nomLocal, sessio,
-				nombEspectadors);// , data);
+				nombEspectadors,
+				consultaRepresentacioUseCaseController.getData());
 	}
 
-	public DadesEntrada selecionarSeients(Set<PosicioSeient> seients) {
+	public DadesEntrada selecionarSeients(final Set<PosicioSeient> seients) {
 		this.seients = seients;
 
 		IControllerRepresentacio controllerRepresentacio = controllerDataFactory
 				.getControllerRepresentacio();
+
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
-				nomLocal, sessio);
-		DadesEntrada dadesEntrada = representacio.obtePreu(nombEspectadors);
+				consultaOcupacioUseCaseController.getNomLocal(),
+				consultaOcupacioUseCaseController.getSessio(),
+				consultaRepresentacioUseCaseController.getData());
+
+		/*
+		 * DadesEntrada dadesEntrada = representacio
+		 * .obtePreu(consultaOcupacioUseCaseController.getNombEspectadors());
+		 */
+
+		// SetMoneda canvis = ShowsCom.getInstance().getCanvis();
+
+		// Pasar de Set Moneda a Set de Strings
+		/*
+		 * HashSet<String> canvi = new HashSet<String>();
+		 * canvi.add(canvis.getDivisa1().toString());
+		 * canvi.add(canvis.getDivisa2().toString());
+		 */
+
+		DadesEntrada dadesEntrada = new DadesEntrada(
+				(this.preuTotal + ShowsCom.getInstance().getComissio() + representacio
+						.getRecarrec())
+						* consultaOcupacioUseCaseController
+								.getNombEspectadors(),
+				ShowsCom.getInstance().getCanvis());
 
 		// TODO duda preuTotal
 		this.preuTotal = dadesEntrada.getPreu();
-		
+
 		return dadesEntrada;
 	}
 
-	public float obtePreuMoneda(String moneda) throws ServeiNoDisponible {
+	public float obtePreuMoneda(final String moneda) throws ServeiNoDisponible {
 		AdapterFactory adapterFactory = AdapterFactory.getInstance();
 		IConversorAdapter conversorAdapter = adapterFactory
 				.getConversorAdapter();
 
 		Moneda divisa = ShowsCom.getInstance().getDivisa();
-		
-		
+
 		double rate = conversorAdapter.convert(divisa, Moneda.valueOf(moneda));
 
 		// TODO duda preuTotal, guardar en controlador? :S
-		this.preuTotal = (float) (preuTotal * rate);
+		this.preuTotal = (float) (this.preuTotal * rate);
 		return this.preuTotal;
 	}
 
-	public void pagament(String dni, int codiB, String numCompte, Date data)
-			throws PagamentNoAutoritzat {
+	public void pagament(final String dni, final int codiB,
+			final String numCompte) throws PagamentNoAutoritzat {
 		IPagamentAdapter pagamentAdapter = AdapterFactory.getInstance()
 				.getPagamentAdapter();
 
 		int codiBancShows = ShowsCom.getInstance().getCodiBanc();
 		String numcompteShows = ShowsCom.getInstance().getNumeroCompte();
 
-		pagamentAdapter.autoritza(dni, codiB, numCompte, preuTotal,
+		pagamentAdapter.autoritza(dni, codiB, numCompte, this.preuTotal,
 				codiBancShows, numcompteShows);
+
 		IControllerRepresentacio controllerRepresentacio = ControllerDataFactory
 				.getInstance().getControllerRepresentacio();
 
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
-				nomLocal, sessio);
-		Entrada entrada = representacio.createEntrada(titol, dni,
-				nombEspectadors, data, preuTotal);
+				consultaOcupacioUseCaseController.getNomLocal(),
+				consultaOcupacioUseCaseController.getSessio(),
+				consultaRepresentacioUseCaseController.getData());
+
+		Entrada entrada = representacio.createEntrada(
+				consultaRepresentacioUseCaseController.getTitol(), dni,
+				consultaOcupacioUseCaseController.getNombEspectadors(),
+				consultaRepresentacioUseCaseController.getData(),
+				this.preuTotal);
 
 		Session session = HibernateUtil.getSession();
 
 		session.beginTransaction();
 		session.saveOrUpdate(entrada);
 		session.getTransaction().commit();
-	}
-
-	public Date getData() {
-		return data;
 	}
 }

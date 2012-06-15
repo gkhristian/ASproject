@@ -112,7 +112,7 @@ public class DataBaseInitializer {
 
 		Representacio rep1 = new Representacio(ses1, local1, preu1, data1,
 				lliures1);
-		
+
 		Estrena est1 = new Estrena(ses2, local2, preu2, data2, lliures2, 10);
 		Estrena est2 = new Estrena(ses1, local2_2, preu2, data2, lliures2_2_1,
 				10);
@@ -164,9 +164,16 @@ public class DataBaseInitializer {
 		est1.setEntradas(ent2);
 
 		/* Shows.com */
-		SetMoneda sm = new SetMoneda(Moneda.GBP, Moneda.USD);
+		
+		HashSet<Moneda> canvis = new HashSet<Moneda>();
+		canvis.add(Moneda.GBP);
+		canvis.add(Moneda.USD);
+		
+		SetMoneda setMoneda = new SetMoneda(canvis);
+
 		ShowsCom showscom = new ShowsCom(1, 12121, "34343434", 20f, Moneda.EUR,
-				sm);
+				setMoneda);
+
 		session.saveOrUpdate(showscom);
 
 		session.getTransaction().commit();

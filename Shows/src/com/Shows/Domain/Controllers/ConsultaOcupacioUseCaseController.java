@@ -1,5 +1,6 @@
 package com.Shows.Domain.Controllers;
 
+import java.sql.Date;
 import java.util.Set;
 
 import com.Shows.Data.Controllers.ControllerDataFactory;
@@ -10,7 +11,6 @@ import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.TupleTypes.PosicioSeient;
 
 public class ConsultaOcupacioUseCaseController {
-	// TODO Replicado ====//
 	private String nomLocal;
 	private TipusSessio sessio;
 	private int nombEspectadors;
@@ -18,10 +18,10 @@ public class ConsultaOcupacioUseCaseController {
 	private ControllerDataFactory controllerDataFactory = ControllerDataFactory
 			.getInstance();
 
-	// ===================//
-
-	public Set<PosicioSeient> obteOcupacio(String nomLocal, TipusSessio sessio,
-			int nombEspectadors) throws SeientsNoDisp { // , Date data) {
+	public Set<PosicioSeient> obteOcupacio(final String nomLocal,
+			final TipusSessio sessio, final int nombEspectadors, Date data)
+			throws SeientsNoDisp {
+		
 		this.nomLocal = nomLocal;
 		this.sessio = sessio;
 		this.nombEspectadors = nombEspectadors;
@@ -29,8 +29,20 @@ public class ConsultaOcupacioUseCaseController {
 		IControllerRepresentacio controllerRepresentacio = controllerDataFactory
 				.getControllerRepresentacio();
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
-				nomLocal, sessio);
+				nomLocal, sessio, data);
 
 		return representacio.obteLliures(nombEspectadors);
+	}
+
+	public String getNomLocal() {
+		return nomLocal;
+	}
+
+	public TipusSessio getSessio() {
+		return sessio;
+	}
+
+	public int getNombEspectadors() {
+		return nombEspectadors;
 	}
 }

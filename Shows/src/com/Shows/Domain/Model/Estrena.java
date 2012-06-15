@@ -18,19 +18,14 @@ public class Estrena extends Representacio implements Serializable {
 	public Estrena() {
 	}
 
-	public Estrena(Sessio sessio, Local nom, int recarrec) {
-		AuxiliarRepresentacio aux = new AuxiliarRepresentacio(sessio, nom);
-		this.setAuxiliarRepresentacio(aux);
+	public Estrena(Sessio sessio, Local nom, int recarrec, Date data) {
+		super(sessio, nom, data);
 		this.recarrec = recarrec;
 	}
 
 	public Estrena(Sessio sessio, Local nom, float preu, Date data,
 			int nombreSeientsLliures, int recarrec) {
-		AuxiliarRepresentacio aux = new AuxiliarRepresentacio(sessio, nom);
-		this.setAuxiliarRepresentacio(aux);
-		this.setPreu(preu);
-		this.setData(data);
-		this.setNombreSeientsLliures(nombreSeientsLliures);
+		super(sessio, nom, preu, data, nombreSeientsLliures);
 		this.recarrec = recarrec;
 	}
 

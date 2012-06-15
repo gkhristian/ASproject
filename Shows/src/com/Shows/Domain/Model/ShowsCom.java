@@ -1,5 +1,7 @@
 package com.Shows.Domain.Model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,9 +15,11 @@ import com.Shows.HibernateUtil;
 public class ShowsCom {
 	@Id
 	private int id;
+
 	private int codiBanc;
 	private String numeroCompte;
 	private Float comissio;
+
 	@Enumerated(EnumType.STRING)
 	private Moneda divisa;
 	private SetMoneda canvis;
@@ -35,14 +39,15 @@ public class ShowsCom {
 	public ShowsCom() {
 	}
 
-	public ShowsCom(int id, int codiBanc, String numeroCompte, Float comissio,
-			Moneda divisa, SetMoneda canvis) {
+	public ShowsCom(final int id, final int codiBanc,
+			final String numeroCompte, final float comissio,
+			final Moneda divisa, final SetMoneda canvis) {
 		this.id = id;
 		this.codiBanc = codiBanc;
 		this.numeroCompte = numeroCompte;
 		this.comissio = comissio;
 		this.divisa = divisa;
-		this.setCanvis(canvis);
+		this.canvis = canvis;
 		instance = this;
 	}
 
@@ -70,11 +75,11 @@ public class ShowsCom {
 		this.numeroCompte = numeroCompte;
 	}
 
-	public Float getComissio() {
+	public float getComissio() {
 		return comissio;
 	}
 
-	public void setComissio(Float comissio) {
+	public void setComissio(float comissio) {
 		this.comissio = comissio;
 	}
 
@@ -86,11 +91,7 @@ public class ShowsCom {
 		this.divisa = divisa;
 	}
 
-	public SetMoneda getCanvis() {
-		return canvis;
-	}
-
-	public void setCanvis(SetMoneda canvis) {
-		this.canvis = canvis;
+	public Set<Moneda> getCanvis() {
+		return canvis.getCanvis();
 	}
 }

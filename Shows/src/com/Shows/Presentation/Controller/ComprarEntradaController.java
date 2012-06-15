@@ -17,38 +17,44 @@ public class ComprarEntradaController {
 	private ComprarEntradaView comprarEntradaView;
 
 	public ComprarEntradaController() {
+
 		comprarEntradaUseCaseController = new ComprarEntradaUseCaseController();
+
 		comprarEntradaView = new ComprarEntradaView(this);
 	}
 
 	public void PrComprarEntrada() {
+
 		comprarEntradaView.mostraEspectacles(comprarEntradaUseCaseController
 				.obteEspectacles());
 	}
 
-	public void PrOkObteRepresentacions(String titol, Date data)
+	public void PrOkObteRepresentacions(final String titol, final Date data)
 			throws NoHiHaRepresentacions {
+
 		comprarEntradaView
 				.mostraRepresentacions(comprarEntradaUseCaseController
 						.obteRepresentacions(titol, data));
 	}
 
-	public void PrOkObteOcupacio(String nomLocal, TipusSessio sessio,
-			int nombEspectadors) throws SeientsNoDisp {
+	public void PrOkObteOcupacio(final String nomLocal,
+			final TipusSessio sessio, final int nombEspectadors)
+			throws SeientsNoDisp {
+
 		comprarEntradaView.mostraOcupacio(comprarEntradaUseCaseController
 				.obteOcupacio(nomLocal, sessio, nombEspectadors));// , data));
 	}
 
-	public void PrOkSelecionarSeients(Set<PosicioSeient> seients) {
+	public void PrOkSelecionarSeients(final Set<PosicioSeient> seients) {
+
 		comprarEntradaView.mostraPreu(comprarEntradaUseCaseController
 				.selecionarSeients(seients));
 	}
 
-	public void PrOkPagament(String dni, int codiB, String numCompte)
-			throws PagamentNoAutoritzat {
-		// TODO Data del controlador?
-		comprarEntradaUseCaseController.pagament(dni, codiB, numCompte,
-				comprarEntradaUseCaseController.getData());
+	public void PrOkPagament(final String dni, final int codiB,
+			final String numCompte) throws PagamentNoAutoritzat {
+
+		comprarEntradaUseCaseController.pagament(dni, codiB, numCompte);
 		comprarEntradaView.mostraAvisFi("Tot ha finalitzat correctament");
 	}
 
@@ -62,10 +68,13 @@ public class ComprarEntradaController {
 	}
 
 	public void PrFi() {
+
 		comprarEntradaView.tancar();
 	}
 
-	public void canviPreuMoneda(String moneda) throws ServeiNoDisponible {
-		comprarEntradaView.mostraPreuMoneda(comprarEntradaUseCaseController.obtePreuMoneda(moneda));
+	public void canviPreuMoneda(final String moneda) throws ServeiNoDisponible {
+
+		comprarEntradaView.mostraPreuMoneda(comprarEntradaUseCaseController
+				.obtePreuMoneda(moneda));
 	}
 }
