@@ -142,6 +142,9 @@ public class ComprarEntradaView extends JFrame {
 
 	public void mostraAvisFi(String missatge) {
 		// TODO delete missatge???
+		AvisAcabaDialog avisAcabaDialog = new AvisAcabaDialog(
+				comprarEntradaController);
+		avisAcabaDialog.setVisible(true);
 	}
 
 	public void mostraAvis(String missatge) {

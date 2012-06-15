@@ -124,4 +124,8 @@ public class ComprarEntradaUseCaseController {
 		representacio.createEntrada(titol, dni, nombEspectadors, data,
 				preuTotal);
 	}
+
+	public Date getData() {
+		return data;
+	}
 }

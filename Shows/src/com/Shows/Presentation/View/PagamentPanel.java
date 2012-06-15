@@ -5,31 +5,36 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.ParseException;
 
 import javax.swing.Box;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
+import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.Shows.TupleTypes.DadesEntrada;
 
-public class PagamentPanel extends JPanel {
+public class PagamentPanel extends JPanel implements PropertyChangeListener {
 
-	private static final long serialVersionUID = 6594237397946129351L;
+	private static final long serialVersionUID = 1L;
 
-	private JPanel contentPane;
-	private JTextField NumeroDniTextField;
-	private JTextField BancTextField;
-	private JTextField CompteTextField;
+	private JFormattedTextField numeroDniFormattedTextField;
+	private JFormattedTextField bancFormattedTextField;
+	private JFormattedTextField compteFormattedTextField;
 	private ComprarEntradaController comprarEntradaController;
-	private JComboBox MonedaComboBox;
+	private JComboBox monedaComboBox;
+
+	private JButton continuaButton;
 
 	/**
 	 * Create the frame.
@@ -132,8 +137,10 @@ public class PagamentPanel extends JPanel {
 		JLabel PreuTotalEurosLbl = new JLabel("New label");
 		horizontalBox_9.add(PreuTotalEurosLbl);
 
-		MonedaComboBox = new JComboBox();
-		horizontalBox_9.add(MonedaComboBox);
+		monedaComboBox = new JComboBox();
+		// TODO necesario, o euros de serie?
+		monedaComboBox.setRenderer(new PromptComboBoxRenderer("Divisa..."));
+		horizontalBox_9.add(monedaComboBox);
 
 		Box verticalBox_1 = Box.createVerticalBox();
 		horizontalBox.add(verticalBox_1);
@@ -147,28 +154,6 @@ public class PagamentPanel extends JPanel {
 		JLabel DniLbl = new JLabel("DNI:");
 		horizontalBox_10.add(DniLbl);
 
-		NumeroDniTextField = new JTextField();
-		horizontalBox_10.add(NumeroDniTextField);
-		NumeroDniTextField.setColumns(10);
-
-		Component verticalStrut_1 = Box.createVerticalStrut(30);
-		verticalBox_1.add(verticalStrut_1);
-
-		Box horizontalBox_12 = Box.createHorizontalBox();
-		verticalBox_1.add(horizontalBox_12);
-
-		JLabel CompteLbl = new JLabel("Compte:");
-		horizontalBox_12.add(CompteLbl);
-
-		BancTextField = new JTextField();
-		horizontalBox_12.add(BancTextField);
-		BancTextField.setColumns(10);
-
-		CompteTextField = new JTextField();
-		CompteTextField.setText("");
-		horizontalBox_12.add(CompteTextField);
-		CompteTextField.setColumns(10);
-
 		Component verticalStrut_2 = Box.createVerticalStrut(30);
 		verticalBox_1.add(verticalStrut_2);
 
@@ -181,60 +166,152 @@ public class PagamentPanel extends JPanel {
 		Component horizontalGlue = Box.createHorizontalGlue();
 		horizontalBox_11.add(horizontalGlue);
 
-		JButton ContinuaBtn = new JButton("Continua");
-		ContinuaBtn.setEnabled(false);
-		horizontalBox_11.add(ContinuaBtn);
+		continuaButton = new JButton("Continua");
+		continuaButton.setEnabled(false);
+		horizontalBox_11.add(continuaButton);
 
-		JButton CancelaBtn = new JButton("Cancel\u00B7la");
-		horizontalBox_11.add(CancelaBtn);
+		JButton cancelaButton = new JButton("Cancel\u00B7la");
+		horizontalBox_11.add(cancelaButton);
 
-		ContinuaBtn.addActionListener(new ActionListener() {
+		// 2100 2458 78 01 00376373
+		MaskFormatter DNIMaskFormatter = null;
+		MaskFormatter bankMaskFormatter = null;
+		MaskFormatter compteMaskFormatter = null;
+		try {
+			DNIMaskFormatter = new MaskFormatter("########-U");
+			bankMaskFormatter = new MaskFormatter("####");
+			compteMaskFormatter = new MaskFormatter("#### ## ## ########");
+		} catch (ParseException parseException) {
+			parseException.printStackTrace();
+		}
+		DNIMaskFormatter.setPlaceholderCharacter('_');
+		bankMaskFormatter.setPlaceholderCharacter('_');
+		compteMaskFormatter.setPlaceholderCharacter('_');
+		DNIMaskFormatter.setCommitsOnValidEdit(true);
+		bankMaskFormatter.setCommitsOnValidEdit(true);
+		compteMaskFormatter.setCommitsOnValidEdit(true);
+
+		numeroDniFormattedTextField = new JFormattedTextField(DNIMaskFormatter);
+		numeroDniFormattedTextField.addPropertyChangeListener("value", this);
+		horizontalBox_10.add(numeroDniFormattedTextField);
+		numeroDniFormattedTextField.setColumns(9);
+
+		Component verticalStrut_1 = Box.createVerticalStrut(30);
+		verticalBox_1.add(verticalStrut_1);
+
+		Box horizontalBox_12 = Box.createHorizontalBox();
+		verticalBox_1.add(horizontalBox_12);
+
+		JLabel CompteLbl = new JLabel("Compte:");
+		horizontalBox_12.add(CompteLbl);
+
+		bancFormattedTextField = new JFormattedTextField(bankMaskFormatter);
+		bancFormattedTextField.addPropertyChangeListener("value", this);
+		horizontalBox_12.add(bancFormattedTextField);
+		bancFormattedTextField.setColumns(4);
+
+		compteFormattedTextField = new JFormattedTextField(compteMaskFormatter);
+		compteFormattedTextField.addPropertyChangeListener("value", this);
+		horizontalBox_12.add(compteFormattedTextField);
+		compteFormattedTextField.setColumns(16);
+
+		continuaButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 
 				// TODO mirar el flujo de datos y modificar datos
 
-				comprarEntradaController.PrOkPagament("", 1, "");
+				try {
+					comprarEntradaController.PrOkPagament(
+							numeroDniFormattedTextField.getValue().toString(),
+							Integer.parseInt(bancFormattedTextField.getValue()
+									.toString()), compteFormattedTextField
+									.getValue().toString());
+				} catch (PagamentNoAutoritzat e) {
+					// TODO mensaje!
+					e.printStackTrace();
+				}
 
 			}
 		});
 
-		CancelaBtn.addActionListener(new ActionListener() {
+		cancelaButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				comprarEntradaController.PrCancellarAvis();
+				comprarEntradaController.PrCancellar();
 			}
 		});
 	}
 
 	public void setDadesEntrada(DadesEntrada dadesEntrada) {
-		// TODO
-		Vector<String> monedas = new Vector<String>();
-		monedas.add("€");
-		monedas.add("pts");
-		monedas.add("libras");
-		
-		DefaultComboBoxModel model = new DefaultComboBoxModel(monedas);
-		MonedaComboBox.setModel(model);
-		MonedaComboBox.setSelectedIndex(-1);
-		setMinimumSize(new Dimension(50,20));
-		MonedaComboBox.addActionListener(new ActionListener() {
-			
+		// TODO es así o deberían depender de ShowsCom?
+
+		MonedaData[] monedaDatas = { new MonedaData(Moneda.EUR, "euro"),
+				new MonedaData(Moneda.GBP, "GBP"),
+				new MonedaData(Moneda.USD, "USD") };
+
+		monedaComboBox.setModel(new DefaultComboBoxModel(monedaDatas));
+		monedaComboBox.setSelectedIndex(-1);
+		setMinimumSize(new Dimension(50, 20));
+		monedaComboBox.addActionListener(new ActionListener() {
+
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				comprarEntradaController.canviPreuMoneda((Moneda) MonedaComboBox.getSelectedItem());
+			public void actionPerformed(ActionEvent actionEvent) {
+				MonedaData monedaData = (MonedaData) monedaComboBox
+						.getSelectedItem();
+				comprarEntradaController.canviPreuMoneda(monedaData.getMoneda());
+				setEnableContinua();
 			}
 		});
 
-
 	}
 
-//	private void setEnableContinua() {
-//		continuaButton
-//				.setEnabled((dateChooser.getDate() != null && espectacleComboBox
-//						.getSelectedIndex() > -1));
-//	}
+	private void setEnableContinua() {
+		int bancLength = 0, dniLength = 0, compteLength = 0;
+
+		if (bancFormattedTextField.getValue() != null)
+			bancLength = bancFormattedTextField.getValue().toString().length();
+
+		if (numeroDniFormattedTextField.getValue() != null)
+			dniLength = numeroDniFormattedTextField.getValue().toString()
+					.length();
+
+		if (compteFormattedTextField.getValue() != null)
+			compteLength = compteFormattedTextField.getValue().toString()
+					.length();
+
+		continuaButton.setEnabled((monedaComboBox.getSelectedIndex() > -1
+				&& bancLength > 3 && compteLength > 15 && dniLength > 8));
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+		setEnableContinua();
+	}
+
+	class MonedaData {
+		private Moneda moneda;
+		private String nom;
+
+		public MonedaData(Moneda moneda, String nom) {
+			this.moneda = moneda;
+			this.nom = nom;
+		}
+
+		public Moneda getMoneda() {
+			return moneda;
+		}
+
+		public String getNom() {
+			return nom;
+		}
+
+		@Override
+		public String toString() {
+			return nom;
+		}
+	}
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.Shows.Domain.Controllers.ComprarEntradaUseCaseController;
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
+import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.TipusSessio;
@@ -43,7 +44,9 @@ public class ComprarEntradaController {
 				.selecionarSeients(seients));
 	}
 
-	public void PrOkPagament(String dni, int codiB, String numCompte) {
+	public void PrOkPagament(String dni, int codiB, String numCompte) throws PagamentNoAutoritzat {
+		// TODO Data del controlador?
+		comprarEntradaUseCaseController.pagament(dni, codiB, numCompte, comprarEntradaUseCaseController.getData());
 		comprarEntradaView.mostraAvisFi("Tot ha finalitzat correctament");
 	}
 
