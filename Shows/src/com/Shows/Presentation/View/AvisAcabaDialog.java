@@ -37,7 +37,7 @@ public class AvisAcabaDialog extends JDialog {
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 
 		setBounds(dimension.width / 2 - width / 2, dimension.height / 2
-				- heigth / 2, width, heigth);
+				- heigth / 2, 336, 120);
 
 		getContentPane().setLayout(new BorderLayout());
 		contentPane.setLayout(new FlowLayout());
