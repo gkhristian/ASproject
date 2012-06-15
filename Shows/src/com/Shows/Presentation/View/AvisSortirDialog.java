@@ -30,7 +30,7 @@ public class AvisSortirDialog extends JDialog {
 	public AvisSortirDialog(
 			final ComprarEntradaController comprarEntradaController) {
 
-		// TODO message???
+		// TODO puede que message???
 		setAlwaysOnTop(true);
 		setModal(true);
 		setResizable(false);

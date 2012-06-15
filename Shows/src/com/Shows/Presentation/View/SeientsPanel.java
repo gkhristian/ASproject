@@ -234,8 +234,7 @@ public class SeientsPanel extends JPanel {
 	}
 
 	private void setEnableContinua() {
-		// TODO nombEspectadors? bajar a Dominio a comprobar? si es así no se
-		// puede controlar en Presentación
+		// TODO nombEspectadors? bajar a Dominio a comprobar? si es así no se puede controlar en Presentación
 		// Hardcoded 2, queda por decidir
 		continuaButton.setEnabled((selectedSeients.size() == 2));
 	}

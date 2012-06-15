@@ -29,6 +29,8 @@ public class AvisAcabaDialog extends JDialog {
 	 */
 	public AvisAcabaDialog(
 			final ComprarEntradaController comprarEntradaController) {
+		
+		// TODO aviso aquí?
 
 		setAlwaysOnTop(true);
 		setModal(true);
