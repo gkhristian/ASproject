@@ -168,6 +168,8 @@ public class ComprarEntradaUseCaseController {
 		
 
 		// TODO calcular nombreSeientsLliures
+		representacio.setNombreSeientsLliures(representacio.getNombreSeientsLliures() - seients.size());
+		session.saveOrUpdate(representacio);
 
 
 		
