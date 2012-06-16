@@ -10,14 +10,14 @@ import javax.persistence.ManyToOne;
 public class AuxiliarRepresentacio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@ManyToOne
 	private Sessio sessio;
 	@ManyToOne
 	private Local local;
-	
+
 	private Date data;
-	
+
 	public AuxiliarRepresentacio() {
 	}
 
@@ -26,16 +26,9 @@ public class AuxiliarRepresentacio implements Serializable {
 		this.local = local;
 		this.data = data;
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	public boolean dataOk(Date data) {
-		if (this.data.getYear() != data.getYear())
-			return false;
-		if (this.data.getMonth() != data.getMonth())
-			return false;
-		if (this.data.getDay() != data.getDay())
-			return false;
-		return true;
+		return (this.data.toString().equals(data.toString()));
 	}
 
 	public Sessio getSessio() {

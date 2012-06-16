@@ -10,7 +10,6 @@ import org.hibernate.Session;
 
 import com.Shows.HibernateUtil;
 import com.Shows.Data.Controllers.ControllerDataFactory;
-import com.Shows.Data.Controllers.ControllerSeientsEnRepresentacio;
 import com.Shows.Data.Interfaces.IControllerEspectacle;
 import com.Shows.Data.Interfaces.IControllerRepresentacio;
 import com.Shows.Data.Interfaces.IControllerSeientsEnRepresentacio;
@@ -146,7 +145,7 @@ public class ComprarEntradaUseCaseController {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 		
-		// TODO ocupar seients
+		// FIXME ocupar seients
 		// Usar this.seients
 		IControllerSeientsEnRepresentacio controllerSeientsEnRepresentacio = ControllerDataFactory
 				.getInstance().getControllerSeientsEnRepresentacio();

@@ -40,7 +40,7 @@ public class Espectacle {
 	
 		HashSet<DadesRepresentacio> dadesRepresentacios = new HashSet<DadesRepresentacio>();
 		for (Representacio representacio : representacions) {
-			if (representacio.dataOk(data))
+			if (representacio.dataOk(data))	
 				dadesRepresentacios.add(representacio.obteInformacio());
 		}
 		
