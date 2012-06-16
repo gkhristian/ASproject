@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import com.Shows.TupleTypes.PosicioSeient;
 
@@ -16,11 +15,9 @@ public class SeientEnRepresentacio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@ManyToOne
-	private Seient seient;
-	@Id
-	@ManyToOne
-	private Representacio representacio;
+	private AuxiliarSeientEnRepresentacio auxpk;
+	
+	
 	@Enumerated(EnumType.STRING)
 	private Estat estat;
 	
@@ -28,18 +25,10 @@ public class SeientEnRepresentacio implements Serializable {
 	}
 
 	public SeientEnRepresentacio(Seient seient, Representacio representacio, Estat estat) {
-		this.seient = seient;
-		this.setRepresentacio(representacio);
+		this.auxpk = new AuxiliarSeientEnRepresentacio(seient, representacio);
 		this.estat = estat;
 	}
 
-	public Seient getSeient() {
-		return seient;
-	}
-
-	public void setSeient(Seient seient) {
-		this.seient = seient;
-	}
 
 	public Estat getEstat() {
 		return estat;
@@ -49,19 +38,19 @@ public class SeientEnRepresentacio implements Serializable {
 		this.estat = estat;
 	}
 
-	public Representacio getRepresentacio() {
-		return representacio;
-	}
-
-	public void setRepresentacio(Representacio representacio) {
-		this.representacio = representacio;
-	}
 
 	public PosicioSeient esLliure() {
 		if (this.estat == Estat.lliure) {
-			PosicioSeient lliure = this.seient.seient();
+			PosicioSeient lliure = this.auxpk.getSeient().seient();
 			return lliure;
 		}
 		return null;
 	}
+	
+	public void ocuparSeient() {
+		if (this.estat == Estat.lliure) {
+			this.estat = Estat.ocupat;
+		}
+	}
+	
 }

@@ -2,6 +2,7 @@ package com.Shows.Data.Controllers;
 
 import com.Shows.Data.Interfaces.IControllerEspectacle;
 import com.Shows.Data.Interfaces.IControllerRepresentacio;
+import com.Shows.Data.Interfaces.IControllerSeientsEnRepresentacio;
 
 public class ControllerDataFactory {
 
@@ -9,6 +10,7 @@ public class ControllerDataFactory {
 
 	private IControllerRepresentacio controllerRepresentacio;
 	private IControllerEspectacle controllerEspectacle;
+	private IControllerSeientsEnRepresentacio controllerSeientsEnRepresentacio;
 
 	public static ControllerDataFactory getInstance() {
 		if (instance == null)
@@ -26,5 +28,11 @@ public class ControllerDataFactory {
 		if (controllerEspectacle == null)
 			controllerEspectacle = new ControllerEspectacle();
 		return controllerEspectacle;
+	}
+
+	public IControllerSeientsEnRepresentacio getControllerSeientsEnRepresentacio() {
+		if (controllerSeientsEnRepresentacio == null)
+			controllerSeientsEnRepresentacio = new ControllerSeientsEnRepresentacio();
+		return controllerSeientsEnRepresentacio;
 	}
 }

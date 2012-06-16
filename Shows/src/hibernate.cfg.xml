@@ -21,5 +21,7 @@
   <mapping class="com.Shows.Domain.Model.Sessio"/>
   <mapping class="com.Shows.Domain.Model.ShowsCom"/>
   <mapping class="com.Shows.Domain.Model.AuxiliarRepresentacio"/>
+  <mapping class="com.Shows.Domain.Model.AuxiliarSeient"/>
+  <mapping class="com.Shows.Domain.Model.AuxiliarSeientEnRepresentacio"/>
  </session-factory>
 </hibernate-configuration>

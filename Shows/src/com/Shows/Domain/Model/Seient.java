@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import com.Shows.TupleTypes.PosicioSeient;
 
@@ -14,48 +13,25 @@ public class Seient implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@ManyToOne
-	private Local local;
-	@Id
-	private int fila;
-	@Id
-	private int columna;
+	private AuxiliarSeient auxs;
 	
 	public Seient() {
 	}
 
 	public Seient(Local local, int columna, int fila) {
-		this.fila = fila;
-		this.columna = columna;
-		this.local = local;
-	}
-
-	public int getFila() {
-		return fila;
-	}
-
-	public void setFila(int fila) {
-		this.fila = fila;
-	}
-
-	public int getColumna() {
-		return columna;
-	}
-
-	public void setColumna(int columna) {
-		this.columna = columna;
-	}
-
-	public Local getLocal() {
-		return local;
-	}
-
-	public void setLocal(Local local) {
-		this.local = local;
+		auxs = new AuxiliarSeient(local, fila, columna);
 	}
 
 	public PosicioSeient seient() {
-		PosicioSeient aux = new PosicioSeient(fila, columna);
+		PosicioSeient aux = new PosicioSeient(auxs.getFila(), auxs.getColumna());
 		return aux;
+	}
+	
+	public void setAuxs(AuxiliarSeient a) {
+		this.auxs = a;
+	}
+	
+	public AuxiliarSeient getAuxs() {
+		return auxs;
 	}
 }

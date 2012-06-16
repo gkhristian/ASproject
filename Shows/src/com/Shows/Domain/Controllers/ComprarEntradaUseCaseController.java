@@ -2,6 +2,7 @@ package com.Shows.Domain.Controllers;
 
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -9,8 +10,10 @@ import org.hibernate.Session;
 
 import com.Shows.HibernateUtil;
 import com.Shows.Data.Controllers.ControllerDataFactory;
+import com.Shows.Data.Controllers.ControllerSeientsEnRepresentacio;
 import com.Shows.Data.Interfaces.IControllerEspectacle;
 import com.Shows.Data.Interfaces.IControllerRepresentacio;
+import com.Shows.Data.Interfaces.IControllerSeientsEnRepresentacio;
 import com.Shows.Domain.Adapters.AdapterFactory;
 import com.Shows.Domain.Adapters.IConversorAdapter;
 import com.Shows.Domain.Adapters.IPagamentAdapter;
@@ -22,6 +25,7 @@ import com.Shows.Domain.Model.Entrada;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Moneda;
 import com.Shows.Domain.Model.Representacio;
+import com.Shows.Domain.Model.SeientEnRepresentacio;
 import com.Shows.Domain.Model.ShowsCom;
 import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.TupleTypes.DadesEntrada;
@@ -139,14 +143,35 @@ public class ComprarEntradaUseCaseController {
 				consultaRepresentacioUseCaseController.getData(),
 				this.preuTotal);
 
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		
 		// TODO ocupar seients
 		// Usar this.seients
+		IControllerSeientsEnRepresentacio controllerSeientsEnRepresentacio = ControllerDataFactory
+				.getInstance().getControllerSeientsEnRepresentacio();
+		Iterator<PosicioSeient> it = seients.iterator();
+		HashSet<SeientEnRepresentacio> seientsEnRepresentacio = new HashSet<SeientEnRepresentacio>();
+		while (it.hasNext()) {
+			PosicioSeient aux = it.next();
+			SeientEnRepresentacio ser = controllerSeientsEnRepresentacio.getSeientEnRepresentacio(
+					representacio.getAuxiliarRepresentacio().getLocal()
+							.getNom(), aux.getFila(), aux.getColumna(),
+					representacio.getAuxiliarRepresentacio().getData(),
+					representacio.getAuxiliarRepresentacio().getSessio()
+							.getSessio());
+			ser.ocuparSeient();
+			session.saveOrUpdate(ser);
+			
+			seientsEnRepresentacio.add(ser);
+		}
+		
+		
 
 		// TODO calcular nombreSeientsLliures
-		
-		Session session = HibernateUtil.getSession();
 
-		session.beginTransaction();
+
+		
 		session.saveOrUpdate(entrada);
 		session.getTransaction().commit();
 	}

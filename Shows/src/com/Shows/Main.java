@@ -37,7 +37,7 @@ public class Main {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 
-		Query query = session.createQuery("Select fila from Seient");
+		Query query = session.createQuery("Select nom from Local");
 
 		return (query.list().size() == 0);
 	}
