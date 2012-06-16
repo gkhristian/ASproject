@@ -28,7 +28,7 @@ public class SeientsPanel extends JPanel {
 
 	private JButton continuaButton;
 
-	private HashSet<PosicioSeient> selectedSeients = new HashSet<PosicioSeient>();
+	private HashSet<PosicioSeient> selectedSeients;
 
 	/**
 	 * Create the frame.
@@ -207,6 +207,10 @@ public class SeientsPanel extends JPanel {
 
 		JPanel[][] panelHolder = new JPanel[maxFila][maxColumna];
 		JSeient[][] holder = new JSeient[maxFila][maxColumna];
+
+		seientsPanel.removeAll();
+
+		selectedSeients = new HashSet<PosicioSeient>();
 
 		seientsPanel.setLayout(new GridLayout(maxFila, maxColumna));
 
