@@ -39,7 +39,7 @@ public class Representacio {
 	}
 
 	public Representacio(Sessio sessio, Local nom, Float preu, Date data,
-			Integer nombreSeientsLliures) {
+			int nombreSeientsLliures) {
 		setAuxiliarRepresentacio(new AuxiliarRepresentacio(sessio, nom, data));
 		this.preu = preu;
 		this.nombreSeientsLliures = nombreSeientsLliures;
@@ -88,11 +88,11 @@ public class Representacio {
 		this.preu = preu;
 	}
 
-	public Integer getNombreSeientsLliures() {
+	public int getNombreSeientsLliures() {
 		return nombreSeientsLliures;
 	}
 
-	public void setNombreSeientsLliures(Integer nombreSeientsLliures) {
+	public void setNombreSeientsLliures(int nombreSeientsLliures) {
 		this.nombreSeientsLliures = nombreSeientsLliures;
 	}
 

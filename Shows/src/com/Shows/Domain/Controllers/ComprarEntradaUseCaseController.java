@@ -144,36 +144,36 @@ public class ComprarEntradaUseCaseController {
 
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
-		
-		// FIXME ocupar seients
-		// Usar this.seients
+
+		session.saveOrUpdate(entrada);
+
 		IControllerSeientsEnRepresentacio controllerSeientsEnRepresentacio = ControllerDataFactory
 				.getInstance().getControllerSeientsEnRepresentacio();
-		Iterator<PosicioSeient> it = seients.iterator();
+
+		Iterator<PosicioSeient> iterator = seients.iterator();
 		HashSet<SeientEnRepresentacio> seientsEnRepresentacio = new HashSet<SeientEnRepresentacio>();
-		while (it.hasNext()) {
-			PosicioSeient aux = it.next();
-			SeientEnRepresentacio ser = controllerSeientsEnRepresentacio.getSeientEnRepresentacio(
-					representacio.getAuxiliarRepresentacio().getLocal()
-							.getNom(), aux.getFila(), aux.getColumna(),
-					representacio.getAuxiliarRepresentacio().getData(),
-					representacio.getAuxiliarRepresentacio().getSessio()
-							.getSessio());
-			ser.ocuparSeient();
-			session.saveOrUpdate(ser);
-			
-			seientsEnRepresentacio.add(ser);
+
+		while (iterator.hasNext()) {
+			PosicioSeient aux = iterator.next();
+			SeientEnRepresentacio seientEnRepresentacio = controllerSeientsEnRepresentacio
+					.getSeientEnRepresentacio(representacio
+							.getAuxiliarRepresentacio().getLocal().getNom(),
+							aux.getFila(), aux.getColumna(), representacio
+									.getAuxiliarRepresentacio().getData(),
+							representacio.getAuxiliarRepresentacio()
+									.getSessio().getSessio());
+
+			seientEnRepresentacio.ocuparSeient();
+
+			session.saveOrUpdate(seientEnRepresentacio);
+
+			seientsEnRepresentacio.add(seientEnRepresentacio);
 		}
-		
-		
 
-		// TODO calcular nombreSeientsLliures
-		representacio.setNombreSeientsLliures(representacio.getNombreSeientsLliures() - seients.size());
-		session.saveOrUpdate(representacio);
+		representacio.setNombreSeientsLliures(representacio
+				.getNombreSeientsLliures() - seients.size());
+		session.merge(representacio);
 
-
-		
-		session.saveOrUpdate(entrada);
 		session.getTransaction().commit();
 	}
 }
