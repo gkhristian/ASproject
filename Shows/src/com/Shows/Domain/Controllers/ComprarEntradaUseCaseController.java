@@ -19,6 +19,7 @@ import com.Shows.Domain.Adapters.IPagamentAdapter;
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
+import com.Shows.Domain.Exceptions.SeientsNoOk;
 import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.Entrada;
 import com.Shows.Domain.Model.Espectacle;
@@ -73,7 +74,12 @@ public class ComprarEntradaUseCaseController {
 				consultaRepresentacioUseCaseController.getData());
 	}
 
-	public DadesEntrada selecionarSeients(final Set<PosicioSeient> seients) {
+	public DadesEntrada selecionarSeients(final Set<PosicioSeient> seients)
+			throws SeientsNoOk {
+		if (seients.size() != consultaOcupacioUseCaseController
+				.getNombEspectadors())
+			throw new SeientsNoOk("El nombre de seients no és igual al nombre d'espectadors de l'entrada");
+
 		this.seients = seients;
 
 		IControllerRepresentacio controllerRepresentacio = controllerDataFactory

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -87,8 +88,8 @@ public class RepresentacioPanel extends JPanel {
 
 		/**** JTable *****/
 		representacionsTable = new JTable();
-		// representacionsTable.setVisible(true);
-		// representacionsTable.setEnabled(false);
+		representacionsTable
+				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		JScrollPane scrollPaneRepresentacioTable = new JScrollPane(
 				representacionsTable);

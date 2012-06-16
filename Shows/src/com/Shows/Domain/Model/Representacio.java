@@ -143,20 +143,4 @@ public class Representacio {
 	public int getRecarrec() {
 		return 0;
 	}
-
-	// TODO toDelete()
-	/*
-	 * public DadesEntrada obtePreu(int nombEspectadors) { float comisio =
-	 * ShowsCom.getInstance().getComissio(); Set<Moneda> canvis =
-	 * ShowsCom.getInstance().getCanvis();
-	 * 
-	 * // Pasar de Set Moneda a Set de Strings /*HashSet<String> canvi = new
-	 * HashSet<String>(); canvi.add(canvis.getDivisa1().toString());
-	 * canvi.add(canvis.getDivisa2().toString());
-	 */
-
-	/*
-	 * DadesEntrada resultado = new DadesEntrada( (this.preu + comisio +
-	 * getRecarrec()) * nombEspectadors, canvis); return resultado; }
-	 */
 }

@@ -8,10 +8,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Set;
 
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -19,9 +18,6 @@ import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import java.awt.SystemColor;
 
 public class ComprarEntradaView extends JFrame {
 
@@ -40,11 +36,9 @@ public class ComprarEntradaView extends JFrame {
 	private JPanel contentPane;
 	private JPanel centerPanel = new JPanel();
 	private CardLayout card = new CardLayout();
-	private final Box horizontalBox = Box.createHorizontalBox();
 
 	private int width = 600;
 	private int heigth = 400;
-	private JLabel missatgeLabel;
 
 	/**
 	 * Create the frame.
@@ -58,7 +52,6 @@ public class ComprarEntradaView extends JFrame {
 		setBounds(dimension.width / 2 - width / 2, dimension.height / 2
 				- heigth / 2, width, heigth);
 
-		// TODO Resizable?
 		setResizable(false);
 
 		espectaclePanel = new EspectaclePanel(comprarEntradaController, this);
@@ -78,13 +71,6 @@ public class ComprarEntradaView extends JFrame {
 		contentPane.add(centerPanel);
 
 		setContentPane(contentPane);
-		horizontalBox.setBorder(new LineBorder(new Color(0, 0, 0)));
-
-		contentPane.add(horizontalBox, BorderLayout.SOUTH);
-
-		missatgeLabel = new JLabel(" ");
-		missatgeLabel.setForeground(SystemColor.textHighlight);
-		horizontalBox.add(missatgeLabel);
 
 		centerPanel.setLayout(card);
 
@@ -105,9 +91,7 @@ public class ComprarEntradaView extends JFrame {
 			public void mouseClicked(MouseEvent mouseEvent) {
 				comprarEntradaController.PrComprarEntrada();
 			}
-
 		});
-
 	}
 
 	public void mostraEspectacles(Set<String> espectacles) {
@@ -135,26 +119,28 @@ public class ComprarEntradaView extends JFrame {
 	}
 
 	public void mostraMissatge(String missatge) {
-		// TODO migrar a un JOption (parecido a JDialog) para que se ve mejor...
-		missatgeLabel.setText(missatge);
+		JOptionPane.showMessageDialog(this, missatge, "Informació",
+				JOptionPane.WARNING_MESSAGE);
 	}
 
 	public void mostraAvisFi(String missatge) {
-		// TODO delete missatge???
-		AvisAcabaDialog avisAcabaDialog = new AvisAcabaDialog(
-				comprarEntradaController);
-		avisAcabaDialog.setVisible(true);
+		int confirmation = JOptionPane.showConfirmDialog(this, missatge,
+				"Informació", JOptionPane.DEFAULT_OPTION,
+				JOptionPane.INFORMATION_MESSAGE);
+
+		if (confirmation == JOptionPane.OK_OPTION) {
+			comprarEntradaController.PrFi();
+		}
 	}
 
 	public void mostraAvis(String missatge) {
-		// TODO delete missatge???
-		AvisSortirDialog avisSortirDialog = new AvisSortirDialog(
-				comprarEntradaController);
-		avisSortirDialog.setVisible(true);
-	}
+		int confirmation = JOptionPane.showConfirmDialog(this, missatge,
+				"Confirmació", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
 
-	public void tancarAvis() {
-		// TODO necesario tancarAvis??? que es???
+		if (confirmation == JOptionPane.OK_OPTION) {
+			comprarEntradaController.PrFi();
+		}
 	}
 
 	public void tancar() {

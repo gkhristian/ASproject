@@ -7,6 +7,7 @@ import com.Shows.Domain.Controllers.ComprarEntradaUseCaseController;
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
+import com.Shows.Domain.Exceptions.SeientsNoOk;
 import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.Presentation.View.ComprarEntradaView;
@@ -45,7 +46,8 @@ public class ComprarEntradaController {
 				.obteOcupacio(nomLocal, sessio, nombEspectadors));
 	}
 
-	public void PrOkSelecionarSeients(final Set<PosicioSeient> seients) {
+	public void PrOkSelecionarSeients(final Set<PosicioSeient> seients)
+			throws SeientsNoOk {
 
 		comprarEntradaView.mostraPreu(comprarEntradaUseCaseController
 				.selecionarSeients(seients));
@@ -59,12 +61,9 @@ public class ComprarEntradaController {
 	}
 
 	public void PrCancellar() {
-		// TODO aviso aquí?
-		comprarEntradaView.mostraAvis("");
-	}
 
-	public void PrCancellarAvis() {
-
+		comprarEntradaView
+				.mostraAvis("Si cancel\u00B7la l'operaci\u00F3 es perdr\u00E0 tot el proc\u00E8s");
 	}
 
 	public void PrFi() {

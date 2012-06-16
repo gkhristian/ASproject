@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.Shows.Domain.Exceptions.SeientsNoOk;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Component.JSeient;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -36,7 +37,7 @@ public class SeientsPanel extends JPanel {
 	 */
 	public SeientsPanel(
 			final ComprarEntradaController comprarEntradaController,
-			ComprarEntradaView comprarEntradaView) {
+			final ComprarEntradaView comprarEntradaView) {
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -170,7 +171,13 @@ public class SeientsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 
-				comprarEntradaController.PrOkSelecionarSeients(selectedSeients);
+				try {
+					comprarEntradaController
+							.PrOkSelecionarSeients(selectedSeients);
+				} catch (SeientsNoOk seientsNoOk) {
+					comprarEntradaView.mostraMissatge(seientsNoOk.getMessage());
+					// seientsNoOk.printStackTrace();
+				}
 
 			}
 		});
@@ -217,7 +224,6 @@ public class SeientsPanel extends JPanel {
 		for (int i = 0; i < dades.length; i++) {
 			m = dades[i].getFila() - 1;
 			n = dades[i].getColumna() - 1;
-			// holder[m][n].setText("L");
 			holder[m][n].setEnabled(true);
 			holder[m][n].addMouseListener(new MouseAdapter() {
 				@Override
@@ -234,8 +240,6 @@ public class SeientsPanel extends JPanel {
 	}
 
 	private void setEnableContinua() {
-		// TODO nombEspectadors? bajar a Dominio a comprobar? si es así no se puede controlar en Presentación
-		// Hardcoded 2, queda por decidir
-		continuaButton.setEnabled((selectedSeients.size() == 2));
+		continuaButton.setEnabled((selectedSeients.size() > 0));
 	}
 }
