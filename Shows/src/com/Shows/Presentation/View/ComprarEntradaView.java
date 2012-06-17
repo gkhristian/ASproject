@@ -41,8 +41,8 @@ public class ComprarEntradaView extends JFrame {
 	private static final int PAGAMENT = SEIENTS + 1;
 
 	// TODO nombres apropiados para el flow
-	private static final String[] flowNames = { "Inici??", "Espectacles",
-			"Representacions", "Seients??", "Pagament??" };
+	private static final String[] flowNames = { "Seleccionar cas d'ús", "Espectacles",
+			"Representacions", "Seleccionar seients", "Pagament" };
 
 	private ComprarEntradaController comprarEntradaController;
 	/**
