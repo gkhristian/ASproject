@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.Set;
 
 import com.Shows.Domain.Controllers.ComprarEntradaUseCaseController;
+import com.Shows.Domain.Controllers.ConsultaOcupacioUseCaseController;
+import com.Shows.Domain.Controllers.ConsultaRepresentacionsUseCaseController;
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
@@ -17,7 +19,9 @@ import com.Shows.TupleTypes.PosicioSeient;
 public class ComprarEntradaController {
 
 	private ComprarEntradaUseCaseController comprarEntradaUseCaseController;
-	private IniciView comprarEntradaView;
+	private ConsultaOcupacioUseCaseController consultaOcupacioUseCaseController;
+	private ConsultaRepresentacionsUseCaseController consultaRepresentacionsUseCaseController;
+	private IniciView iniciView;
 
 	private Color backgroundColor;
 
@@ -27,43 +31,53 @@ public class ComprarEntradaController {
 
 		comprarEntradaUseCaseController = new ComprarEntradaUseCaseController();
 
-		comprarEntradaView = new IniciView(this);
+		iniciView = new IniciView(this);
 	}
 
 	public void PrComprarEntrada() {
 
 		comprarEntradaUseCaseController.init();
-		comprarEntradaView.mostraEspectacles(comprarEntradaUseCaseController
+		iniciView.mostraEspectacles(comprarEntradaUseCaseController
 				.obteEspectacles());
 	}
-	
-	public void PrConsultaOcupacio() {
-		
-		comprarEntradaUseCaseController.init();
-		comprarEntradaView.mostraEspectacles(comprarEntradaUseCaseController
-				.obteEspectacles());
+
+	public void PrConsultaOcupacio(final String nomLocal,
+			final TipusSessio sessio, final int nombEspectadors, final Date data)
+			throws SeientsNoDisp {
+
+		// consultaOcupacioUseCaseController.init();
+		iniciView.mostraOcupacio(consultaOcupacioUseCaseController
+				.obteOcupacio(nomLocal, sessio, nombEspectadors, data));
+	}
+
+	public void PrConsultaRepresentacio(final String titol, final Date data)
+			throws NoHiHaRepresentacions {
+
+		// consultaRepresentacionsUseCaseController.init();
+		iniciView
+				.mostraRepresentacions(consultaRepresentacionsUseCaseController
+						.obteRepresentacions(titol, data));
 	}
 
 	public void PrOkObteRepresentacions(final String titol, final Date data)
 			throws NoHiHaRepresentacions {
 
-		comprarEntradaView
-				.mostraRepresentacions(comprarEntradaUseCaseController
-						.obteRepresentacions(titol, data));
+		iniciView.mostraRepresentacions(comprarEntradaUseCaseController
+				.obteRepresentacions(titol, data));
 	}
 
 	public void PrOkObteOcupacio(final String nomLocal,
 			final TipusSessio sessio, final int nombEspectadors)
 			throws SeientsNoDisp {
 
-		comprarEntradaView.mostraOcupacio(comprarEntradaUseCaseController
-				.obteOcupacio(nomLocal, sessio, nombEspectadors));
+		iniciView.mostraOcupacio(comprarEntradaUseCaseController.obteOcupacio(
+				nomLocal, sessio, nombEspectadors));
 	}
 
 	public void PrOkSelecionarSeients(final Set<PosicioSeient> seients)
 			throws SeientsNoOk {
 
-		comprarEntradaView.mostraPreu(comprarEntradaUseCaseController
+		iniciView.mostraPreu(comprarEntradaUseCaseController
 				.selecionarSeients(seients));
 	}
 
@@ -71,23 +85,23 @@ public class ComprarEntradaController {
 			final String numCompte) throws PagamentNoAutoritzat {
 
 		comprarEntradaUseCaseController.pagament(dni, codiB, numCompte);
-		comprarEntradaView.mostraAvisFi("Tot ha finalitzat correctament");
+		iniciView.mostraAvisFi("Tot ha finalitzat correctament");
 	}
 
 	public void PrCancellar() {
 
-		comprarEntradaView
+		iniciView
 				.mostraAvis("Si cancel\u00B7la l'operaci\u00F3 es perdr\u00E0 tot el proc\u00E8s");
 	}
 
 	public void PrFi() {
 
-		comprarEntradaView.tancar();
+		iniciView.tancar();
 	}
 
 	public void canviPreuMoneda(final String moneda) throws ServeiNoDisponible {
 
-		comprarEntradaView.mostraPreuMoneda(comprarEntradaUseCaseController
+		iniciView.mostraPreuMoneda(comprarEntradaUseCaseController
 				.obtePreuMoneda(moneda));
 	}
 

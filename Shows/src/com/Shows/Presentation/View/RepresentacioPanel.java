@@ -45,11 +45,11 @@ public class RepresentacioPanel extends JPanel {
 	/**
 	 * Create the frame.
 	 * 
-	 * @param comprarEntradaView
+	 * @param iniciView
 	 */
 	public RepresentacioPanel(
 			final ComprarEntradaController comprarEntradaController,
-			final IniciView comprarEntradaView) {
+			final IniciView iniciView) {
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -132,7 +132,7 @@ public class RepresentacioPanel extends JPanel {
 		continuaButton.setAlignmentX(RIGHT_ALIGNMENT);
 		continuaButton.setEnabled(false);
 		horizontalBox.add(continuaButton);
-		
+
 		Component horizontalStrut = Box.createHorizontalStrut(10);
 		horizontalBox.add(horizontalStrut);
 
@@ -166,15 +166,14 @@ public class RepresentacioPanel extends JPanel {
 							.getValueAt(representacionsTable.getSelectedRow(),
 									4).toString();
 
-					comprarEntradaView.setSeientsString(local, tipusSessio
-							.toString(), Integer.toString(nombEspectadors),
-							(estrena) ? "Si" : "No", preuSeient);
+					iniciView.setSeientsString(local, tipusSessio.toString(),
+							Integer.toString(nombEspectadors), (estrena) ? "Si"
+									: "No", preuSeient);
 
 					comprarEntradaController.PrOkObteOcupacio(local,
 							tipusSessio, nombEspectadors);
 				} catch (SeientsNoDisp seientsNoDisp) {
-					comprarEntradaView.mostraMissatge(seientsNoDisp
-							.getMessage());
+					iniciView.mostraMissatge(seientsNoDisp.getMessage());
 					// seientsNoDisp.printStackTrace();
 				}
 			}

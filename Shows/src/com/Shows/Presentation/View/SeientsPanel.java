@@ -39,11 +39,11 @@ public class SeientsPanel extends JPanel {
 	/**
 	 * Create the frame.
 	 * 
-	 * @param comprarEntradaView
+	 * @param iniciView
 	 */
 	public SeientsPanel(
 			final ComprarEntradaController comprarEntradaController,
-			final IniciView comprarEntradaView) {
+			final IniciView iniciView) {
 
 		this.comprarEntradaController = comprarEntradaController;
 
@@ -75,7 +75,7 @@ public class SeientsPanel extends JPanel {
 		continuaButton = new JButton("Continua");
 		continuaButton.setEnabled(false);
 		horizontalBox_11.add(continuaButton);
-		
+
 		Component horizontalStrut = Box.createHorizontalStrut(10);
 		horizontalBox_11.add(horizontalStrut);
 
@@ -100,12 +100,12 @@ public class SeientsPanel extends JPanel {
 								+ posicioSeient.getColumna() + "} ";
 					}
 
-					comprarEntradaView.setPagamentString(seients);
+					iniciView.setPagamentString(seients);
 
 					comprarEntradaController
 							.PrOkSelecionarSeients(selectedSeients);
 				} catch (SeientsNoOk seientsNoOk) {
-					comprarEntradaView.mostraMissatge(seientsNoOk.getMessage());
+					iniciView.mostraMissatge(seientsNoOk.getMessage());
 					// seientsNoOk.printStackTrace();
 				}
 			}

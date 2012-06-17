@@ -87,10 +87,6 @@ public class EspectaclePanel extends JPanel {
 
 		dateChooser.setMinimumSize(new Dimension(170, 22));
 		
-		final java.util.Date dataAvui = dateChooser.getDate();
-		
-		System.out.println("data actual: "+ dataAvui.toString());
-
 		dateChooser.getDateEditor().addPropertyChangeListener(
 				new PropertyChangeListener() {
 
@@ -130,6 +126,9 @@ public class EspectaclePanel extends JPanel {
 		continuaButton = new JButton("Continua");
 		continuaButton.setEnabled(false);
 		horizontalBox.add(continuaButton);
+		
+		Component horizontalStrut_3 = Box.createHorizontalStrut(10);
+		horizontalBox.add(horizontalStrut_3);
 
 		cancelaButton = new JButton("Cancel\u00B7la");
 		horizontalBox.add(cancelaButton);
@@ -152,10 +151,10 @@ public class EspectaclePanel extends JPanel {
 					
 					
 					// TODO data
-					if (dataAvui.after(date)) iniciView.mostraMissatge("mal");
+					/*if (dataAvui.after(date)) iniciView.mostraMissatge("mal");
 					else {
 						continuaButton.setEnabled(true);
-					}
+					}*/
 
 				} catch (NoHiHaRepresentacions noHiHaRepresentacions) {
 					iniciView.mostraMissatge(noHiHaRepresentacions
