@@ -108,6 +108,9 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 
 		compteFormattedTextField = new JFormattedTextField(compteMaskFormatter);
 		compteFormattedTextField.addPropertyChangeListener("value", this);
+		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(10);
+		horizontalBox_12.add(horizontalStrut_1);
 		horizontalBox_12.add(compteFormattedTextField);
 		compteFormattedTextField.setColumns(16);
 
@@ -146,6 +149,9 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		continuaButton = new JButton("Continua");
 		continuaButton.setEnabled(false);
 		horizontalBox_11.add(continuaButton);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(10);
+		horizontalBox_11.add(horizontalStrut);
 
 		JButton cancelaButton = new JButton("Cancel\u00B7la");
 		horizontalBox_11.add(cancelaButton);

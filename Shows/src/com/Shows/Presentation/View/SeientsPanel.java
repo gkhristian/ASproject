@@ -75,6 +75,9 @@ public class SeientsPanel extends JPanel {
 		continuaButton = new JButton("Continua");
 		continuaButton.setEnabled(false);
 		horizontalBox_11.add(continuaButton);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(10);
+		horizontalBox_11.add(horizontalStrut);
 
 		JButton cancelaButton = new JButton("Cancel\u00B7la");
 		horizontalBox_11.add(cancelaButton);
