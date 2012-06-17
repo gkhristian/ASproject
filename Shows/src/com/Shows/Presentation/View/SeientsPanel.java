@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.swing.Box;
@@ -48,106 +49,8 @@ public class SeientsPanel extends JPanel {
 
 		setLayout(new BorderLayout(0, 0));
 
-		Box horizontalBox = Box.createHorizontalBox();
-		add(horizontalBox);
-
-		Box horizontalBox_12 = Box.createHorizontalBox();
-		horizontalBox.add(horizontalBox_12);
-
-		Box verticalBox = Box.createVerticalBox();
-		horizontalBox_12.add(verticalBox);
-
-		Box horizontalBox_1 = Box.createHorizontalBox();
-		horizontalBox_1.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_1);
-
-		JLabel EspectacleLbl = new JLabel("Espectacle:");
-		horizontalBox_1.add(EspectacleLbl);
-
-		JLabel NomEspectacleLbl = new JLabel("New label");
-		horizontalBox_1.add(NomEspectacleLbl);
-
-		Box horizontalBox_2 = Box.createHorizontalBox();
-		horizontalBox_2.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_2);
-
-		JLabel DataLbl = new JLabel("Data:");
-		horizontalBox_2.add(DataLbl);
-
-		JLabel DataEspectacleLbl = new JLabel("New Label");
-		horizontalBox_2.add(DataEspectacleLbl);
-
-		Box horizontalBox_4 = Box.createHorizontalBox();
-		horizontalBox_4.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_4);
-
-		JLabel LocalLbl = new JLabel("Local:");
-		horizontalBox_4.add(LocalLbl);
-
-		JLabel NomLocalLbl = new JLabel("New label");
-		horizontalBox_4.add(NomLocalLbl);
-
-		Box horizontalBox_3 = Box.createHorizontalBox();
-		horizontalBox_3.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_3);
-
-		JLabel SessioLbl = new JLabel("Sessio:");
-		horizontalBox_3.add(SessioLbl);
-
-		JLabel TipusSessioLbl = new JLabel("New label");
-		horizontalBox_3.add(TipusSessioLbl);
-
-		Box horizontalBox_5 = Box.createHorizontalBox();
-		horizontalBox_5.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_5);
-
-		JLabel NombreEspectadorsLbl = new JLabel("Nombre d'espectadors:");
-		horizontalBox_5.add(NombreEspectadorsLbl);
-
-		JLabel NumeroEspectadorsLbl = new JLabel("New label");
-		horizontalBox_5.add(NumeroEspectadorsLbl);
-
-		Box horizontalBox_6 = Box.createHorizontalBox();
-		horizontalBox_6.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_6);
-
-		JLabel EsEstrenaLbl = new JLabel("New label");
-		horizontalBox_6.add(EsEstrenaLbl);
-
-		Box horizontalBox_8 = Box.createHorizontalBox();
-		horizontalBox_8.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_8);
-
-		JLabel PreuSeientsLbl = new JLabel("Preu per seient:");
-		horizontalBox_8.add(PreuSeientsLbl);
-
-		JLabel PreuPerSeientEurosLbl = new JLabel("New label");
-		horizontalBox_8.add(PreuPerSeientEurosLbl);
-
-		Component verticalStrut = Box.createVerticalStrut(20);
-		verticalBox.add(verticalStrut);
-
-		Box horizontalBox_7 = Box.createHorizontalBox();
-		horizontalBox_7.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_7);
-
-		JLabel OcupatLbl = new JLabel("Ocupat");
-		horizontalBox_7.add(OcupatLbl);
-
-		Box horizontalBox_9 = Box.createHorizontalBox();
-		horizontalBox_9.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_9);
-		JLabel DisponibleLbl = new JLabel("Disponible");
-		horizontalBox_9.add(DisponibleLbl);
-
-		Box horizontalBox_10 = Box.createHorizontalBox();
-		horizontalBox_10.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_10);
-		JLabel SeleccionatLbl = new JLabel("Seleccionat");
-		horizontalBox_10.add(SeleccionatLbl);
-
 		Box verticalBox_1 = Box.createVerticalBox();
-		horizontalBox_12.add(verticalBox_1);
+		add(verticalBox_1, BorderLayout.CENTER);
 
 		Component verticalGlue = Box.createVerticalGlue();
 		verticalBox_1.add(verticalGlue);
@@ -182,13 +85,26 @@ public class SeientsPanel extends JPanel {
 			public void actionPerformed(ActionEvent actionEvent) {
 
 				try {
+
+					String seients = new String();
+
+					Iterator<PosicioSeient> iterator = selectedSeients
+							.iterator();
+					while (iterator.hasNext()) {
+						PosicioSeient posicioSeient = (PosicioSeient) iterator
+								.next();
+						seients += "{" + posicioSeient.getFila() + ", "
+								+ posicioSeient.getColumna() + "} ";
+					}
+
+					comprarEntradaView.setPagamentString(seients);
+
 					comprarEntradaController
 							.PrOkSelecionarSeients(selectedSeients);
 				} catch (SeientsNoOk seientsNoOk) {
 					comprarEntradaView.mostraMissatge(seientsNoOk.getMessage());
 					// seientsNoOk.printStackTrace();
 				}
-
 			}
 		});
 

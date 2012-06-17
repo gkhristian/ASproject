@@ -43,7 +43,7 @@ public class EspectaclePanel extends JPanel {
 			final ComprarEntradaView comprarEntradaView) {
 
 		setLayout(new BorderLayout(0, 0));
-		
+
 		Box verticalBox = Box.createVerticalBox();
 		add(verticalBox);
 
@@ -79,7 +79,7 @@ public class EspectaclePanel extends JPanel {
 		JTextField dateEditor = (JTextField) dateChooser.getDateEditor()
 				.getUiComponent();
 		dateEditor.setEditable(false);
-		
+
 		Component horizontalStrut_2 = Box.createHorizontalStrut(10);
 		horizontalBox_1.add(horizontalStrut_2);
 
@@ -138,9 +138,14 @@ public class EspectaclePanel extends JPanel {
 					java.sql.Date date = new java.sql.Date(dateChooser
 							.getDate().getTime());
 
+					comprarEntradaView.setRepresentacionsString(
+							espectacleComboBox.getSelectedItem().toString(),
+							date.toString());
+
 					comprarEntradaController.PrOkObteRepresentacions(
 							espectacleComboBox.getSelectedItem().toString(),
 							date);
+
 				} catch (NoHiHaRepresentacions noHiHaRepresentacions) {
 					comprarEntradaView.mostraMissatge(noHiHaRepresentacions
 							.getMessage());

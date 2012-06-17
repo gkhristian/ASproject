@@ -2,6 +2,9 @@ package com.Shows;
 
 import java.awt.EventQueue;
 
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -21,6 +24,13 @@ public class Main {
 		// DataBaseInitializer.clearDatabase();
 		if (need2InitDataBase())
 			DataBaseInitializer.initDatabase();
+
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				// Turn off metal's use of bold fonts
+				UIManager.put("swing.boldMetal", Boolean.FALSE);
+			}
+		});
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

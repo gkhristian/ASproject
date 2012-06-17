@@ -39,8 +39,6 @@ public class RepresentacioPanel extends JPanel {
 	private static final long serialVersionUID = -3674558461643546039L;
 
 	private JTable representacionsTable;
-	private JLabel nomEspectacleLabel;
-	private JLabel dataEspectacleLabel;
 	private JButton continuaButton;
 	private JSpinner nombreEspectadorsSpinner;
 
@@ -51,44 +49,12 @@ public class RepresentacioPanel extends JPanel {
 	 */
 	public RepresentacioPanel(
 			final ComprarEntradaController comprarEntradaController,
-			ComprarEntradaView comprarEntradaView) {
+			final ComprarEntradaView comprarEntradaView) {
 
 		setLayout(new BorderLayout(0, 0));
-		Box horizontalBox_1 = Box.createHorizontalBox();
-		add(horizontalBox_1);
-
-		Box verticalBox = Box.createVerticalBox();
-		horizontalBox_1.add(verticalBox);
-
-		horizontalBox_1.add(verticalBox);
-
-		Box horizontalBox_2 = Box.createHorizontalBox();
-		verticalBox.add(horizontalBox_2);
-
-		Box verticalBox_1 = Box.createVerticalBox();
-		verticalBox_1.setBorder(new EmptyBorder(0, 0, 0, 10));
-		horizontalBox_2.add(verticalBox_1);
-
-		JLabel EspectacleLbl = new JLabel("Espectacle:");
-		EspectacleLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
-		verticalBox_1.add(EspectacleLbl);
-
-		nomEspectacleLabel = new JLabel("New Label");
-		nomEspectacleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		verticalBox_1.add(nomEspectacleLabel);
-
-		JLabel DataLbl = new JLabel("Data:");
-		DataLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
-		verticalBox_1.add(DataLbl);
-
-		dataEspectacleLabel = new JLabel("New Label");
-		dataEspectacleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		verticalBox_1.add(dataEspectacleLabel);
 
 		Box verticalBox_2 = Box.createVerticalBox();
-		horizontalBox_2.add(verticalBox_2);
-
-		/**** JTable *****/
+		add(verticalBox_2, BorderLayout.CENTER);
 		representacionsTable = new JTable();
 		representacionsTable
 				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -117,7 +83,7 @@ public class RepresentacioPanel extends JPanel {
 		nombreEspectadorsSpinner.setPreferredSize(new Dimension(50, 30));
 		nombreEspectadorsSpinner.setMaximumSize(new Dimension(100, 30));
 		nombreEspectadorsSpinner.setModel(new SpinnerNumberModel(0, 0, 99, 1));
-		
+
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		horizontalBox_3.add(horizontalGlue_1);
 
@@ -128,8 +94,6 @@ public class RepresentacioPanel extends JPanel {
 				setEnableContinua();
 			}
 		});
-
-		/***** No parece funcionar *****/
 		nombreEspectadorsSpinner.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent keyEvent) {
@@ -150,6 +114,10 @@ public class RepresentacioPanel extends JPanel {
 						setEnableContinua();
 					}
 				});
+
+		/**** JTable *****/
+
+		/***** No parece funcionar *****/
 		/***/
 
 		Box horizontalBox = Box.createHorizontalBox();
@@ -174,18 +142,33 @@ public class RepresentacioPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
-					comprarEntradaController.PrOkObteOcupacio(
-							representacionsTable
-									.getModel()
-									.getValueAt(
-											representacionsTable
-													.getSelectedRow(), 0)
-									.toString(),
-							(TipusSessio) representacionsTable.getModel()
-									.getValueAt(
-											representacionsTable
-													.getSelectedRow(), 1),
-							(Integer) nombreEspectadorsSpinner.getValue());
+					String local = representacionsTable
+							.getModel()
+							.getValueAt(representacionsTable.getSelectedRow(),
+									0).toString();
+
+					TipusSessio tipusSessio = (TipusSessio) representacionsTable
+							.getModel().getValueAt(
+									representacionsTable.getSelectedRow(), 1);
+
+					int nombEspectadors = (Integer) nombreEspectadorsSpinner
+							.getValue();
+
+					boolean estrena = (Boolean) representacionsTable.getModel()
+							.getValueAt(representacionsTable.getSelectedRow(),
+									3);
+
+					String preuSeient = representacionsTable
+							.getModel()
+							.getValueAt(representacionsTable.getSelectedRow(),
+									4).toString();
+
+					comprarEntradaView.setSeientsString(local, tipusSessio
+							.toString(), Integer.toString(nombEspectadors),
+							(estrena) ? "Si" : "No", preuSeient);
+
+					comprarEntradaController.PrOkObteOcupacio(local,
+							tipusSessio, nombEspectadors);
 				} catch (SeientsNoDisp seientsNoDisp) {
 					seientsNoDisp.printStackTrace();
 				}
@@ -247,14 +230,6 @@ public class RepresentacioPanel extends JPanel {
 			}
 		});
 
-	}
-
-	public void setnomEspectacleLabel(JLabel nomEspectacleLabel) {
-		this.nomEspectacleLabel = nomEspectacleLabel;
-	}
-
-	public void setdataEspectacleLabel(JLabel dataEspectacleLabel) {
-		this.dataEspectacleLabel = dataEspectacleLabel;
 	}
 
 	private void setEnableContinua() {

@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
@@ -57,100 +58,12 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		this.comprarEntradaView = comprarEntradaView;
 
 		setLayout(new BorderLayout(0, 0));
-		Box horizontalBox = Box.createHorizontalBox();
-		add(horizontalBox, BorderLayout.NORTH);
-
-		Box verticalBox = Box.createVerticalBox();
-		horizontalBox.add(verticalBox);
-
-		Box horizontalBox_1 = Box.createHorizontalBox();
-		horizontalBox_1.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_1);
-
-		JLabel EspectacleLbl = new JLabel("Espectacle:");
-		horizontalBox_1.add(EspectacleLbl);
-
-		JLabel NomEspectacleLbl = new JLabel("New label");
-		horizontalBox_1.add(NomEspectacleLbl);
-
-		Box horizontalBox_2 = Box.createHorizontalBox();
-		horizontalBox_2.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_2);
-
-		JLabel DataLbl = new JLabel("Data:");
-		horizontalBox_2.add(DataLbl);
-
-		JLabel DataEspectacleLbl = new JLabel("New Label");
-		horizontalBox_2.add(DataEspectacleLbl);
-
-		Box horizontalBox_4 = Box.createHorizontalBox();
-		horizontalBox_4.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_4);
-
-		JLabel LocalLbl = new JLabel("Local:");
-		horizontalBox_4.add(LocalLbl);
-
-		JLabel NomLocalLbl = new JLabel("New label");
-		horizontalBox_4.add(NomLocalLbl);
-
-		Box horizontalBox_3 = Box.createHorizontalBox();
-		horizontalBox_3.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_3);
-
-		JLabel SessioLbl = new JLabel("Sessio:");
-		horizontalBox_3.add(SessioLbl);
-
-		JLabel TipusSessioLbl = new JLabel("New label");
-		horizontalBox_3.add(TipusSessioLbl);
-
-		Box horizontalBox_5 = Box.createHorizontalBox();
-		horizontalBox_5.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_5);
-
-		JLabel NombreEspectadorsLbl = new JLabel("Nombre d'espectadors:");
-		horizontalBox_5.add(NombreEspectadorsLbl);
-
-		JLabel NumeroEspectadorsLbl = new JLabel("New label");
-		horizontalBox_5.add(NumeroEspectadorsLbl);
-
-		Box horizontalBox_6 = Box.createHorizontalBox();
-		horizontalBox_6.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_6);
-
-		JLabel EsEstrenaLbl = new JLabel("New label");
-		horizontalBox_6.add(EsEstrenaLbl);
-
-		Box horizontalBox_8 = Box.createHorizontalBox();
-		horizontalBox_8.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_8);
-
-		JLabel PreuSeientsLbl = new JLabel("Preu per seient:");
-		horizontalBox_8.add(PreuSeientsLbl);
-
-		JLabel PreuPerSeientEurosLbl = new JLabel("New label");
-		horizontalBox_8.add(PreuPerSeientEurosLbl);
-
-		Box horizontalBox_7 = Box.createHorizontalBox();
-		horizontalBox_7.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_7);
-
-		JLabel SeientsLbl = new JLabel("Seients");
-		horizontalBox_7.add(SeientsLbl);
-
-		JLabel TotsSeientsLbl = new JLabel("New label");
-		horizontalBox_7.add(TotsSeientsLbl);
 
 		Box verticalBox_1 = Box.createVerticalBox();
-		horizontalBox.add(verticalBox_1);
-
-		Component verticalStrut = Box.createVerticalStrut(30);
-		verticalBox_1.add(verticalStrut);
+		add(verticalBox_1, BorderLayout.CENTER);
 
 		Box horizontalBox_10 = Box.createHorizontalBox();
 		verticalBox_1.add(horizontalBox_10);
-
-		JLabel DniLbl = new JLabel("DNI:");
-		horizontalBox_10.add(DniLbl);
 
 		MaskFormatter DNIMaskFormatter = null;
 		MaskFormatter bankMaskFormatter = null;
@@ -169,21 +82,23 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		bankMaskFormatter.setCommitsOnValidEdit(true);
 		compteMaskFormatter.setCommitsOnValidEdit(true);
 
+		JLabel DniLbl = new JLabel("DNI:");
+		DniLbl.setBorder(new EmptyBorder(0, 0, 0, 10));
+		horizontalBox_10.add(DniLbl);
+
 		numeroDniFormattedTextField = new JFormattedTextField(DNIMaskFormatter);
 		numeroDniFormattedTextField.addPropertyChangeListener("value", this);
 		horizontalBox_10.add(numeroDniFormattedTextField);
 		numeroDniFormattedTextField.setColumns(9);
 
-		Component verticalStrut_2 = Box.createVerticalStrut(30);
+		Component verticalStrut_2 = Box.createVerticalStrut(10);
 		verticalBox_1.add(verticalStrut_2);
-
-		Component verticalStrut_1 = Box.createVerticalStrut(30);
-		verticalBox_1.add(verticalStrut_1);
 
 		Box horizontalBox_12 = Box.createHorizontalBox();
 		verticalBox_1.add(horizontalBox_12);
 
 		JLabel CompteLbl = new JLabel("Compte:");
+		CompteLbl.setBorder(new EmptyBorder(0, 0, 0, 10));
 		horizontalBox_12.add(CompteLbl);
 
 		bancFormattedTextField = new JFormattedTextField(bankMaskFormatter);
@@ -197,20 +112,29 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		compteFormattedTextField.setColumns(16);
 
 		Box horizontalBox_9 = Box.createHorizontalBox();
+		horizontalBox_9.setBorder(new EmptyBorder(10, 0, 0, 0));
 		verticalBox_1.add(horizontalBox_9);
-		horizontalBox_9.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+		Component horizontalGlue_1 = Box.createHorizontalGlue();
+		horizontalBox_9.add(horizontalGlue_1);
 
 		JLabel PreuTotalLbl = new JLabel("Preu Total:");
+		PreuTotalLbl.setBorder(new EmptyBorder(0, 0, 0, 10));
 		horizontalBox_9.add(PreuTotalLbl);
 
 		preuTotalEurosLabel = new JLabel("");
+		preuTotalEurosLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
 		horizontalBox_9.add(preuTotalEurosLabel);
 
 		monedaComboBox = new JComboBox();
 		monedaComboBox.setRenderer(new PromptComboBoxRenderer("Divisa..."));
 		horizontalBox_9.add(monedaComboBox);
+		
+		Component verticalStrut_1 = Box.createVerticalStrut(160);
+		verticalBox_1.add(verticalStrut_1);
 
 		Box horizontalBox_11 = Box.createHorizontalBox();
+		horizontalBox_11.setBorder(new EmptyBorder(10, 0, 0, 0));
 		add(horizontalBox_11, BorderLayout.SOUTH);
 
 		JLabel MessageAreaLbl = new JLabel("");

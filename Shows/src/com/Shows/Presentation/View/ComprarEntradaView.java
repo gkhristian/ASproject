@@ -3,8 +3,10 @@ package com.Shows.Presentation.View;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.Shows.HibernateUtil;
@@ -55,12 +58,24 @@ public class ComprarEntradaView extends JFrame {
 	private JPanel centerPanel = new JPanel();
 	private CardLayout card = new CardLayout();
 
+	private Box horizontalBox_1;
+	private JLabel stateLabel;
+
 	private Box horizontalBox;
 	private ArrayList<JLabel> navigationLabels;
 	private ArrayList<Box> navigationHorizontalBox;
 
 	private int width = 600;
 	private int heigth = 400;
+
+	private String espectacle = new String();
+	private String data = new String();
+	private String local = new String();
+	private String sessio = new String();
+	private String nombEspectadors = new String();
+	private String estrena = new String();
+	private String preuSeient = new String();
+	private String seients = new String();
 
 	/**
 	 * Create the frame.
@@ -87,22 +102,7 @@ public class ComprarEntradaView extends JFrame {
 			}
 		});
 
-		espectaclePanel = new EspectaclePanel(comprarEntradaController, this);
-		representacioPanel = new RepresentacioPanel(comprarEntradaController,
-				this);
-		seientsPanel = new SeientsPanel(comprarEntradaController, this);
-		pagamentPanel = new PagamentPanel(comprarEntradaController, this);
-		comprarEntradaPanel = new ComprarEntradaPanel();
-
 		Color backgroundColor = comprarEntradaController.getBackgroundColor();
-
-		espectaclePanel.setBackground(backgroundColor);
-		representacioPanel.setBackground(backgroundColor);
-		seientsPanel.setBackground(backgroundColor);
-		pagamentPanel.setBackground(backgroundColor);
-		comprarEntradaPanel.setBackground(backgroundColor);
-
-		centerPanel.setBackground(backgroundColor);
 
 		setBackground(backgroundColor);
 
@@ -116,17 +116,43 @@ public class ComprarEntradaView extends JFrame {
 		horizontalBox = Box.createHorizontalBox();
 		horizontalBox.setBorder(new EmptyBorder(10, 0, 10, 0));
 		contentPane.add(horizontalBox, BorderLayout.NORTH);
+
+		horizontalBox_1 = Box.createHorizontalBox();
+		horizontalBox_1.setAlignmentY(Component.CENTER_ALIGNMENT);
+		contentPane.add(horizontalBox_1, BorderLayout.CENTER);
+
+		stateLabel = new JLabel();
+		stateLabel.setVerticalTextPosition(SwingConstants.TOP);
+		stateLabel.setVerticalAlignment(SwingConstants.TOP);
+		stateLabel.setBorder(new EmptyBorder(10, 10, 0, 0));
+		stateLabel.setMaximumSize(new Dimension(160, 600));
+		stateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		horizontalBox_1.add(stateLabel);
+
+		espectaclePanel = new EspectaclePanel(comprarEntradaController, this);
+		representacioPanel = new RepresentacioPanel(comprarEntradaController,
+				this);
+		seientsPanel = new SeientsPanel(comprarEntradaController, this);
+		pagamentPanel = new PagamentPanel(comprarEntradaController, this);
+		comprarEntradaPanel = new ComprarEntradaPanel();
+		comprarEntradaPanel.setPreferredSize(new Dimension(0, 0));
+		comprarEntradaPanel.setMinimumSize(new Dimension(0, 0));
+		comprarEntradaPanel.setMaximumSize(new Dimension(0, 0));
+
+		espectaclePanel.setBackground(backgroundColor);
+		representacioPanel.setBackground(backgroundColor);
+		seientsPanel.setBackground(backgroundColor);
+		pagamentPanel.setBackground(backgroundColor);
+		comprarEntradaPanel.setBackground(backgroundColor);
+		centerPanel.setPreferredSize(new Dimension(0, 0));
+		centerPanel.setMinimumSize(new Dimension(0, 0));
+		centerPanel.setMaximumSize(new Dimension(600, 600));
+		horizontalBox_1.add(centerPanel);
+
+		centerPanel.setBackground(backgroundColor);
 		centerPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-		contentPane.add(centerPanel);
-
-		setContentPane(contentPane);
-
 		centerPanel.setLayout(card);
-
-		/**
-		 * Añadir los paneles para luego poder mostrarlos
-		 */
 		centerPanel.add(comprarEntradaPanel, flowNames[0]);
 		centerPanel.add(espectaclePanel, flowNames[1]);
 		centerPanel.add(representacioPanel, flowNames[2]);
@@ -144,20 +170,31 @@ public class ComprarEntradaView extends JFrame {
 			}
 		});
 
+		setContentPane(contentPane);
+
+		/**
+		 * Añadir los paneles para luego poder mostrarlos
+		 */
+
 		navigationLabels = new ArrayList<JLabel>(5);
 		navigationHorizontalBox = new ArrayList<Box>(5);
 
 		for (int i = 0; i < 5; i++) {
 			JLabel jLabel = new JLabel(flowNames[i]);
+
+			jLabel.setFont(new Font("Arial", Font.BOLD, 15));
+
 			Box hBox = Box.createHorizontalBox();
 
 			if (i != 0) {
 				JLabel indicatorLabel = new JLabel(">");
+				indicatorLabel.setFont(new Font("Arial", Font.BOLD, 15));
 				indicatorLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
 				hBox.add(indicatorLabel);
 			}
 			hBox.add(jLabel);
 			navigationLabels.add(jLabel);
+
 			navigationHorizontalBox.add(hBox);
 			jLabel.setEnabled(false);
 			jLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
@@ -206,7 +243,69 @@ public class ComprarEntradaView extends JFrame {
 			navigationHorizontalBox.get(i).setVisible((i <= flowState));
 		}
 
+		switch (flowState) {
+		case COMPRAR_ENTRADA:
+			stateLabel.setText("");
+			stateLabel.setVisible(false);
+			break;
+
+		case ESPECTACLES:
+			stateLabel.setText("");
+			stateLabel.setVisible(false);
+			break;
+
+		case REPRESENTACIONS:
+			stateLabel.setVisible(true);
+			stateLabel.setText("<html><b>Espectacle: </b>" + espectacle
+					+ "<br><b>Data: </b>" + data + "</html>");
+			break;
+
+		case SEIENTS:
+			stateLabel.setVisible(true);
+			stateLabel.setText("<html><b>Espectacle: </b>" + espectacle
+					+ "<br><b>Data: </b>" + data + "<br><b>Local: </b>" + local
+					+ "<br><b>Sessió: </b>" + sessio
+					+ "<br><b>Espectadors: </b>" + nombEspectadors
+					+ "<br><b>Estrena: </b>" + estrena
+					+ "<br><b>Preu per seient: </b>" + preuSeient + "</html>");
+			break;
+
+		case PAGAMENT:
+			stateLabel.setVisible(true);
+			stateLabel.setText("<html><b>Espectacle: </b>" + espectacle
+					+ "<br><b>Data: </b>" + data + "<br><b>Local: </b>" + local
+					+ "<br><b>Sessió: </b>" + sessio
+					+ "<br><b>Espectadors: </b>" + nombEspectadors
+					+ "<br><b>Estrena: </b>" + estrena
+					+ "<br><b>Preu per seient: </b>" + preuSeient
+					+ "<br><b>Seients: </b>" + seients + "</html>");
+			break;
+
+		default:
+			break;
+		}
+
 		card.show(centerPanel, flowNames[flowState]);
+	}
+
+	public void setRepresentacionsString(final String espectacle,
+			final String data) {
+		this.espectacle = espectacle;
+		this.data = data;
+	}
+
+	public void setSeientsString(final String local, final String sessio,
+			final String nombEspectadors, final String estrena,
+			final String preuSeient) {
+		this.local = local;
+		this.sessio = sessio;
+		this.nombEspectadors = nombEspectadors;
+		this.estrena = estrena;
+		this.preuSeient = preuSeient;
+	}
+
+	public void setPagamentString(String seients) {
+		this.seients = seients;
 	}
 
 	public void mostraEspectacles(Set<String> espectacles) {
