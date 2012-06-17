@@ -29,6 +29,8 @@ import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ComprarEntradaView extends JFrame {
 
@@ -76,6 +78,8 @@ public class ComprarEntradaView extends JFrame {
 	private String estrena = new String();
 	private String preuSeient = new String();
 	private String seients = new String();
+	private JButton ConsultaRepresentacionsBtn;
+	private JButton ConsultaDisponibilitatBtn;
 
 	/**
 	 * Create the frame.
@@ -135,6 +139,10 @@ public class ComprarEntradaView extends JFrame {
 		seientsPanel = new SeientsPanel(comprarEntradaController, this);
 		pagamentPanel = new PagamentPanel(comprarEntradaController, this);
 		comprarEntradaPanel = new ComprarEntradaPanel();
+		comprarEntradaPanel.getComparEntradaButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		comprarEntradaPanel.setPreferredSize(new Dimension(0, 0));
 		comprarEntradaPanel.setMinimumSize(new Dimension(0, 0));
 		comprarEntradaPanel.setMaximumSize(new Dimension(0, 0));
@@ -161,6 +169,14 @@ public class ComprarEntradaView extends JFrame {
 
 		JButton comparEntradaButton = comprarEntradaPanel
 				.getComparEntradaButton();
+		
+		ConsultaRepresentacionsBtn = new JButton("Consulta Representacions");
+		ConsultaRepresentacionsBtn.setEnabled(false);
+		comprarEntradaPanel.add(ConsultaRepresentacionsBtn);
+		
+		ConsultaDisponibilitatBtn = new JButton("Consulta Disponibilitat");
+		ConsultaDisponibilitatBtn.setEnabled(false);
+		comprarEntradaPanel.add(ConsultaDisponibilitatBtn);
 
 		comparEntradaButton.addMouseListener(new MouseAdapter() {
 
