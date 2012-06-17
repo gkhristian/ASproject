@@ -42,7 +42,6 @@ public class ComprarEntradaView extends JFrame {
 	private static final int SEIENTS = REPRESENTACIONS + 1;
 	private static final int PAGAMENT = SEIENTS + 1;
 
-	// FIXME nombres apropiados para el flow
 	private static final String[] flowNames = { "Inici",
 			"Espectacles", "Representacions", "Seleccionar seients", "Pagament" };
 
@@ -101,7 +100,6 @@ public class ComprarEntradaView extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent windowEvent) {
-				// FIXME mensaje de confirmación, cerrar
 				mostraAvis("Està segur que desitja tancar l'aplicació? Es perdràn els canvis.");
 			}
 		});

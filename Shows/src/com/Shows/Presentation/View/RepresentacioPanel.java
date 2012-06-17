@@ -174,7 +174,6 @@ public class RepresentacioPanel extends JPanel {
 							.getMessage());
 					// seientsNoDisp.printStackTrace();
 				}
-
 			}
 		});
 

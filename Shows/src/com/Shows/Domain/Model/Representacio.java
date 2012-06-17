@@ -50,7 +50,6 @@ public class Representacio {
 	public Entrada createEntrada(String titol, String dni, int nombEspectadors,
 			Date data, float preuTotal) {
 
-		// FIXME CHECK: COM ES SAP L'IDENTIFICADOR?????????????????????
 		String identificador = titol
 				+ ((Integer) getEntradas().size()).toString();
 
