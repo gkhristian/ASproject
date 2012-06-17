@@ -100,12 +100,11 @@ public class ComprarEntradaUseCaseController {
 		ShowsCom showsCom = ShowsCom.getInstance();
 
 		float comisio = showsCom.getComissio();
-		int recarec = representacio.getRecarrec();
 		Set<String> canvis = showsCom.getCanvis();
 
 		canvis.add(showsCom.getDivisa().toString());
 		
-		float preuTotal= representacio.obtePreu() + comisio + recarec;
+		float preuTotal= representacio.obtePreu() + comisio;
 		DadesEntrada dadesEntrada = new DadesEntrada(preuTotal
 				*consultaOcupacioUseCaseController.getNombEspectadors(),canvis);
 

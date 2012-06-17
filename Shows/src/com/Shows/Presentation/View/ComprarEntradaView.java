@@ -8,6 +8,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -29,8 +31,6 @@ import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ComprarEntradaView extends JFrame {
 
@@ -43,8 +43,8 @@ public class ComprarEntradaView extends JFrame {
 	private static final int PAGAMENT = SEIENTS + 1;
 
 	// FIXME nombres apropiados para el flow
-	private static final String[] flowNames = { "Seleccionar cas d'ús", "Espectacles",
-			"Representacions", "Seleccionar seients", "Pagament" };
+	private static final String[] flowNames = { "Inici",
+			"Espectacles", "Representacions", "Seleccionar seients", "Pagament" };
 
 	private ComprarEntradaController comprarEntradaController;
 	/**
@@ -139,10 +139,11 @@ public class ComprarEntradaView extends JFrame {
 		seientsPanel = new SeientsPanel(comprarEntradaController, this);
 		pagamentPanel = new PagamentPanel(comprarEntradaController, this);
 		comprarEntradaPanel = new ComprarEntradaPanel();
-		comprarEntradaPanel.getComparEntradaButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		comprarEntradaPanel.getComparEntradaButton().addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					}
+				});
 		comprarEntradaPanel.setPreferredSize(new Dimension(0, 0));
 		comprarEntradaPanel.setMinimumSize(new Dimension(0, 0));
 		comprarEntradaPanel.setMaximumSize(new Dimension(0, 0));
@@ -169,11 +170,11 @@ public class ComprarEntradaView extends JFrame {
 
 		JButton comparEntradaButton = comprarEntradaPanel
 				.getComparEntradaButton();
-		
+
 		ConsultaRepresentacionsBtn = new JButton("Consulta Representacions");
 		ConsultaRepresentacionsBtn.setEnabled(false);
 		comprarEntradaPanel.add(ConsultaRepresentacionsBtn);
-		
+
 		ConsultaDisponibilitatBtn = new JButton("Consulta Disponibilitat");
 		ConsultaDisponibilitatBtn.setEnabled(false);
 		comprarEntradaPanel.add(ConsultaDisponibilitatBtn);
@@ -198,13 +199,13 @@ public class ComprarEntradaView extends JFrame {
 		for (int i = 0; i < 5; i++) {
 			JLabel jLabel = new JLabel(flowNames[i]);
 
-			jLabel.setFont(new Font("Arial", Font.BOLD, 15));
+			jLabel.setFont(new Font("Arial", Font.BOLD, 14));
 
 			Box hBox = Box.createHorizontalBox();
 
 			if (i != 0) {
 				JLabel indicatorLabel = new JLabel(">");
-				indicatorLabel.setFont(new Font("Arial", Font.BOLD, 15));
+				indicatorLabel.setFont(new Font("Arial", Font.BOLD, 14));
 				indicatorLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
 				hBox.add(indicatorLabel);
 			}
