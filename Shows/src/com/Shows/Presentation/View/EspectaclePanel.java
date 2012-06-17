@@ -32,7 +32,6 @@ public class EspectaclePanel extends JPanel {
 
 	private JButton continuaButton;
 	private JButton cancelaButton;
-
 	/**
 	 * Create the frame.
 	 * 
@@ -84,9 +83,13 @@ public class EspectaclePanel extends JPanel {
 		horizontalBox_1.add(horizontalStrut_2);
 
 		horizontalBox_1.add(dateChooser);
-		dateChooser.setAlignmentX(Component.LEFT_ALIGNMENT);
+		dateChooser.setAlignmentX(Component.LEFT_ALIGNMENT);		
 
 		dateChooser.setMinimumSize(new Dimension(170, 22));
+		
+		final java.util.Date dataAvui = dateChooser.getDate();
+		
+		System.out.println("data actual: "+ dataAvui.toString());
 
 		dateChooser.getDateEditor().addPropertyChangeListener(
 				new PropertyChangeListener() {
@@ -100,6 +103,7 @@ public class EspectaclePanel extends JPanel {
 									+ ": "
 									+ (java.util.Date) propertyChangeEvent
 											.getNewValue());
+							
 							setEnableContinua();
 						}
 					}
@@ -145,6 +149,13 @@ public class EspectaclePanel extends JPanel {
 					comprarEntradaController.PrOkObteRepresentacions(
 							espectacleComboBox.getSelectedItem().toString(),
 							date);
+					
+					
+					
+					if (dataAvui.after(date)) comprarEntradaView.mostraMissatge("mal");
+					else {
+						continuaButton.setEnabled(true);
+					}
 
 				} catch (NoHiHaRepresentacions noHiHaRepresentacions) {
 					comprarEntradaView.mostraMissatge(noHiHaRepresentacions
