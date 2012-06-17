@@ -110,7 +110,7 @@ public class ComprarEntradaUseCaseController {
 				*consultaOcupacioUseCaseController.getNombEspectadors(),canvis);
 
 		// TODO la comisión y el recargo se aplica por cada espectador??? DE MOMENTO SI
-		this.preuTotal = preuTotal;
+		this.preuTotal = preuTotal * consultaOcupacioUseCaseController.getNombEspectadors();
 
 		return dadesEntrada;
 	}
