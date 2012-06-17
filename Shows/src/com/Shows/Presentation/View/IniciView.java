@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import javax.swing.Box;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,7 +24,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.Shows.HibernateUtil;
-import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.Presentation.Controller.FrontController;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -43,7 +42,7 @@ public class IniciView extends JFrame {
 	private static final String[] flowNames = { "Inici", "Espectacles",
 			"Representacions", "Seleccionar seients", "Pagament" };
 
-	private ComprarEntradaController comprarEntradaController;
+	private FrontController frontController;
 	/**
 	 * Instancia de los Panels
 	 */
@@ -79,10 +78,9 @@ public class IniciView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IniciView(
-			final ComprarEntradaController comprarEntradaController) {
+	public IniciView(final FrontController frontController) {
 
-		this.comprarEntradaController = comprarEntradaController;
+		this.frontController = frontController;
 
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -100,7 +98,7 @@ public class IniciView extends JFrame {
 			}
 		});
 
-		Color backgroundColor = comprarEntradaController.getBackgroundColor();
+		Color backgroundColor = frontController.getBackgroundColor();
 
 		setBackground(backgroundColor);
 
@@ -127,12 +125,11 @@ public class IniciView extends JFrame {
 		stateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		horizontalBox_1.add(stateLabel);
 
-		espectaclePanel = new EspectaclePanel(comprarEntradaController, this);
-		representacioPanel = new RepresentacioPanel(comprarEntradaController,
-				this);
-		seientsPanel = new SeientsPanel(comprarEntradaController, this);
-		pagamentPanel = new PagamentPanel(comprarEntradaController, this);
-		iniciPanel = new IniciPanel();
+		espectaclePanel = new EspectaclePanel(frontController, this);
+		representacioPanel = new RepresentacioPanel(frontController, this);
+		seientsPanel = new SeientsPanel(frontController, this);
+		pagamentPanel = new PagamentPanel(frontController, this);
+		iniciPanel = new IniciPanel(frontController, this);
 
 		iniciPanel.setPreferredSize(new Dimension(0, 0));
 		iniciPanel.setMinimumSize(new Dimension(0, 0));
@@ -157,37 +154,6 @@ public class IniciView extends JFrame {
 		centerPanel.add(representacioPanel, flowNames[2]);
 		centerPanel.add(seientsPanel, flowNames[3]);
 		centerPanel.add(pagamentPanel, flowNames[4]);
-
-		JButton comparEntradaButton = iniciPanel.getComparEntradaButton();
-
-		comparEntradaButton.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent mouseEvent) {
-				comprarEntradaController.PrComprarEntrada();
-			}
-		});
-
-		JButton consultaOcupacioButton = iniciPanel.getConsultaOcupacioButton();
-
-		consultaOcupacioButton.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent mouseEvent) {
-				comprarEntradaController.PrComprarEntrada();
-			}
-		});
-
-		JButton consultaRepresentacioButton = iniciPanel
-				.getConsultaRepresentacioButton();
-
-		consultaRepresentacioButton.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent mouseEvent) {
-				comprarEntradaController.PrComprarEntrada();
-			}
-		});
 
 		setContentPane(contentPane);
 
@@ -224,7 +190,8 @@ public class IniciView extends JFrame {
 				public void mouseReleased(MouseEvent mouseEvent) {
 
 					JLabel jLabel = (JLabel) mouseEvent.getComponent();
-					setFlowState(navigationLabels.indexOf(jLabel));
+					if (jLabel.isEnabled())
+						setFlowState(navigationLabels.indexOf(jLabel), false);
 				}
 
 				@Override
@@ -233,8 +200,8 @@ public class IniciView extends JFrame {
 					JLabel jLabel = (JLabel) mouseEvent.getComponent();
 					jLabel.setForeground(new Color(163, 184, 204));
 					if (jLabel.isEnabled())
-						IniciView.this.setCursor(new Cursor(
-								Cursor.HAND_CURSOR));
+						IniciView.this
+								.setCursor(new Cursor(Cursor.HAND_CURSOR));
 				}
 
 				@Override
@@ -250,16 +217,19 @@ public class IniciView extends JFrame {
 
 			horizontalBox.add(hBox);
 		}
-		setFlowState(COMPRAR_ENTRADA);
+		setFlowState(COMPRAR_ENTRADA, false);
 	}
 
-	private void setFlowState(int flowState) {
+	private void setFlowState(int flowState, boolean simple) {
 
 		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
-		for (int i = 0; i < 5; i++) {
-			navigationLabels.get(i).setEnabled((i < flowState));
-			navigationHorizontalBox.get(i).setVisible((i <= flowState));
+		if (!simple)
+			for (int i = 0; i < 5; i++) {
+				navigationLabels.get(i).setEnabled((i < flowState));
+				navigationHorizontalBox.get(i).setVisible((i <= flowState));
+			}
+		else {
+			navigationLabels.get(0).setEnabled(true);
 		}
 
 		switch (flowState) {
@@ -280,7 +250,7 @@ public class IniciView extends JFrame {
 			break;
 
 		case SEIENTS:
-			stateLabel.setVisible(true);
+			stateLabel.setVisible(!simple);
 			stateLabel.setText("<html><b>Espectacle: </b>" + espectacle
 					+ "<br><b>Data: </b>" + data + "<br><b>Local: </b>" + local
 					+ "<br><b>Sessió: </b>" + sessio
@@ -330,25 +300,26 @@ public class IniciView extends JFrame {
 	public void mostraEspectacles(Set<String> espectacles) {
 
 		espectaclePanel.setEspectacleComboBox(espectacles);
-		setFlowState(ESPECTACLES);
+		setFlowState(ESPECTACLES, false);
 	}
 
-	public void mostraRepresentacions(Set<DadesRepresentacio> representacions) {
+	public void mostraRepresentacions(Set<DadesRepresentacio> representacions,
+			boolean simple) {
 
-		representacioPanel.setInfo(representacions);
-		setFlowState(REPRESENTACIONS);
+		representacioPanel.setInfo(representacions, simple);
+		setFlowState(REPRESENTACIONS, simple);
 	}
 
-	public void mostraOcupacio(Set<PosicioSeient> seients) {
+	public void mostraOcupacio(Set<PosicioSeient> seients, boolean simple) {
 
-		seientsPanel.setSeients(seients);
-		setFlowState(SEIENTS);
+		seientsPanel.setSeients(seients, simple);
+		setFlowState(SEIENTS, simple);
 	}
 
 	public void mostraPreu(DadesEntrada dadesEntrada) {
 
 		pagamentPanel.setDadesEntrada(dadesEntrada);
-		setFlowState(PAGAMENT);
+		setFlowState(PAGAMENT, false);
 	}
 
 	public void mostraPreuMoneda(Float preu) {
@@ -369,7 +340,7 @@ public class IniciView extends JFrame {
 				JOptionPane.INFORMATION_MESSAGE);
 
 		if (confirmation == JOptionPane.OK_OPTION) {
-			comprarEntradaController.PrFi();
+			frontController.PrFi();
 		}
 	}
 
@@ -380,7 +351,7 @@ public class IniciView extends JFrame {
 				JOptionPane.QUESTION_MESSAGE);
 
 		if (confirmation == JOptionPane.OK_OPTION) {
-			comprarEntradaController.PrFi();
+			frontController.PrFi();
 		}
 	}
 

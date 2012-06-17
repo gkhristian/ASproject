@@ -2,6 +2,7 @@ package com.Shows.Presentation.Controller;
 
 import java.awt.Color;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.Set;
 
 import com.Shows.Domain.Controllers.ComprarEntradaUseCaseController;
@@ -16,7 +17,7 @@ import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.Presentation.View.IniciView;
 import com.Shows.TupleTypes.PosicioSeient;
 
-public class ComprarEntradaController {
+public class FrontController {
 
 	private ComprarEntradaUseCaseController comprarEntradaUseCaseController;
 	private ConsultaOcupacioUseCaseController consultaOcupacioUseCaseController;
@@ -25,11 +26,13 @@ public class ComprarEntradaController {
 
 	private Color backgroundColor;
 
-	public ComprarEntradaController() {
+	public FrontController() {
 
 		backgroundColor = new Color(250, 250, 250);
 
 		comprarEntradaUseCaseController = new ComprarEntradaUseCaseController();
+		consultaOcupacioUseCaseController = new ConsultaOcupacioUseCaseController();
+		consultaRepresentacionsUseCaseController = new ConsultaRepresentacionsUseCaseController();
 
 		iniciView = new IniciView(this);
 	}
@@ -46,24 +49,40 @@ public class ComprarEntradaController {
 			throws SeientsNoDisp {
 
 		// consultaOcupacioUseCaseController.init();
-		iniciView.mostraOcupacio(consultaOcupacioUseCaseController
-				.obteOcupacio(nomLocal, sessio, nombEspectadors, data));
+		try {
+			iniciView.mostraOcupacio(consultaOcupacioUseCaseController
+					.obteOcupacio(nomLocal, sessio, nombEspectadors, data),
+					true);
+		} catch (NullPointerException nullPointerException) {
+			iniciView
+					.mostraMissatge("No es pot consular l'ocupació amb aquestes dades.");
+		}
 	}
 
 	public void PrConsultaRepresentacio(final String titol, final Date data)
 			throws NoHiHaRepresentacions {
 
 		// consultaRepresentacionsUseCaseController.init();
-		iniciView
-				.mostraRepresentacions(consultaRepresentacionsUseCaseController
-						.obteRepresentacions(titol, data));
+		try {
+			iniciView.mostraRepresentacions(
+					consultaRepresentacionsUseCaseController
+							.obteRepresentacions(titol, data), true);
+		} catch (NullPointerException nullPointerException) {
+			iniciView
+					.mostraMissatge("No es pot consular la representació amb aquestes dades.");
+		}
 	}
 
 	public void PrOkObteRepresentacions(final String titol, final Date data)
 			throws NoHiHaRepresentacions {
 
-		iniciView.mostraRepresentacions(comprarEntradaUseCaseController
-				.obteRepresentacions(titol, data));
+		java.util.Date dataAvui = Calendar.getInstance().getTime();
+		if (dataAvui.after(data))
+			iniciView
+					.mostraMissatge("La data ha de ser posterior a la data actual");
+		else
+			iniciView.mostraRepresentacions(comprarEntradaUseCaseController
+					.obteRepresentacions(titol, data), false);
 	}
 
 	public void PrOkObteOcupacio(final String nomLocal,
@@ -71,7 +90,7 @@ public class ComprarEntradaController {
 			throws SeientsNoDisp {
 
 		iniciView.mostraOcupacio(comprarEntradaUseCaseController.obteOcupacio(
-				nomLocal, sessio, nombEspectadors));
+				nomLocal, sessio, nombEspectadors), false);
 	}
 
 	public void PrOkSelecionarSeients(final Set<PosicioSeient> seients)

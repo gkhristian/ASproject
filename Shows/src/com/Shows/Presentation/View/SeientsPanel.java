@@ -20,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import com.Shows.Domain.Exceptions.SeientsNoOk;
-import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.Presentation.Controller.FrontController;
 import com.Shows.Presentation.View.Component.JSeient;
 import com.Shows.TupleTypes.PosicioSeient;
 
@@ -28,11 +28,12 @@ public class SeientsPanel extends JPanel {
 
 	private static final long serialVersionUID = -8834919801528392136L;
 
-	private ComprarEntradaController comprarEntradaController;
+	private FrontController frontController;
 
 	private JPanel seientsPanel;
 
 	private JButton continuaButton;
+	private JButton cancelaButton;
 
 	private HashSet<PosicioSeient> selectedSeients;
 
@@ -41,11 +42,10 @@ public class SeientsPanel extends JPanel {
 	 * 
 	 * @param iniciView
 	 */
-	public SeientsPanel(
-			final ComprarEntradaController comprarEntradaController,
+	public SeientsPanel(final FrontController frontController,
 			final IniciView iniciView) {
 
-		this.comprarEntradaController = comprarEntradaController;
+		this.frontController = frontController;
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -79,7 +79,7 @@ public class SeientsPanel extends JPanel {
 		Component horizontalStrut = Box.createHorizontalStrut(10);
 		horizontalBox_11.add(horizontalStrut);
 
-		JButton cancelaButton = new JButton("Cancel\u00B7la");
+		cancelaButton = new JButton("Cancel\u00B7la");
 		horizontalBox_11.add(cancelaButton);
 
 		continuaButton.addActionListener(new ActionListener() {
@@ -102,8 +102,7 @@ public class SeientsPanel extends JPanel {
 
 					iniciView.setPagamentString(seients);
 
-					comprarEntradaController
-							.PrOkSelecionarSeients(selectedSeients);
+					frontController.PrOkSelecionarSeients(selectedSeients);
 				} catch (SeientsNoOk seientsNoOk) {
 					iniciView.mostraMissatge(seientsNoOk.getMessage());
 					// seientsNoOk.printStackTrace();
@@ -116,12 +115,12 @@ public class SeientsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 
-				comprarEntradaController.PrCancellar();
+				frontController.PrCancellar();
 			}
 		});
 	}
 
-	public void setSeients(Set<PosicioSeient> seients) {
+	public void setSeients(Set<PosicioSeient> seients, boolean simple) {
 
 		PosicioSeient[] dades = seients.toArray(new PosicioSeient[0]);
 
@@ -143,8 +142,7 @@ public class SeientsPanel extends JPanel {
 
 		seientsPanel.setLayout(new GridLayout(maxFila, maxColumna));
 
-		seientsPanel.setBackground(comprarEntradaController
-				.getBackgroundColor());
+		seientsPanel.setBackground(frontController.getBackgroundColor());
 
 		for (int m = 0; m < maxFila; m++) {
 			for (int n = 0; n < maxColumna; n++) {
@@ -155,9 +153,9 @@ public class SeientsPanel extends JPanel {
 
 				panelHolder[m][n].add(holder[m][n]);
 
-				holder[m][n].setBackground(comprarEntradaController
-						.getBackgroundColor());
-				panelHolder[m][n].setBackground(comprarEntradaController
+				holder[m][n]
+						.setBackground(frontController.getBackgroundColor());
+				panelHolder[m][n].setBackground(frontController
 						.getBackgroundColor());
 
 				seientsPanel.add(panelHolder[m][n]);
@@ -181,6 +179,8 @@ public class SeientsPanel extends JPanel {
 				}
 			});
 		}
+		continuaButton.setVisible(!simple);
+		cancelaButton.setVisible(!simple);
 	}
 
 	private void setEnableContinua() {

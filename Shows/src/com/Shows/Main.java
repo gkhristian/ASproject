@@ -8,12 +8,12 @@ import javax.swing.UIManager;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.Presentation.Controller.FrontController;
 
 public class Main {
 
 	@SuppressWarnings("unused")
-	private static ComprarEntradaController comprarEntradaController;
+	private static FrontController comprarEntradaController;
 
 	/**
 	 * @param args
@@ -35,7 +35,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					comprarEntradaController = new ComprarEntradaController();
+					comprarEntradaController = new FrontController();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

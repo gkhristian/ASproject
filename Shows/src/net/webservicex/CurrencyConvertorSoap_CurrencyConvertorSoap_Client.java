@@ -4,12 +4,10 @@ package net.webservicex;
  * Please modify this class to meet your needs
  * This class is not complete
  */
-import com.Shows.Domain.Exceptions.*;
 import java.net.URL;
 
 import javax.xml.namespace.QName;
 
-import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.Moneda;
 
 /**

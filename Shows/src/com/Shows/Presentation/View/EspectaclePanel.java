@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
-import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.Presentation.Controller.FrontController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.toedter.calendar.JDateChooser;
 
@@ -32,13 +32,13 @@ public class EspectaclePanel extends JPanel {
 
 	private JButton continuaButton;
 	private JButton cancelaButton;
+
 	/**
 	 * Create the frame.
 	 * 
 	 * @param comprarEntradaView
 	 */
-	public EspectaclePanel(
-			final ComprarEntradaController comprarEntradaController,
+	public EspectaclePanel(final FrontController frontController,
 			final IniciView iniciView) {
 
 		setLayout(new BorderLayout(0, 0));
@@ -83,10 +83,10 @@ public class EspectaclePanel extends JPanel {
 		horizontalBox_1.add(horizontalStrut_2);
 
 		horizontalBox_1.add(dateChooser);
-		dateChooser.setAlignmentX(Component.LEFT_ALIGNMENT);		
+		dateChooser.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 		dateChooser.setMinimumSize(new Dimension(170, 22));
-		
+
 		dateChooser.getDateEditor().addPropertyChangeListener(
 				new PropertyChangeListener() {
 
@@ -99,7 +99,7 @@ public class EspectaclePanel extends JPanel {
 									+ ": "
 									+ (java.util.Date) propertyChangeEvent
 											.getNewValue());
-							
+
 							setEnableContinua();
 						}
 					}
@@ -126,7 +126,7 @@ public class EspectaclePanel extends JPanel {
 		continuaButton = new JButton("Continua");
 		continuaButton.setEnabled(false);
 		horizontalBox.add(continuaButton);
-		
+
 		Component horizontalStrut_3 = Box.createHorizontalStrut(10);
 		horizontalBox.add(horizontalStrut_3);
 
@@ -141,24 +141,13 @@ public class EspectaclePanel extends JPanel {
 					java.sql.Date date = new java.sql.Date(dateChooser
 							.getDate().getTime());
 
-					iniciView.setRepresentacionsString(
-							espectacleComboBox.getSelectedItem().toString(),
-							date.toString());
+					iniciView.setRepresentacionsString(espectacleComboBox
+							.getSelectedItem().toString(), date.toString());
 
-					comprarEntradaController.PrOkObteRepresentacions(
-							espectacleComboBox.getSelectedItem().toString(),
-							date);
-					
-					
-					// TODO data
-					/*if (dataAvui.after(date)) iniciView.mostraMissatge("mal");
-					else {
-						continuaButton.setEnabled(true);
-					}*/
-
+					frontController.PrOkObteRepresentacions(espectacleComboBox
+							.getSelectedItem().toString(), date);
 				} catch (NoHiHaRepresentacions noHiHaRepresentacions) {
-					iniciView.mostraMissatge(noHiHaRepresentacions
-							.getMessage());
+					iniciView.mostraMissatge(noHiHaRepresentacions.getMessage());
 					// noHiHaRepresentacions.printStackTrace();
 				}
 			}
@@ -169,7 +158,7 @@ public class EspectaclePanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				comprarEntradaController.PrCancellar();
+				frontController.PrCancellar();
 			}
 		});
 	}

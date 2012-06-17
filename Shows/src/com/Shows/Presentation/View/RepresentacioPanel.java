@@ -30,7 +30,7 @@ import javax.swing.text.DefaultFormatter;
 
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.TipusSessio;
-import com.Shows.Presentation.Controller.ComprarEntradaController;
+import com.Shows.Presentation.Controller.FrontController;
 import com.Shows.Presentation.View.Renderer.CheckBoxRenderer;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
@@ -40,6 +40,7 @@ public class RepresentacioPanel extends JPanel {
 
 	private JTable representacionsTable;
 	private JButton continuaButton;
+	private JButton cancelaButton;
 	private JSpinner nombreEspectadorsSpinner;
 
 	/**
@@ -47,8 +48,7 @@ public class RepresentacioPanel extends JPanel {
 	 * 
 	 * @param iniciView
 	 */
-	public RepresentacioPanel(
-			final ComprarEntradaController comprarEntradaController,
+	public RepresentacioPanel(final FrontController frontController,
 			final IniciView iniciView) {
 
 		setLayout(new BorderLayout(0, 0));
@@ -136,7 +136,7 @@ public class RepresentacioPanel extends JPanel {
 		Component horizontalStrut = Box.createHorizontalStrut(10);
 		horizontalBox.add(horizontalStrut);
 
-		JButton cancelaButton = new JButton("Cancel\u00B7la");
+		cancelaButton = new JButton("Cancel\u00B7la");
 		cancelaButton.setAlignmentX(RIGHT_ALIGNMENT);
 		horizontalBox.add(cancelaButton);
 
@@ -170,8 +170,8 @@ public class RepresentacioPanel extends JPanel {
 							Integer.toString(nombEspectadors), (estrena) ? "Si"
 									: "No", preuSeient);
 
-					comprarEntradaController.PrOkObteOcupacio(local,
-							tipusSessio, nombEspectadors);
+					frontController.PrOkObteOcupacio(local, tipusSessio,
+							nombEspectadors);
 				} catch (SeientsNoDisp seientsNoDisp) {
 					iniciView.mostraMissatge(seientsNoDisp.getMessage());
 					// seientsNoDisp.printStackTrace();
@@ -184,12 +184,12 @@ public class RepresentacioPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				comprarEntradaController.PrCancellar();
+				frontController.PrCancellar();
 			}
 		});
 	}
 
-	public void setInfo(Set<DadesRepresentacio> representacions) {
+	public void setInfo(Set<DadesRepresentacio> representacions, boolean simple) {
 
 		String[] columnNames = { "Local", "Sessió", "Seients Disponibles",
 				"És estrena?", "Preu" };
@@ -233,6 +233,8 @@ public class RepresentacioPanel extends JPanel {
 			}
 		});
 
+		continuaButton.setVisible(!simple);
+		cancelaButton.setVisible(!simple);
 	}
 
 	private void setEnableContinua() {
