@@ -99,8 +99,8 @@ public class DataBaseInitializer {
 		/* Data */
 		Date data1 = Date.valueOf("2012-06-30");
 		Date data2 = Date.valueOf("2012-07-31");
-		Date data3 = Date.valueOf("2012-06-19");
-		Date data4 = Date.valueOf("2012-06-18");
+		Date data3 = Date.valueOf("2012-06-20");
+		Date data4 = Date.valueOf("2012-06-19");
 
 		/* Representacions i Estrenes */
 		Float preu1 = 10f;
@@ -116,29 +116,31 @@ public class DataBaseInitializer {
 		int lliures2_3_2 = filas2_3 * columnas2_3;
 		int lliures2_1 = filas2 * columnas2;
 
-		//tarda - PalauSantJordi - 30 juny 
+		// tarda - PalauSantJordi - 30 juny
 		Representacio rep1 = new Representacio(ses1, local1, preu1, data1,
 				lliures1);
-		//nit - ATomarPorCulo - 31 juliol
+		// nit - ATomarPorCulo - 31 juliol
 		Estrena est1 = new Estrena(ses2, local2, preu2, data2, lliures2, 5);
-		//tarda - PepeStage - 31 juliol
+		// tarda - PepeStage - 31 juliol
 		Estrena est2 = new Estrena(ses1, local2_2, preu2, data2, lliures2_2_1,
 				5);
-		//mati - Akihabara Playbox - 30 juny
-		Estrena est3 = new Estrena(ses3, local2_3, preu1, data1, lliures2_3_2, 7);
-		//nit - Akihabara Playbox - 31 juliol
+		// mati - Akihabara Playbox - 30 juny
+		Estrena est3 = new Estrena(ses3, local2_3, preu1, data1, lliures2_3_2,
+				7);
+		// nit - Akihabara Playbox - 31 juliol
 		Representacio rep2 = new Representacio(ses2, local2_3, preu2, data2,
 				lliures2_3);
-		//mati - PepeStage - 31 juliol
+		// mati - PepeStage - 31 juliol
 		Representacio rep3 = new Representacio(ses3, local2_2, preu2, data2,
 				lliures2_2_2);
-		//nit - PalauSantJordi - 19 juny
-		Representacio rep4 = new Representacio(ses2, local1, preu1, data3, lliures1_1);
-		//mati - PalauSantJordi - 19 juny
-		Estrena est4 = new Estrena(ses3, local1, preu1, data3, lliures1_2,8);
-		//tarda - ATomarPorCulo - 18 juny
-		Estrena est5 = new Estrena(ses1, local2, preu2, data4, lliures2_1,2);
-		
+		// nit - PalauSantJordi - 19 juny
+		Representacio rep4 = new Representacio(ses2, local1, preu1, data3,
+				lliures1_1);
+		// mati - PalauSantJordi - 19 juny
+		Estrena est4 = new Estrena(ses3, local1, preu1, data3, lliures1_2, 8);
+		// tarda - ATomarPorCulo - 18 juny
+		Estrena est5 = new Estrena(ses1, local2, preu2, data4, lliures2_1, 2);
+
 		session.saveOrUpdate(rep1);
 		session.saveOrUpdate(est1);
 		session.saveOrUpdate(est2);
@@ -176,7 +178,7 @@ public class DataBaseInitializer {
 		/* Espectacle */
 		Espectacle esp1 = new Espectacle("Espectacular", 3, representacions1);
 		Espectacle esp2 = new Espectacle("EspectaCULO", 1, representacions2);
-		Espectacle esp3 = new Espectacle("EspectoPatronum",5,representacions3);
+		Espectacle esp3 = new Espectacle("EspectoPatronum", 5, representacions3);
 		session.saveOrUpdate(esp1);
 		session.saveOrUpdate(esp2);
 		session.saveOrUpdate(esp3);
@@ -198,11 +200,11 @@ public class DataBaseInitializer {
 		est1.setEntradas(ent2);
 
 		/* Shows.com */
-		
+
 		HashSet<Moneda> canvis = new HashSet<Moneda>();
 		canvis.add(Moneda.GBP);
 		canvis.add(Moneda.USD);
-		
+
 		SetMoneda setMoneda = new SetMoneda(canvis);
 
 		ShowsCom showscom = new ShowsCom(1, 12121, "34343434", 3f, Moneda.EUR,
