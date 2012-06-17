@@ -25,13 +25,14 @@ import com.Shows.Domain.Model.ShowsCom;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.Shows.TupleTypes.DadesEntrada;
+import java.awt.Font;
 
 public class PagamentPanel extends JPanel implements PropertyChangeListener {
 
 	private static final long serialVersionUID = 1L;
 
 	private ComprarEntradaController comprarEntradaController;
-	private ComprarEntradaView comprarEntradaView;
+	private IniciView comprarEntradaView;
 
 	private JFormattedTextField numeroDniFormattedTextField;
 	private JFormattedTextField bancFormattedTextField;
@@ -52,7 +53,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 	 */
 	public PagamentPanel(
 			final ComprarEntradaController comprarEntradaController,
-			final ComprarEntradaView comprarEntradaView) {
+			final IniciView comprarEntradaView) {
 
 		this.comprarEntradaController = comprarEntradaController;
 		this.comprarEntradaView = comprarEntradaView;
@@ -122,6 +123,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		horizontalBox_9.add(horizontalGlue_1);
 
 		JLabel PreuTotalLbl = new JLabel("Preu Total:");
+		PreuTotalLbl.setFont(new Font("Arial", Font.BOLD, 16));
 		PreuTotalLbl.setBorder(new EmptyBorder(0, 0, 0, 10));
 		horizontalBox_9.add(PreuTotalLbl);
 

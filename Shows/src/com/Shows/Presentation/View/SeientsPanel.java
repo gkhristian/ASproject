@@ -43,7 +43,7 @@ public class SeientsPanel extends JPanel {
 	 */
 	public SeientsPanel(
 			final ComprarEntradaController comprarEntradaController,
-			final ComprarEntradaView comprarEntradaView) {
+			final IniciView comprarEntradaView) {
 
 		this.comprarEntradaController = comprarEntradaController;
 

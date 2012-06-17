@@ -49,7 +49,7 @@ public class RepresentacioPanel extends JPanel {
 	 */
 	public RepresentacioPanel(
 			final ComprarEntradaController comprarEntradaController,
-			final ComprarEntradaView comprarEntradaView) {
+			final IniciView comprarEntradaView) {
 
 		setLayout(new BorderLayout(0, 0));
 

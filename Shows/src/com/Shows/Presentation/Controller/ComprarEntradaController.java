@@ -11,13 +11,13 @@ import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Exceptions.SeientsNoOk;
 import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.TipusSessio;
-import com.Shows.Presentation.View.ComprarEntradaView;
+import com.Shows.Presentation.View.IniciView;
 import com.Shows.TupleTypes.PosicioSeient;
 
 public class ComprarEntradaController {
 
 	private ComprarEntradaUseCaseController comprarEntradaUseCaseController;
-	private ComprarEntradaView comprarEntradaView;
+	private IniciView comprarEntradaView;
 
 	private Color backgroundColor;
 
@@ -27,11 +27,18 @@ public class ComprarEntradaController {
 
 		comprarEntradaUseCaseController = new ComprarEntradaUseCaseController();
 
-		comprarEntradaView = new ComprarEntradaView(this);
+		comprarEntradaView = new IniciView(this);
 	}
 
 	public void PrComprarEntrada() {
 
+		comprarEntradaUseCaseController.init();
+		comprarEntradaView.mostraEspectacles(comprarEntradaUseCaseController
+				.obteEspectacles());
+	}
+	
+	public void PrConsultaOcupacio() {
+		
 		comprarEntradaUseCaseController.init();
 		comprarEntradaView.mostraEspectacles(comprarEntradaUseCaseController
 				.obteEspectacles());
