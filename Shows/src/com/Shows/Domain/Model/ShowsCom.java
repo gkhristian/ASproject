@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 import org.hibernate.Session;
 
-import com.Shows.HibernateUtil;
+import com.Shows.Data.DataMapper.HibernateUtil;
 
 @Entity
 public class ShowsCom {

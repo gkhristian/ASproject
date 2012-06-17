@@ -8,6 +8,7 @@ import javax.swing.UIManager;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.Shows.Data.DataMapper.HibernateUtil;
 import com.Shows.Presentation.Controller.FrontController;
 
 public class Main {
@@ -21,7 +22,6 @@ public class Main {
 	public static void main(String[] args) {
 
 		/***** init DB *****/
-		// DataBaseInitializer.clearDatabase();
 		if (need2InitDataBase())
 			DataBaseInitializer.initDatabase();
 

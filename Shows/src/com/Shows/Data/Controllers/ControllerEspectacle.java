@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import com.Shows.HibernateUtil;
+import com.Shows.Data.DataMapper.HibernateUtil;
 import com.Shows.Data.Interfaces.IControllerEspectacle;
 import com.Shows.Domain.Model.Espectacle;
 

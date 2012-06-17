@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import com.Shows.HibernateUtil;
+import com.Shows.Data.DataMapper.HibernateUtil;
 import com.Shows.Data.Interfaces.IControllerSeientsEnRepresentacio;
 import com.Shows.Domain.Model.AuxiliarRepresentacio;
 import com.Shows.Domain.Model.AuxiliarSeient;

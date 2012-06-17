@@ -1,4 +1,4 @@
-package com.Shows;
+package com.Shows.Data.DataMapper;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

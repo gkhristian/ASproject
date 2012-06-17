@@ -5,10 +5,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.Shows.Data.DataMapper.HibernateUtil;
 import com.Shows.Domain.Model.Entrada;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Estat;
@@ -133,12 +132,12 @@ public class DataBaseInitializer {
 		// mati - PepeStage - 31 juliol
 		Representacio rep3 = new Representacio(ses3, local2_2, preu2, data2,
 				lliures2_2_2);
-		// nit - PalauSantJordi - 19 juny
+		// nit - PalauSantJordi - 20 juny
 		Representacio rep4 = new Representacio(ses2, local1, preu1, data3,
 				lliures1_1);
-		// mati - PalauSantJordi - 19 juny
+		// mati - PalauSantJordi - 20 juny
 		Estrena est4 = new Estrena(ses3, local1, preu1, data3, lliures1_2, 8);
-		// tarda - ATomarPorCulo - 18 juny
+		// tarda - ATomarPorCulo - 19 juny
 		Estrena est5 = new Estrena(ses1, local2, preu2, data4, lliures2_1, 2);
 
 		session.saveOrUpdate(rep1);
@@ -238,19 +237,5 @@ public class DataBaseInitializer {
 		}
 		rep.setNombreSeientsLliures(ll);
 		rep.setSeientsEnRepresentacio(ser);
-	}
-
-	public static void clearDatabase() throws HibernateException {
-
-		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
-
-		Query query;
-		query = session.createSQLQuery("DROP SCHEMA public CASCADE");
-		query.executeUpdate();
-		query = session.createSQLQuery("CREATE SCHEMA public");
-		query.executeUpdate();
-
-		session.getTransaction().commit();
 	}
 }

@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.Shows.HibernateUtil;
+import com.Shows.Data.DataMapper.HibernateUtil;
 import com.Shows.Presentation.Controller.FrontController;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;

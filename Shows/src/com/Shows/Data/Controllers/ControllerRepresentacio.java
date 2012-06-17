@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import org.hibernate.Session;
 
-import com.Shows.HibernateUtil;
+import com.Shows.Data.DataMapper.HibernateUtil;
 import com.Shows.Data.Interfaces.IControllerRepresentacio;
 import com.Shows.Domain.Model.AuxiliarRepresentacio;
 import com.Shows.Domain.Model.Local;

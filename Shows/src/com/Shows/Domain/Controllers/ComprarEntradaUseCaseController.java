@@ -8,8 +8,8 @@ import java.util.Set;
 
 import org.hibernate.Session;
 
-import com.Shows.HibernateUtil;
 import com.Shows.Data.Controllers.ControllerDataFactory;
+import com.Shows.Data.DataMapper.HibernateUtil;
 import com.Shows.Data.Interfaces.IControllerEspectacle;
 import com.Shows.Data.Interfaces.IControllerRepresentacio;
 import com.Shows.Data.Interfaces.IControllerSeientsEnRepresentacio;
