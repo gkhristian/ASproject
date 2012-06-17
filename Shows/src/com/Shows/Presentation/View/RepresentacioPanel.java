@@ -132,6 +132,9 @@ public class RepresentacioPanel extends JPanel {
 		continuaButton.setAlignmentX(RIGHT_ALIGNMENT);
 		continuaButton.setEnabled(false);
 		horizontalBox.add(continuaButton);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(10);
+		horizontalBox.add(horizontalStrut);
 
 		JButton cancelaButton = new JButton("Cancel\u00B7la");
 		cancelaButton.setAlignmentX(RIGHT_ALIGNMENT);
