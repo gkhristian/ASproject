@@ -103,13 +103,14 @@ public class ComprarEntradaUseCaseController {
 		Set<String> canvis = showsCom.getCanvis();
 
 		canvis.add(showsCom.getDivisa().toString());
-		
-		float preuTotal= representacio.obtePreu() + comisio;
-		DadesEntrada dadesEntrada = new DadesEntrada(preuTotal
-				*consultaOcupacioUseCaseController.getNombEspectadors(),canvis);
 
-		// TODO la comisión y el recargo se aplica por cada espectador??? DE MOMENTO SI
-		this.preuTotal = preuTotal * consultaOcupacioUseCaseController.getNombEspectadors();
+		float preuTotal = representacio.obtePreu() + comisio;
+		DadesEntrada dadesEntrada = new DadesEntrada(preuTotal
+				* consultaOcupacioUseCaseController.getNombEspectadors(),
+				canvis);
+
+		this.preuTotal = preuTotal
+				* consultaOcupacioUseCaseController.getNombEspectadors();
 
 		return dadesEntrada;
 	}

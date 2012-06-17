@@ -170,7 +170,9 @@ public class RepresentacioPanel extends JPanel {
 					comprarEntradaController.PrOkObteOcupacio(local,
 							tipusSessio, nombEspectadors);
 				} catch (SeientsNoDisp seientsNoDisp) {
-					seientsNoDisp.printStackTrace();
+					comprarEntradaView.mostraMissatge(seientsNoDisp
+							.getMessage());
+					// seientsNoDisp.printStackTrace();
 				}
 
 			}
