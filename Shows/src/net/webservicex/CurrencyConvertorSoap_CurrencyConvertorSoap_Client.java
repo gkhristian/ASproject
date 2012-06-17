@@ -25,7 +25,7 @@ public final class CurrencyConvertorSoap_CurrencyConvertorSoap_Client {
 	public CurrencyConvertorSoap_CurrencyConvertorSoap_Client() {
 	}
 
-	public static double convert(Moneda divisa, Moneda moneda) throws ServeiNoDisponible {
+	public static double convert(Moneda divisa, Moneda moneda) {
 		URL wsdlURL = CurrencyConvertor.WSDL_LOCATION;
 
 		CurrencyConvertor currencyConvertor = new CurrencyConvertor(wsdlURL,

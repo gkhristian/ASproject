@@ -31,7 +31,7 @@ public class CurrencyConvertorSoapImpl implements CurrencyConvertorSoap {
     /* (non-Javadoc)
      * @see net.webservicex.CurrencyConvertorSoap#conversionRate(net.webservicex.Currency  fromCurrency ,)net.webservicex.Currency  toCurrency )*
      */
-    public double conversionRate(net.webservicex.Currency fromCurrency,net.webservicex.Currency toCurrency)  throws ServeiNoDisponible { 
+    public double conversionRate(net.webservicex.Currency fromCurrency,net.webservicex.Currency toCurrency) { 
         LOG.info("Executing operation conversionRate");
         System.out.println(fromCurrency);
         System.out.println(toCurrency);
@@ -40,7 +40,7 @@ public class CurrencyConvertorSoapImpl implements CurrencyConvertorSoap {
             return _return;
         } catch (java.lang.Exception ex) {
             ex.printStackTrace();
-            throw new ServeiNoDisponible();
         }
+		return 0;
     }
 }

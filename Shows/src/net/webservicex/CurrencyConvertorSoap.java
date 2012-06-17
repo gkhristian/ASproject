@@ -32,5 +32,5 @@ public interface CurrencyConvertorSoap {
         net.webservicex.Currency fromCurrency,
         @WebParam(name = "ToCurrency", targetNamespace = "http://www.webserviceX.NET/")
         net.webservicex.Currency toCurrency
-    ) throws ServeiNoDisponible;
+    );
 }

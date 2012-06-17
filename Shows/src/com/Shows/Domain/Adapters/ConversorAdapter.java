@@ -8,7 +8,13 @@ public class ConversorAdapter implements IConversorAdapter {
 
 	@Override
 	public double convert(Moneda divisa, Moneda moneda) throws ServeiNoDisponible {
-
-		return new CurrencyConvertor().convert(divisa, moneda);
+		CurrencyConvertor currencyConvertor = new CurrencyConvertor();
+		try{
+			return currencyConvertor.convert(divisa, moneda);
+		}
+		catch (java.lang.Exception ex){
+			throw new ServeiNoDisponible();
+		}
+		
 	}
 }
