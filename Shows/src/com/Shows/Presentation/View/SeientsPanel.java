@@ -19,6 +19,7 @@ import com.Shows.Domain.Exceptions.SeientsNoOk;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Component.JSeient;
 import com.Shows.TupleTypes.PosicioSeient;
+import javax.swing.border.EmptyBorder;
 
 public class SeientsPanel extends JPanel {
 
@@ -152,6 +153,7 @@ public class SeientsPanel extends JPanel {
 		verticalBox_1.add(verticalGlue_1);
 
 		Box horizontalBox_11 = Box.createHorizontalBox();
+		horizontalBox_11.setBorder(new EmptyBorder(10, 0, 0, 0));
 		add(horizontalBox_11, BorderLayout.SOUTH);
 		JLabel MessageAreaLbl = new JLabel("");
 		horizontalBox_11.add(MessageAreaLbl);

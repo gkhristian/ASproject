@@ -21,6 +21,7 @@ import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.border.EmptyBorder;
 
 public class EspectaclePanel extends JPanel {
 
@@ -45,14 +46,14 @@ public class EspectaclePanel extends JPanel {
 		Box verticalBox = Box.createVerticalBox();
 		add(verticalBox);
 
-		Component verticalStrut_1 = Box.createVerticalStrut(120);
+		Component verticalStrut_1 = Box.createVerticalStrut(110);
 		verticalBox.add(verticalStrut_1);
 
 		Box horizontalBox_1 = Box.createHorizontalBox();
 		horizontalBox_1.setAlignmentY(Component.CENTER_ALIGNMENT);
 		verticalBox.add(horizontalBox_1);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(40);
+		Component horizontalStrut = Box.createHorizontalStrut(10);
 		horizontalBox_1.add(horizontalStrut);
 
 		JLabel seleccioniEspectacleLabel = new JLabel(
@@ -62,29 +63,18 @@ public class EspectaclePanel extends JPanel {
 		espectacleComboBox = new JComboBox();
 		espectacleComboBox.setToolTipText("Espectacles");
 		espectacleComboBox.setMaximumRowCount(30);
-		espectacleComboBox.setMinimumSize(new Dimension(50,20));
+		espectacleComboBox.setMinimumSize(new Dimension(100, 20));
 
 		espectacleComboBox.setRenderer(new PromptComboBoxRenderer(
 				"Espectacle..."));
 
 		horizontalBox_1.add(espectacleComboBox);
-		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(40);
-		horizontalBox_1.add(horizontalStrut_1);
-		
-		Box horizontalBox_2 = Box.createHorizontalBox();
-		verticalBox.add(horizontalBox_2);
-		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(180);
-		horizontalBox_2.add(horizontalStrut_3);
 		dateChooser = new JDateChooser();
-		horizontalBox_2.add(dateChooser);
+		dateChooser.setBorder(new EmptyBorder(0, 20, 0, 0));
+		horizontalBox_1.add(dateChooser);
 		dateChooser.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
 				dateChooser.setMinimumSize(new Dimension(100, 20));
-				
-				Component horizontalStrut_2 = Box.createHorizontalStrut(40);
-				horizontalBox_2.add(horizontalStrut_2);
 				
 						dateChooser.getDateEditor().addPropertyChangeListener(
 								new PropertyChangeListener() {
@@ -102,6 +92,9 @@ public class EspectaclePanel extends JPanel {
 										}
 									}
 								});
+		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		horizontalBox_1.add(horizontalStrut_1);
 
 		Component verticalStrut = Box.createVerticalStrut(150);
 		verticalBox.add(verticalStrut);
@@ -109,6 +102,7 @@ public class EspectaclePanel extends JPanel {
 		/***** DataChooser *****/
 
 		Box horizontalBox = Box.createHorizontalBox();
+		horizontalBox.setBorder(new EmptyBorder(10, 0, 0, 0));
 		add(horizontalBox, BorderLayout.SOUTH);
 
 		JLabel MessageAreaLbl = new JLabel("");

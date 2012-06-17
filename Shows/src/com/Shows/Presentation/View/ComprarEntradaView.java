@@ -98,7 +98,9 @@ public class ComprarEntradaView extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		horizontalBox = Box.createHorizontalBox();
+		horizontalBox.setBorder(new EmptyBorder(10, 0, 20, 0));
 		contentPane.add(horizontalBox, BorderLayout.NORTH);
+		centerPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 		contentPane.add(centerPanel);
 

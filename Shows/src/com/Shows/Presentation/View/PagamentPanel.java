@@ -24,6 +24,7 @@ import com.Shows.Domain.Model.ShowsCom;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.Shows.TupleTypes.DadesEntrada;
+import javax.swing.border.EmptyBorder;
 
 public class PagamentPanel extends JPanel implements PropertyChangeListener {
 
@@ -170,6 +171,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		verticalBox_1.add(verticalStrut_2);
 
 		Box horizontalBox_11 = Box.createHorizontalBox();
+		horizontalBox_11.setBorder(new EmptyBorder(10, 0, 0, 0));
 		add(horizontalBox_11, BorderLayout.SOUTH);
 
 		JLabel MessageAreaLbl = new JLabel("");

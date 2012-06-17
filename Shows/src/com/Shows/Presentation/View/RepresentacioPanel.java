@@ -26,6 +26,7 @@ import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.CheckBoxRenderer;
 import com.Shows.TupleTypes.DadesRepresentacio;
+import javax.swing.border.EmptyBorder;
 
 public class RepresentacioPanel extends JPanel {
 
@@ -59,24 +60,30 @@ public class RepresentacioPanel extends JPanel {
 		verticalBox.add(horizontalBox_2);
 
 		Box verticalBox_1 = Box.createVerticalBox();
+		verticalBox_1.setBorder(new EmptyBorder(0, 0, 0, 10));
 		horizontalBox_2.add(verticalBox_1);
 
 		JLabel EspectacleLbl = new JLabel("Espectacle:");
+		EspectacleLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalBox_1.add(EspectacleLbl);
 
 		nomEspectacleLabel = new JLabel("New Label");
+		nomEspectacleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalBox_1.add(nomEspectacleLabel);
 
 		JLabel DataLbl = new JLabel("Data:");
+		DataLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalBox_1.add(DataLbl);
 
 		dataEspectacleLabel = new JLabel("New Label");
+		dataEspectacleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalBox_1.add(dataEspectacleLabel);
 
 		Component verticalStrut = Box.createVerticalStrut(80);
 		verticalBox_1.add(verticalStrut);
 
 		JLabel NombreEspectadorsLbl = new JLabel("Nombre d'espectadors:");
+		NombreEspectadorsLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalBox_1.add(NombreEspectadorsLbl);
 
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
@@ -96,6 +103,7 @@ public class RepresentacioPanel extends JPanel {
 		horizontalBox_2.add(scrollPaneRepresentacioTable);
 
 		Box horizontalBox = Box.createHorizontalBox();
+		horizontalBox.setBorder(new EmptyBorder(10, 0, 0, 0));
 		horizontalBox.setAlignmentX(RIGHT_ALIGNMENT);
 		add(horizontalBox, BorderLayout.SOUTH);
 		JLabel MessageAreaLbl = new JLabel("");
