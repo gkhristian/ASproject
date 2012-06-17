@@ -36,7 +36,7 @@ public class ComprarEntradaUseCaseController {
 
 	private Set<PosicioSeient> seients;
 	private float preuTotal;
-
+	boolean preuAssignat;
 	private ControllerDataFactory controllerDataFactory = ControllerDataFactory
 			.getInstance();
 
@@ -46,6 +46,7 @@ public class ComprarEntradaUseCaseController {
 	public void init() {
 		seients = new HashSet<PosicioSeient>();
 		preuTotal = 0;
+		preuAssignat = false;
 	}
 
 	public Set<String> obteEspectacles() {
@@ -103,15 +104,13 @@ public class ComprarEntradaUseCaseController {
 		Set<String> canvis = showsCom.getCanvis();
 
 		canvis.add(showsCom.getDivisa().toString());
-
-		float preuTotal = this.preuTotal + comisio + recarec;
-
+		
+		float preuTotal= representacio.obtePreu() + comisio + recarec;
 		DadesEntrada dadesEntrada = new DadesEntrada(preuTotal
-				* consultaOcupacioUseCaseController.getNombEspectadors(),
-				canvis);
-		// TODO la comisión y el recargo se aplica por cada espectador???
-		this.preuTotal = preuTotal
-				* consultaOcupacioUseCaseController.getNombEspectadors();
+				*consultaOcupacioUseCaseController.getNombEspectadors(),canvis);
+
+		// TODO la comisión y el recargo se aplica por cada espectador??? DE MOMENTO SI
+		this.preuTotal = preuTotal;
 
 		return dadesEntrada;
 	}
