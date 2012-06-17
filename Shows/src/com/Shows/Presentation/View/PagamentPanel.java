@@ -24,7 +24,6 @@ import com.Shows.Domain.Model.ShowsCom;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.Shows.TupleTypes.DadesEntrada;
-import javax.swing.border.EmptyBorder;
 
 public class PagamentPanel extends JPanel implements PropertyChangeListener {
 
@@ -141,20 +140,6 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		JLabel TotsSeientsLbl = new JLabel("New label");
 		horizontalBox_7.add(TotsSeientsLbl);
 
-		Box horizontalBox_9 = Box.createHorizontalBox();
-		horizontalBox_9.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox.add(horizontalBox_9);
-
-		JLabel PreuTotalLbl = new JLabel("Preu Total:");
-		horizontalBox_9.add(PreuTotalLbl);
-
-		preuTotalEurosLabel = new JLabel("");
-		horizontalBox_9.add(preuTotalEurosLabel);
-
-		monedaComboBox = new JComboBox();
-		monedaComboBox.setRenderer(new PromptComboBoxRenderer("Divisa..."));
-		horizontalBox_9.add(monedaComboBox);
-
 		Box verticalBox_1 = Box.createVerticalBox();
 		horizontalBox.add(verticalBox_1);
 
@@ -167,27 +152,6 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		JLabel DniLbl = new JLabel("DNI:");
 		horizontalBox_10.add(DniLbl);
 
-		Component verticalStrut_2 = Box.createVerticalStrut(30);
-		verticalBox_1.add(verticalStrut_2);
-
-		Box horizontalBox_11 = Box.createHorizontalBox();
-		horizontalBox_11.setBorder(new EmptyBorder(10, 0, 0, 0));
-		add(horizontalBox_11, BorderLayout.SOUTH);
-
-		JLabel MessageAreaLbl = new JLabel("");
-		horizontalBox_11.add(MessageAreaLbl);
-
-		Component horizontalGlue = Box.createHorizontalGlue();
-		horizontalBox_11.add(horizontalGlue);
-
-		continuaButton = new JButton("Continua");
-		continuaButton.setEnabled(false);
-		horizontalBox_11.add(continuaButton);
-
-		JButton cancelaButton = new JButton("Cancel\u00B7la");
-		horizontalBox_11.add(cancelaButton);
-
-		// 2100 2458 78 01 00376373
 		MaskFormatter DNIMaskFormatter = null;
 		MaskFormatter bankMaskFormatter = null;
 		MaskFormatter compteMaskFormatter = null;
@@ -210,6 +174,9 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		horizontalBox_10.add(numeroDniFormattedTextField);
 		numeroDniFormattedTextField.setColumns(9);
 
+		Component verticalStrut_2 = Box.createVerticalStrut(30);
+		verticalBox_1.add(verticalStrut_2);
+
 		Component verticalStrut_1 = Box.createVerticalStrut(30);
 		verticalBox_1.add(verticalStrut_1);
 
@@ -228,6 +195,36 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		compteFormattedTextField.addPropertyChangeListener("value", this);
 		horizontalBox_12.add(compteFormattedTextField);
 		compteFormattedTextField.setColumns(16);
+
+		Box horizontalBox_9 = Box.createHorizontalBox();
+		verticalBox_1.add(horizontalBox_9);
+		horizontalBox_9.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+		JLabel PreuTotalLbl = new JLabel("Preu Total:");
+		horizontalBox_9.add(PreuTotalLbl);
+
+		preuTotalEurosLabel = new JLabel("");
+		horizontalBox_9.add(preuTotalEurosLabel);
+
+		monedaComboBox = new JComboBox();
+		monedaComboBox.setRenderer(new PromptComboBoxRenderer("Divisa..."));
+		horizontalBox_9.add(monedaComboBox);
+
+		Box horizontalBox_11 = Box.createHorizontalBox();
+		add(horizontalBox_11, BorderLayout.SOUTH);
+
+		JLabel MessageAreaLbl = new JLabel("");
+		horizontalBox_11.add(MessageAreaLbl);
+
+		Component horizontalGlue = Box.createHorizontalGlue();
+		horizontalBox_11.add(horizontalGlue);
+
+		continuaButton = new JButton("Continua");
+		continuaButton.setEnabled(false);
+		horizontalBox_11.add(continuaButton);
+
+		JButton cancelaButton = new JButton("Cancel\u00B7la");
+		horizontalBox_11.add(cancelaButton);
 
 		continuaButton.addActionListener(new ActionListener() {
 
@@ -282,10 +279,10 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 						comprarEntradaController
 								.canviPreuMoneda((String) monedaComboBox
 										.getSelectedItem());
-						
+
 						monedaComboBoxSelectetItem = monedaComboBox
 								.getSelectedItem();
-						
+
 					} catch (ServeiNoDisponible serveiNoDisponible) {
 						comprarEntradaView.mostraMissatge(serveiNoDisponible
 								.getMessage());

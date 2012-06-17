@@ -109,7 +109,7 @@ public class ComprarEntradaUseCaseController {
 		DadesEntrada dadesEntrada = new DadesEntrada(preuTotal
 				* consultaOcupacioUseCaseController.getNombEspectadors(),
 				canvis);
-		// HERE!
+		// TODO la comisión y el recargo se aplica por cada espectador???
 		this.preuTotal = preuTotal
 				* consultaOcupacioUseCaseController.getNombEspectadors();
 
