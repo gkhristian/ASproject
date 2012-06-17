@@ -13,7 +13,6 @@ public class ComprarEntradaPanel extends JPanel {
 
 		ComparEntradabtn = new JButton("Comprar Entrada");
 		add(ComparEntradabtn);
-
 	}
 
 	public JButton getComparEntradabtn() {

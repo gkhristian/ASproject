@@ -1,6 +1,7 @@
 package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,16 +15,19 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import com.Shows.Domain.Exceptions.SeientsNoOk;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Component.JSeient;
 import com.Shows.TupleTypes.PosicioSeient;
-import javax.swing.border.EmptyBorder;
 
 public class SeientsPanel extends JPanel {
 
 	private static final long serialVersionUID = -8834919801528392136L;
+
+	private ComprarEntradaController comprarEntradaController;
 
 	private JPanel seientsPanel;
 
@@ -39,6 +43,8 @@ public class SeientsPanel extends JPanel {
 	public SeientsPanel(
 			final ComprarEntradaController comprarEntradaController,
 			final ComprarEntradaView comprarEntradaView) {
+
+		this.comprarEntradaController = comprarEntradaController;
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -147,6 +153,8 @@ public class SeientsPanel extends JPanel {
 		verticalBox_1.add(verticalGlue);
 
 		seientsPanel = new JPanel();
+		seientsPanel.setBorder(new LineBorder(Color.BLACK));
+
 		verticalBox_1.add(seientsPanel);
 
 		Component verticalGlue_1 = Box.createVerticalGlue();
@@ -216,12 +224,23 @@ public class SeientsPanel extends JPanel {
 
 		seientsPanel.setLayout(new GridLayout(maxFila, maxColumna));
 
+		seientsPanel.setBackground(comprarEntradaController
+				.getBackgroundColor());
+
 		for (int m = 0; m < maxFila; m++) {
 			for (int n = 0; n < maxColumna; n++) {
 				panelHolder[m][n] = new JPanel();
+
 				holder[m][n] = new JSeient(new PosicioSeient(m + 1, n + 1));
 				holder[m][n].setEnabled(false);
+
 				panelHolder[m][n].add(holder[m][n]);
+
+				holder[m][n].setBackground(comprarEntradaController
+						.getBackgroundColor());
+				panelHolder[m][n].setBackground(comprarEntradaController
+						.getBackgroundColor());
+
 				seientsPanel.add(panelHolder[m][n]);
 			}
 		}

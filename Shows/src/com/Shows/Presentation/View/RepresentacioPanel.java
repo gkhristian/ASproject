@@ -2,8 +2,13 @@ package com.Shows.Presentation.View;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Set;
@@ -17,16 +22,17 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatter;
 
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.CheckBoxRenderer;
 import com.Shows.TupleTypes.DadesRepresentacio;
-import javax.swing.border.EmptyBorder;
 
 public class RepresentacioPanel extends JPanel {
 
@@ -79,19 +85,8 @@ public class RepresentacioPanel extends JPanel {
 		dataEspectacleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalBox_1.add(dataEspectacleLabel);
 
-		Component verticalStrut = Box.createVerticalStrut(80);
-		verticalBox_1.add(verticalStrut);
-
-		JLabel NombreEspectadorsLbl = new JLabel("Nombre d'espectadors:");
-		NombreEspectadorsLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
-		verticalBox_1.add(NombreEspectadorsLbl);
-
-		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		verticalBox_1.add(verticalStrut_1);
-
-		nombreEspectadorsSpinner = new JSpinner();
-		nombreEspectadorsSpinner.setModel(new SpinnerNumberModel(0, 0, 25, 1));
-		verticalBox_1.add(nombreEspectadorsSpinner);
+		Box verticalBox_2 = Box.createVerticalBox();
+		horizontalBox_2.add(verticalBox_2);
 
 		/**** JTable *****/
 		representacionsTable = new JTable();
@@ -100,15 +95,67 @@ public class RepresentacioPanel extends JPanel {
 
 		JScrollPane scrollPaneRepresentacioTable = new JScrollPane(
 				representacionsTable);
-		horizontalBox_2.add(scrollPaneRepresentacioTable);
+		verticalBox_2.add(scrollPaneRepresentacioTable);
+
+		Box horizontalBox_3 = Box.createHorizontalBox();
+		horizontalBox_3.setBorder(new EmptyBorder(10, 0, 0, 0));
+		verticalBox_2.add(horizontalBox_3);
+
+		JLabel NombreEspectadorsLbl = new JLabel("Nombre d'espectadors:");
+		horizontalBox_3.add(NombreEspectadorsLbl);
+		NombreEspectadorsLbl.setBorder(new EmptyBorder(0, 0, 0, 10));
+		NombreEspectadorsLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		nombreEspectadorsSpinner = new JSpinner();
+		horizontalBox_3.add(nombreEspectadorsSpinner);
+
+		((DefaultFormatter) ((JSpinner.DefaultEditor) nombreEspectadorsSpinner
+				.getEditor()).getTextField().getFormatter())
+				.setAllowsInvalid(false);
+
+		nombreEspectadorsSpinner.setMinimumSize(new Dimension(100, 30));
+		nombreEspectadorsSpinner.setPreferredSize(new Dimension(50, 30));
+		nombreEspectadorsSpinner.setMaximumSize(new Dimension(100, 30));
+		nombreEspectadorsSpinner.setModel(new SpinnerNumberModel(0, 0, 99, 1));
+		
+		Component horizontalGlue_1 = Box.createHorizontalGlue();
+		horizontalBox_3.add(horizontalGlue_1);
+
+		nombreEspectadorsSpinner.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent changeEvent) {
+				setEnableContinua();
+			}
+		});
+
+		/***** No parece funcionar *****/
+		nombreEspectadorsSpinner.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent keyEvent) {
+				setEnableContinua();
+			}
+		});
+
+		nombreEspectadorsSpinner
+				.addInputMethodListener(new InputMethodListener() {
+
+					@Override
+					public void inputMethodTextChanged(InputMethodEvent event) {
+						setEnableContinua();
+					}
+
+					@Override
+					public void caretPositionChanged(InputMethodEvent event) {
+						setEnableContinua();
+					}
+				});
+		/***/
 
 		Box horizontalBox = Box.createHorizontalBox();
 		horizontalBox.setBorder(new EmptyBorder(10, 0, 0, 0));
 		horizontalBox.setAlignmentX(RIGHT_ALIGNMENT);
 		add(horizontalBox, BorderLayout.SOUTH);
-		JLabel MessageAreaLbl = new JLabel("");
-		MessageAreaLbl.setAlignmentX(RIGHT_ALIGNMENT);
-		horizontalBox.add(MessageAreaLbl);
 
 		Component horizontalGlue = Box.createHorizontalGlue();
 		horizontalBox.add(horizontalGlue);
@@ -152,14 +199,6 @@ public class RepresentacioPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				comprarEntradaController.PrCancellar();
-			}
-		});
-
-		nombreEspectadorsSpinner.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent changeEvent) {
-				setEnableContinua();
 			}
 		});
 	}

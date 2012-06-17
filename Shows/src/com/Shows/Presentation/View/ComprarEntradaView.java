@@ -37,8 +37,9 @@ public class ComprarEntradaView extends JFrame {
 	private static final int SEIENTS = REPRESENTACIONS + 1;
 	private static final int PAGAMENT = SEIENTS + 1;
 
-	private static final String[] flowNames = { "Comprar Entrada",
-			"Espectacles", "Representacions", "Seients", "Pagament" };
+	// TODO nombres apropiados para el flow
+	private static final String[] flowNames = { "Inici??", "Espectacles",
+			"Representacions", "Seients??", "Pagament??" };
 
 	private ComprarEntradaController comprarEntradaController;
 	/**
@@ -56,6 +57,7 @@ public class ComprarEntradaView extends JFrame {
 
 	private Box horizontalBox;
 	private ArrayList<JLabel> navigationLabels;
+	private ArrayList<Box> navigationHorizontalBox;
 
 	private int width = 600;
 	private int heigth = 400;
@@ -65,6 +67,7 @@ public class ComprarEntradaView extends JFrame {
 	 */
 	public ComprarEntradaView(
 			final ComprarEntradaController comprarEntradaController) {
+
 		this.comprarEntradaController = comprarEntradaController;
 
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -91,14 +94,27 @@ public class ComprarEntradaView extends JFrame {
 		pagamentPanel = new PagamentPanel(comprarEntradaController, this);
 		comprarEntradaPanel = new ComprarEntradaPanel();
 
+		Color backgroundColor = comprarEntradaController.getBackgroundColor();
+
+		espectaclePanel.setBackground(backgroundColor);
+		representacioPanel.setBackground(backgroundColor);
+		seientsPanel.setBackground(backgroundColor);
+		pagamentPanel.setBackground(backgroundColor);
+		comprarEntradaPanel.setBackground(backgroundColor);
+
+		centerPanel.setBackground(backgroundColor);
+
+		setBackground(backgroundColor);
+
 		setVisible(true);
 
 		contentPane = new JPanel();
+		contentPane.setBackground(backgroundColor);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		horizontalBox = Box.createHorizontalBox();
-		horizontalBox.setBorder(new EmptyBorder(10, 0, 20, 0));
+		horizontalBox.setBorder(new EmptyBorder(10, 0, 10, 0));
 		contentPane.add(horizontalBox, BorderLayout.NORTH);
 		centerPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
@@ -128,25 +144,37 @@ public class ComprarEntradaView extends JFrame {
 		});
 
 		navigationLabels = new ArrayList<JLabel>(5);
+		navigationHorizontalBox = new ArrayList<Box>(5);
 
 		for (int i = 0; i < 5; i++) {
 			JLabel jLabel = new JLabel(flowNames[i]);
+			Box hBox = Box.createHorizontalBox();
+
+			if (i != 0) {
+				JLabel indicatorLabel = new JLabel(">");
+				indicatorLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
+				hBox.add(indicatorLabel);
+			}
+			hBox.add(jLabel);
 			navigationLabels.add(jLabel);
+			navigationHorizontalBox.add(hBox);
 			jLabel.setEnabled(false);
-			jLabel.setVisible(false);
 			jLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
+			hBox.setVisible(false);
 
 			jLabel.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseReleased(MouseEvent mouseEvent) {
+
 					JLabel jLabel = (JLabel) mouseEvent.getComponent();
 					setFlowState(navigationLabels.indexOf(jLabel));
 				}
 
 				@Override
 				public void mouseEntered(MouseEvent mouseEvent) {
+
 					JLabel jLabel = (JLabel) mouseEvent.getComponent();
-					jLabel.setForeground(new Color(0.2f, 0.3f, 0.7f));
+					jLabel.setForeground(new Color(163, 184, 204));
 					if (jLabel.isEnabled())
 						ComprarEntradaView.this.setCursor(new Cursor(
 								Cursor.HAND_CURSOR));
@@ -154,6 +182,7 @@ public class ComprarEntradaView extends JFrame {
 
 				@Override
 				public void mouseExited(MouseEvent mouseEvent) {
+
 					JLabel jLabel = (JLabel) mouseEvent.getComponent();
 					jLabel.setForeground(Color.BLACK);
 					if (jLabel.isEnabled())
@@ -162,7 +191,7 @@ public class ComprarEntradaView extends JFrame {
 				}
 			});
 
-			horizontalBox.add(jLabel);
+			horizontalBox.add(hBox);
 		}
 		setFlowState(COMPRAR_ENTRADA);
 	}
@@ -173,7 +202,7 @@ public class ComprarEntradaView extends JFrame {
 
 		for (int i = 0; i < 5; i++) {
 			navigationLabels.get(i).setEnabled((i < flowState));
-			navigationLabels.get(i).setVisible((i <= flowState));
+			navigationHorizontalBox.get(i).setVisible((i <= flowState));
 		}
 
 		card.show(centerPanel, flowNames[flowState]);

@@ -16,12 +16,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.toedter.calendar.JDateChooser;
-import javax.swing.border.EmptyBorder;
 
 public class EspectaclePanel extends JPanel {
 
@@ -42,7 +43,7 @@ public class EspectaclePanel extends JPanel {
 			final ComprarEntradaView comprarEntradaView) {
 
 		setLayout(new BorderLayout(0, 0));
-
+		
 		Box verticalBox = Box.createVerticalBox();
 		add(verticalBox);
 
@@ -52,47 +53,58 @@ public class EspectaclePanel extends JPanel {
 		Box horizontalBox_1 = Box.createHorizontalBox();
 		horizontalBox_1.setAlignmentY(Component.CENTER_ALIGNMENT);
 		verticalBox.add(horizontalBox_1);
-		
+
 		Component horizontalStrut = Box.createHorizontalStrut(10);
 		horizontalBox_1.add(horizontalStrut);
 
 		JLabel seleccioniEspectacleLabel = new JLabel(
 				"Seleccioni espectacle i data: ");
+		seleccioniEspectacleLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
 		horizontalBox_1.add(seleccioniEspectacleLabel);
 
 		espectacleComboBox = new JComboBox();
+		espectacleComboBox.setPreferredSize(new Dimension(150, 22));
+		espectacleComboBox.setMaximumSize(new Dimension(150, 22));
 		espectacleComboBox.setToolTipText("Espectacles");
 		espectacleComboBox.setMaximumRowCount(30);
-		espectacleComboBox.setMinimumSize(new Dimension(100, 20));
+		espectacleComboBox.setMinimumSize(new Dimension(150, 22));
 
 		espectacleComboBox.setRenderer(new PromptComboBoxRenderer(
 				"Espectacle..."));
 
 		horizontalBox_1.add(espectacleComboBox);
 		dateChooser = new JDateChooser();
-		dateChooser.setBorder(new EmptyBorder(0, 20, 0, 0));
+		dateChooser.setPreferredSize(new Dimension(170, 22));
+		dateChooser.setMaximumSize(new Dimension(170, 22));
+		JTextField dateEditor = (JTextField) dateChooser.getDateEditor()
+				.getUiComponent();
+		dateEditor.setEditable(false);
+		
+		Component horizontalStrut_2 = Box.createHorizontalStrut(10);
+		horizontalBox_1.add(horizontalStrut_2);
+
 		horizontalBox_1.add(dateChooser);
 		dateChooser.setAlignmentX(Component.LEFT_ALIGNMENT);
-		
-				dateChooser.setMinimumSize(new Dimension(100, 20));
-				
-						dateChooser.getDateEditor().addPropertyChangeListener(
-								new PropertyChangeListener() {
-				
-									@Override
-									public void propertyChange(
-											PropertyChangeEvent propertyChangeEvent) {
-										if ("date".equals(propertyChangeEvent.getPropertyName())) {
-											System.out.println(propertyChangeEvent
-													.getPropertyName()
-													+ ": "
-													+ (java.util.Date) propertyChangeEvent
-															.getNewValue());
-											setEnableContinua();
-										}
-									}
-								});
-		
+
+		dateChooser.setMinimumSize(new Dimension(170, 22));
+
+		dateChooser.getDateEditor().addPropertyChangeListener(
+				new PropertyChangeListener() {
+
+					@Override
+					public void propertyChange(
+							PropertyChangeEvent propertyChangeEvent) {
+						if ("date".equals(propertyChangeEvent.getPropertyName())) {
+							System.out.println(propertyChangeEvent
+									.getPropertyName()
+									+ ": "
+									+ (java.util.Date) propertyChangeEvent
+											.getNewValue());
+							setEnableContinua();
+						}
+					}
+				});
+
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		horizontalBox_1.add(horizontalStrut_1);
 

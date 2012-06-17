@@ -1,5 +1,6 @@
 package com.Shows.Presentation.Controller;
 
+import java.awt.Color;
 import java.sql.Date;
 import java.util.Set;
 
@@ -14,10 +15,15 @@ import com.Shows.Presentation.View.ComprarEntradaView;
 import com.Shows.TupleTypes.PosicioSeient;
 
 public class ComprarEntradaController {
+
 	private ComprarEntradaUseCaseController comprarEntradaUseCaseController;
 	private ComprarEntradaView comprarEntradaView;
 
+	private Color backgroundColor;
+
 	public ComprarEntradaController() {
+
+		backgroundColor = new Color(250, 250, 250);
 
 		comprarEntradaUseCaseController = new ComprarEntradaUseCaseController();
 
@@ -75,5 +81,9 @@ public class ComprarEntradaController {
 
 		comprarEntradaView.mostraPreuMoneda(comprarEntradaUseCaseController
 				.obtePreuMoneda(moneda));
+	}
+
+	public Color getBackgroundColor() {
+		return backgroundColor;
 	}
 }
