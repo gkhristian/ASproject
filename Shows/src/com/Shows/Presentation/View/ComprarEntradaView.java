@@ -133,9 +133,10 @@ public class ComprarEntradaView extends JFrame {
 		centerPanel.add(seientsPanel, flowNames[3]);
 		centerPanel.add(pagamentPanel, flowNames[4]);
 
-		JButton nuevo = comprarEntradaPanel.getComparEntradabtn();
+		JButton comparEntradaButton = comprarEntradaPanel
+				.getComparEntradaButton();
 
-		nuevo.addMouseListener(new MouseAdapter() {
+		comparEntradaButton.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent mouseEvent) {

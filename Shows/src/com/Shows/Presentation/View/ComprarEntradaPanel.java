@@ -7,15 +7,15 @@ public class ComprarEntradaPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JButton ComparEntradabtn;
+	private JButton comparEntradaButton;
 
 	public ComprarEntradaPanel() {
 
-		ComparEntradabtn = new JButton("Comprar Entrada");
-		add(ComparEntradabtn);
+		comparEntradaButton = new JButton("Comprar Entrada");
+		add(comparEntradaButton);
 	}
 
-	public JButton getComparEntradabtn() {
-		return ComparEntradabtn;
+	public JButton getComparEntradaButton() {
+		return comparEntradaButton;
 	}
 }

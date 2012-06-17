@@ -32,6 +32,7 @@ public class ComprarEntradaController {
 
 	public void PrComprarEntrada() {
 
+		comprarEntradaUseCaseController.init();
 		comprarEntradaView.mostraEspectacles(comprarEntradaUseCaseController
 				.obteEspectacles());
 	}

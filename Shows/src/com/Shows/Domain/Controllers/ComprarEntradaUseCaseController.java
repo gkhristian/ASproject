@@ -43,6 +43,11 @@ public class ComprarEntradaUseCaseController {
 	private ConsultaRepresentacioUseCaseController consultaRepresentacioUseCaseController;
 	private ConsultaOcupacioUseCaseController consultaOcupacioUseCaseController;
 
+	public void init() {
+		seients = new HashSet<PosicioSeient>();
+		preuTotal = 0;
+	}
+
 	public Set<String> obteEspectacles() {
 		IControllerEspectacle controllerEspectacle = controllerDataFactory
 				.getControllerEspectacle();
@@ -78,7 +83,8 @@ public class ComprarEntradaUseCaseController {
 			throws SeientsNoOk {
 		if (seients.size() != consultaOcupacioUseCaseController
 				.getNombEspectadors())
-			throw new SeientsNoOk("El nombre de seients no és igual al nombre d'espectadors de l'entrada");
+			throw new SeientsNoOk(
+					"El nombre de seients no és igual al nombre d'espectadors de l'entrada");
 
 		this.seients = seients;
 
@@ -103,8 +109,9 @@ public class ComprarEntradaUseCaseController {
 		DadesEntrada dadesEntrada = new DadesEntrada(preuTotal
 				* consultaOcupacioUseCaseController.getNombEspectadors(),
 				canvis);
-//HERE!
-		this.preuTotal = preuTotal*consultaOcupacioUseCaseController.getNombEspectadors();
+		// HERE!
+		this.preuTotal = preuTotal
+				* consultaOcupacioUseCaseController.getNombEspectadors();
 
 		return dadesEntrada;
 	}
