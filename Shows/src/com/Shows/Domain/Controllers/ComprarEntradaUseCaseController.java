@@ -40,7 +40,7 @@ public class ComprarEntradaUseCaseController {
 	private ControllerDataFactory controllerDataFactory = ControllerDataFactory
 			.getInstance();
 
-	private ConsultaRepresentacioUseCaseController consultaRepresentacioUseCaseController;
+	private ConsultaRepresentacionsUseCaseController consultaRepresentacionsUseCaseController;
 	private ConsultaOcupacioUseCaseController consultaOcupacioUseCaseController;
 
 	public void init() {
@@ -64,8 +64,8 @@ public class ComprarEntradaUseCaseController {
 	public Set<DadesRepresentacio> obteRepresentacions(final String titol,
 			final Date data) throws NoHiHaRepresentacions {
 
-		consultaRepresentacioUseCaseController = new ConsultaRepresentacioUseCaseController();
-		return consultaRepresentacioUseCaseController.obteRepresentacions(
+		consultaRepresentacionsUseCaseController = new ConsultaRepresentacionsUseCaseController();
+		return consultaRepresentacionsUseCaseController.obteRepresentacions(
 				titol, data);
 	}
 
@@ -77,7 +77,7 @@ public class ComprarEntradaUseCaseController {
 
 		return consultaOcupacioUseCaseController.obteOcupacio(nomLocal, sessio,
 				nombEspectadors,
-				consultaRepresentacioUseCaseController.getData());
+				consultaRepresentacionsUseCaseController.getData());
 	}
 
 	public DadesEntrada selecionarSeients(final Set<PosicioSeient> seients)
@@ -95,7 +95,7 @@ public class ComprarEntradaUseCaseController {
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
 				consultaOcupacioUseCaseController.getNomLocal(),
 				consultaOcupacioUseCaseController.getSessio(),
-				consultaRepresentacioUseCaseController.getData());
+				consultaRepresentacionsUseCaseController.getData());
 
 		ShowsCom showsCom = ShowsCom.getInstance();
 
@@ -146,12 +146,12 @@ public class ComprarEntradaUseCaseController {
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
 				consultaOcupacioUseCaseController.getNomLocal(),
 				consultaOcupacioUseCaseController.getSessio(),
-				consultaRepresentacioUseCaseController.getData());
+				consultaRepresentacionsUseCaseController.getData());
 
 		Entrada entrada = representacio.createEntrada(
-				consultaRepresentacioUseCaseController.getTitol(), dni,
+				consultaRepresentacionsUseCaseController.getTitol(), dni,
 				consultaOcupacioUseCaseController.getNombEspectadors(),
-				consultaRepresentacioUseCaseController.getData(),
+				consultaRepresentacionsUseCaseController.getData(),
 				this.preuTotal);
 
 		Session session = HibernateUtil.getSession();

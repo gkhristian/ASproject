@@ -8,7 +8,7 @@ import com.Shows.Data.Interfaces.IControllerEspectacle;
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
-public class ConsultaRepresentacioUseCaseController {
+public class ConsultaRepresentacionsUseCaseController {
 	
 	private String titol;
 	private Date data;

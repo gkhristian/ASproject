@@ -32,7 +32,6 @@ public class EspectaclePanel extends JPanel {
 
 	private JButton continuaButton;
 	private JButton cancelaButton;
-
 	/**
 	 * Create the frame.
 	 * 
@@ -40,7 +39,7 @@ public class EspectaclePanel extends JPanel {
 	 */
 	public EspectaclePanel(
 			final ComprarEntradaController comprarEntradaController,
-			final ComprarEntradaView comprarEntradaView) {
+			final IniciView iniciView) {
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -84,10 +83,10 @@ public class EspectaclePanel extends JPanel {
 		horizontalBox_1.add(horizontalStrut_2);
 
 		horizontalBox_1.add(dateChooser);
-		dateChooser.setAlignmentX(Component.LEFT_ALIGNMENT);
+		dateChooser.setAlignmentX(Component.LEFT_ALIGNMENT);		
 
 		dateChooser.setMinimumSize(new Dimension(170, 22));
-
+		
 		dateChooser.getDateEditor().addPropertyChangeListener(
 				new PropertyChangeListener() {
 
@@ -100,6 +99,7 @@ public class EspectaclePanel extends JPanel {
 									+ ": "
 									+ (java.util.Date) propertyChangeEvent
 											.getNewValue());
+							
 							setEnableContinua();
 						}
 					}
@@ -126,6 +126,9 @@ public class EspectaclePanel extends JPanel {
 		continuaButton = new JButton("Continua");
 		continuaButton.setEnabled(false);
 		horizontalBox.add(continuaButton);
+		
+		Component horizontalStrut_3 = Box.createHorizontalStrut(10);
+		horizontalBox.add(horizontalStrut_3);
 
 		cancelaButton = new JButton("Cancel\u00B7la");
 		horizontalBox.add(cancelaButton);
@@ -138,16 +141,23 @@ public class EspectaclePanel extends JPanel {
 					java.sql.Date date = new java.sql.Date(dateChooser
 							.getDate().getTime());
 
-					comprarEntradaView.setRepresentacionsString(
+					iniciView.setRepresentacionsString(
 							espectacleComboBox.getSelectedItem().toString(),
 							date.toString());
 
 					comprarEntradaController.PrOkObteRepresentacions(
 							espectacleComboBox.getSelectedItem().toString(),
 							date);
+					
+					
+					// TODO data
+					/*if (dataAvui.after(date)) iniciView.mostraMissatge("mal");
+					else {
+						continuaButton.setEnabled(true);
+					}*/
 
 				} catch (NoHiHaRepresentacions noHiHaRepresentacions) {
-					comprarEntradaView.mostraMissatge(noHiHaRepresentacions
+					iniciView.mostraMissatge(noHiHaRepresentacions
 							.getMessage());
 					// noHiHaRepresentacions.printStackTrace();
 				}

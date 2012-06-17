@@ -3,6 +3,7 @@ package com.Shows.Presentation.View;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -31,7 +32,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 	private static final long serialVersionUID = 1L;
 
 	private ComprarEntradaController comprarEntradaController;
-	private ComprarEntradaView comprarEntradaView;
+	private IniciView iniciView;
 
 	private JFormattedTextField numeroDniFormattedTextField;
 	private JFormattedTextField bancFormattedTextField;
@@ -48,14 +49,14 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 	/**
 	 * Create the frame.
 	 * 
-	 * @param comprarEntradaView
+	 * @param iniciView
 	 */
 	public PagamentPanel(
 			final ComprarEntradaController comprarEntradaController,
-			final ComprarEntradaView comprarEntradaView) {
+			final IniciView iniciView) {
 
 		this.comprarEntradaController = comprarEntradaController;
-		this.comprarEntradaView = comprarEntradaView;
+		this.iniciView = iniciView;
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -108,7 +109,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 
 		compteFormattedTextField = new JFormattedTextField(compteMaskFormatter);
 		compteFormattedTextField.addPropertyChangeListener("value", this);
-		
+
 		Component horizontalStrut_1 = Box.createHorizontalStrut(10);
 		horizontalBox_12.add(horizontalStrut_1);
 		horizontalBox_12.add(compteFormattedTextField);
@@ -122,6 +123,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		horizontalBox_9.add(horizontalGlue_1);
 
 		JLabel PreuTotalLbl = new JLabel("Preu Total:");
+		PreuTotalLbl.setFont(new Font("Arial", Font.BOLD, 16));
 		PreuTotalLbl.setBorder(new EmptyBorder(0, 0, 0, 10));
 		horizontalBox_9.add(PreuTotalLbl);
 
@@ -132,7 +134,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		monedaComboBox = new JComboBox();
 		monedaComboBox.setRenderer(new PromptComboBoxRenderer("Divisa..."));
 		horizontalBox_9.add(monedaComboBox);
-		
+
 		Component verticalStrut_1 = Box.createVerticalStrut(160);
 		verticalBox_1.add(verticalStrut_1);
 
@@ -149,7 +151,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 		continuaButton = new JButton("Continua");
 		continuaButton.setEnabled(false);
 		horizontalBox_11.add(continuaButton);
-		
+
 		Component horizontalStrut = Box.createHorizontalStrut(10);
 		horizontalBox_11.add(horizontalStrut);
 
@@ -167,8 +169,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 									.toString()), compteFormattedTextField
 									.getValue().toString());
 				} catch (PagamentNoAutoritzat pagamentNoAutoritzat) {
-					comprarEntradaView.mostraMissatge(pagamentNoAutoritzat
-							.getMessage());
+					iniciView.mostraMissatge(pagamentNoAutoritzat.getMessage());
 					pagamentNoAutoritzat.printStackTrace();
 				}
 
@@ -214,7 +215,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 								.getSelectedItem();
 
 					} catch (ServeiNoDisponible serveiNoDisponible) {
-						comprarEntradaView.mostraMissatge(serveiNoDisponible
+						iniciView.mostraMissatge(serveiNoDisponible
 								.getMessage());
 						// serveiNoDisponible.printStackTrace();
 					}
