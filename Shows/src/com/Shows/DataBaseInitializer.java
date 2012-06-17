@@ -113,9 +113,9 @@ public class DataBaseInitializer {
 		Representacio rep1 = new Representacio(ses1, local1, preu1, data1,
 				lliures1);
 
-		Estrena est1 = new Estrena(ses2, local2, preu2, data2, lliures2, 10);
+		Estrena est1 = new Estrena(ses2, local2, preu2, data2, lliures2, 5);
 		Estrena est2 = new Estrena(ses1, local2_2, preu2, data2, lliures2_2_1,
-				10);
+				5);
 		Representacio rep2 = new Representacio(ses2, local2_3, preu2, data2,
 				lliures2_3);
 		Representacio rep3 = new Representacio(ses3, local2_2, preu2, data2,
@@ -171,7 +171,7 @@ public class DataBaseInitializer {
 		
 		SetMoneda setMoneda = new SetMoneda(canvis);
 
-		ShowsCom showscom = new ShowsCom(1, 12121, "34343434", 20f, Moneda.EUR,
+		ShowsCom showscom = new ShowsCom(1, 12121, "34343434", 3f, Moneda.EUR,
 				setMoneda);
 
 		session.saveOrUpdate(showscom);
