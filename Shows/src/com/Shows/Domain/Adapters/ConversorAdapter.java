@@ -13,7 +13,7 @@ public class ConversorAdapter implements IConversorAdapter {
 			return currencyConvertor.convert(divisa, moneda);
 		}
 		catch (java.lang.Exception ex){
-			throw new ServeiNoDisponible();
+			throw new ServeiNoDisponible("El servei no estˆ disponible");
 		}
 		
 	}
