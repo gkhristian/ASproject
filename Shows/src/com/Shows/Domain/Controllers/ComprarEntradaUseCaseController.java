@@ -103,8 +103,8 @@ public class ComprarEntradaUseCaseController {
 		DadesEntrada dadesEntrada = new DadesEntrada(preuTotal
 				* consultaOcupacioUseCaseController.getNombEspectadors(),
 				canvis);
-
-		this.preuTotal = preuTotal;
+//HERE!
+		this.preuTotal = preuTotal*consultaOcupacioUseCaseController.getNombEspectadors();
 
 		return dadesEntrada;
 	}
