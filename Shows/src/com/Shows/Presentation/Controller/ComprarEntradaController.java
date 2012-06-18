@@ -8,12 +8,12 @@ import java.util.Set;
 import com.Shows.Domain.Controllers.ComprarEntradaUseCaseController;
 import com.Shows.Domain.Controllers.ConsultaOcupacioUseCaseController;
 import com.Shows.Domain.Controllers.ConsultaRepresentacionsUseCaseController;
-import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
-import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
-import com.Shows.Domain.Exceptions.SeientsNoDisp;
-import com.Shows.Domain.Exceptions.SeientsNoOk;
-import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.TipusSessio;
+import com.Shows.Exceptions.NoHiHaRepresentacions;
+import com.Shows.Exceptions.PagamentNoAutoritzat;
+import com.Shows.Exceptions.SeientsNoDisp;
+import com.Shows.Exceptions.SeientsNoOk;
+import com.Shows.Exceptions.ServeiNoDisponible;
 import com.Shows.Presentation.View.ComprarEntradaView;
 import com.Shows.TupleTypes.PosicioSeient;
 

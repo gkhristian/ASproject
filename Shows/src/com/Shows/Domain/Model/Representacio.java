@@ -11,7 +11,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
-import com.Shows.Domain.Exceptions.SeientsNoDisp;
+import com.Shows.Exceptions.SeientsNoDisp;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
 

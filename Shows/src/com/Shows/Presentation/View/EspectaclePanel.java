@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
+import com.Shows.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.toedter.calendar.JDateChooser;

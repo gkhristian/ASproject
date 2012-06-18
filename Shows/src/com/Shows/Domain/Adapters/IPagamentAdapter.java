@@ -1,6 +1,6 @@
 package com.Shows.Domain.Adapters;
 
-import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
+import com.Shows.Exceptions.PagamentNoAutoritzat;
 
 public interface IPagamentAdapter {
 

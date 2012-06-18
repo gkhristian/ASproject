@@ -16,11 +16,6 @@ import com.Shows.Data.Interfaces.IControllerSeientsEnRepresentacio;
 import com.Shows.Domain.Adapters.AdapterFactory;
 import com.Shows.Domain.Adapters.IConversorAdapter;
 import com.Shows.Domain.Adapters.IPagamentAdapter;
-import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
-import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
-import com.Shows.Domain.Exceptions.SeientsNoDisp;
-import com.Shows.Domain.Exceptions.SeientsNoOk;
-import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.Entrada;
 import com.Shows.Domain.Model.Espectacle;
 import com.Shows.Domain.Model.Moneda;
@@ -28,6 +23,11 @@ import com.Shows.Domain.Model.Representacio;
 import com.Shows.Domain.Model.SeientEnRepresentacio;
 import com.Shows.Domain.Model.ShowsCom;
 import com.Shows.Domain.Model.TipusSessio;
+import com.Shows.Exceptions.NoHiHaRepresentacions;
+import com.Shows.Exceptions.PagamentNoAutoritzat;
+import com.Shows.Exceptions.SeientsNoDisp;
+import com.Shows.Exceptions.SeientsNoOk;
+import com.Shows.Exceptions.ServeiNoDisponible;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -36,7 +36,7 @@ public class ComprarEntradaUseCaseController {
 
 	private Set<PosicioSeient> seients;
 	private float preuTotal;
-	boolean preuAssignat;
+
 	private ControllerDataFactory controllerDataFactory = ControllerDataFactory
 			.getInstance();
 
@@ -46,7 +46,6 @@ public class ComprarEntradaUseCaseController {
 	public void init() {
 		seients = new HashSet<PosicioSeient>();
 		preuTotal = 0;
-		preuAssignat = false;
 	}
 
 	public Set<String> obteEspectacles() {

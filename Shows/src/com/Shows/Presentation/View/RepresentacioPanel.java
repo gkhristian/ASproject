@@ -28,8 +28,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatter;
 
-import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.TipusSessio;
+import com.Shows.Exceptions.SeientsNoDisp;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.CheckBoxRenderer;
 import com.Shows.TupleTypes.DadesRepresentacio;

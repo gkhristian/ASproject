@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.Shows.Data.Controllers.ControllerDataFactory;
 import com.Shows.Data.Interfaces.IControllerEspectacle;
-import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
+import com.Shows.Exceptions.NoHiHaRepresentacions;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
 public class ConsultaRepresentacionsUseCaseController {

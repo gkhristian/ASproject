@@ -5,9 +5,9 @@ import java.util.Set;
 
 import com.Shows.Data.Controllers.ControllerDataFactory;
 import com.Shows.Data.Interfaces.IControllerRepresentacio;
-import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.Representacio;
 import com.Shows.Domain.Model.TipusSessio;
+import com.Shows.Exceptions.SeientsNoDisp;
 import com.Shows.TupleTypes.PosicioSeient;
 
 public class ConsultaOcupacioUseCaseController {

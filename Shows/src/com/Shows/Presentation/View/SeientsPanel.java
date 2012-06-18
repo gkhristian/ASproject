@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import com.Shows.Domain.Exceptions.SeientsNoOk;
+import com.Shows.Exceptions.SeientsNoOk;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Component.JSeient;
 import com.Shows.TupleTypes.PosicioSeient;

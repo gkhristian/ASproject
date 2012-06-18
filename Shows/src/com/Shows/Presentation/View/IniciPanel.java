@@ -20,9 +20,9 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
-import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
-import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.TipusSessio;
+import com.Shows.Exceptions.NoHiHaRepresentacions;
+import com.Shows.Exceptions.SeientsNoDisp;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.toedter.calendar.JDateChooser;
 

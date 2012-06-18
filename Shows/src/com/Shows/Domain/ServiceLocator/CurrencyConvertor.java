@@ -2,8 +2,8 @@ package com.Shows.Domain.ServiceLocator;
 
 import net.webservicex.CurrencyConvertorSoap_CurrencyConvertorSoap_Client;
 
-import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.Moneda;
+import com.Shows.Exceptions.ServeiNoDisponible;
 
 public class CurrencyConvertor extends Servei {
 

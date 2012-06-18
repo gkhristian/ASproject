@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
+import com.Shows.Exceptions.NoHiHaRepresentacions;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
 @Entity

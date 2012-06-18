@@ -20,9 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
-import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
-import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.ShowsCom;
+import com.Shows.Exceptions.PagamentNoAutoritzat;
+import com.Shows.Exceptions.ServeiNoDisponible;
 import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.Shows.TupleTypes.DadesEntrada;

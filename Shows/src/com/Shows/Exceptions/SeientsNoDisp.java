@@ -1,4 +1,4 @@
-package com.Shows.Domain.Exceptions;
+package com.Shows.Exceptions;
 
 public class SeientsNoDisp extends Exception {
 

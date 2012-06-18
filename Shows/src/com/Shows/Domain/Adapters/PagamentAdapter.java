@@ -1,8 +1,8 @@
 package com.Shows.Domain.Adapters;
 
-import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.ServiceLocator.ServeiPagament;
 import com.Shows.Domain.ServiceLocator.ServiceLocator;
+import com.Shows.Exceptions.PagamentNoAutoritzat;
 
 public class PagamentAdapter implements IPagamentAdapter {
 

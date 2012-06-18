@@ -1,7 +1,7 @@
 package com.Shows.Domain.Adapters;
 
-import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.Moneda;
+import com.Shows.Exceptions.ServeiNoDisponible;
 
 public interface IConversorAdapter {
 
