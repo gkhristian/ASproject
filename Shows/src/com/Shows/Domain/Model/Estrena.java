@@ -42,9 +42,4 @@ public class Estrena extends Representacio implements Serializable {
 	public boolean esEstrena() {
 		return true;
 	}
-
-	@Override
-	public float obtePreu() {
-		return getPreu() + this.recarrec;
-	}
 }

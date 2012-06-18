@@ -68,15 +68,11 @@ public class Representacio {
 		return new DadesRepresentacio(
 				auxiliarRepresentacio.getLocal().getNom(),
 				auxiliarRepresentacio.getSessio().getSessio(),
-				nombreSeientsLliures, esEstrena(), obtePreu());
+				nombreSeientsLliures, esEstrena(), getPreu() + getRecarrec());
 	}
 
 	public boolean esEstrena() {
 		return false;
-	}
-
-	public float obtePreu() {
-		return preu;
 	}
 
 	public Float getPreu() {

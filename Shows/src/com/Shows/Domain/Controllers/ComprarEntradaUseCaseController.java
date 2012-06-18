@@ -104,7 +104,8 @@ public class ComprarEntradaUseCaseController {
 
 		canvis.add(showsCom.getDivisa().toString());
 
-		float preuTotal = representacio.obtePreu() + comisio;
+		float preuTotal = representacio.getPreu() + representacio.getRecarrec()
+				+ comisio;
 		DadesEntrada dadesEntrada = new DadesEntrada(preuTotal
 				* consultaOcupacioUseCaseController.getNombEspectadors(),
 				canvis);
