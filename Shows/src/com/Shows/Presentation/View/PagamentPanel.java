@@ -23,7 +23,7 @@ import javax.swing.text.MaskFormatter;
 import com.Shows.Domain.Exceptions.PagamentNoAutoritzat;
 import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.ShowsCom;
-import com.Shows.Presentation.Controller.FrontController;
+import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.Shows.TupleTypes.DadesEntrada;
 
@@ -31,7 +31,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 
 	private static final long serialVersionUID = 1L;
 
-	private FrontController frontController;
+	private ComprarEntradaController comprarEntradaController;
 	private ComprarEntradaView comprarEntradaView;
 
 	private JFormattedTextField numeroDniFormattedTextField;
@@ -51,10 +51,11 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 	 * 
 	 * @param comprarEntradaView
 	 */
-	public PagamentPanel(final FrontController frontController,
+	public PagamentPanel(
+			final ComprarEntradaController comprarEntradaController,
 			final ComprarEntradaView comprarEntradaView) {
 
-		this.frontController = frontController;
+		this.comprarEntradaController = comprarEntradaController;
 		this.comprarEntradaView = comprarEntradaView;
 
 		setLayout(new BorderLayout(0, 0));
@@ -162,13 +163,14 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
-					frontController.PrOkPagament(numeroDniFormattedTextField
-							.getValue().toString(), Integer
-							.parseInt(bancFormattedTextField.getValue()
+					comprarEntradaController.PrOkPagament(
+							numeroDniFormattedTextField.getValue().toString(),
+							Integer.parseInt(bancFormattedTextField.getValue()
 									.toString()), compteFormattedTextField
-							.getValue().toString());
+									.getValue().toString());
 				} catch (PagamentNoAutoritzat pagamentNoAutoritzat) {
-					comprarEntradaView.mostraMissatge(pagamentNoAutoritzat.getMessage());
+					comprarEntradaView.mostraMissatge(pagamentNoAutoritzat
+							.getMessage());
 					pagamentNoAutoritzat.printStackTrace();
 				}
 
@@ -180,7 +182,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				frontController.PrCancellar();
+				comprarEntradaController.PrCancellar();
 			}
 		});
 	}
@@ -206,8 +208,9 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 				if (monedaComboBoxSelectetItem != monedaComboBox
 						.getSelectedItem()) {
 					try {
-						frontController.canviPreuMoneda((String) monedaComboBox
-								.getSelectedItem());
+						comprarEntradaController
+								.canviPreuMoneda((String) monedaComboBox
+										.getSelectedItem());
 
 						monedaComboBoxSelectetItem = monedaComboBox
 								.getSelectedItem();

@@ -17,7 +17,7 @@ import com.Shows.Domain.Model.TipusSessio;
 import com.Shows.Presentation.View.ComprarEntradaView;
 import com.Shows.TupleTypes.PosicioSeient;
 
-public class FrontController {
+public class ComprarEntradaController {
 
 	private ComprarEntradaUseCaseController comprarEntradaUseCaseController;
 	private ConsultaOcupacioUseCaseController consultaOcupacioUseCaseController;
@@ -26,7 +26,7 @@ public class FrontController {
 
 	private Color backgroundColor;
 
-	public FrontController() {
+	public ComprarEntradaController() {
 
 		backgroundColor = new Color(250, 250, 250);
 

@@ -16,19 +16,18 @@ public class SeientEnRepresentacio implements Serializable {
 
 	@Id
 	private AuxiliarSeientEnRepresentacio auxpk;
-	
-	
+
 	@Enumerated(EnumType.STRING)
 	private Estat estat;
-	
+
 	public SeientEnRepresentacio() {
 	}
 
-	public SeientEnRepresentacio(Seient seient, Representacio representacio, Estat estat) {
+	public SeientEnRepresentacio(Seient seient, Representacio representacio,
+			Estat estat) {
 		this.auxpk = new AuxiliarSeientEnRepresentacio(seient, representacio);
 		this.estat = estat;
 	}
-
 
 	public Estat getEstat() {
 		return estat;
@@ -38,7 +37,6 @@ public class SeientEnRepresentacio implements Serializable {
 		this.estat = estat;
 	}
 
-
 	public PosicioSeient esLliure() {
 		if (this.estat == Estat.lliure) {
 			PosicioSeient lliure = this.auxpk.getSeient().seient();
@@ -46,11 +44,10 @@ public class SeientEnRepresentacio implements Serializable {
 		}
 		return null;
 	}
-	
+
 	public void ocuparSeient() {
 		if (this.estat == Estat.lliure) {
 			this.estat = Estat.ocupat;
 		}
 	}
-	
 }

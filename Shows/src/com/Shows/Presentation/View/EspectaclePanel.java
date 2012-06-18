@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
-import com.Shows.Presentation.Controller.FrontController;
+import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.PromptComboBoxRenderer;
 import com.toedter.calendar.JDateChooser;
 
@@ -38,7 +38,8 @@ public class EspectaclePanel extends JPanel {
 	 * 
 	 * @param comprarEntradaView
 	 */
-	public EspectaclePanel(final FrontController frontController,
+	public EspectaclePanel(
+			final ComprarEntradaController comprarEntradaController,
 			final ComprarEntradaView comprarEntradaView) {
 
 		setLayout(new BorderLayout(0, 0));
@@ -141,13 +142,16 @@ public class EspectaclePanel extends JPanel {
 					java.sql.Date date = new java.sql.Date(dateChooser
 							.getDate().getTime());
 
-					comprarEntradaView.setRepresentacionsString(espectacleComboBox
-							.getSelectedItem().toString(), date.toString());
+					comprarEntradaView.setRepresentacionsString(
+							espectacleComboBox.getSelectedItem().toString(),
+							date.toString());
 
-					frontController.PrOkObteRepresentacions(espectacleComboBox
-							.getSelectedItem().toString(), date);
+					comprarEntradaController.PrOkObteRepresentacions(
+							espectacleComboBox.getSelectedItem().toString(),
+							date);
 				} catch (NoHiHaRepresentacions noHiHaRepresentacions) {
-					comprarEntradaView.mostraMissatge(noHiHaRepresentacions.getMessage());
+					comprarEntradaView.mostraMissatge(noHiHaRepresentacions
+							.getMessage());
 					// noHiHaRepresentacions.printStackTrace();
 				}
 			}
@@ -158,7 +162,7 @@ public class EspectaclePanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				frontController.PrCancellar();
+				comprarEntradaController.PrCancellar();
 			}
 		});
 	}

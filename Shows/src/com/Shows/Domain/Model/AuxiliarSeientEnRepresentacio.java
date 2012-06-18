@@ -17,12 +17,13 @@ public class AuxiliarSeientEnRepresentacio implements Serializable {
 
 	public AuxiliarSeientEnRepresentacio() {
 	}
-	
-	public AuxiliarSeientEnRepresentacio(Seient seient, Representacio representacio) {
+
+	public AuxiliarSeientEnRepresentacio(Seient seient,
+			Representacio representacio) {
 		this.seient = seient;
 		this.representacio = representacio;
 	}
-	
+
 	public Seient getSeient() {
 		return seient;
 	}

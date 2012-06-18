@@ -7,14 +7,14 @@ import com.Shows.Domain.ServiceLocator.CurrencyConvertor;
 public class ConversorAdapter implements IConversorAdapter {
 
 	@Override
-	public double convert(Moneda divisa, Moneda moneda) throws ServeiNoDisponible {
+	public double convert(Moneda divisa, Moneda moneda)
+			throws ServeiNoDisponible {
 		CurrencyConvertor currencyConvertor = new CurrencyConvertor();
-		try{
+		try {
 			return currencyConvertor.convert(divisa, moneda);
+		} catch (java.lang.Exception ex) {
+			throw new ServeiNoDisponible("El servei no està disponible");
 		}
-		catch (java.lang.Exception ex){
-			throw new ServeiNoDisponible("El servei no estˆ disponible");
-		}
-		
+
 	}
 }

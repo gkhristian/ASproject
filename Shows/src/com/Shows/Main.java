@@ -9,12 +9,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.Shows.Data.DataMapper.HibernateUtil;
-import com.Shows.Presentation.Controller.FrontController;
+import com.Shows.Presentation.Controller.ComprarEntradaController;
 
 public class Main {
 
 	@SuppressWarnings("unused")
-	private static FrontController comprarEntradaController;
+	private static ComprarEntradaController comprarEntradaController;
 
 	/**
 	 * @param args
@@ -35,7 +35,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					comprarEntradaController = new FrontController();
+					comprarEntradaController = new ComprarEntradaController();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

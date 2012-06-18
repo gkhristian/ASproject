@@ -17,13 +17,13 @@ public class AuxiliarSeient implements Serializable {
 
 	public AuxiliarSeient() {
 	}
-	
+
 	public AuxiliarSeient(Local local, int fila, int columna) {
 		this.local = local;
 		this.fila = fila;
 		this.columna = columna;
 	}
-	
+
 	public int getColumna() {
 		return columna;
 	}

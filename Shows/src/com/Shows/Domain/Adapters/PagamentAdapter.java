@@ -10,13 +10,13 @@ public class PagamentAdapter implements IPagamentAdapter {
 	public boolean autoritza(String dni, int codiB, String numCompte,
 			float importe, int codiBancShows, String numcompteShows)
 			throws PagamentNoAutoritzat {
-		
+
 		ServeiPagament serveiPagament = (ServeiPagament) ServiceLocator
 				.getInstance().find("Servei Pagament");
-		
+
 		boolean autoritza = serveiPagament.autoritza(dni, codiB, numCompte,
 				importe, codiBancShows, numcompteShows);
-		
+
 		if (!autoritza) {
 			throw new PagamentNoAutoritzat("Pagament no autoritzat");
 		} else

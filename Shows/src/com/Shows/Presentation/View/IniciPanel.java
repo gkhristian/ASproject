@@ -23,7 +23,7 @@ import javax.swing.border.TitledBorder;
 import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.TipusSessio;
-import com.Shows.Presentation.Controller.FrontController;
+import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.toedter.calendar.JDateChooser;
 
 public class IniciPanel extends JPanel {
@@ -61,14 +61,14 @@ public class IniciPanel extends JPanel {
 	private Component horizontalStrut_3;
 	private Component horizontalStrut_4;
 
-	public IniciPanel(final FrontController frontController,
+	public IniciPanel(final ComprarEntradaController comprarEntradaController,
 			final ComprarEntradaView comprarEntradaView) {
 
 		verticalBox = Box.createVerticalBox();
 		add(verticalBox);
 
 		panel_2 = new JPanel();
-		panel_2.setBackground(frontController.getBackgroundColor());
+		panel_2.setBackground(comprarEntradaController.getBackgroundColor());
 		verticalBox.add(panel_2);
 
 		comparEntradaButton = new JButton("Comprar Entrada");
@@ -79,7 +79,7 @@ public class IniciPanel extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent mouseEvent) {
-				frontController.PrComprarEntrada();
+				comprarEntradaController.PrComprarEntrada();
 			}
 		});
 
@@ -95,7 +95,7 @@ public class IniciPanel extends JPanel {
 				.getBorder("TitledBorder.border"), "Prova Cas d'\u00DAs",
 				TitledBorder.LEADING, TitledBorder.TOP, null,
 				new Color(0, 0, 0)));
-		panel.setBackground(frontController.getBackgroundColor());
+		panel.setBackground(comprarEntradaController.getBackgroundColor());
 
 		verticalBox_1 = Box.createVerticalBox();
 		panel.add(verticalBox_1);
@@ -157,7 +157,7 @@ public class IniciPanel extends JPanel {
 				.getBorder("TitledBorder.border"), "Prova Cas d'\u00DAs",
 				TitledBorder.LEADING, TitledBorder.TOP, null,
 				new Color(0, 0, 0)));
-		panel_1.setBackground(frontController.getBackgroundColor());
+		panel_1.setBackground(comprarEntradaController.getBackgroundColor());
 
 		verticalBox_2 = Box.createVerticalBox();
 		panel_1.add(verticalBox_2);
@@ -248,12 +248,14 @@ public class IniciPanel extends JPanel {
 							.getDate().getTime());
 
 					try {
-						frontController.PrConsultaOcupacio(localTextField
-								.getText(), TipusSessio.valueOf(sessioComboBox
-								.getSelectedItem().toString()),
+						comprarEntradaController.PrConsultaOcupacio(
+								localTextField.getText(), TipusSessio
+										.valueOf(sessioComboBox
+												.getSelectedItem().toString()),
 								(Integer) espectadorsSpinner.getValue(), date);
 					} catch (SeientsNoDisp seientsNoDisp) {
-						comprarEntradaView.mostraMissatge(seientsNoDisp.getMessage());
+						comprarEntradaView.mostraMissatge(seientsNoDisp
+								.getMessage());
 					}
 				}
 			}
@@ -268,7 +270,7 @@ public class IniciPanel extends JPanel {
 							representacioDateChooser.getDate().getTime());
 
 					try {
-						frontController.PrConsultaRepresentacio(
+						comprarEntradaController.PrConsultaRepresentacio(
 								titolEspectacleTextField.getText(), date);
 					} catch (NoHiHaRepresentacions noHiHaRepresentacions) {
 						comprarEntradaView.mostraMissatge(noHiHaRepresentacions

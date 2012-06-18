@@ -19,7 +19,6 @@ public class CheckBoxRenderer extends JCheckBox implements TableCellRenderer {
 			boolean isSelected, boolean hasFocus, int row, int column) {
 		if (isSelected) {
 			setForeground(table.getSelectionForeground());
-			// super.setBackground(table.getSelectionBackground());
 			setBackground(table.getSelectionBackground());
 		} else {
 			setForeground(table.getForeground());

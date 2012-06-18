@@ -21,14 +21,14 @@ public class ConsultaOcupacioUseCaseController {
 	public Set<PosicioSeient> obteOcupacio(final String nomLocal,
 			final TipusSessio sessio, final int nombEspectadors, Date data)
 			throws SeientsNoDisp {
-		
+
 		this.nomLocal = nomLocal;
 		this.sessio = sessio;
 		this.nombEspectadors = nombEspectadors;
 
 		IControllerRepresentacio controllerRepresentacio = controllerDataFactory
 				.getControllerRepresentacio();
-		
+
 		Representacio representacio = controllerRepresentacio.getRepresentacio(
 				nomLocal, sessio, data);
 

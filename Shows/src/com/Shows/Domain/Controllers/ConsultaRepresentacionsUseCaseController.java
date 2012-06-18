@@ -9,7 +9,7 @@ import com.Shows.Domain.Exceptions.NoHiHaRepresentacions;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
 public class ConsultaRepresentacionsUseCaseController {
-	
+
 	private String titol;
 	private Date data;
 

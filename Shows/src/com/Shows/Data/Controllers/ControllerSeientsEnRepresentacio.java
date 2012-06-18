@@ -23,27 +23,31 @@ public class ControllerSeientsEnRepresentacio implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SeientEnRepresentacio> allSeientsEnRepresentacio() {
+
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 		return (List<SeientEnRepresentacio>) session.createQuery(
 				"from SeientEnRepresentacio").list();
-
 	}
 
 	@Override
 	public SeientEnRepresentacio getSeientEnRepresentacio(String nomLocal,
 			int fila, int columna, Date data, TipusSessio sessio) {
+
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
-		
-		Sessio sesion =  (Sessio) session.get(Sessio.class, sessio);
+
+		Sessio sesion = (Sessio) session.get(Sessio.class, sessio);
 		Local local = (Local) session.get(Local.class, nomLocal);
-		Representacio representacio = (Representacio) session.get(Representacio.class, new AuxiliarRepresentacio(sesion, local, data));
-		
-		Seient seient = (Seient) session.get(Seient.class, new AuxiliarSeient(local,fila,columna));
-		
-		return (SeientEnRepresentacio) session.get(SeientEnRepresentacio.class, new AuxiliarSeientEnRepresentacio(seient, representacio));
+		Representacio representacio = (Representacio) session.get(
+				Representacio.class, new AuxiliarRepresentacio(sesion, local,
+						data));
+
+		Seient seient = (Seient) session.get(Seient.class, new AuxiliarSeient(
+				local, fila, columna));
+
+		return (SeientEnRepresentacio) session.get(SeientEnRepresentacio.class,
+				new AuxiliarSeientEnRepresentacio(seient, representacio));
 
 	}
-
 }

@@ -20,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import com.Shows.Domain.Exceptions.SeientsNoOk;
-import com.Shows.Presentation.Controller.FrontController;
+import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Component.JSeient;
 import com.Shows.TupleTypes.PosicioSeient;
 
@@ -28,7 +28,7 @@ public class SeientsPanel extends JPanel {
 
 	private static final long serialVersionUID = -8834919801528392136L;
 
-	private FrontController frontController;
+	private ComprarEntradaController comprarEntradaController;
 
 	private JPanel seientsPanel;
 
@@ -42,10 +42,11 @@ public class SeientsPanel extends JPanel {
 	 * 
 	 * @param comprarEntradaView
 	 */
-	public SeientsPanel(final FrontController frontController,
+	public SeientsPanel(
+			final ComprarEntradaController comprarEntradaController,
 			final ComprarEntradaView comprarEntradaView) {
 
-		this.frontController = frontController;
+		this.comprarEntradaController = comprarEntradaController;
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -102,7 +103,8 @@ public class SeientsPanel extends JPanel {
 
 					comprarEntradaView.setPagamentString(seients);
 
-					frontController.PrOkSelecionarSeients(selectedSeients);
+					comprarEntradaController
+							.PrOkSelecionarSeients(selectedSeients);
 				} catch (SeientsNoOk seientsNoOk) {
 					comprarEntradaView.mostraMissatge(seientsNoOk.getMessage());
 					// seientsNoOk.printStackTrace();
@@ -115,7 +117,7 @@ public class SeientsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 
-				frontController.PrCancellar();
+				comprarEntradaController.PrCancellar();
 			}
 		});
 	}
@@ -142,7 +144,8 @@ public class SeientsPanel extends JPanel {
 
 		seientsPanel.setLayout(new GridLayout(maxFila, maxColumna));
 
-		seientsPanel.setBackground(frontController.getBackgroundColor());
+		seientsPanel.setBackground(comprarEntradaController
+				.getBackgroundColor());
 
 		for (int m = 0; m < maxFila; m++) {
 			for (int n = 0; n < maxColumna; n++) {
@@ -153,9 +156,9 @@ public class SeientsPanel extends JPanel {
 
 				panelHolder[m][n].add(holder[m][n]);
 
-				holder[m][n]
-						.setBackground(frontController.getBackgroundColor());
-				panelHolder[m][n].setBackground(frontController
+				holder[m][n].setBackground(comprarEntradaController
+						.getBackgroundColor());
+				panelHolder[m][n].setBackground(comprarEntradaController
 						.getBackgroundColor());
 
 				seientsPanel.add(panelHolder[m][n]);

@@ -14,9 +14,9 @@ public class JSeient extends JCheckBox {
 	public JSeient(PosicioSeient posicioSeient) {
 		this.setPosicioSeient(posicioSeient);
 
-		setIcon(new ImageIcon("assets/gfx/icons/iconLliure.png"));	
-		setSelectedIcon(new ImageIcon("assets/gfx/icons/iconSeleccionat.png"));	
-		setDisabledIcon(new ImageIcon("assets/gfx/icons/iconOcupat.png"));	
+		setIcon(new ImageIcon("assets/gfx/icons/iconLliure.png"));
+		setSelectedIcon(new ImageIcon("assets/gfx/icons/iconSeleccionat.png"));
+		setDisabledIcon(new ImageIcon("assets/gfx/icons/iconOcupat.png"));
 	}
 
 	public PosicioSeient getPosicioSeient() {

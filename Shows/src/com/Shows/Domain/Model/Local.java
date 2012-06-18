@@ -16,7 +16,7 @@ public class Local {
 
 	@OneToMany
 	private Set<Seient> seients;
-	
+
 	public Local() {
 	}
 

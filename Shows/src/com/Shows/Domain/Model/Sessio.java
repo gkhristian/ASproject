@@ -14,11 +14,11 @@ public class Sessio {
 
 	public Sessio() {
 	}
-	
+
 	public Sessio(TipusSessio sessio) {
 		this.sessio = sessio;
 	}
-	
+
 	public TipusSessio getSessio() {
 		return sessio;
 	}

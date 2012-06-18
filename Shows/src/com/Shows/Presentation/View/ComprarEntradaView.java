@@ -24,7 +24,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.Shows.Data.DataMapper.HibernateUtil;
-import com.Shows.Presentation.Controller.FrontController;
+import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
@@ -42,7 +42,7 @@ public class ComprarEntradaView extends JFrame {
 	private static final String[] flowNames = { "Inici", "Espectacles",
 			"Representacions", "Seleccionar seients", "Pagament" };
 
-	private FrontController frontController;
+	private ComprarEntradaController comprarEntradaController;
 	/**
 	 * Instancia de los Panels
 	 */
@@ -78,9 +78,10 @@ public class ComprarEntradaView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ComprarEntradaView(final FrontController frontController) {
+	public ComprarEntradaView(
+			final ComprarEntradaController comprarEntradaController) {
 
-		this.frontController = frontController;
+		this.comprarEntradaController = comprarEntradaController;
 
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -98,7 +99,7 @@ public class ComprarEntradaView extends JFrame {
 			}
 		});
 
-		Color backgroundColor = frontController.getBackgroundColor();
+		Color backgroundColor = comprarEntradaController.getBackgroundColor();
 
 		setBackground(backgroundColor);
 
@@ -125,11 +126,12 @@ public class ComprarEntradaView extends JFrame {
 		stateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		horizontalBox_1.add(stateLabel);
 
-		espectaclePanel = new EspectaclePanel(frontController, this);
-		representacioPanel = new RepresentacioPanel(frontController, this);
-		seientsPanel = new SeientsPanel(frontController, this);
-		pagamentPanel = new PagamentPanel(frontController, this);
-		iniciPanel = new IniciPanel(frontController, this);
+		espectaclePanel = new EspectaclePanel(comprarEntradaController, this);
+		representacioPanel = new RepresentacioPanel(comprarEntradaController,
+				this);
+		seientsPanel = new SeientsPanel(comprarEntradaController, this);
+		pagamentPanel = new PagamentPanel(comprarEntradaController, this);
+		iniciPanel = new IniciPanel(comprarEntradaController, this);
 
 		iniciPanel.setPreferredSize(new Dimension(0, 0));
 		iniciPanel.setMinimumSize(new Dimension(0, 0));
@@ -200,8 +202,8 @@ public class ComprarEntradaView extends JFrame {
 					JLabel jLabel = (JLabel) mouseEvent.getComponent();
 					jLabel.setForeground(new Color(163, 184, 204));
 					if (jLabel.isEnabled())
-						ComprarEntradaView.this
-								.setCursor(new Cursor(Cursor.HAND_CURSOR));
+						ComprarEntradaView.this.setCursor(new Cursor(
+								Cursor.HAND_CURSOR));
 				}
 
 				@Override
@@ -344,7 +346,7 @@ public class ComprarEntradaView extends JFrame {
 				JOptionPane.INFORMATION_MESSAGE);
 
 		if (confirmation == JOptionPane.OK_OPTION) {
-			frontController.PrFi();
+			comprarEntradaController.PrFi();
 		}
 	}
 

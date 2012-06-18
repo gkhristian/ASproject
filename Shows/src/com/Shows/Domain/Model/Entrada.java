@@ -16,7 +16,7 @@ public class Entrada {
 	private Float preu;
 	@ManyToOne
 	private Representacio representacio;
-	
+
 	public Entrada() {
 	}
 

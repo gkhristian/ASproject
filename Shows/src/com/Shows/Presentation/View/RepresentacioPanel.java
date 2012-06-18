@@ -30,7 +30,7 @@ import javax.swing.text.DefaultFormatter;
 
 import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Model.TipusSessio;
-import com.Shows.Presentation.Controller.FrontController;
+import com.Shows.Presentation.Controller.ComprarEntradaController;
 import com.Shows.Presentation.View.Renderer.CheckBoxRenderer;
 import com.Shows.TupleTypes.DadesRepresentacio;
 
@@ -48,7 +48,8 @@ public class RepresentacioPanel extends JPanel {
 	 * 
 	 * @param comprarEntradaView
 	 */
-	public RepresentacioPanel(final FrontController frontController,
+	public RepresentacioPanel(
+			final ComprarEntradaController comprarEntradaController,
 			final ComprarEntradaView comprarEntradaView) {
 
 		setLayout(new BorderLayout(0, 0));
@@ -166,14 +167,15 @@ public class RepresentacioPanel extends JPanel {
 							.getValueAt(representacionsTable.getSelectedRow(),
 									4).toString();
 
-					comprarEntradaView.setSeientsString(local, tipusSessio.toString(),
-							Integer.toString(nombEspectadors), (estrena) ? "Si"
-									: "No", preuSeient);
+					comprarEntradaView.setSeientsString(local, tipusSessio
+							.toString(), Integer.toString(nombEspectadors),
+							(estrena) ? "Si" : "No", preuSeient);
 
-					frontController.PrOkObteOcupacio(local, tipusSessio,
-							nombEspectadors);
+					comprarEntradaController.PrOkObteOcupacio(local,
+							tipusSessio, nombEspectadors);
 				} catch (SeientsNoDisp seientsNoDisp) {
-					comprarEntradaView.mostraMissatge(seientsNoDisp.getMessage());
+					comprarEntradaView.mostraMissatge(seientsNoDisp
+							.getMessage());
 					// seientsNoDisp.printStackTrace();
 				}
 			}
@@ -184,7 +186,7 @@ public class RepresentacioPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				frontController.PrCancellar();
+				comprarEntradaController.PrCancellar();
 			}
 		});
 	}
