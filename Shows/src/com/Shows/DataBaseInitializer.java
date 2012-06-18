@@ -29,7 +29,7 @@ public class DataBaseInitializer {
 
 		/* Locals */
 		Local local1 = new Local("Palau Sant Jordi", "C/Falsa 123");
-		Local local2 = new Local("A Tomar Por Culo", "C/Parla");
+		Local local2 = new Local("Indispuesto", "C/Parla");
 		Local local2_2 = new Local("PepeStage", "C/Tio Pepe");
 		Local local2_3 = new Local("Akihabara Playbox", "C/Japon 2222bis");
 		session.saveOrUpdate(local1);

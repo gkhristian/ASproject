@@ -33,8 +33,8 @@ public class IniciView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final int COMPRAR_ENTRADA = 0;
-	private static final int ESPECTACLES = COMPRAR_ENTRADA + 1;
+	private static final int INICI = 0;
+	private static final int ESPECTACLES = INICI + 1;
 	private static final int REPRESENTACIONS = ESPECTACLES + 1;
 	private static final int SEIENTS = REPRESENTACIONS + 1;
 	private static final int PAGAMENT = SEIENTS + 1;
@@ -217,7 +217,7 @@ public class IniciView extends JFrame {
 
 			horizontalBox.add(hBox);
 		}
-		setFlowState(COMPRAR_ENTRADA, false);
+		setFlowState(INICI, false);
 	}
 
 	private void setFlowState(int flowState, boolean simple) {
@@ -233,7 +233,7 @@ public class IniciView extends JFrame {
 		}
 
 		switch (flowState) {
-		case COMPRAR_ENTRADA:
+		case INICI:
 			stateLabel.setText("");
 			stateLabel.setVisible(false);
 			break;
@@ -297,6 +297,10 @@ public class IniciView extends JFrame {
 		this.seients = seients;
 	}
 
+	public void mostraInici() {
+		setFlowState(INICI, false);
+	}
+
 	public void mostraEspectacles(Set<String> espectacles) {
 
 		espectaclePanel.setEspectacleComboBox(espectacles);
@@ -351,7 +355,7 @@ public class IniciView extends JFrame {
 				JOptionPane.QUESTION_MESSAGE);
 
 		if (confirmation == JOptionPane.OK_OPTION) {
-			frontController.PrFi();
+			tancar();
 		}
 	}
 

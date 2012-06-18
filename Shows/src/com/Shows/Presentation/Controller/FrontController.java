@@ -115,7 +115,7 @@ public class FrontController {
 
 	public void PrFi() {
 
-		iniciView.tancar();
+		iniciView.mostraInici();
 	}
 
 	public void canviPreuMoneda(final String moneda) throws ServeiNoDisponible {
