@@ -36,7 +36,7 @@ import com.Shows.TupleTypes.DadesRepresentacio;
 
 public class RepresentacioPanel extends JPanel {
 
-	private static final long serialVersionUID = -3674558461643546039L;
+	private static final long serialVersionUID = 1L;
 
 	private JTable representacionsTable;
 	private JButton continuaButton;
@@ -46,10 +46,10 @@ public class RepresentacioPanel extends JPanel {
 	/**
 	 * Create the frame.
 	 * 
-	 * @param iniciView
+	 * @param comprarEntradaView
 	 */
 	public RepresentacioPanel(final FrontController frontController,
-			final IniciView iniciView) {
+			final ComprarEntradaView comprarEntradaView) {
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -166,14 +166,14 @@ public class RepresentacioPanel extends JPanel {
 							.getValueAt(representacionsTable.getSelectedRow(),
 									4).toString();
 
-					iniciView.setSeientsString(local, tipusSessio.toString(),
+					comprarEntradaView.setSeientsString(local, tipusSessio.toString(),
 							Integer.toString(nombEspectadors), (estrena) ? "Si"
 									: "No", preuSeient);
 
 					frontController.PrOkObteOcupacio(local, tipusSessio,
 							nombEspectadors);
 				} catch (SeientsNoDisp seientsNoDisp) {
-					iniciView.mostraMissatge(seientsNoDisp.getMessage());
+					comprarEntradaView.mostraMissatge(seientsNoDisp.getMessage());
 					// seientsNoDisp.printStackTrace();
 				}
 			}

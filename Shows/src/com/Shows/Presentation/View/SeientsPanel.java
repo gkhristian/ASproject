@@ -40,10 +40,10 @@ public class SeientsPanel extends JPanel {
 	/**
 	 * Create the frame.
 	 * 
-	 * @param iniciView
+	 * @param comprarEntradaView
 	 */
 	public SeientsPanel(final FrontController frontController,
-			final IniciView iniciView) {
+			final ComprarEntradaView comprarEntradaView) {
 
 		this.frontController = frontController;
 
@@ -100,11 +100,11 @@ public class SeientsPanel extends JPanel {
 								+ posicioSeient.getColumna() + "} ";
 					}
 
-					iniciView.setPagamentString(seients);
+					comprarEntradaView.setPagamentString(seients);
 
 					frontController.PrOkSelecionarSeients(selectedSeients);
 				} catch (SeientsNoOk seientsNoOk) {
-					iniciView.mostraMissatge(seientsNoOk.getMessage());
+					comprarEntradaView.mostraMissatge(seientsNoOk.getMessage());
 					// seientsNoOk.printStackTrace();
 				}
 			}

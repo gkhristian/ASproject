@@ -14,7 +14,7 @@ import com.Shows.Domain.Exceptions.SeientsNoDisp;
 import com.Shows.Domain.Exceptions.SeientsNoOk;
 import com.Shows.Domain.Exceptions.ServeiNoDisponible;
 import com.Shows.Domain.Model.TipusSessio;
-import com.Shows.Presentation.View.IniciView;
+import com.Shows.Presentation.View.ComprarEntradaView;
 import com.Shows.TupleTypes.PosicioSeient;
 
 public class FrontController {
@@ -22,7 +22,7 @@ public class FrontController {
 	private ComprarEntradaUseCaseController comprarEntradaUseCaseController;
 	private ConsultaOcupacioUseCaseController consultaOcupacioUseCaseController;
 	private ConsultaRepresentacionsUseCaseController consultaRepresentacionsUseCaseController;
-	private IniciView iniciView;
+	private ComprarEntradaView iniciView;
 
 	private Color backgroundColor;
 
@@ -34,7 +34,7 @@ public class FrontController {
 		consultaOcupacioUseCaseController = new ConsultaOcupacioUseCaseController();
 		consultaRepresentacionsUseCaseController = new ConsultaRepresentacionsUseCaseController();
 
-		iniciView = new IniciView(this);
+		iniciView = new ComprarEntradaView(this);
 	}
 
 	public void PrComprarEntrada() {

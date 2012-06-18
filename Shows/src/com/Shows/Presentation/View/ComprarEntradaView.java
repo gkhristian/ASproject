@@ -29,7 +29,7 @@ import com.Shows.TupleTypes.DadesEntrada;
 import com.Shows.TupleTypes.DadesRepresentacio;
 import com.Shows.TupleTypes.PosicioSeient;
 
-public class IniciView extends JFrame {
+public class ComprarEntradaView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -78,7 +78,7 @@ public class IniciView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IniciView(final FrontController frontController) {
+	public ComprarEntradaView(final FrontController frontController) {
 
 		this.frontController = frontController;
 
@@ -200,7 +200,7 @@ public class IniciView extends JFrame {
 					JLabel jLabel = (JLabel) mouseEvent.getComponent();
 					jLabel.setForeground(new Color(163, 184, 204));
 					if (jLabel.isEnabled())
-						IniciView.this
+						ComprarEntradaView.this
 								.setCursor(new Cursor(Cursor.HAND_CURSOR));
 				}
 
@@ -210,7 +210,7 @@ public class IniciView extends JFrame {
 					JLabel jLabel = (JLabel) mouseEvent.getComponent();
 					jLabel.setForeground(Color.BLACK);
 					if (jLabel.isEnabled())
-						IniciView.this.setCursor(new Cursor(
+						ComprarEntradaView.this.setCursor(new Cursor(
 								Cursor.DEFAULT_CURSOR));
 				}
 			});

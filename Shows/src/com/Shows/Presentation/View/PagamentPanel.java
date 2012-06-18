@@ -32,7 +32,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 	private static final long serialVersionUID = 1L;
 
 	private FrontController frontController;
-	private IniciView iniciView;
+	private ComprarEntradaView comprarEntradaView;
 
 	private JFormattedTextField numeroDniFormattedTextField;
 	private JFormattedTextField bancFormattedTextField;
@@ -49,13 +49,13 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 	/**
 	 * Create the frame.
 	 * 
-	 * @param iniciView
+	 * @param comprarEntradaView
 	 */
 	public PagamentPanel(final FrontController frontController,
-			final IniciView iniciView) {
+			final ComprarEntradaView comprarEntradaView) {
 
 		this.frontController = frontController;
-		this.iniciView = iniciView;
+		this.comprarEntradaView = comprarEntradaView;
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -168,7 +168,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 									.toString()), compteFormattedTextField
 							.getValue().toString());
 				} catch (PagamentNoAutoritzat pagamentNoAutoritzat) {
-					iniciView.mostraMissatge(pagamentNoAutoritzat.getMessage());
+					comprarEntradaView.mostraMissatge(pagamentNoAutoritzat.getMessage());
 					pagamentNoAutoritzat.printStackTrace();
 				}
 
@@ -213,7 +213,7 @@ public class PagamentPanel extends JPanel implements PropertyChangeListener {
 								.getSelectedItem();
 
 					} catch (ServeiNoDisponible serveiNoDisponible) {
-						iniciView.mostraMissatge(serveiNoDisponible
+						comprarEntradaView.mostraMissatge(serveiNoDisponible
 								.getMessage());
 						// serveiNoDisponible.printStackTrace();
 					}

@@ -62,7 +62,7 @@ public class IniciPanel extends JPanel {
 	private Component horizontalStrut_4;
 
 	public IniciPanel(final FrontController frontController,
-			final IniciView iniciView) {
+			final ComprarEntradaView comprarEntradaView) {
 
 		verticalBox = Box.createVerticalBox();
 		add(verticalBox);
@@ -253,7 +253,7 @@ public class IniciPanel extends JPanel {
 								.getSelectedItem().toString()),
 								(Integer) espectadorsSpinner.getValue(), date);
 					} catch (SeientsNoDisp seientsNoDisp) {
-						iniciView.mostraMissatge(seientsNoDisp.getMessage());
+						comprarEntradaView.mostraMissatge(seientsNoDisp.getMessage());
 					}
 				}
 			}
@@ -271,7 +271,7 @@ public class IniciPanel extends JPanel {
 						frontController.PrConsultaRepresentacio(
 								titolEspectacleTextField.getText(), date);
 					} catch (NoHiHaRepresentacions noHiHaRepresentacions) {
-						iniciView.mostraMissatge(noHiHaRepresentacions
+						comprarEntradaView.mostraMissatge(noHiHaRepresentacions
 								.getMessage());
 					}
 				}

@@ -39,7 +39,7 @@ public class EspectaclePanel extends JPanel {
 	 * @param comprarEntradaView
 	 */
 	public EspectaclePanel(final FrontController frontController,
-			final IniciView iniciView) {
+			final ComprarEntradaView comprarEntradaView) {
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -141,13 +141,13 @@ public class EspectaclePanel extends JPanel {
 					java.sql.Date date = new java.sql.Date(dateChooser
 							.getDate().getTime());
 
-					iniciView.setRepresentacionsString(espectacleComboBox
+					comprarEntradaView.setRepresentacionsString(espectacleComboBox
 							.getSelectedItem().toString(), date.toString());
 
 					frontController.PrOkObteRepresentacions(espectacleComboBox
 							.getSelectedItem().toString(), date);
 				} catch (NoHiHaRepresentacions noHiHaRepresentacions) {
-					iniciView.mostraMissatge(noHiHaRepresentacions.getMessage());
+					comprarEntradaView.mostraMissatge(noHiHaRepresentacions.getMessage());
 					// noHiHaRepresentacions.printStackTrace();
 				}
 			}
